@@ -19,7 +19,6 @@ public class Matrice {
 		}		
 	}
 	
-	
 	// GETTER TAILLE
 	public int getTaille() {
 		return taille;
@@ -32,7 +31,6 @@ public class Matrice {
 	public void setValue(int pValue, int ligne, int col) {
 		value[ligne][col] = pValue;
 	}
-	
 	
 	// DISPLAY MATRICE
 	// prend en paramètre la taille de la matrice
@@ -48,7 +46,6 @@ public class Matrice {
 		System.out.println("-------------");
 		return "";
 	}
-	
 	
 	// MATRICE IDENTITE ?
 	// Les elements de la diagonale = 1
@@ -87,8 +84,8 @@ public class Matrice {
 	}
 	
 	
-public static void main(String []args) {
-		
+	// MAIN 
+	public static void main(String []args) {
 		int l_un[] = {98,85,74,65,45,32,21,10,2}; 
 		int l_deux[] = {12,21,31,24,14,94,66,36,46}; 
 		int l_ident[] = {1,0,0,0,1,0,0,0,1}; 
@@ -105,7 +102,6 @@ public static void main(String []args) {
 			System.out.println("Ce n'est PAS une matrice identite");
 		*/	
 		
-		
 		Matrice ident = new Matrice(3, l_ident);
 		ident.toString();
 		if(ident.isIdentity())
@@ -118,7 +114,6 @@ public static void main(String []args) {
 			System.out.println("C'est une matrice identite");
 		else
 			System.out.println("Ce n'est PAS une matrice identite");
-		
 	}// MAIN
 	
 	
