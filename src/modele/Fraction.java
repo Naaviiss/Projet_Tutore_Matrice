@@ -3,7 +3,6 @@ package modele;
 public class Fraction {
 	private int numerateur;
 	private int denominateur;
-	//Le nombre entier 3 est sous la forme 3/1 ; Cela devra être géré à un moment du programme
 	
 	//FRACTION
 	//une fraction est composee d'une numerateur et d'un denominateur
@@ -158,6 +157,7 @@ public class Fraction {
 		//AVEC UTILISATION DE REDUIREV2
 		f4 = new Fraction(30,10);
 		System.out.println("Apres reductionV2 de f4 = " + f4.reduireV2(f4));
+		System.out.println("f4 = " + f4.toString());
 		//ECRITURE NON FRACTIONNELLE (MATH)
 		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
 	}
