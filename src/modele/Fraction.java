@@ -5,11 +5,21 @@ public class Fraction {
 	private int denominateur;
 	
 	//FRACTION
-	//une fraction est composee d'une numerateur et d'un denominateur
+	//une fraction composee d'une numerateur et d'un denominateur
 	public Fraction(int parNum, int parDen) {
+		if(parDen == 0) {
+			parDen = 1;
+			parNum = 0;
+		}
 		numerateur = parNum;
 		denominateur = parDen;
 		reduire();   //A voir si on veut que la fraction soit reduite directement ou non
+	}
+	//si la fraction est un nombre entier
+	public Fraction(int parVal) {
+		numerateur = parVal;
+		denominateur = 1;
+		reduire();
 	}
 	
 	//GETTER
@@ -116,7 +126,7 @@ public class Fraction {
 		//FRACTION
 		Fraction f1 = new Fraction(25,-13);
 		System.out.println("f1 = " + f1.toString());
-		Fraction f2 = new Fraction(2,13);
+		Fraction f2 = new Fraction(-2,26);
 		System.out.println("f2 = " + f2.toString());
 		System.out.println();
 		
