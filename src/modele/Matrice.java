@@ -2,14 +2,14 @@ package modele;
 
 public class Matrice {
 	public int taille;
-	public int value[][];
+	public Fraction value[][];
 	
 	// CREATE MATRICE
 	// prend en paramètre - la taille de la matrice - une liste de int
 	// Remplis la matrice des éléments de la liste de int
-	public Matrice(int parTaille, int liste[]){
+	public Matrice(int parTaille, Fraction liste[]){
 		taille = parTaille;
-		value = new int[taille][taille];
+		value = new Fraction[taille][taille];
 		int element=0;
 		for(int i=0; i<taille; i++) {
 			for(int j=0; j<taille; j++) {
@@ -24,12 +24,19 @@ public class Matrice {
 		return taille;
 	}
 	// GETTER VALUE
-	public int[][] getValue() {
+	public Fraction[][] getValue() {
 		return value;
 	}
 	// SETTER VALUE
-	public void setValue(int pValue, int ligne, int col) {
+	public void setValue(Fraction pValue, int ligne, int col) {
 		value[ligne][col] = pValue;
+	}
+	public void setValue(Fraction value1, Fraction value2, Fraction value3, int ligne) {
+		Fraction liste[] = {value1, value2, value3};
+		for(int i=0; i<getTaille(); i++) {
+			setValue(liste[i], ligne, i);
+		}
+		
 	}
 	
 	// DISPLAY MATRICE
@@ -52,12 +59,13 @@ public class Matrice {
 	// Le reste = 0
 	public boolean isIdentity() {
 		int zero = 0; // pour j
+		Fraction frac_un = new Fraction(1), frac_zero = new Fraction(0);
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
-				if(j==zero && value[i][j]!=1) {
+				if(j==zero && value[i][j]!=frac_un){
 					return false;
 				}
-				else if(j!=zero && value[i][j]!=0) {
+				else if(j!=zero && value[i][j]!=frac_zero) {
 					return false;
 				}
 			}
@@ -66,29 +74,40 @@ public class Matrice {
 		return true;
 	}
 	
-	// CHANGE LINE
-	// operand possible - add - substract - multiply - divide
-	public void changeLine(int ligne, String operand) {
-		if(operand == "add") {
-			// ...
-		}
-		else if(operand == "substract") {
-			// ...
-		}
-		else if(operand == "multiply") {
-			// ...
-		}
-		else if(operand == "divide") {
-			// ...
+	// LIGNE + OPERATION
+	// operand possible | add(+) | substract(-) | multiply(*) | divide(/)
+	// param ligne entre : 0 et 2
+	public void changeLine(int ligne, String operand, Fraction pFraction) {
+		for(int i=0; i<getTaille(); i++) {
+			for(int j=0; j<getTaille(); j++) {
+				if(ligne==i) {
+					if(operand == "+") {
+						value[i][j] = value[i][j].FAddition(pFraction);
+					}
+					else if(operand == "-") {
+						value[i][j] = value[i][j].FSoustraction(pFraction);
+					}
+					else if(operand == "*") {
+						value[i][j] = value[i][j].FMultiplication(pFraction);
+					}
+					else if(operand == "/") {
+						value[i][j] = value[i][j].FDivision(pFraction);
+					}
+					else {
+						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
+					}
+				}//if
+			}
 		}
 	}
 	
-	
-	// MAIN 
+	//////////////////////
+	// 		MAIN 		//
+	//////////////////////
 	public static void main(String []args) {
-		int l_un[] = {98,85,74,65,45,32,21,10,2}; 
-		int l_deux[] = {12,21,31,24,14,94,66,36,46}; 
-		int l_ident[] = {1,0,0,0,1,0,0,0,1}; 
+		Fraction l_un[] = {new Fraction(10),new Fraction(1),new Fraction(12),new Fraction(34),new Fraction(71),new Fraction(7),new Fraction(65),new Fraction(99),new Fraction(2)}; 
+		//Fraction l_deux[] = {12,21,31,24,14,94,66,36,46}; 
+		Fraction l_ident[] = {new Fraction(1),new Fraction(0),new Fraction(0),new Fraction(0),new Fraction(1),new Fraction(0),new Fraction(0),new Fraction(0),new Fraction(1)};
 		
 		//Matrice un = new Matrice(3, l_un);
 		//un.toString();
@@ -108,12 +127,27 @@ public class Matrice {
 			System.out.println("C'est une matrice identite");
 		else
 			System.out.println("Ce n'est PAS une matrice identite");
-		ident.setValue(5, 1, 1);
+		
+		// Change une ligne
+		// NE FONCTIONNE PAS SI ON A UNE FRACTION A CAUSE DES INT MIS
+		// METTRE DES FRACTIONS DèS LES PARAM
+		ident.setValue(new Fraction(5),new Fraction(1,2),new Fraction(10),1);
 		ident.toString();
-		if(ident.isIdentity())
-			System.out.println("C'est une matrice identite");
-		else
-			System.out.println("Ce n'est PAS une matrice identite");
+
+		// Test modif toute une ligne
+		System.out.println("ADDITION");
+		ident.changeLine(1, "+", new Fraction(2));
+		ident.toString();
+		System.out.println("SOUSTRACTION");
+		ident.changeLine(1, "-", new Fraction(2));
+		ident.toString();
+		System.out.println("DIVISION");
+		ident.changeLine(1, "/", new Fraction(2));
+		ident.toString();
+		System.out.println("MULTIPLICATION");
+		ident.changeLine(1, "*", new Fraction(2,3));
+		ident.toString();
+		
 	}// MAIN
 	
 	
