@@ -161,5 +161,4 @@ public class Fraction {
 		//ECRITURE NON FRACTIONNELLE (MATH)
 		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
 	}
-	
 }
