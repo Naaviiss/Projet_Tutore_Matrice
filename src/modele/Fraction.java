@@ -3,6 +3,7 @@ package modele;
 public class Fraction {
 	private int numerateur;
 	private int denominateur;
+	//Le nombre entier 3 est sous la forme 3/1 ; Cela devra être géré à un moment du programme
 	
 	//FRACTION
 	//une fraction est composee d'une numerateur et d'un denominateur
@@ -42,7 +43,11 @@ public class Fraction {
 	//REDUIRE reduit de facon definitive
 	//reduit la fraction jusqu'a ce qu'elle soit irreductible
 	void reduire() {
-		int pgcd = CalculPGCD(numerateur,denominateur);
+		if(denominateur < 0) {
+			numerateur *= -1;
+			denominateur *= -1;
+		}
+		int pgcd = Math.abs(CalculPGCD(numerateur,denominateur));
 		this.setNumerateur(numerateur/pgcd);
 		this.setDenominateur(denominateur/pgcd);
 	}
@@ -100,6 +105,9 @@ public class Fraction {
 	//TOSTRING
 	//ecrit une fraction
 	public String toString() {
+		if(denominateur == 1) {
+			return Integer.toString(numerateur);
+		}
 		return numerateur + "/" + denominateur;
 	}
 	
@@ -107,9 +115,9 @@ public class Fraction {
 	public static void main(String[] args) {
 		
 		//FRACTION
-		Fraction f1 = new Fraction(-25,42);
+		Fraction f1 = new Fraction(25,-13);
 		System.out.println("f1 = " + f1.toString());
-		Fraction f2 = new Fraction(2,7);
+		Fraction f2 = new Fraction(2,13);
 		System.out.println("f2 = " + f2.toString());
 		System.out.println();
 		
@@ -120,43 +128,35 @@ public class Fraction {
 		Fraction f3 = f1.FAddition(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println("Resusltat de " + f1 + " + " + f2 + " = " + f3);
-		f3.reduire();
-		System.out.println("Apres reduction f3 = " + f3);
 		System.out.println();
 		
 		//SOUSTRACTION
 		f3 = f1.FSoustraction(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println("Resusltat de " + f1 + " - " + f2 + " = " + f3);
-		f3.reduire();
-		System.out.println("Apres reduction f3 = " + f3);
 		System.out.println();
 		
 		//MULTIPLICATION
 		f3 = f1.FMultiplication(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println("Resusltat de " + f1 + " * " + f2 + " = " + f3);
-		f3.reduire();
-		System.out.println("Apres reduction f3 = " + f3);
 		System.out.println();
 		
 		//DIVISION
 		f3 = f1.FDivision(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println("Resusltat de " + f1 + " / " + f2 + " = " + f3);
-		f3.reduire();
-		System.out.println("Apres reduction f3 = " + f3);
 		System.out.println();
 		
 		//REDUCTION
-		Fraction f4 = new Fraction(100,15);
+		Fraction f4 = new Fraction(30,10);
 		System.out.println("f4 = " + f4.toString());
 		System.out.println("Avant reduction de f4 = " + f4);
 		//AVEC UTILISATION DE REDUIRE
 		f4.reduire();
 		System.out.println("Apres reduction de f4 = " + f4);
 		//AVEC UTILISATION DE REDUIREV2
-		f4 = new Fraction(100,15);
+		f4 = new Fraction(30,10);
 		System.out.println("Apres reductionV2 de f4 = " + f4.reduireV2(f4));
 		//ECRITURE NON FRACTIONNELLE (MATH)
 		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
