@@ -13,7 +13,6 @@ public class Matrice {
 		int element=0;
 		for(int i=0; i<taille; i++) {
 			for(int j=0; j<taille; j++) {
-				//System.out.println("Ligne "+i+" | Col "+j+" = "+liste[element]);
 				value[i][j]=liste[element];
 				element+=1;
 			}
