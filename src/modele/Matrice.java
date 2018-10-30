@@ -27,10 +27,11 @@ public class Matrice {
 	public Fraction[][] getValue() {
 		return value;
 	}
-	// SETTER VALUE
+	// SETTER VALUE (une case)
 	public void setValue(Fraction pValue, int ligne, int col) {
 		value[ligne][col] = pValue;
 	}
+	// SETTER VALUE (une ligne entière)
 	public void setValue(Fraction value1, Fraction value2, Fraction value3, int ligne) {
 		Fraction liste[] = {value1, value2, value3};
 		for(int i=0; i<getTaille(); i++) {
@@ -57,27 +58,49 @@ public class Matrice {
 	// MATRICE IDENTITE ?
 	// Les elements de la diagonale = 1
 	// Le reste = 0
+//	public boolean isIdentity() {
+//		int zero = 0; // pour j
+//		Fraction frac_un = new Fraction(1), frac_zero = new Fraction(0);
+//		for(int i=0; i<getTaille(); i++) {
+//			for(int j=0; j<getTaille(); j++) {
+//				if(j==zero && value[i][j]!=frac_un){
+//					return false;
+//				}
+//				else if(j!=zero && value[i][j]!=frac_zero) {
+//					return false;
+//				}
+//			}
+//			zero+=1;
+//		}
+//		return true;
+//	}
 	public boolean isIdentity() {
-		int zero = 0; // pour j
-		Fraction frac_un = new Fraction(1), frac_zero = new Fraction(0);
+		int diago = 0; // pour j
+		Fraction un = new Fraction(1), zero = new Fraction(0);
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
-				if(j==zero && value[i][j]!=frac_un){
+				if(j==diago && value[i][j]!=un) {
+					System.out.println("PROBLEME ->");
+					System.out.println("Ligne : " + i + " Colonne : " + j+"diago"+diago+" = " + value[i][j] + "ou" +un);
 					return false;
 				}
-				else if(j!=zero && value[i][j]!=frac_zero) {
+				else if(j!=diago && value[i][j]!=zero) {
 					return false;
 				}
 			}
-			zero+=1;
+			diago+=1;
 		}
 		return true;
 	}
 	
-	// LIGNE + OPERATION
-	// operand possible | add(+) | substract(-) | multiply(*) | divide(/)
-	// param ligne entre : 0 et 2
-	public void changeLine(int ligne, String operand, Fraction pFraction) {
+	/****************************************/
+	/*				CALCUL					*/
+	/****************************************/
+	// MODIFYLINE
+	// Effectue une opération sur une ligne entière
+	// Prend en paramètre : 
+	// int ligne(0 ou 1 ou 2), String operand ( add(+) | substract(-) | multiply(*) | divide(/) ), Fraction pFraction
+	public void modifyLine(int ligne, String operand, Fraction pFraction) {
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
 				if(ligne==i) {
@@ -101,9 +124,27 @@ public class Matrice {
 		}
 	}
 	
-	//////////////////////
-	// 		MAIN 		//
-	//////////////////////
+	// CHANGELINE
+	// Inverse 2 lignes
+	// Prend en paramètre : int ligne(0 ou 1 ou 2), int ligne2(0 ou 1 ou 2)
+	public void changeLine(int ligne, int ligne2) {
+		Fraction tampon[] = new Fraction[getTaille()];
+		for(int i=0; i<getTaille(); i++) {
+			tampon[i] = value[ligne][i];			// Tampon = Ligne 1
+		}
+		for(int j=0; j<getTaille(); j++) {
+			setValue(value[ligne2][j], ligne, j);	// Ligne 1 = Ligne 2	
+		}
+		for(int k=0; k<getTaille(); k++) {
+			setValue(tampon[k], ligne2, k);			// Ligne 2 = Tampon	
+		}
+	}
+	
+			
+			
+	/****************************************/
+	/*				MAIN					*/
+	/****************************************/
 	public static void main(String []args) {
 		Fraction l_un[] = {new Fraction(10),new Fraction(1),new Fraction(12),new Fraction(34),new Fraction(71),new Fraction(7),new Fraction(65),new Fraction(99),new Fraction(2)}; 
 		//Fraction l_deux[] = {12,21,31,24,14,94,66,36,46}; 
@@ -131,22 +172,27 @@ public class Matrice {
 		// Change une ligne
 		// NE FONCTIONNE PAS SI ON A UNE FRACTION A CAUSE DES INT MIS
 		// METTRE DES FRACTIONS DèS LES PARAM
-		ident.setValue(new Fraction(5),new Fraction(1,2),new Fraction(10),1);
-		ident.toString();
+//		ident.setValue(new Fraction(5),new Fraction(1,2),new Fraction(10),1);
+//		ident.toString();
 
 		// Test modif toute une ligne
-		System.out.println("ADDITION");
-		ident.changeLine(1, "+", new Fraction(2));
-		ident.toString();
-		System.out.println("SOUSTRACTION");
-		ident.changeLine(1, "-", new Fraction(2));
-		ident.toString();
-		System.out.println("DIVISION");
-		ident.changeLine(1, "/", new Fraction(2));
-		ident.toString();
-		System.out.println("MULTIPLICATION");
-		ident.changeLine(1, "*", new Fraction(2,3));
-		ident.toString();
+//		System.out.println("ADDITION +2");
+//		ident.modifyLine(1, "+", new Fraction(2));
+//		ident.toString();
+//		System.out.println("SOUSTRACTION -2");
+//		ident.modifyLine(1, "-", new Fraction(2));
+//		ident.toString();
+//		System.out.println("DIVISION /2");
+//		ident.modifyLine(1, "/", new Fraction(2));
+//		ident.toString();
+//		System.out.println("MULTIPLICATION *2/3");
+//		ident.modifyLine(1, "*", new Fraction(2,3));
+//		ident.toString();
+		
+		// Inverse 2 lignes
+//		ident.changeLine(0, 1);
+//		ident.toString();
+		
 		
 	}// MAIN
 	
