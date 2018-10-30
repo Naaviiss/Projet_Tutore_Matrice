@@ -61,6 +61,20 @@ public class Matrice {
 	/*public double[] getLigne(int i) {
 		return ;
 	}*/
+	public int getTaille() {
+		if(Lig != Col) {
+			throw new RuntimeException("Pas matrice carre");
+		}
+		else {
+			return Lig;
+		}
+	}
+	public int getLig() {
+		return Lig;
+	}
+	public int getCol() {
+		return Col;
+	}
 	
 	//SETTER
 	//set une case
@@ -75,7 +89,7 @@ public class Matrice {
 	//FONCTION
 	//renvoie une matrice identite de taille "Taille"
 	public static Matrice Identite(int Taille) {
-        Matrice Ident = new Matrice(Taille, Taille);
+        Matrice Ident = new Matrice(Taille);
         for (int i=0; i < Taille; i++) {
         	Ident.Case[i][i] = new Fraction(1,1);
         }
@@ -88,6 +102,41 @@ public class Matrice {
         Case[i] = Case[j];
         Case[j] = tampon;
     }
+	
+	//COMPARE
+	//compare deux matrices entre elle et renvoie un boolean
+	public boolean MCompare(Matrice parMat) {
+		Matrice Mat = this;
+		if(Mat.Lig != parMat.Lig || Mat.Col != parMat.Col) {
+			throw new RuntimeException("Erreur dimensions des deux matrices");
+		}
+		for (int i=0; i < Lig; i++) {
+			for(int j=0; j < Col ;j++) {
+				if(!(Mat.Case[i][j].FCompare(parMat.Case[i][j]))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	//ISIDENTITY
+	//return true si la matrice est une matrice identite
+	public boolean isIdentite() {
+		int zero = 0;
+		for(int i=0; i < Lig; i++) {
+			for(int j=0; j < Col; j++) {
+				if(j==zero && !(Case[i][j].FCompare(new Fraction(1)))) {
+					return false;
+				}
+				else if(j!=zero && !(Case[i][j].FCompare(new Fraction(0)))) {
+					return false;
+				}
+			}
+			zero +=1;
+		}
+		return true;
+	}
 	
 	//OPERATION
 	//ADDITION
@@ -140,22 +189,9 @@ public class Matrice {
 		return res;
 	}
 	
-	//COMPARE
-	//compare deux matrices entre elle et renvoie un boolean
-	public boolean Compare(Matrice parMat) {
-		Matrice Mat = this;
-		if(Mat.Lig != parMat.Lig || Mat.Col != parMat.Col) {
-			throw new RuntimeException("Erreur dimensions des deux matrices");
-		}
-		for (int i=0; i < Lig; i++) {
-			for(int j=0; j < Col ;j++) {
-				if(Mat.Case[i][j] != parMat.Case[i][j]) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+	//pour DIVISION de matrice il faut calculer la matrice transpose, la comatrice, le determinant et sous matrice
+	//ces quatres choses permettent d'avoir la matrice inverse. Puis M1/M2 = M1*(M2)^-1  (iverse de M2)
+	//la division se feront donc avec FDivision
 	
 	//TOSTRING
 	//affiche une matrice
@@ -184,7 +220,10 @@ public class Matrice {
 		System.out.println();
 		
 		Matrice D = Matrice.Identite(4);
+		Matrice E = Matrice.Identite(4);
 		D.Affiche();
+		System.out.println(D.isIdentite());
+		System.out.println(D.MCompare(E));
 		System.out.println();
 		
 		A.MAddition(B).Affiche();
@@ -194,9 +233,6 @@ public class Matrice {
 		System.out.println();
 		
 		A.MMultiplication(B).Affiche();
-		System.out.println();
-		
-		System.out.println(B.Compare(C));
 		System.out.println();
 		
 		C.Echange(1,2);
