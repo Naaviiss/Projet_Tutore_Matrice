@@ -41,7 +41,6 @@ public class Matrice {
 		for(int i=0; i<getTaille(); i++) {
 			setValue(liste[i], ligne, i);
 		}
-		
 	}
 	
 	// DISPLAY MATRICE
@@ -82,7 +81,7 @@ public class Matrice {
 	/****************************************/
 	/*				CALCUL					*/
 	/****************************************/
-	// MODIFYLINE -> 
+	// MODIFYLINE -> ( L3 -> 2L3 )
 	// Multiplication d'une ligne par un nombre non nul.
 	// Prend en paramètre : 
 	// int ligne(0 ou 1 ou 2), String operand ( add(+) | substract(-) | multiply(*) | divide(/) ), Fraction pFraction
@@ -110,6 +109,42 @@ public class Matrice {
 		}
 	}
 	
+	// MODIFYLINE 2 -> ( L3 -> L3 - 2L1 )
+	// Transformation d'une ligne à l'aide d'une autre ligne
+	/*	
+	 * EXEMPLE pour : L3 -> L3 - 2L1
+	 * 				  Ligne3 = Ligne3 - 2*Ligne1
+	 * matrice.modifyLine2(2, "-", 0, new Fraction(2));
+	*/										
+	public void modifyLine2(int ligneA, String operand, int ligneB, Fraction multiplicateur) {
+		Fraction frac;
+		for(int i=0; i<getTaille(); i++) {
+			for(int j=0; j<getTaille(); j++) {
+				if(ligneA==i) {
+					if(operand == "+") {
+						frac = multiplicateur.FMultiplication(getValueC(ligneB,j));
+						value[i][j] = getValueC(i,j).FAddition(frac);
+					}
+					else if(operand == "-") {
+						frac = multiplicateur.FMultiplication(getValueC(ligneB,j));
+						value[i][j] = getValueC(i,j).FSoustraction(frac);
+					}
+					else if(operand == "*") {
+						frac = multiplicateur.FMultiplication(getValueC(ligneB,j));
+						value[i][j] = getValueC(i,j).FMultiplication(frac);
+					}
+					else if(operand == "/") {
+						frac = multiplicateur.FMultiplication(getValueC(ligneB,j));
+						value[i][j] = getValueC(i,j).FDivision(frac);
+					}
+					else {
+						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
+					}
+				}
+			}
+		}
+	}
+	
 	// CHANGELINE
 	// Echange de deux lignes.
 	// Prend en paramètre : int ligne(0 ou 1 ou 2), int ligne2(0 ou 1 ou 2)
@@ -126,9 +161,6 @@ public class Matrice {
 		}
 	}
 	
-	
-	// addition d'un multiple d'une ligne à une autre ligne
-	
 			
 	/****************************************/
 	/*				MAIN					*/
@@ -139,17 +171,14 @@ public class Matrice {
 		
 		Fraction fUn = new Fraction(12);
 		Fraction fDeux = new Fraction(1);
-		//compareFraction(fUn, fDeux);
-
-		
 		
 		// MATRICE 1
-		Matrice mUn = new Matrice(3, l_un);
-		mUn.toString();
-		if(mUn.isIdentity())
-			System.out.println("EST une matrice identite");
-		else
-			System.out.println("N'EST PAS une matrice identite!");
+//		Matrice mUn = new Matrice(3, l_un);
+//		mUn.toString();
+//		if(mUn.isIdentity())
+//			System.out.println("EST une matrice identite");
+//		else
+//			System.out.println("N'EST PAS une matrice identite!");
 		
 		// MATRICE 2 (identité)
 		Matrice ident = new Matrice(3, l_ident);
@@ -183,8 +212,17 @@ public class Matrice {
 		ident.toString();
 		
 		// Inverse 2 lignes
+		System.out.println("INVERSION LIGNE 1 et 2");
 		ident.changeLine(0, 1);
 		ident.toString();
+		
+		// Modifier avec d'autre lignes
+		// L3 -> L3 - 2L1
+		System.out.println("L3 -> L3 - 2L1");
+		ident.modifyLine2(2, "-", 0, new Fraction(2));
+		ident.toString();
+		// L3 -> L3 + L2
+		// L3 -> L3/4
 		
 		
 	}// MAIN
