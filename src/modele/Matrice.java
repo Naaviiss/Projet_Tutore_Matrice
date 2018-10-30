@@ -27,11 +27,15 @@ public class Matrice {
 	public Fraction[][] getValue() {
 		return value;
 	}
-	// SETTER VALUE (une case)
+	// GETTER VALUE CASE
+	public Fraction getValueC(int ligne, int col) {
+		return value[ligne][col];
+	}
+	// SETTER VALUE (1 CASE)
 	public void setValue(Fraction pValue, int ligne, int col) {
 		value[ligne][col] = pValue;
 	}
-	// SETTER VALUE (une ligne entière)
+	// SETTER VALUE (CASES D'UNE LIGNE)
 	public void setValue(Fraction value1, Fraction value2, Fraction value3, int ligne) {
 		Fraction liste[] = {value1, value2, value3};
 		for(int i=0; i<getTaille(); i++) {
@@ -56,36 +60,18 @@ public class Matrice {
 	}
 	
 	// MATRICE IDENTITE ?
-	// Les elements de la diagonale = 1
-	// Le reste = 0
-//	public boolean isIdentity() {
-//		int zero = 0; // pour j
-//		Fraction frac_un = new Fraction(1), frac_zero = new Fraction(0);
-//		for(int i=0; i<getTaille(); i++) {
-//			for(int j=0; j<getTaille(); j++) {
-//				if(j==zero && value[i][j]!=frac_un){
-//					return false;
-//				}
-//				else if(j!=zero && value[i][j]!=frac_zero) {
-//					return false;
-//				}
-//			}
-//			zero+=1;
-//		}
-//		return true;
-//	}
+	// Diagonale = 1
+	// Le reste  = 0
+	// Renvoit true (si est une matrice identité) ET false(si n'est pas une matrice identité)
 	public boolean isIdentity() {
 		int diago = 0; // pour j
-		Fraction un = new Fraction(1), zero = new Fraction(0);
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
-				if(j==diago && value[i][j]!=un) {
-					System.out.println("PROBLEME ->");
-					System.out.println("Ligne : " + i + " Colonne : " + j+"diago"+diago+" = " + value[i][j] + "ou" +un);
-					return false;
+				if(j==diago && (this.getValueC(i,j).getNumerateur()!=1 || this.getValueC(i,j).getDenominateur()!=1)) {
+						return false;
 				}
-				else if(j!=diago && value[i][j]!=zero) {
-					return false;
+				else if(j!=diago && (this.getValueC(i,j).getNumerateur()!=0 || this.getValueC(i,j).getDenominateur()!=1)) {
+						return false;
 				}
 			}
 			diago+=1;
@@ -96,8 +82,8 @@ public class Matrice {
 	/****************************************/
 	/*				CALCUL					*/
 	/****************************************/
-	// MODIFYLINE
-	// Effectue une opération sur une ligne entière
+	// MODIFYLINE -> 
+	// Multiplication d'une ligne par un nombre non nul.
 	// Prend en paramètre : 
 	// int ligne(0 ou 1 ou 2), String operand ( add(+) | substract(-) | multiply(*) | divide(/) ), Fraction pFraction
 	public void modifyLine(int ligne, String operand, Fraction pFraction) {
@@ -125,7 +111,7 @@ public class Matrice {
 	}
 	
 	// CHANGELINE
-	// Inverse 2 lignes
+	// Echange de deux lignes.
 	// Prend en paramètre : int ligne(0 ou 1 ou 2), int ligne2(0 ou 1 ou 2)
 	public void changeLine(int ligne, int ligne2) {
 		Fraction tampon[] = new Fraction[getTaille()];
@@ -140,58 +126,65 @@ public class Matrice {
 		}
 	}
 	
-			
+	
+	// addition d'un multiple d'une ligne à une autre ligne
+	
 			
 	/****************************************/
 	/*				MAIN					*/
 	/****************************************/
 	public static void main(String []args) {
 		Fraction l_un[] = {new Fraction(10),new Fraction(1),new Fraction(12),new Fraction(34),new Fraction(71),new Fraction(7),new Fraction(65),new Fraction(99),new Fraction(2)}; 
-		//Fraction l_deux[] = {12,21,31,24,14,94,66,36,46}; 
 		Fraction l_ident[] = {new Fraction(1),new Fraction(0),new Fraction(0),new Fraction(0),new Fraction(1),new Fraction(0),new Fraction(0),new Fraction(0),new Fraction(1)};
 		
-		//Matrice un = new Matrice(3, l_un);
-		//un.toString();
+		Fraction fUn = new Fraction(12);
+		Fraction fDeux = new Fraction(1);
+		//compareFraction(fUn, fDeux);
+
 		
-		/*
-		Matrice deux = new Matrice(3, l_deux);
-		deux.toString();
-		if(deux.isIdentity())
-			System.out.println("C'est une matrice identite");
+		
+		// MATRICE 1
+		Matrice mUn = new Matrice(3, l_un);
+		mUn.toString();
+		if(mUn.isIdentity())
+			System.out.println("EST une matrice identite");
 		else
-			System.out.println("Ce n'est PAS une matrice identite");
-		*/	
+			System.out.println("N'EST PAS une matrice identite!");
 		
+		// MATRICE 2 (identité)
 		Matrice ident = new Matrice(3, l_ident);
 		ident.toString();
 		if(ident.isIdentity())
-			System.out.println("C'est une matrice identite");
+			System.out.println("EST une matrice identite");
 		else
-			System.out.println("Ce n'est PAS une matrice identite");
+			System.out.println("N'EST PAS une matrice identite!");
+
 		
+		// CALCUL 
+
 		// Change une ligne
-		// NE FONCTIONNE PAS SI ON A UNE FRACTION A CAUSE DES INT MIS
-		// METTRE DES FRACTIONS DèS LES PARAM
-//		ident.setValue(new Fraction(5),new Fraction(1,2),new Fraction(10),1);
-//		ident.toString();
+		/* NE FONCTIONNE PAS SI ON A UNE FRACTION A CAUSE DES INT MIS
+		   METTRE DES FRACTIONS DèS LES PARAM */
+		ident.setValue(new Fraction(5),new Fraction(1,2),new Fraction(10),1);
+		ident.toString();
 
 		// Test modif toute une ligne
-//		System.out.println("ADDITION +2");
-//		ident.modifyLine(1, "+", new Fraction(2));
-//		ident.toString();
-//		System.out.println("SOUSTRACTION -2");
-//		ident.modifyLine(1, "-", new Fraction(2));
-//		ident.toString();
-//		System.out.println("DIVISION /2");
-//		ident.modifyLine(1, "/", new Fraction(2));
-//		ident.toString();
-//		System.out.println("MULTIPLICATION *2/3");
-//		ident.modifyLine(1, "*", new Fraction(2,3));
-//		ident.toString();
+		System.out.println("ADDITION +2");
+		ident.modifyLine(1, "+", new Fraction(2));
+		ident.toString();
+		System.out.println("SOUSTRACTION -2");
+		ident.modifyLine(1, "-", new Fraction(2));
+		ident.toString();
+		System.out.println("DIVISION /2");
+		ident.modifyLine(1, "/", new Fraction(2));
+		ident.toString();
+		System.out.println("MULTIPLICATION *2/3");
+		ident.modifyLine(1, "*", new Fraction(2,3));
+		ident.toString();
 		
 		// Inverse 2 lignes
-//		ident.changeLine(0, 1);
-//		ident.toString();
+		ident.changeLine(0, 1);
+		ident.toString();
 		
 		
 	}// MAIN
