@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,18 +15,27 @@ import javax.swing.border.EmptyBorder;
 
 public class PanelGauss extends JPanel{
 	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
-	private JScrollPane defil;//panneau defilant
 	
-	public PanelGauss(/*Matrice pMatrice*/) {
+	public PanelGauss() {
+		
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
 		
-		affichageMatrices = new PanelAffichageMatrices(/*pMatrice*/);
-		defil = new JScrollPane(affichageMatrices);
+		//a supprimer
+		HashMap<String, String> hm = new HashMap<String,String>();
+		hm.put("20", "1");
+	    hm.put("10", "2");
+	    hm.put("30", "3");
+	    hm.put("40", "4");
+	    hm.put("40", "7");
+	    hm.put("50", "5");
 		
-		//ajout de la scrollbar
-		defil.setVerticalScrollBarPolicy(defil.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(defil,BorderLayout.WEST);
+		//instance de la table affichant es matrices
+		affichageMatrices = new PanelAffichageMatrices(hm);
+		
+		//ajout des éléments au panel 
+		this.add(affichageMatrices,BorderLayout.WEST);
+		
 	}
 }
