@@ -8,8 +8,7 @@ public class Fraction {
 	//une fraction composee d'une numerateur et d'un denominateur
 	public Fraction(int parNum, int parDen) {
 		if(parDen == 0) {
-			parDen = 1;
-			parNum = 0;
+			throw new RuntimeException("Division par zero");
 		}
 		numerateur = parNum;
 		denominateur = parDen;
@@ -52,7 +51,7 @@ public class Fraction {
 	//REDUIRE reduit de facon definitive
 	//reduit la fraction jusqu'a ce qu'elle soit irreductible
 	void reduire() {
-		if(denominateur < 0) {
+		if(denominateur < 0) { //pour mettre le - devant
 			numerateur *= -1;
 			denominateur *= -1;
 		}
@@ -90,7 +89,7 @@ public class Fraction {
 		}
 	}
 	
-	//donne l'ordre de deux fractions ( < ou > )
+	//donne l'ordre de deux fractions ( < ou > )  true si sup
 	public boolean FSup(Fraction f) {
 		if(this.FMath(this) > f.FMath(f)) {
 			return true;

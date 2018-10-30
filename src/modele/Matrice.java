@@ -5,8 +5,6 @@ public class Matrice {
 	private int Lig;
 	private int Col;
 	private Fraction[][] Case;
-	//une case non remplie signifie un zero dans cette meme case
-	//pour l'instant les cases sont remplites avec des doubles, mais elles devront plus tard etre remplites avec des fractions, en sachant que 3 est tout simplement 3/1 mais simplifiee
 	
 	//MATRICE
 	//creer une matrice carre vide de taille parTaille
@@ -14,7 +12,7 @@ public class Matrice {
 		Lig = parTaille;
 		Col = parTaille;
 		Case = new Fraction[Lig][Col];
-		remplir(Case);
+		this.remplir();
 	}
 	
 	//creer une matrice vide de taille parLig et parCol
@@ -22,7 +20,7 @@ public class Matrice {
 		Lig = parLig;
 		Col = parCol;
 		Case = new Fraction[Lig][Col];
-		remplir(Case);
+		this.remplir();
 	}
 	
 	//creer une matrice avec un tableau donne
@@ -30,8 +28,8 @@ public class Matrice {
 		Lig = parMat.length;
 		Col = parMat.length;
 		this.Case = new Fraction[Lig][Col];
-		for(int i=0; i<Lig ; i++) {
-			for(int j=0; j<Col ;j++) {
+		for(int i=0; i<this.getLig() ; i++) {
+			for(int j=0; j<this.getCol() ;j++) {
 				this.Case[i][j] = parMat[i][j];
 			}
 		}
@@ -44,9 +42,9 @@ public class Matrice {
 	
 	//REMPLIR
 	//remplie une matrice de 0 a sa creation
-	public void remplir(Fraction[][] Mat) {
-		for(int i=0; i<Lig ; i++) {
-			for(int j=0; j<Col ;j++) {
+	public void remplir() {
+		for(int i=0; i<this.getLig() ; i++) {
+			for(int j=0; j<this.getCol() ;j++) {
 				this.Case[i][j] = new Fraction(0);
 			}
 		}
@@ -55,23 +53,36 @@ public class Matrice {
 	//GETTER
 	//get une case
 	public Fraction getCase(int i, int j) {
-		return this.Case[i][j];
+		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
+			throw new RuntimeException("Case non existante");
+		}
+		else {
+			return this.Case[i][j];
+		}
 	}
 	//get une ligne sous forme de tableau
-	/*public double[] getLigne(int i) {
-		return ;
-	}*/
+	public Fraction[] getLigne(int x) {
+		if((x > this.getCol()-1) || (x < 0)) {
+			throw new RuntimeException("Ligne non existante");
+		}
+		else {
+			return Case[x];
+		}
+	}
+	//get taille matrice carre
 	public int getTaille() {
-		if(Lig != Col) {
+		if(this.getLig() != this.getCol()) {
 			throw new RuntimeException("Pas matrice carre");
 		}
 		else {
-			return Lig;
+			return this.getLig();
 		}
 	}
+	//get nombre ligne d'une matrice
 	public int getLig() {
 		return Lig;
 	}
+	//get nombre de colonne d'une matrice
 	public int getCol() {
 		return Col;
 	}
@@ -79,12 +90,22 @@ public class Matrice {
 	//SETTER
 	//set une case
 	public void setCase(int i, int j, Fraction var) { //var int a changer en fraction
-		this.Case[i][j] = var;
+		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
+			throw new RuntimeException("Case non existante");
+		}
+		else {
+			this.Case[i][j] = var;
+		}
 	}
-	//ser une ligne sous forme de tableau
-	/*public void setLigne(int i, int[] tab) {
-		
-	}*/
+	//set une ligne de la matrice appelante avec un tableau donne en parametre
+	public void setLigne(int x, Fraction tab[]) {
+		if((x > this.getCol()-1) || (x < 0)) {
+			throw new RuntimeException("Ligne non existante");
+		}
+		else {
+			this.Case[x] = tab;
+		}
+	}
 	
 	//FONCTION
 	//renvoie une matrice identite de taille "Taille"
@@ -98,8 +119,8 @@ public class Matrice {
 	
 	//echange deux lignes entre elles
 	public void Echange(int i, int j) {
-		Fraction[] tampon = Case[i];
-        Case[i] = Case[j];
+		Fraction[] tampon = getLigne(i);
+        Case[i] = getLigne(j);
         Case[j] = tampon;
     }
 	
@@ -107,11 +128,11 @@ public class Matrice {
 	//compare deux matrices entre elle et renvoie un boolean
 	public boolean MCompare(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.Lig != parMat.Lig || Mat.Col != parMat.Col) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		for (int i=0; i < Lig; i++) {
-			for(int j=0; j < Col ;j++) {
+		for (int i=0; i < this.getLig() ;i++) {
+			for(int j=0; j < this.getCol() ;j++) {
 				if(!(Mat.Case[i][j].FCompare(parMat.Case[i][j]))) {
 					return false;
 				}
@@ -124,8 +145,8 @@ public class Matrice {
 	//return true si la matrice est une matrice identite
 	public boolean isIdentite() {
 		int zero = 0;
-		for(int i=0; i < Lig; i++) {
-			for(int j=0; j < Col; j++) {
+		for(int i=0; i < this.getLig(); i++) {
+			for(int j=0; j < this.getCol(); j++) {
 				if(j==zero && !(Case[i][j].FCompare(new Fraction(1)))) {
 					return false;
 				}
@@ -143,12 +164,12 @@ public class Matrice {
 	//additionne deux matrices entre elles
 	public Matrice MAddition(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.Lig != parMat.Lig || Mat.Col != parMat.Col) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		Matrice res = new Matrice(Lig,Col);
-		for (int i=0; i < Lig; i++) {
-			for(int j=0; j < Col ;j++) {
+		Matrice res = new Matrice(this.getLig(),this.getCol());
+		for (int i=0; i < this.getLig(); i++) {
+			for(int j=0; j < this.getCol() ;j++) {
 				res.Case[i][j] = Mat.Case[i][j].FAddition(parMat.Case[i][j]);
 			}
 		}
@@ -159,12 +180,12 @@ public class Matrice {
 	//soustrait deux matrices entre elles
 	public Matrice MSoustraction(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.Lig != parMat.Lig || Mat.Col != parMat.Col) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		Matrice res = new Matrice(Lig,Col);
-		for (int i=0; i < Lig; i++) {
-			for(int j=0; j < Col ;j++) {
+		Matrice res = new Matrice(this.getLig(),this.getCol());
+		for (int i=0; i < this.getLig(); i++) {
+			for(int j=0; j < this.getCol();j++) {
 				res.Case[i][j] = Mat.Case[i][j].FSoustraction(parMat.Case[i][j]);
 			}
 		}
@@ -175,14 +196,14 @@ public class Matrice {
 	//multiplie deux matrices entre elles
 	public Matrice MMultiplication(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.Col != parMat.Lig) {
+		if(Mat.getCol() != parMat.getLig()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		Matrice res = new Matrice(Mat.Lig,parMat.Col);
-		for (int i=0; i < res.Lig; i++) {
-			for(int j=0; j < res.Col ; j++) {
-				for(int k=0; k < Mat.Col ; k++) {
-					res.Case[i][j] = res.Case[i][j].FAddition((Mat.Case[i][k].FAddition(parMat.Case[k][j])));
+		Matrice res = new Matrice(Mat.getLig(),parMat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ; j++) {
+				for(int k=0; k < Mat.getCol() ; k++) {
+					res.Case[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parMat.getCase(k,j))));
 				}
 			}
 		}
@@ -190,14 +211,15 @@ public class Matrice {
 	}
 	
 	//pour DIVISION de matrice il faut calculer la matrice transpose, la comatrice, le determinant et sous matrice
-	//ces quatres choses permettent d'avoir la matrice inverse. Puis M1/M2 = M1*(M2)^-1  (iverse de M2)
-	//la division se feront donc avec FDivision
+	//ces quatres choses permettent d'avoir la matrice inverse. Puis M1/M2 = M1*(M2)^-1  (M1 multiplier par l'inverse de M2)
+	//las divisions se feront donc avec FDivision
+	//Impossible de faire ces quatres prerequis car il faut le faire le modulo d'une fraction
 	
-	//TOSTRING
+	//AFFICHE
 	//affiche une matrice
 	public void Affiche() {
-		for (int i=0; i < Lig; i++) {
-			for(int j=0; j < Col ;j++) {
+		for (int i=0; i < this.getLig(); i++) {
+			for(int j=0; j < this.getCol();j++) {
 				System.out.print(Case[i][j].toString() + " | ");
 			}
 			System.out.println();
@@ -213,14 +235,21 @@ public class Matrice {
 		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,2),new Fraction(5,2),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
 		Matrice B = new Matrice(tab);
 		B.Affiche();
+		System.out.println("getLigne()");
+		Fraction tab2[] = B.getLigne(1);
+		System.out.println(tab2[0] + " | " + tab2[1] + " | " + tab2[2]);
+		System.out.println("setLigne()");
+		Fraction[] tab3 = {new Fraction(11), new Fraction(12), new Fraction(13,14)};
+		B.setLigne(1,tab3);
+		B.Affiche();
 		System.out.println();
 		
 		Matrice C = new Matrice(B);
 		C.Affiche();
 		System.out.println();
 		
-		Matrice D = Matrice.Identite(4);
-		Matrice E = Matrice.Identite(4);
+		Matrice D = Matrice.Identite(3);
+		Matrice E = Matrice.Identite(3);
 		D.Affiche();
 		System.out.println(D.isIdentite());
 		System.out.println(D.MCompare(E));
