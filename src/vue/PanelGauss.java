@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 public class PanelGauss extends JPanel{
 	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
+	private PanelCommandes commandesMatrices; //là où l'étudiant pourra choisir ses actions
 	
 	public PanelGauss() {
 		
