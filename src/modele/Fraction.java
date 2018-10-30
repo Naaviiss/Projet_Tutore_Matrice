@@ -8,8 +8,7 @@ public class Fraction {
 	//une fraction composee d'une numerateur et d'un denominateur
 	public Fraction(int parNum, int parDen) {
 		if(parDen == 0) {
-			parDen = 1;
-			parNum = 0;
+			throw new RuntimeException("Division par zero");
 		}
 		numerateur = parNum;
 		denominateur = parDen;
@@ -52,7 +51,7 @@ public class Fraction {
 	//REDUIRE reduit de facon definitive
 	//reduit la fraction jusqu'a ce qu'elle soit irreductible
 	void reduire() {
-		if(denominateur < 0) {
+		if(denominateur < 0) { //pour mettre le - devant
 			numerateur *= -1;
 			denominateur *= -1;
 		}
@@ -77,6 +76,27 @@ public class Fraction {
 		double deno = frac.getDenominateur();
 		double resultat = nume / deno;
 		return resultat;
+	}
+	
+	//COMPARE
+	//compare deux fractions entre elles
+	public boolean FCompare(Fraction f) {
+		if((this.getNumerateur() == f.getNumerateur()) && (this.getDenominateur() == f.getDenominateur())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//donne l'ordre de deux fractions ( < ou > )  true si sup
+	public boolean FSup(Fraction f) {
+		if(this.FMath(this) > f.FMath(f)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//ADDITION
@@ -124,16 +144,17 @@ public class Fraction {
 	public static void main(String[] args) {
 		
 		//FRACTION
-		Fraction f1 = new Fraction(25,-13);
+		Fraction f1 = new Fraction(30,-13);
 		System.out.println("f1 = " + f1.toString());
 		Fraction f2 = new Fraction(-2,26);
 		System.out.println("f2 = " + f2.toString());
+		System.out.println("f1 et f2 pareil ? " + f1.FCompare(f2));
 		System.out.println();
 		
 		System.out.println("f3 representera le resultat de l'operation entre f1 et f2");
 		System.out.println();
 		
-		//ADDICTION
+		//ADDITION
 		Fraction f3 = f1.FAddition(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println("Resusltat de " + f1 + " + " + f2 + " = " + f3);
@@ -170,5 +191,12 @@ public class Fraction {
 		System.out.println("f4 = " + f4.toString());
 		//ECRITURE NON FRACTIONNELLE (MATH)
 		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
+		
+		//ORDRE
+		Fraction f5 = new Fraction(10/2);
+		System.out.println("f5 = " + f5.toString());
+		Fraction f6 = new Fraction(10/3);
+		System.out.println("f6 = " + f6.toString());
+		System.out.println("f5 > f6 ? " + f5.FSup(f6));
 	}
 }
