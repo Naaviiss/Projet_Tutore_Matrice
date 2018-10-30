@@ -60,7 +60,7 @@ public class Matrice {
 			return this.Case[i][j];
 		}
 	}
-	//get une ligne sous forme de tableau
+	//get une ligne sous forme de tableau de fraction
 	public Fraction[] getLigne(int x) {
 		if((x > this.getCol()-1) || (x < 0)) {
 			throw new RuntimeException("Ligne non existante");
@@ -68,6 +68,10 @@ public class Matrice {
 		else {
 			return Case[x];
 		}
+	}
+	//get toute la matrice sous forme de tableau de fraction
+	public Fraction[][] getAll() {
+		return Case;
 	}
 	//get taille matrice carre
 	public int getTaille() {
