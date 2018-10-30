@@ -6,7 +6,8 @@ public class Matrice {
 	private int Col;
 	private Fraction[][] Case;
 	
-	//MATRICE
+															/////MATRICE/////
+	
 	//creer une matrice carre vide de taille parTaille
 	public Matrice (int parTaille) {
 		Lig = parTaille;
@@ -50,7 +51,7 @@ public class Matrice {
 		}
 	}
 	
-	//GETTER
+															/////GETTER/////
 	//get une case
 	public Fraction getCase(int i, int j) {
 		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
@@ -91,7 +92,7 @@ public class Matrice {
 		return Col;
 	}
 	
-	//SETTER
+															/////SETTER/////
 	//set une case
 	public void setCase(int i, int j, Fraction var) { //var int a changer en fraction
 		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
@@ -111,7 +112,8 @@ public class Matrice {
 		}
 	}
 	
-	//FONCTION
+															/////FONCTION/////
+	
 	//renvoie une matrice identite de taille "Taille"
 	public static Matrice Identite(int Taille) {
         Matrice Ident = new Matrice(Taille);
@@ -163,7 +165,8 @@ public class Matrice {
 		return true;
 	}
 	
-	//OPERATION
+															/////OPERATION/////
+	
 	//ADDITION
 	//additionne deux matrices entre elles
 	public Matrice MAddition(Matrice parMat) {
@@ -171,10 +174,21 @@ public class Matrice {
 		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		Matrice res = new Matrice(this.getLig(),this.getCol());
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol() ;j++) {
+		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ;j++) {
 				res.Case[i][j] = Mat.Case[i][j].FAddition(parMat.Case[i][j]);
+			}
+		}
+		return res;
+	}
+	//additionne une matrice avec une fraction
+	public Matrice IAddition(Fraction parFrac) {
+		Matrice Mat = this;
+		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ;j++) {
+				res.Case[i][j] = Mat.Case[i][j].FAddition(parFrac);
 			}
 		}
 		return res;
@@ -187,10 +201,21 @@ public class Matrice {
 		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
 			throw new RuntimeException("Erreur dimensions des deux matrices");
 		}
-		Matrice res = new Matrice(this.getLig(),this.getCol());
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol();j++) {
+		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol();j++) {
 				res.Case[i][j] = Mat.Case[i][j].FSoustraction(parMat.Case[i][j]);
+			}
+		}
+		return res;
+	}
+	//soustrait une matrice avec une fraction
+	public Matrice ISoustraction(Fraction parFrac) {
+		Matrice Mat = this;
+		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ;j++) {
+				res.Case[i][j] = Mat.Case[i][j].FSoustraction(parFrac);
 			}
 		}
 		return res;
@@ -208,6 +233,19 @@ public class Matrice {
 			for(int j=0; j < res.getCol() ; j++) {
 				for(int k=0; k < Mat.getCol() ; k++) {
 					res.Case[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parMat.getCase(k,j))));
+				}
+			}
+		}
+		return res;
+	}
+	//multiplie une matrice avec une fraction
+	public Matrice IMultiplication(Fraction parFrac) {
+		Matrice Mat = this;
+		Matrice res = new Matrice(this.getLig(),this.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ; j++) {
+				for(int k=0; k < Mat.getCol() ; k++) {
+					res.Case[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parFrac)));
 				}
 			}
 		}
@@ -259,12 +297,19 @@ public class Matrice {
 		System.out.println(D.MCompare(E));
 		System.out.println();
 		
+		System.out.println("A+(1/2)");
+		A.IAddition(new Fraction(1,2)).Affiche();;
+		System.out.println();
+		
+		System.out.println("A+B");
 		A.MAddition(B).Affiche();
 		System.out.println();
 		
+		System.out.println("A-B");
 		A.MSoustraction(B).Affiche();
 		System.out.println();
 		
+		System.out.println("A*B");
 		A.MMultiplication(B).Affiche();
 		System.out.println();
 		
