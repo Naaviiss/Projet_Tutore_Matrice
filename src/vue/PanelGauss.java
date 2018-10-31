@@ -32,11 +32,15 @@ public class PanelGauss extends JPanel{
 	    hm.put("40", "7");
 	    hm.put("50", "5");
 		
-		//instance de la table affichant es matrices
+		//instance de la table affichant les matrices
 		affichageMatrices = new PanelAffichageMatrices(hm);
+		
+		//instance du panel avec les commandes
+		commandesMatrices = new PanelCommandes();
 		
 		//ajout des éléments au panel 
 		this.add(affichageMatrices,BorderLayout.WEST);
+		this.add(commandesMatrices,BorderLayout.EAST);
 		
 	}
 }

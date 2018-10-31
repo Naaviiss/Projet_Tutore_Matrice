@@ -6,10 +6,12 @@ import java.awt.Font;
 import java.awt.ScrollPane;
 import java.util.HashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 public class PanelAffichageMatrices extends JPanel{
 
