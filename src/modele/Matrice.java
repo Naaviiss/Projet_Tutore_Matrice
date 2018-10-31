@@ -24,7 +24,7 @@ public class Matrice {
 		this.remplir();
 	}
 	
-	//creer une matrice avec un tableau donne
+	//creer une matrice avec un tableau donne en parametre
 	public Matrice (Fraction[][] parMat) {
 		Lig = parMat.length;
 		Col = parMat.length;
@@ -42,7 +42,7 @@ public class Matrice {
 	}
 	
 	//REMPLIR
-	//remplie une matrice de 0 a sa creation
+	//remplie une matrice de 0 a sa creation ( pour pas que la matrice soit remplit de null )
 	public void remplir() {
 		for(int i=0; i<this.getLig() ; i++) {
 			for(int j=0; j<this.getCol() ;j++) {
@@ -70,7 +70,7 @@ public class Matrice {
 			return Case[x];
 		}
 	}
-	//get toute la matrice sous forme de tableau de fraction
+	//get toute la matrice sous forme de tableau de fraction ( ex : {{1,2,3} , {4,5,6} , {7,8,9}} )
 	public Fraction[][] getAll() {
 		return Case;
 	}
@@ -123,7 +123,7 @@ public class Matrice {
         return Ident;
     }
 	
-	//echange deux lignes entre elles
+	//echange deux lignes entre elles ( M[Li] <- M[Lj]   && M[Lj] <- M[Li])
 	public void Echange(int i, int j) {
 		Fraction[] tampon = getLigne(i);
         Case[i] = getLigne(j);
@@ -131,7 +131,7 @@ public class Matrice {
     }
 	
 	//COMPARE
-	//compare deux matrices entre elle et renvoie un boolean
+	//compare deux matrices entre elles et renvoie true si elles sont identique, sinon false
 	public boolean MCompare(Matrice parMat) {
 		Matrice Mat = this;
 		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
@@ -148,7 +148,7 @@ public class Matrice {
 	}
 	
 	//ISIDENTITY
-	//return true si la matrice est une matrice identite
+	//return true si la matrice est une matrice identite, sinon false
 	public boolean isIdentite() {
 		int zero = 0;
 		for(int i=0; i < this.getLig(); i++) {
@@ -168,7 +168,7 @@ public class Matrice {
 															/////OPERATION/////
 	
 	//ADDITION
-	//additionne deux matrices entre elles
+	//additionne deux matrices entre elles ( res <- M1 + M2 )
 	public Matrice MAddition(Matrice parMat) {
 		Matrice Mat = this;
 		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
@@ -182,7 +182,7 @@ public class Matrice {
 		}
 		return res;
 	}
-	//additionne une matrice avec une fraction
+	//additionne une matrice avec une fraction ( res <- M + frac )
 	public Matrice IAddition(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
@@ -193,9 +193,20 @@ public class Matrice {
 		}
 		return res;
 	}
+	//additionne deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] + M[Lj])
+	public Matrice LAddition(int i, int j) {
+		Matrice Mat = this;
+		Fraction tabi[] = Mat.getLigne(i);
+		Fraction tabj[] = Mat.getLigne(j);
+		for(int x=0; x < Mat.getCol(); x++) {
+			tabi[x] = tabi[x].FAddition(tabj[x]);
+		}
+		Mat.setLigne(i,tabi);
+		return Mat;
+	}
 	
 	//SOUSTRACTION
-	//soustrait deux matrices entre elles
+	//soustrait deux matrices entre elles ( res <- M1 - M2 )
 	public Matrice MSoustraction(Matrice parMat) {
 		Matrice Mat = this;
 		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
@@ -209,7 +220,7 @@ public class Matrice {
 		}
 		return res;
 	}
-	//soustrait une matrice avec une fraction
+	//soustrait une matrice avec une fraction ( res <- M - frac )
 	public Matrice ISoustraction(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
@@ -220,9 +231,20 @@ public class Matrice {
 		}
 		return res;
 	}
+	//soustrait deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] - M[Lj])
+		public Matrice LSoustraction(int i, int j) {
+			Matrice Mat = this;
+			Fraction tabi[] = Mat.getLigne(i);
+			Fraction tabj[] = Mat.getLigne(j);
+			for(int x=0; x < Mat.getCol(); x++) {
+				tabi[x] = tabi[x].FSoustraction(tabj[x]);
+			}
+			Mat.setLigne(i,tabi);
+			return Mat;
+		}
 	
 	//MULTIPLICATION
-	//multiplie deux matrices entre elles
+	//multiplie deux matrices entre elles ( res <- M1 * M2 )
 	public Matrice MMultiplication(Matrice parMat) {
 		Matrice Mat = this;
 		if(Mat.getCol() != parMat.getLig()) {
@@ -238,7 +260,7 @@ public class Matrice {
 		}
 		return res;
 	}
-	//multiplie une matrice avec une fraction
+	//multiplie une matrice avec une fraction ( res <- M * frac )
 	public Matrice IMultiplication(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(this.getLig(),this.getCol());
@@ -251,13 +273,48 @@ public class Matrice {
 		}
 		return res;
 	}
+	//multiplie deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] * M[Lj])
+		public Matrice LMultiplication(int i, int j) {
+			Matrice Mat = this;
+			Fraction tabi[] = Mat.getLigne(i);
+			Fraction tabj[] = Mat.getLigne(j);
+			for(int x=0; x < Mat.getCol(); x++) {
+				tabi[x] = tabi[x].FMultiplication(tabj[x]);
+			}
+			Mat.setLigne(i,tabi);
+			return Mat;
+		}
 	
-	//pour DIVISION de matrice il faut calculer la matrice transpose, la comatrice, le determinant et sous matrice
+	//pour DIVISION de deux matrice il faut calculer la matrice transpose, la comatrice, le determinant et sous matrice
 	//ces quatres choses permettent d'avoir la matrice inverse. Puis M1/M2 = M1*(M2)^-1  (M1 multiplier par l'inverse de M2)
-	//las divisions se feront donc avec FDivision
+	//les divisions se feront donc avec FDivision
 	//Impossible de faire ces quatres prerequis car il faut le faire le modulo d'une fraction
+	//Donc pas de "public Matrice MDivision(Matrice parMat) ( res <- M1 / M2 ) "
 	
-	//AFFICHE
+	//divise une matrice avec une fraction ( res <- M / frac )
+	public Matrice IDivision(Fraction parFrac) {
+		Matrice Mat = this;
+		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
+		for (int i=0; i < res.getLig(); i++) {
+			for(int j=0; j < res.getCol() ;j++) {
+				res.Case[i][j] = Mat.Case[i][j].FDivision(parFrac);
+			}
+		}
+		return res;
+	}
+	//additionne deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] / M[Lj])
+	public Matrice LDivision(int i, int j) {
+		Matrice Mat = this;
+		Fraction tabi[] = Mat.getLigne(i);
+		Fraction tabj[] = Mat.getLigne(j);
+		for(int x=0; x < Mat.getCol(); x++) {
+			tabi[x] = tabi[x].FDivision(tabj[x]);
+		}
+		Mat.setLigne(i,tabi);
+		return Mat;
+	}
+		
+															/////AFFICHE/////
 	//affiche une matrice
 	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
@@ -315,6 +372,15 @@ public class Matrice {
 		
 		C.Echange(1,2);
 		C.Affiche();
+		System.out.println();
+		
+		//LAddition
+		Fraction[][] tab5 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
+		Matrice Z = new Matrice(tab5);
+		Z.Affiche();
+		System.out.println();
+		Z = Z.LAddition(0,1);
+		Z.Affiche();
 		System.out.println();
 	}
 }
