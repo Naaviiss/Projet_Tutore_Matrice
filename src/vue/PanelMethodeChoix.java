@@ -32,37 +32,25 @@ public class PanelMethodeChoix extends JPanel{
 		panel = newPanel;
 	}
 
-
-	public JButton getBouton(String bouton) { 
-		// recupere le bouton correspondant a la string choisis
-		if(bouton=="symplex") { 
-			// bouton symplex
-			return boutons[0];
-			}
-		else if (bouton=="gauss") { 
-			// bouton gauss
-			return boutons[1];
-		}
-	}
-
-
-	public void setControleur(Controleur newControleur) { 
-		/* donne au controleur la posibilité d'écouter ce que font les 
-		boutons */
-		for(int i=0; i<boutons.length ; i++) {
-    		boutons[i].enregistreEcouteur(newControleur);
-    	}
-	}
-
-
-	public void actionPerformed(ActionEvent event) {
-		if(event.getSource() == this.getBouton("symplex")) {
-			this.setPanelMethode(new PanelSymplex());
-			// penser a modifier les arguments de PanelSympex()
-		}
-		else if(event.getSource() == this.getBouton("gauss")) {
-			this.setPanelMethode(new PanelGaussTaille());
-			// penser a modifier les arguments de PanelGaussTaille()
-		}
-	}
+//
+//
+//	public void setControleur(Controleur newControleur) { 
+//		/* donne au controleur la posibilité d'écouter ce que font les 
+//		boutons */
+//		for(int i=0; i<boutons.length ; i++) {
+//    		boutons[i].enregistreEcouteur(newControleur);
+//    	}
+//	}
+//
+//
+//	public void actionPerformed(ActionEvent event) {
+//		if(event.getSource() == this.getBouton("symplex")) {
+//			this.setPanelMethode(new PanelSymplex());
+//			// penser a modifier les arguments de PanelSympex()
+//		}
+//		else if(event.getSource() == this.getBouton("gauss")) {
+//			this.setPanelMethode(new PanelGaussTaille());
+//			// penser a modifier les arguments de PanelGaussTaille()
+//		}
+//	}
 }
