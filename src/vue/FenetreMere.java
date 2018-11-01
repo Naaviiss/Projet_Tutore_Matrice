@@ -15,10 +15,6 @@ import java.awt.event.ActionListener;
 public class FenetreMere extends JFrame{
 	public FenetreMere (String parTitre){
 		super(parTitre);
-		//On fait en sorte que cela s'affiche sur l'écran en entier
-		this.pack();
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		//On appelle le PanelAffichage pour gérer
 		//Les boutons concernant les simplex et les matrices
@@ -58,6 +54,10 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
+		//On fait en sorte que cela s'affiche sur l'écran en entier
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		this.pack();
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 	}//FenetreFrise()
 	public static void main (String []args){
