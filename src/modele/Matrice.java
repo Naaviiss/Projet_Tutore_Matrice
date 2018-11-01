@@ -266,9 +266,7 @@ public class Matrice {
 		Matrice res = new Matrice(this.getLig(),this.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ; j++) {
-				for(int k=0; k < Mat.getCol() ; k++) {
-					res.Case[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parFrac)));
-				}
+				res.Case[i][j] = Mat.getCase(i,j).FMultiplication(parFrac);
 			}
 		}
 		return res;
@@ -390,96 +388,126 @@ public class Matrice {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		
-//		Matrice A = new Matrice(3,3);
-//		A.Affiche();
-//		System.out.println();
-//		
-//		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,2),new Fraction(5,2),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-//		Matrice B = new Matrice(tab);
-//		B.Affiche();
-//		System.out.println("getLigne()");
-//		Fraction tab2[] = B.getLigne(1);
-//		System.out.println(tab2[0] + " | " + tab2[1] + " | " + tab2[2]);
-//		System.out.println("setLigne()");
-//		Fraction[] tab3 = {new Fraction(11), new Fraction(12), new Fraction(13,14)};
-//		B.setLigne(1,tab3);
-//		B.Affiche();
-//		System.out.println();
-//		
-//		Matrice C = new Matrice(B);
-//		C.Affiche();
-//		System.out.println();
-//		
-//		Matrice D = Matrice.Identite(3);
-//		Matrice E = Matrice.Identite(3);
-//		D.Affiche();
-//		System.out.println(D.isIdentite());
-//		System.out.println(D.MCompare(E));
-//		System.out.println();
-//		
-//		System.out.println("A+(1/2)");
-//		A.IAddition(new Fraction(1,2)).Affiche();;
-//		System.out.println();
-//		
-//		System.out.println("A+B");
-//		A.MAddition(B).Affiche();
-//		System.out.println();
-//		
-//		System.out.println("A-B");
-//		A.MSoustraction(B).Affiche();
-//		System.out.println();
-//		
-//		System.out.println("A*B");
-//		A.MMultiplication(B).Affiche();
-//		System.out.println();
-//		
-//		C.Echange(1,2);
-//		C.Affiche();
-//		System.out.println();
-//		
-//		//LAddition
-//		Fraction[][] tab5 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-//		Matrice Z = new Matrice(tab5);
-//		Z.Affiche();
-//		System.out.println();
-//		Z = Z.LAddition(0,1);
-//		Z.Affiche();
-//		System.out.println();
-//		System.out.println();
-//		System.out.println();
-//		
-//		// Test modif toute une ligne
-//		Matrice Nancy = Matrice.Identite(3);
-//		System.out.println("Matrice Identite Nancy");
-//		Nancy.Affiche();
-//		System.out.println();
-//		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxième ligne)");
-//		Nancy.modifyLine(1, "+", new Fraction(2));
-//		Nancy.Affiche();
-//		System.out.println();
-//		System.out.println("SOUSTRACTION -2 sur la ligne 1");
-//		Nancy.modifyLine(1, "-", new Fraction(2));
-//		Nancy.Affiche();
-//		System.out.println();
-//		System.out.println("DIVISION /2 sur la ligne 1");
-//		Nancy.modifyLine(1, "/", new Fraction(2));
-//		Nancy.Affiche();
-//		System.out.println();
-//		System.out.println("MULTIPLICATION *2/3 sur la ligne 1");
-//		Nancy.modifyLine(1, "*", new Fraction(2,3));
-//		Nancy.Affiche();
-//		System.out.println();
-//		System.out.println();
-//				
-//		// Modifier avec d'autre lignes
-//		// L3 -> L3 - 2L1
-//		System.out.println("modifyLine2");
-//		System.out.println("L3 -> L3 - 2L1");
-//		Nancy.modifyLine2(2, "-", 0, new Fraction(2));
-//		Nancy.Affiche();
-//		// L3 -> L3 + L2
-//		// L3 -> L3/4
-//	}
+	public static void main(String[] args) {
+		
+		//MATRICE
+		System.out.println("Matrices utilisées dans la suite du programme :");
+		System.out.println();
+		System.out.println("A est une matrice 3 par 3 , vide");
+		Matrice A = new Matrice(3,3);
+		A.Affiche();
+		System.out.println();
+		System.out.println("B est une matrice 3 par 3 , remplite de fractions et de nombres entiers");
+		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,15)}};
+		Matrice B = new Matrice(tab);
+		B.Affiche();
+		System.out.println();
+		System.out.println("C est la copie de la matrice B");
+		Matrice C = new Matrice(B);
+		C.Affiche();
+		System.out.println();
+		System.out.println("D et E sont des matrices identités de taille 4");
+		Matrice D = Matrice.Identite(4);
+		Matrice E = Matrice.Identite(4);
+		D.Affiche();
+		System.out.println();
+		System.out.println("F est une matrice 3 par 3 , remplite de nombres entiers qui se suivent");
+		Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
+		Matrice F = new Matrice(tab2);
+		F.Affiche();
+		System.out.println();
+		
+		//OPERATION
+		System.out.println("Quelques opérations sur les matrices :");
+		System.out.println("F + (1/2)");
+		F.IAddition(new Fraction(1,2)).Affiche();;
+		System.out.println();
+		System.out.println("F - 3");
+		F.ISoustraction(new Fraction(3)).Affiche();;
+		System.out.println();
+		System.out.println("F * 2");
+		F.IMultiplication(new Fraction(2)).Affiche();;
+		System.out.println();
+		System.out.println("F / 2");
+		F.IDivision(new Fraction(2)).Affiche();;
+		System.out.println();
+		
+		//COMPARE
+		System.out.println("Regardons si deux matrices sont identiques ( 'true' si oui, 'false' sinon ) :");
+		System.out.println("La matrice B et C sont-elles identiques ? " + B.MCompare(C));
+		System.out.println("La matrice B et A sont-elles identiques ? " + B.MCompare(A));
+		System.out.println();
+		
+		System.out.println("Regardons si une matrice est-elles bien une matrice identité ( 'true' si oui, 'false' sinon ) :");
+		System.out.println("La matrice B est-elle une matrice identité ? " + B.isIdentite());
+		System.out.println("La matrice D est-elle une matrice identité ? " + D.isIdentite());
+		System.out.println();
+		
+		//GETTER SETTER
+		System.out.println("Nous allons récupérer une ligne en particulier d'une matrice (F):");
+		System.out.println("Rappel de la matrice F");
+		F.Affiche();
+		System.out.println("La ligne 1 de la Matrice F est :");
+		Fraction tab3[] = F.getLigne(1);
+		System.out.println(tab3[0] + " | " + tab3[1] + " | " + tab3[2]);
+		System.out.println();
+		
+		System.out.println("Nous allons changer une ligne en particulier d'une matrice (F):");
+		System.out.println("Nous allons changer la ligne 1 de la matrice F par (6,1,3/2)");
+		Fraction[] tab4 = {new Fraction(6), new Fraction(1), new Fraction(3,2)};
+		F.setLigne(1,tab4);
+		System.out.println("La matrice F devient alors :");
+		F.Affiche();
+		System.out.println();
+		
+		//ECHANGE
+		System.out.println("Nous allons Echanger la ligne 0 et la ligne 1 de la matrice F :");
+		F.Echange(0,1);
+		F.Affiche();
+		System.out.println();
+		
+		////////////////////en cour
+		//LAddition
+		Fraction[][] tab5 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
+		Matrice Z = new Matrice(tab5);
+		Z.Affiche();
+		System.out.println();
+		Z = Z.LAddition(0,1);
+		Z.Affiche();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		// Test modif toute une ligne
+		Matrice Nancy = Matrice.Identite(3);
+		System.out.println("Matrice Identite Nancy");
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxième ligne)");
+		Nancy.modifyLine(1, "+", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("SOUSTRACTION -2 sur la ligne 1");
+		Nancy.modifyLine(1, "-", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("DIVISION /2 sur la ligne 1");
+		Nancy.modifyLine(1, "/", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("MULTIPLICATION *2/3 sur la ligne 1");
+		Nancy.modifyLine(1, "*", new Fraction(2,3));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println();
+				
+		// Modifier avec d'autre lignes
+		// L3 -> L3 - 2L1
+		System.out.println("modifyLine2");
+		System.out.println("L3 -> L3 - 2L1");
+		Nancy.modifyLine2(2, "-", 0, new Fraction(2));
+		Nancy.Affiche();
+		// L3 -> L3 + L2
+		// L3 -> L3/4
+	}
 }
