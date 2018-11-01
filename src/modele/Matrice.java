@@ -434,11 +434,23 @@ public class Matrice {
 		
 		//OPERATION
 		System.out.println("Quelques opérations sur la matrice F :");
+		System.out.println();
 		
+		System.out.println("Nous pouvons effectuer une opération entre un matrice et une fraction (ou un entier) :");
 		System.out.println("F*2 :");
 		F.IMultiplication(new Fraction(2)).Affiche();
 		System.out.println();
 		System.out.println("Nous pouvons faire le même principe avec + , - et /");
+		
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
+		
+		System.out.println("Nous pouvons effectuer une opération entre deux matrices :");
+		System.out.println("F*F :");
+		F.MMultiplication(F).Affiche();
+		System.out.println();
+		System.out.println("Nous pouvons faire le même principe avec + et -");
 		
 		System.out.println();
 		System.out.println("-----------------------------");
