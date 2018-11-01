@@ -313,7 +313,72 @@ public class Matrice {
 		Mat.setLigne(i,tabi);
 		return Mat;
 	}
-		
+	
+															/////MODIFYLINE/////
+	
+	// MODIFYLINE -> ( L3 -> 2L3 )
+	// Multiplication d'une ligne par un nombre non nul.
+	// Prend en paramètre : 
+	// int ligne(0 ou 1 ou 2), String operand ( add(+) | substract(-) | multiply(*) | divide(/) ), Fraction pFraction
+	public void modifyLine(int ligne, String operand, Fraction pFraction) {
+		for(int i=0; i<getTaille(); i++) {
+			for(int j=0; j<getTaille(); j++) {
+				if(ligne==i) {
+					if(operand == "+") {
+						Case[i][j] = Case[i][j].FAddition(pFraction);
+					}
+					else if(operand == "-") {
+						Case[i][j] = Case[i][j].FSoustraction(pFraction);
+					}
+					else if(operand == "*") {
+						Case[i][j] = Case[i][j].FMultiplication(pFraction);
+					}
+					else if(operand == "/") {
+						Case[i][j] = Case[i][j].FDivision(pFraction);
+					}
+					else {
+						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
+					}
+				}//if
+			}
+		}
+	}
+	
+	// MODIFYLINE 2 -> ( L3 -> L3 - 2L1 )
+	// Transformation d'une ligne à l'aide d'une autre ligne
+	/*	
+	 * EXEMPLE pour : L3 -> L3 - 2L1
+	 * 				  Ligne3 = Ligne3 - 2*Ligne1
+	 * matrice.modifyLine2(2, "-", 0, new Fraction(2));
+	*/										
+	public void modifyLine2(int ligneA, String operand, int ligneB, Fraction multiplicateur) {
+		Fraction frac;
+		for(int i=0; i<getTaille(); i++) {
+			for(int j=0; j<getTaille(); j++) {
+				if(ligneA==i) {
+					if(operand == "+") {
+						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
+						Case[i][j] = getCase(i,j).FAddition(frac);
+					}
+					else if(operand == "-") {
+						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
+						Case[i][j] = getCase(i,j).FSoustraction(frac);
+					}
+					else if(operand == "*") {
+						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
+						Case[i][j] = getCase(i,j).FMultiplication(frac);
+					}
+					else if(operand == "/") {
+						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
+						Case[i][j] = getCase(i,j).FDivision(frac);
+					}
+					else {
+						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
+					}
+				}
+			}
+		}
+	}
 															/////AFFICHE/////
 	//affiche une matrice
 	public void Affiche() {
