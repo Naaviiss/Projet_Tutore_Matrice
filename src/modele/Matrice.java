@@ -13,7 +13,7 @@ public class Matrice {
 		Lig = parTaille;
 		Col = parTaille;
 		Case = new Fraction[Lig][Col];
-		this.remplir();
+		this.remplir(0);
 	}
 	
 	//creer une matrice vide de taille parLig et parCol
@@ -21,7 +21,7 @@ public class Matrice {
 		Lig = parLig;
 		Col = parCol;
 		Case = new Fraction[Lig][Col];
-		this.remplir();
+		this.remplir(0);
 	}
 	
 	//creer une matrice avec un tableau donne en parametre
@@ -42,11 +42,11 @@ public class Matrice {
 	}
 	
 	//REMPLIR
-	//remplie une matrice de 0 a sa creation ( pour pas que la matrice soit remplit de null )
-	public void remplir() {
+	//remplie une matrice de x ( remplie de 0 a sa creation pour pas que la matrice soit remplit de null et donne erreur )
+	public void remplir(int x) {
 		for(int i=0; i<this.getLig() ; i++) {
 			for(int j=0; j<this.getCol() ;j++) {
-				this.Case[i][j] = new Fraction(0);
+				this.Case[i][j] = new Fraction(x);
 			}
 		}
 	}
@@ -391,6 +391,7 @@ public class Matrice {
 	public static void main(String[] args) {
 		
 		//MATRICE
+		System.out.println();
 		System.out.println("Matrices utilisées dans la suite du programme :");
 		System.out.println();
 		System.out.println("A est une matrice 3 par 3 , vide");
@@ -398,7 +399,7 @@ public class Matrice {
 		A.Affiche();
 		System.out.println();
 		System.out.println("B est une matrice 3 par 3 , remplite de fractions et de nombres entiers");
-		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,15)}};
+		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
 		Matrice B = new Matrice(tab);
 		B.Affiche();
 		System.out.println();
@@ -406,9 +407,8 @@ public class Matrice {
 		Matrice C = new Matrice(B);
 		C.Affiche();
 		System.out.println();
-		System.out.println("D et E sont des matrices identités de taille 4");
+		System.out.println("D est matrice identité de taille 4");
 		Matrice D = Matrice.Identite(4);
-		Matrice E = Matrice.Identite(4);
 		D.Affiche();
 		System.out.println();
 		System.out.println("F est une matrice 3 par 3 , remplite de nombres entiers qui se suivent");
@@ -416,20 +416,7 @@ public class Matrice {
 		Matrice F = new Matrice(tab2);
 		F.Affiche();
 		System.out.println();
-		
-		//OPERATION
-		System.out.println("Quelques opérations sur les matrices :");
-		System.out.println("F + (1/2)");
-		F.IAddition(new Fraction(1,2)).Affiche();;
-		System.out.println();
-		System.out.println("F - 3");
-		F.ISoustraction(new Fraction(3)).Affiche();;
-		System.out.println();
-		System.out.println("F * 2");
-		F.IMultiplication(new Fraction(2)).Affiche();;
-		System.out.println();
-		System.out.println("F / 2");
-		F.IDivision(new Fraction(2)).Affiche();;
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//COMPARE
@@ -442,42 +429,101 @@ public class Matrice {
 		System.out.println("La matrice B est-elle une matrice identité ? " + B.isIdentite());
 		System.out.println("La matrice D est-elle une matrice identité ? " + D.isIdentite());
 		System.out.println();
-		
-		//GETTER SETTER
-		System.out.println("Nous allons récupérer une ligne en particulier d'une matrice (F):");
-		System.out.println("Rappel de la matrice F");
-		F.Affiche();
-		System.out.println("La ligne 1 de la Matrice F est :");
-		Fraction tab3[] = F.getLigne(1);
-		System.out.println(tab3[0] + " | " + tab3[1] + " | " + tab3[2]);
+		System.out.println("-----------------------------");
 		System.out.println();
 		
-		System.out.println("Nous allons changer une ligne en particulier d'une matrice (F):");
-		System.out.println("Nous allons changer la ligne 1 de la matrice F par (6,1,3/2)");
-		Fraction[] tab4 = {new Fraction(6), new Fraction(1), new Fraction(3,2)};
-		F.setLigne(1,tab4);
-		System.out.println("La matrice F devient alors :");
+		//OPERATION
+		System.out.println("Quelques opérations sur la matrice F :");
+		
+		System.out.println("F*2 :");
+		F.IMultiplication(new Fraction(2)).Affiche();
+		System.out.println();
+		System.out.println("Nous pouvons faire le même principe avec + , - et /");
+		
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
+		
+		System.out.println("PREMICE : les indices dans une matrice de taille 3 sont : 0,1,2 pour les lignes et les colonnes");
+		System.out.println();
+		
+		System.out.println("Quelques opérations sur une seul ligne de la matrice F :");
+		Matrice G = new Matrice(F);//on dit que G c'est F, mais c'est un secret
+		System.out.println("Rappel de la matrice F :");
 		F.Affiche();
+		System.out.println("Nous allons additionner la ligne 1 à la ligne 0 de la matrice F, cela donne :");
+		F.LAddition(0,1);
+		F.Affiche();
+		System.out.println();
+		System.out.println("Nous pouvons faire le même principe avec - , * et /");
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//ECHANGE
-		System.out.println("Nous allons Echanger la ligne 0 et la ligne 1 de la matrice F :");
-		F.Echange(0,1);
-		F.Affiche();
+		System.out.println("Nous allons Echanger la ligne 0 et la ligne 2 de la matrice F, voici ce que l'on obtient :");
+		G.Echange(0,2);
+		G.Affiche();
+		G.Echange(0,2); //pour remettre comme avant, pour la suite
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
-		////////////////////en cour
-		//LAddition
-		Fraction[][] tab5 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-		Matrice Z = new Matrice(tab5);
-		Z.Affiche();
+		//GETTER SETTER
+		
+		System.out.println("Nous allons récupérer la taille de la matrice F :");
+		System.out.println("Rappel de la matrice F :");
+		G.Affiche();
+		System.out.println("La taille de la matrice F est : " + G.getTaille());
 		System.out.println();
-		Z = Z.LAddition(0,1);
-		Z.Affiche();
+		
+		System.out.println("Nous allons récupérer une case en particulier de la matrice F :");
+		System.out.println("La case [1,2] de la matrice F est : " + G.getCase(1,2));
 		System.out.println();
+		
+		System.out.println("Nous allons récupérer une ligne en particulier de la matrice F :");
+		System.out.println("La ligne 1 de la Matrice F est :");
+		Fraction tab3[] = G.getLigne(1);
+		System.out.println(tab3[0] + " | " + tab3[1] + " | " + tab3[2]);
+		System.out.println();
+		
+		System.out.println("Nous allons récupérer la matrice F entière sous forme de tableau :");
+		Fraction tab4[][] = G.getAll();
+		System.out.print("[");
+		for(int i=0 ; i < G.getTaille() ; i++) {
+			System.out.print("[");
+			for(int j=0 ; j < G.getTaille() ; j++) {
+				System.out.print(tab4[i][j]);
+				if(j!=2)
+					System.out.print(",");
+			}
+			System.out.print("]");
+		}
+		System.out.print("]");
 		System.out.println();
 		System.out.println();
 		
+		//
+		
+		System.out.println("Nous allons changer une case en particulier de la matrice F :");
+		System.out.println("Nous allons changer la case [1][2] de la matrice F par 10");
+		G.setCase(1,2,new Fraction(10));
+		System.out.println("La matrice F devient alors :");
+		G.Affiche();
+		System.out.println();
+		
+		System.out.println("Nous allons changer une ligne en particulier de la matrice F :");
+		System.out.println("Nous allons changer la ligne 2 de la matrice F par ( 6,1,(3/2) )");
+		Fraction[] tab5 = {new Fraction(6), new Fraction(1), new Fraction(3,2)};
+		G.setLigne(2,tab5);
+		System.out.println("La matrice F devient alors :");
+		G.Affiche();
+		System.out.println();
+		System.out.println("-----------------------------");
+		
+		
+		///////////////// Nancy /////////////////
+		/*
 		// Test modif toute une ligne
 		Matrice Nancy = Matrice.Identite(3);
 		System.out.println("Matrice Identite Nancy");
@@ -509,5 +555,6 @@ public class Matrice {
 		Nancy.Affiche();
 		// L3 -> L3 + L2
 		// L3 -> L3/4
+		*/
 	}
 }

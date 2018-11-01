@@ -150,11 +150,14 @@ public class Fraction {
 	public static void main(String[] args) {
 		
 		//FRACTION
+		System.out.println();
 		System.out.println("Fractions utilisées dans la suite du programme");
 		Fraction f1 = new Fraction(30,-13);
 		System.out.println("f1 = 30/(-13) = " + f1.toString());
 		Fraction f2 = new Fraction(-2,26);
 		System.out.println("f2 = (-2)/26 = " + f2.toString());
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//OPERATION
@@ -192,32 +195,45 @@ public class Fraction {
 		f3 = f1.FDivision(f2);
 		System.out.println("f3 = " + f3.toString());
 		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
 		
 		//REDUCTION
 		System.out.println("Test de réduction d'une fraction :");
 		Fraction f4 = new Fraction(30,10);
 		System.out.println("f4 = 30/10");
 		System.out.println("f4 = " + f4.toString());
+		Fraction f4bis = new Fraction(2051280,915750);
+		System.out.println("f4bis = 2051280 / 915750");
+		System.out.println("f4bis = " + f4bis.toString());
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//ECRITURE NON FRACTIONNELLE (MATH)
-		System.out.println("Test écriture décimal d'une fraction :");
-		System.out.println("Ecriture non fractionnelle de f1 = "+ f1.toString() + " = " + f1.FMath());
+		System.out.println("Test écriture décimale d'une fraction :");
+		System.out.println("Ecriture décimale de f1 = "+ f1.toString() + " = " + f1.FMath());
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//COMPARE
-		System.out.println("Test de comparaison de deux fractions :");
-		System.out.println("f1 et f2 sont-elles égales ? ( 'true' si oui, 'false' sinon ) : résultat = " + f1.FCompare(f2));
+		System.out.println("Test de comparaison de deux fractions ( 'true' si oui, 'false' sinon ) :");
+		System.out.println("f1 et f2 sont-elles égales ? résultat = " + f1.FCompare(f2));
+		System.out.println("f1 et -30/13 sont-elles égales ? résultat = " + f1.FCompare(new Fraction(-30,13)));
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//ORDRE
 		System.out.println("Test de l'ordre de deux fractions ( > ou <= ):");
 		Fraction f5 = new Fraction(10/2);
-		System.out.println("f5 = 10/2 = " + f5.toString());
 		Fraction f6 = new Fraction(10/3);
-		System.out.println("f6 = 10/3 = " + f6.toString());
+		System.out.println("f5 = 10/2 = " + f5.toString() + " et f6 = 10/3 = " + f6.toString());
 		System.out.println("f5 > f6 ? ( 'true' si oui, 'false' sinon ) : résultat = " + f5.FSup(f6));
 		System.out.println("f6 > f5 ? ( 'true' si oui, 'false' sinon ) : résultat = " + f6.FSup(f5));
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//AUTRE
@@ -236,12 +252,15 @@ public class Fraction {
 		f7 = new Fraction(f7);
 		System.out.println("Maintenant f7 = 282/47 = " + f7.toString());
 		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
 		
 		System.out.println("Test calcul PGCD d'une fraction :");
 		Fraction ex = new Fraction(0);
 		int pgcd = Math.abs(ex.CalculPGCD(125,475));
 		System.out.println("PGCD de 125 et 475 = " + pgcd);
 		System.out.println();
+		System.out.println("-----------------------------");
 	}
 
 }
