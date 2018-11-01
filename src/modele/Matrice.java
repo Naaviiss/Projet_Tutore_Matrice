@@ -447,39 +447,5 @@ public class Matrice {
 		Z = Z.LAddition(0,1);
 		Z.Affiche();
 		System.out.println();
-		System.out.println();
-		System.out.println();
-		
-		// Test modif toute une ligne
-		Matrice Nancy = Matrice.Identite(3);
-		System.out.println("Matrice Identite Nancy");
-		Nancy.Affiche();
-		System.out.println();
-		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxième ligne)");
-		Nancy.modifyLine(1, "+", new Fraction(2));
-		Nancy.Affiche();
-		System.out.println();
-		System.out.println("SOUSTRACTION -2 sur la ligne 1");
-		Nancy.modifyLine(1, "-", new Fraction(2));
-		Nancy.Affiche();
-		System.out.println();
-		System.out.println("DIVISION /2 sur la ligne 1");
-		Nancy.modifyLine(1, "/", new Fraction(2));
-		Nancy.Affiche();
-		System.out.println();
-		System.out.println("MULTIPLICATION *2/3 sur la ligne 1");
-		Nancy.modifyLine(1, "*", new Fraction(2,3));
-		Nancy.Affiche();
-		System.out.println();
-		System.out.println();
-				
-		// Modifier avec d'autre lignes
-		// L3 -> L3 - 2L1
-		System.out.println("modifyLine2");
-		System.out.println("L3 -> L3 - 2L1");
-		Nancy.modifyLine2(2, "-", 0, new Fraction(2));
-		Nancy.Affiche();
-		// L3 -> L3 + L2
-		// L3 -> L3/4
 	}
 }
