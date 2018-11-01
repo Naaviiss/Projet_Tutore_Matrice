@@ -141,62 +141,62 @@ public class Fraction {
 	}
 	
 	//TEST_MAIN
-	public static void main(String[] args) {
-		
-		//FRACTION
-		Fraction f1 = new Fraction(30,-13);
-		System.out.println("f1 = " + f1.toString());
-		Fraction f2 = new Fraction(-2,26);
-		System.out.println("f2 = " + f2.toString());
-		System.out.println("f1 et f2 pareil ? " + f1.FCompare(f2));
-		System.out.println();
-		
-		System.out.println("f3 representera le resultat de l'operation entre f1 et f2");
-		System.out.println();
-		
-		//ADDITION
-		Fraction f3 = f1.FAddition(f2);
-		System.out.println("f3 = " + f3.toString());
-		System.out.println("Resusltat de " + f1 + " + " + f2 + " = " + f3);
-		System.out.println();
-		
-		//SOUSTRACTION
-		f3 = f1.FSoustraction(f2);
-		System.out.println("f3 = " + f3.toString());
-		System.out.println("Resusltat de " + f1 + " - " + f2 + " = " + f3);
-		System.out.println();
-		
-		//MULTIPLICATION
-		f3 = f1.FMultiplication(f2);
-		System.out.println("f3 = " + f3.toString());
-		System.out.println("Resusltat de " + f1 + " * " + f2 + " = " + f3);
-		System.out.println();
-		
-		//DIVISION
-		f3 = f1.FDivision(f2);
-		System.out.println("f3 = " + f3.toString());
-		System.out.println("Resusltat de " + f1 + " / " + f2 + " = " + f3);
-		System.out.println();
-		
-		//REDUCTION
-		Fraction f4 = new Fraction(30,10);
-		System.out.println("f4 = " + f4.toString());
-		System.out.println("Avant reduction de f4 = " + f4);
-		//AVEC UTILISATION DE REDUIRE
-		f4.reduire();
-		System.out.println("Apres reduction de f4 = " + f4);
-		//AVEC UTILISATION DE REDUIREV2
-		f4 = new Fraction(30,10);
-		System.out.println("Apres reductionV2 de f4 = " + f4.reduireV2(f4));
-		System.out.println("f4 = " + f4.toString());
-		//ECRITURE NON FRACTIONNELLE (MATH)
-		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
-		
-		//ORDRE
-		Fraction f5 = new Fraction(10/2);
-		System.out.println("f5 = " + f5.toString());
-		Fraction f6 = new Fraction(10/3);
-		System.out.println("f6 = " + f6.toString());
-		System.out.println("f5 > f6 ? " + f5.FSup(f6));
-	}
+//	public static void main(String[] args) {
+//		
+//		//FRACTION
+//		Fraction f1 = new Fraction(30,-13);
+//		System.out.println("f1 = " + f1.toString());
+//		Fraction f2 = new Fraction(-2,26);
+//		System.out.println("f2 = " + f2.toString());
+//		System.out.println("f1 et f2 pareil ? " + f1.FCompare(f2));
+//		System.out.println();
+//		
+//		System.out.println("f3 representera le resultat de l'operation entre f1 et f2");
+//		System.out.println();
+//		
+//		//ADDITION
+//		Fraction f3 = f1.FAddition(f2);
+//		System.out.println("f3 = " + f3.toString());
+//		System.out.println("Resusltat de " + f1 + " + " + f2 + " = " + f3);
+//		System.out.println();
+//		
+//		//SOUSTRACTION
+//		f3 = f1.FSoustraction(f2);
+//		System.out.println("f3 = " + f3.toString());
+//		System.out.println("Resusltat de " + f1 + " - " + f2 + " = " + f3);
+//		System.out.println();
+//		
+//		//MULTIPLICATION
+//		f3 = f1.FMultiplication(f2);
+//		System.out.println("f3 = " + f3.toString());
+//		System.out.println("Resusltat de " + f1 + " * " + f2 + " = " + f3);
+//		System.out.println();
+//		
+//		//DIVISION
+//		f3 = f1.FDivision(f2);
+//		System.out.println("f3 = " + f3.toString());
+//		System.out.println("Resusltat de " + f1 + " / " + f2 + " = " + f3);
+//		System.out.println();
+//		
+//		//REDUCTION
+//		Fraction f4 = new Fraction(30,10);
+//		System.out.println("f4 = " + f4.toString());
+//		System.out.println("Avant reduction de f4 = " + f4);
+//		//AVEC UTILISATION DE REDUIRE
+//		f4.reduire();
+//		System.out.println("Apres reduction de f4 = " + f4);
+//		//AVEC UTILISATION DE REDUIREV2
+//		f4 = new Fraction(30,10);
+//		System.out.println("Apres reductionV2 de f4 = " + f4.reduireV2(f4));
+//		System.out.println("f4 = " + f4.toString());
+//		//ECRITURE NON FRACTIONNELLE (MATH)
+//		System.out.println("Ecriture non fractionnelle de f4 = " + f4.FMath(f4));
+//		
+//		//ORDRE
+//		Fraction f5 = new Fraction(10/2);
+//		System.out.println("f5 = " + f5.toString());
+//		Fraction f6 = new Fraction(10/3);
+//		System.out.println("f6 = " + f6.toString());
+//		System.out.println("f5 > f6 ? " + f5.FSup(f6));
+//	}
 }
