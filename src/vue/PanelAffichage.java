@@ -16,13 +16,16 @@ import modele.Data;
 
 public class PanelAffichage extends JPanel implements ActionListener{
 	//On crée nos deux boutons
-	private JButton bouton_simplex = new JButton("Simplex");
-	private JButton bouton_matrice = new JButton("Matrice");
+	JButton bouton_simplex = new JButton("Simplex");
+	JButton bouton_matrice = new JButton("Matrice");
+	
+	//parametre fenetre pour le menu
+	private FenetreMere fenetre;
 	
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
 
-	public PanelAffichage(){
-		
+	public PanelAffichage(FenetreMere fenetre){
+		this.fenetre = fenetre;
 		panelboutons = new JPanel();
 		//this.setLayout(new BorderLayout());	
 		this.setBorder(new EmptyBorder(300,300,300,300));
@@ -55,10 +58,12 @@ public class PanelAffichage extends JPanel implements ActionListener{
 		String actionCommand = evt.getActionCommand();
 		
 		//L'action concernant le bouton quitter
-		if (actionCommand.equals(Data.Titre_Menu[1])){
+		if (actionCommand.equals(Data.Titre_Menu[2])){
 			System.exit(0);
+		}//L'action concernant le bouton Retour Menu Principal
+		if (actionCommand.equals(Data.Titre_Menu[1])){
+			fenetre.setMenu();
 		}
-		
 		//L'action concernant l'aide pour les simplex
 		if (actionCommand.equals(Data.Titre_Menu_Liste[0])){
 			String texte = new String("Texte pour comprendre simplex");
@@ -70,10 +75,9 @@ public class PanelAffichage extends JPanel implements ActionListener{
 			String texte = new String("Texte pour comprendre matrice");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
-	}//actionPerformed()
-//	public void enregistreEcouteur(Controleur parControleur){
-//		bouton_simplex.addActionListener(parControleur);
-//		bouton_matrice.addActionListener(parControleur);
-
-//	}//enregistreEcouteur()
+	}
+	public void enregistreEcouteur(FenetreMere parControleur){
+		bouton_simplex.addActionListener(parControleur);
+		bouton_matrice.addActionListener(parControleur);
+	}//enregistreEcouteur()
 }//PanelAgenda
