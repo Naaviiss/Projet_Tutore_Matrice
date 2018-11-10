@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.List;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
@@ -31,6 +32,15 @@ public class PanelGauss extends JPanel{
 	    hm.put("40", "4");
 	    hm.put("40", "7");
 	    hm.put("50", "5");
+	    
+	    //a supprimer
+	    List modificationsLignes = new List();
+	    modificationsLignes.add("L0");
+	    modificationsLignes.add("L1");
+	    modificationsLignes.add("L2");
+	    modificationsLignes.add("L3");
+	    modificationsLignes.add("L4");
+	    modificationsLignes.add("L5");
 		
 		//instance de la table affichant les matrices
 		affichageMatrices = new PanelAffichageMatrices(hm);

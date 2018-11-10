@@ -14,6 +14,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	
 	//private HashMap<Integer, List<Matrice>> chMatrices;
 	private HashMap<String, String> chMatrices; // en attendant d'avoir la classe Matrice
+	private List<String> ligneModifiees; //pour les modifications de lignes
 	
 	public ModelAffichageMatrices(/*private HashMap<Integer, List<Matrice>> pMatricese*/ HashMap<String, String> pMatrices) {
 		
@@ -30,16 +31,20 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		//itérateur pour parcourir les entrees
 //		Iterator<Entry<Integer, List<Matrice>>> it = entrees.Iterator();
 		Iterator<Entry<String,String>> it = entrees.iterator();
+		Iterator<String> itLigne  = ligneModifiees.iterator();
 		
 		int indiceLigne = 0;
 //		Entry<Integer, List<Matrice>> entree;
 		Entry<String, String> entree;
+		String lignModif;
 
 		String chaine;
-		while (it.hasNext()) {
+		while (it.hasNext() && itLigne.hasNext()) {
 			entree = it.next();
+			lignModif = itLigne.next();
 			setValueAt(entree.getKey()+" A", indiceLigne, 0);
 			setValueAt(entree.getKey()+" B", indiceLigne, 1);
+			setValueAt(lignModif, indiceLigne, 2);
 			indiceLigne ++;
 		}
 		

@@ -39,8 +39,9 @@ public class PanelAffichageMatrices extends JPanel{
 		JScrollPane panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//taille des colonnes et de la table
-		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(340);
-		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(340);
+		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(235);
+		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(235);
+		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(235);
 		panDefil.setPreferredSize(new Dimension(700, 850));
 		
 		//ajout panneau defilant avec la table
