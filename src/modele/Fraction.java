@@ -67,7 +67,7 @@ public class Fraction {
 	}
 	
 	//REDUIREV2 reduit juste pour l'affichage
-	//reduit la fraction jusqu'a ce qu'elle soit irreductible
+	//reduit la fraction jusqu'a ce qu'elle soit irreductible -- ne sert a rien si "reduire()" est activé dans les constructeur "Fraction"
 	public Fraction reduireV2(Fraction frac) {
 		int pgcd = CalculPGCD(frac.getNumerateur(),frac.getDenominateur());
 		frac.setNumerateur(frac.getNumerateur()/pgcd);
