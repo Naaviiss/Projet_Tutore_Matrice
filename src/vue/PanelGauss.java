@@ -6,8 +6,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,7 +35,7 @@ public class PanelGauss extends JPanel{
 	    hm.put("50", "5");
 	    
 	    //a supprimer
-	    List modificationsLignes = new List();
+	    List<String> modificationsLignes = new ArrayList<String>();
 	    modificationsLignes.add("L0");
 	    modificationsLignes.add("L1");
 	    modificationsLignes.add("L2");
@@ -43,7 +44,7 @@ public class PanelGauss extends JPanel{
 	    modificationsLignes.add("L5");
 		
 		//instance de la table affichant les matrices
-		affichageMatrices = new PanelAffichageMatrices(hm);
+		affichageMatrices = new PanelAffichageMatrices(hm,modificationsLignes);
 		
 		//instance du panel avec les commandes
 		commandesMatrices = new PanelCommandes();

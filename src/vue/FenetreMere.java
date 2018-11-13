@@ -18,7 +18,8 @@ public class FenetreMere extends JFrame{
 		
 		//On appelle le PanelAffichage pour gérer
 		//Les boutons concernant les simplex et les matrices
-		PanelAffichage contentPane = new PanelAffichage();
+		//PanelAffichage contentPane = new PanelAffichage();
+		PanelGauss contentPane = new PanelGauss();
 		this.setContentPane(contentPane);
 		setVisible(true);
 
@@ -31,7 +32,7 @@ public class FenetreMere extends JFrame{
 				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.Titre_Menu[i]);
 			    menu.setMnemonic('A');
-				menu.addActionListener((ActionListener) contentPane);
+//				menu.addActionListener((ActionListener) contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
@@ -39,7 +40,7 @@ public class FenetreMere extends JFrame{
 				for(int j=0;j<Data.Titre_Menu_Liste.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.Titre_Menu_Liste[j]);
 					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu_Liste[j].charAt(0),java.awt.Event.CTRL_MASK));
-					menuitem.addActionListener((ActionListener) contentPane);
+//					menuitem.addActionListener((ActionListener) contentPane);
 					menuitem.setActionCommand(Data.Titre_Menu_Liste[j]);
 					menu.add(menuitem);
 				}
@@ -48,7 +49,7 @@ public class FenetreMere extends JFrame{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.Titre_Menu[i],Data.Titre_Menu[i].charAt(0));
 				menu.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu[i].charAt(0),java.awt.Event.CTRL_MASK));
-				menu.addActionListener((ActionListener) contentPane);
+//				menu.addActionListener((ActionListener) contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 			}
