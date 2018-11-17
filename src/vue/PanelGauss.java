@@ -13,6 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import modele.*;
+
 public class PanelGauss extends JPanel{
 	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
 	private PanelCommandes commandesMatrices; //là où l'étudiant pourra choisir ses actions
@@ -24,13 +26,20 @@ public class PanelGauss extends JPanel{
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
 		
 		//a supprimer
-		HashMap<String, String> hm = new HashMap<String,String>();
+		/*HashMap<String, String> hm = new HashMap<String,String>();
 		hm.put("20", "1");
 	    hm.put("10", "2");
 	    hm.put("30", "3");
 	    hm.put("40", "4");
 	    hm.put("40", "7");
-	    hm.put("50", "5");
+	    hm.put("50", "5");*/
+		HashMap<Matrice, Matrice> hm = new HashMap<Matrice,Matrice>();
+		hm.put(new Matrice(3), new Matrice(3));
+	    hm.put(new Matrice(3), new Matrice(3));
+	    hm.put(new Matrice(3), new Matrice(3));
+	    hm.put(new Matrice(3), new Matrice(3));
+	    hm.put(new Matrice(3), new Matrice(3));
+	    hm.put(new Matrice(3), new Matrice(3));
 		
 		//instance de la table affichant les matrices
 		affichageMatrices = new PanelAffichageMatrices(hm);

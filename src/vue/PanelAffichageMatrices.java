@@ -13,12 +13,14 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
+import modele.*;
+
 public class PanelAffichageMatrices extends JPanel{
 
 	private JTable tableMatrices; //String pour l'instant
-	private HashMap<String, String> chMatrices; //String pour l'instant
+	private HashMap<Matrice, Matrice> chMatrices; //String pour l'instant
 	
-	public PanelAffichageMatrices(HashMap<String, String> pMatrices) {
+	public PanelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices) {
 		chMatrices = pMatrices;
 		tableMatrices = new JTable();
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices));

@@ -107,4 +107,12 @@ public class PanelCommandes extends JPanel implements Data{
 			this.add(operations[i],contraintes);
 		}
 	}
+	
+	public void setControleur(Controleur newControleur) {
+		//controleur écoute les boutons
+		valider.enregistreEcouteur(newControleur);
+		operations.enregistreEcouteur(newControleur);
+		lignes.enregistreEcouteur(newControleur);
+		constante.enregistreEcouteur(newControleur);
+	}
 }
