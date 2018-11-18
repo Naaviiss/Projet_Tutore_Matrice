@@ -29,11 +29,6 @@ public class FenetreMere extends JFrame{
 		//Les boutons concernant les simplex et les matrices
 //		affichage.enregistreEcouteur(this);
 		
-		//ajout des panels au CardLayout
-//		contentPane.add(affichage, "menu_choix");
-		//contentPane.add(symplex, "panel_symplex");
-//		contentPane.add(gauss, "panel_gauss");
-		
 		this.add(contentPane);
 		setVisible(true);
 
@@ -54,7 +49,7 @@ public class FenetreMere extends JFrame{
 				for(int j=0;j<Data.Titre_Menu_Liste.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.Titre_Menu_Liste[j]);
 					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu_Liste[j].charAt(0),java.awt.Event.CTRL_MASK));
-//					menuitem.addActionListener((ActionListener) contentPane);
+					menuitem.addActionListener(contentPane);
 					menuitem.setActionCommand(Data.Titre_Menu_Liste[j]);
 					menu.add(menuitem);
 				}
@@ -63,7 +58,7 @@ public class FenetreMere extends JFrame{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.Titre_Menu[i],Data.Titre_Menu[i].charAt(0));
 				menu.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu[i].charAt(0),java.awt.Event.CTRL_MASK));
-//				menu.addActionListener((ActionListener) contentPane);
+				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 			}

@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 //import controleur.Controleur;
 import modele.Data;
 
-public class PanelAffichage extends JPanel{
+public class PanelAffichage extends JPanel implements ActionListener{
 	//On crée nos deux boutons
 	JButton bouton_simplex = new JButton("Simplex");
 	JButton bouton_matrice = new JButton("Matrice");
@@ -37,7 +37,7 @@ public class PanelAffichage extends JPanel{
 		panelboutons.setLayout(new BorderLayout(20,20));
 		
 		bouton_simplex.setActionCommand(Data.Choix[0]);
-		bouton_matrice.setActionCommand(Data.Choix[0]);
+		bouton_matrice.setActionCommand(Data.Choix[1]);
 		
 		//On lui ajoute les deux boutons
 		panelboutons.add(bouton_simplex,BorderLayout.WEST);
@@ -50,31 +50,30 @@ public class PanelAffichage extends JPanel{
 		//new Controleur(panelgauss, panelsimplex);
 		
 	}//PanelAffichage()
-//	
-//	public void actionPerformed(ActionEvent evt){
-//		String actionCommand = evt.getActionCommand();
-//		
-//		//L'action concernant le bouton quitter
-//		if (actionCommand.equals(Data.Titre_Menu[2])){
-//			System.exit(0);
-//		}//L'action concernant le bouton Retour Menu Principal
+	
+	public void actionPerformed(ActionEvent pEvt){
+		
+		//L'action concernant le bouton quitter
+		if (pEvt.getActionCommand().equals(Data.Titre_Menu[2])){
+			System.exit(0);
+		}//L'action concernant le bouton Retour Menu Principal
 //		if (actionCommand.equals(Data.Titre_Menu[1])){
 //			fenetre.setMenu();
 //		}
-//		//L'action concernant l'aide pour les simplex
-//		if (actionCommand.equals(Data.Titre_Menu_Liste[0])){
-//			String texte = new String("Texte pour comprendre simplex");
-//			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-//		}
-//		
-//		//L'action concernant l'aide pour les matrices
-//		if (actionCommand.equals(Data.Titre_Menu_Liste[1])){
-//			String texte = new String("Texte pour comprendre matrice");
-//			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-//		}
-//	}
-//	public void enregistreEcouteur(FenetreMere parControleur){
+		//L'action concernant l'aide pour les simplex
+		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[0])){
+			String texte = new String("Texte pour comprendre simplex");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		//L'action concernant l'aide pour les matrices
+		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[1])){
+			String texte = new String("Texte pour comprendre matrice");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	public void enregistreEcouteur(FenetreMere parControleur){
 //		bouton_simplex.addActionListener(parControleur);
 //		bouton_matrice.addActionListener(parControleur);
-//	}//enregistreEcouteur()
+	}//enregistreEcouteur()
 }//PanelAffichage
