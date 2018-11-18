@@ -20,7 +20,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 	JPanel contentPane;
 	PanelAffichage affichage;
 	//PanelSymplex symplex;
-	PanelGauss gauss;
+	PanelChoix gauss;
 	
 	public FenetreMere (String parTitre){
 		super(parTitre);
@@ -35,7 +35,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 		
 		//Creation des panels symplex et gauss
 		//symplex = new PanelSymplex();
-		gauss = new PanelGauss();
+		gauss = new PanelChoix();
 		
 		//ajout des panels au CardLayout
 		contentPane.add(affichage, "menu_choix");
