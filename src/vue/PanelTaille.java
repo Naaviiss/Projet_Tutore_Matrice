@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controleur.Controleur;
+
 public class PanelTaille extends JPanel{
 	JButton valider = new JButton("valider");
 	JNumberTextField taille = new JNumberTextField();
@@ -28,7 +30,7 @@ public class PanelTaille extends JPanel{
 		return i;
 	}
 	
-	public void enregistreEcouteur(PanelChoix parControleur){
+	public void enregistreEcouteur(Controleur parControleur){
 		valider.addActionListener(parControleur);
 	}
 	

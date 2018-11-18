@@ -21,6 +21,7 @@ public class PanelMatrice extends JPanel{
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
 	private Controleur chControleur; //le controleur
+	private JButton boutonValider;//le bouton valider
 	
 	public PanelMatrice(int pTailleMatrice, Controleur pControleur) {
 		
@@ -37,7 +38,7 @@ public class PanelMatrice extends JPanel{
 		InputField[] champsInput = new InputField[4*4];
 		
 		//le bouton valider 
-		JButton boutonValider = new JButton("Valider");
+		boutonValider = new JButton("Valider");
 		boutonValider.setPreferredSize(new Dimension(300, 100));
 		boutonValider.setFont(new Font(Font.SERIF, 20, 60));
 		
@@ -63,11 +64,11 @@ public class PanelMatrice extends JPanel{
 		instruction.setFont(new Font(Font.SERIF, 20, 30));
 		
 		//ajout des champs au panel
-		this.add(valider, "valider");
+		this.add(boutonValider, "valider");
 	}
 	
-	public void enregistreEcouteur(PanelChoix parControleur){
-		valider.addActionListener(parControleur);
+	public void enregistreEcouteur(Controleur parControleur){
+		boutonValider.addActionListener(parControleur);
 	}
 
 	public void setTaille(int taille) {
