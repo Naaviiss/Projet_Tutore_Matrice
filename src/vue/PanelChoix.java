@@ -10,10 +10,10 @@ public class PanelChoix extends JPanel implements ActionListener{
 	PanelTaille panTaille;
 	PanelGauss gauss;
 	PanelMatrice panMatrice;
+	int taille;
 	
 	public PanelChoix() {
 		this.setLayout(new CardLayout());
-		
 		panTaille = new PanelTaille();
 		gauss = new PanelGauss();
 		panMatrice = new PanelMatrice();
@@ -24,12 +24,6 @@ public class PanelChoix extends JPanel implements ActionListener{
 		panTaille.enregistreEcouteur(this);
 		panMatrice.enregistreEcouteur(this);
 	}
-	
-	
-	
-	
-	
-	
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
