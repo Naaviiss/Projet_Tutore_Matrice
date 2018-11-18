@@ -6,17 +6,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import Controleur.Controleur;
+
 public class PanelChoix extends JPanel implements ActionListener{
 	PanelTaille panTaille;
 	PanelGauss gauss;
 	PanelMatrice panMatrice;
 	int taille;
+	Controleur chControleur;
 	
-	public PanelChoix() {
+	public PanelChoix(Controleur parControleur) {
+		chControleur = parControleur;
 		this.setLayout(new CardLayout());
 		panTaille = new PanelTaille();
 		gauss = new PanelGauss();
-		panMatrice = new PanelMatrice();
+		panMatrice = new PanelMatrice(3, chControleur);
 		this.add(panTaille, "panel_taille");
 		this.add(gauss, "panel_gauss");
 		this.add(panMatrice, "panel_matrice");

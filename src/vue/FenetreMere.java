@@ -7,6 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import Controleur.Controleur;
 import modele.Data;
 
 import java.awt.CardLayout;
@@ -21,10 +22,11 @@ public class FenetreMere extends JFrame implements ActionListener{
 	PanelAffichage affichage;
 	//PanelSymplex symplex;
 	PanelChoix gauss;
+	Controleur chControleur;
 	
 	public FenetreMere (String parTitre){
 		super(parTitre);
-		
+		chControleur = new Controleur(null);
 		contentPane = new JPanel();
 		contentPane.setLayout(new CardLayout());
 		
@@ -35,7 +37,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 		
 		//Creation des panels symplex et gauss
 		//symplex = new PanelSymplex();
-		gauss = new PanelChoix();
+		gauss = new PanelChoix(chControleur);
 		
 		//ajout des panels au CardLayout
 		contentPane.add(affichage, "menu_choix");
