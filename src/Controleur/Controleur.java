@@ -19,6 +19,19 @@ public class Controleur implements ActionListener{
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
 			
 		}
+		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
+			
+		}
+		for (int i = 0; i<Data.OPERATIONS.length;i++) {
+			if(pEvt.getActionCommand().equals(Data.OPERATIONS[i])) {
+				
+			}
+		}
+		for (int i = 0; i<Data.INTITULES.length;i++) {
+			if(pEvt.getActionCommand().equals(Data.INTITULES[i])) {
+				
+			}
+		}
 	}
 
 }
