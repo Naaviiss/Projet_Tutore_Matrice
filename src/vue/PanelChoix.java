@@ -17,7 +17,7 @@ public class PanelChoix extends JPanel implements ActionListener{
 		panTaille = new PanelTaille();
 		gauss = new PanelGauss();
 		panMatrice = new PanelMatrice();
-		this.add(panTaille, "panel taille");
+		this.add(panTaille, "panel_taille");
 		this.add(gauss, "panel_gauss");
 		this.add(panMatrice, "panel_matrice");
 		
