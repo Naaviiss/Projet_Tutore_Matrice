@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controleur.Controleur;
+import modele.Data;
 
 public class PanelTaille extends JPanel{
 	JButton valider = new JButton("valider");
@@ -18,6 +19,7 @@ public class PanelTaille extends JPanel{
 		valider.setPreferredSize(new Dimension(50, 75));
 		taille.setPreferredSize(new Dimension(50, 20));
 		valider.setFont(new Font(Font.SERIF, 20, 60));
+		valider.setActionCommand(Data.VALIDER_PANEL_TAILLE);
 		
 		//ajout des champs au panel
 		this.add(new JLabel("Choisir une taille de matrice entre 3 et 5"));

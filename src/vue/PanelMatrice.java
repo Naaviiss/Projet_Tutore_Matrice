@@ -64,7 +64,7 @@ public class PanelMatrice extends JPanel{
 		instruction.setFont(new Font(Font.SERIF, 20, 30));
 		
 		//ajout des champs au panel
-		this.add(boutonValider, "valider");
+		this.add(boutonValider);
 	}
 	
 	public void enregistreEcouteur(Controleur parControleur){

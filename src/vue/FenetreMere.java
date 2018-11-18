@@ -18,14 +18,13 @@ import java.awt.event.ActionListener;
 
 
 public class FenetreMere extends JFrame{
-	PanelAffichage contentPane;
+	PanelChoix contentPane;
 	
 	public FenetreMere (String parTitre){
 		super(parTitre);
-		contentPane = new PanelAffichage();
-		contentPane.setLayout(new CardLayout());
+		contentPane = new PanelChoix();
 		this.add(contentPane);
-		setVisible(true);
+		this.setVisible(true);
 
 		//On s'occupe du menu en haut de l'écran
 		JMenuBar menuBar = new JMenuBar();

@@ -4,20 +4,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import modele.Data;
+import vue.PanelAffichage;
+import vue.PanelChoix;
 import vue.PanelMatrice;
 
 public class Controleur implements ActionListener{
 	
-	//faudra mettre tous les champs mais por l'instant je mets le mien
-	PanelMatrice chPanMatrice;
+//	PanelMatrice chPanMatrice;
+	PanelChoix chPanelChoix;
 	
-	public Controleur(PanelMatrice pPanMatrice) {
-		chPanMatrice = pPanMatrice;
+	public Controleur(/*PanelMatrice pPanMatrice*/PanelChoix pPanChoix) {
+//		chPanMatrice = pPanMatrice;
+		chPanelChoix = pPanChoix;
 	}
 	
 	public void actionPerformed(ActionEvent pEvt) {
+		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {
+			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
+		}
+		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {
+			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
+		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-			
+			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 			

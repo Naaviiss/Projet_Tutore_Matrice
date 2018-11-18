@@ -117,13 +117,13 @@ public class PanelCommandes extends JPanel implements Data{
 		//boutons à l'écoute
 		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
 		valider.addActionListener(chControleur);
-		for (int i = 0; i<Data.OPERATIONS.length;i++) {
-			operations[i].setActionCommand(Data.OPERATIONS[i]);
-			operations[i].addActionListener(chControleur);
-		}
-		for (int i = 0; i<lignes.length;i++) {
-			lignes[i].setActionCommand(Data.INTITULES[i]);
-			lignes[i].addActionListener(chControleur);
-		}
+//		for (int i = 0; i<Data.OPERATIONS.length;i++) {
+//			operations[i].setActionCommand(Data.OPERATIONS[i]);
+//			operations[i].addActionListener(chControleur);
+//		}
+//		for (int i = 0; i<lignes.length;i++) {
+//			lignes[i].setActionCommand(Data.INTITULES[i]);
+//			lignes[i].addActionListener(chControleur);
+//		}
 	}
 }

@@ -11,20 +11,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controleur.Controleur;
 //import controleur.Controleur;
 import modele.Data;
 
-public class PanelAffichage extends JPanel implements ActionListener{
+public class PanelAffichage extends JPanel{
 	//On crée nos deux boutons
-	JButton bouton_simplex = new JButton("Simplex");
-	JButton bouton_matrice = new JButton("Matrice");
-	
+	private JButton bouton_simplex = new JButton("Simplex");
+	private JButton bouton_matrice = new JButton("Matrice");
+	private Controleur chControleur;
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
 
-	public PanelAffichage(){
-		
-		panelboutons = new JPanel();
-		//this.setLayout(new BorderLayout());	
+	public PanelAffichage(Controleur pControleur){
+		chControleur = pControleur;
+		panelboutons = new JPanel();	
 		this.setBorder(new EmptyBorder(300,300,300,300));
 
 		//On les personnalise
@@ -36,8 +36,8 @@ public class PanelAffichage extends JPanel implements ActionListener{
 		//Le panel sera géré par un BorderLayout
 		panelboutons.setLayout(new BorderLayout(20,20));
 		
-		bouton_simplex.setActionCommand(Data.Choix[0]);
-		bouton_matrice.setActionCommand(Data.Choix[1]);
+		bouton_simplex.setActionCommand(Data.CHOIX[0]);
+		bouton_matrice.setActionCommand(Data.CHOIX[1]);
 		
 		//On lui ajoute les deux boutons
 		panelboutons.add(bouton_simplex,BorderLayout.WEST);
@@ -46,34 +46,11 @@ public class PanelAffichage extends JPanel implements ActionListener{
 		//on ajoute le panel  au PanelAffichage
 		this.add(panelboutons);
 		
-		//Le controleur
-		//new Controleur(panelgauss, panelsimplex);
-		
 	}//PanelAffichage()
 	
-	public void actionPerformed(ActionEvent pEvt){
-		
-		//L'action concernant le bouton quitter
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu[2])){
-			System.exit(0);
-		}//L'action concernant le bouton Retour Menu Principal
-//		if (actionCommand.equals(Data.Titre_Menu[1])){
-//			fenetre.setMenu();
-//		}
-		//L'action concernant l'aide pour les simplex
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[0])){
-			String texte = new String("Texte pour comprendre simplex");
-			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-		//L'action concernant l'aide pour les matrices
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[1])){
-			String texte = new String("Texte pour comprendre matrice");
-			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-		}
+	
+	public void enregistreEcouteur(Controleur parControleur) {
+		bouton_simplex.addActionListener(parControleur);
+		bouton_matrice.addActionListener(parControleur);
 	}
-	public void enregistreEcouteur(FenetreMere parControleur){
-//		bouton_simplex.addActionListener(parControleur);
-//		bouton_matrice.addActionListener(parControleur);
-	}//enregistreEcouteur()
 }//PanelAffichage
