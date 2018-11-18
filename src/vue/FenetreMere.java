@@ -7,6 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import Controleur.Controleur;
 import modele.Data;
 
 import java.awt.CardLayout;
@@ -16,31 +17,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class FenetreMere extends JFrame implements ActionListener{
-	JPanel contentPane;
-	PanelAffichage affichage;
-	//PanelSymplex symplex;
-	PanelChoix gauss;
+public class FenetreMere extends JFrame{
+	PanelAffichage contentPane;
 	
 	public FenetreMere (String parTitre){
 		super(parTitre);
-		
-		contentPane = new JPanel();
+		contentPane = new PanelAffichage();
 		contentPane.setLayout(new CardLayout());
 		
 		//Creation du panel d'affichage de l'interface de choix
 		//Les boutons concernant les simplex et les matrices
-		affichage = new PanelAffichage(this);
-		affichage.enregistreEcouteur(this);
-		
-		//Creation des panels symplex et gauss
-		//symplex = new PanelSymplex();
-		gauss = new PanelChoix();
-		
-		//ajout des panels au CardLayout
-		contentPane.add(affichage, "menu_choix");
-		//contentPane.add(symplex, "panel_symplex");
-		contentPane.add(gauss, "panel_gauss");
+//		affichage.enregistreEcouteur(this);
 		
 		this.add(contentPane);
 		setVisible(true);
@@ -54,7 +41,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.Titre_Menu[i]);
 			    menu.setMnemonic('A');
-				menu.addActionListener((ActionListener) affichage);
+//				menu.addActionListener((ActionListener) contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
@@ -62,7 +49,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 				for(int j=0;j<Data.Titre_Menu_Liste.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.Titre_Menu_Liste[j]);
 					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu_Liste[j].charAt(0),java.awt.Event.CTRL_MASK));
-					menuitem.addActionListener((ActionListener) affichage);
+					menuitem.addActionListener(contentPane);
 					menuitem.setActionCommand(Data.Titre_Menu_Liste[j]);
 					menu.add(menuitem);
 				}
@@ -71,7 +58,7 @@ public class FenetreMere extends JFrame implements ActionListener{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.Titre_Menu[i],Data.Titre_Menu[i].charAt(0));
 				menu.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu[i].charAt(0),java.awt.Event.CTRL_MASK));
-				menu.addActionListener((ActionListener) affichage);
+				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 			}
@@ -91,13 +78,13 @@ public class FenetreMere extends JFrame implements ActionListener{
 		((CardLayout) contentPane.getLayout()).show(contentPane,"menu_choix");
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		   if (source == affichage.bouton_matrice)   {
-		          ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_gauss");
-		      }
-		    //if (e.target == affichage.bouton_symplex)   {
-		    //      ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_symplex");
-		    //   }
-		  }//actionPerformed()
+//	public void actionPerformed(ActionEvent e) {
+//		Object source = e.getSource();
+//		   if (source == affichage.bouton_matrice)   {
+//		          ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_gauss");
+//		      }
+//		    //if (e.target == affichage.bouton_symplex)   {
+//		    //      ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_symplex");
+//		    //   }
+//		  }//actionPerformed()
 }
