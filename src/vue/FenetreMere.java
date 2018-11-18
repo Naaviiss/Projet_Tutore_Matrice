@@ -24,11 +24,6 @@ public class FenetreMere extends JFrame{
 		super(parTitre);
 		contentPane = new PanelAffichage();
 		contentPane.setLayout(new CardLayout());
-		
-		//Creation du panel d'affichage de l'interface de choix
-		//Les boutons concernant les simplex et les matrices
-//		affichage.enregistreEcouteur(this);
-		
 		this.add(contentPane);
 		setVisible(true);
 
@@ -41,7 +36,7 @@ public class FenetreMere extends JFrame{
 				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.Titre_Menu[i]);
 			    menu.setMnemonic('A');
-//				menu.addActionListener((ActionListener) contentPane);
+				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.Titre_Menu[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
@@ -73,18 +68,4 @@ public class FenetreMere extends JFrame{
 	public static void main (String []args){
 		new FenetreMere("Projet Simplex et Matrice");
 	}// main()
-	
-	public void setMenu() {
-		((CardLayout) contentPane.getLayout()).show(contentPane,"menu_choix");
-	}
-	
-//	public void actionPerformed(ActionEvent e) {
-//		Object source = e.getSource();
-//		   if (source == affichage.bouton_matrice)   {
-//		          ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_gauss");
-//		      }
-//		    //if (e.target == affichage.bouton_symplex)   {
-//		    //      ((CardLayout) contentPane.getLayout()).show(contentPane,"panel_symplex");
-//		    //   }
-//		  }//actionPerformed()
 }
