@@ -12,13 +12,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controleur.Controleur;
+import modele.Data;
+
 public class PanelMatrice extends JPanel{
 	private JPanel panelMatrice; //la partie où on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
+	private Controleur chControleur; //le controleur
 	
-	public PanelMatrice(/*Matrice pMatrice*/) {
+	public PanelMatrice(int pTailleMatrice, Controleur pControleur) {
 		
+		chControleur = pControleur;
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();
 		instruction = new JLabel("Veuillez compléter votre Matrice");
@@ -30,17 +35,21 @@ public class PanelMatrice extends JPanel{
 		//le tableau avec tous les champs pour remplir la matrice
 		InputField[] champsInput = new InputField[4*4];
 		
-		//le bouton valider
+		//le bouton valider 
 		JButton boutonValider = new JButton("Valider");
 		boutonValider.setPreferredSize(new Dimension(300, 100));
 		boutonValider.setFont(new Font(Font.SERIF, 20, 60));
 		
+		//on met les boutons à l'écoute
+		boutonValider.setActionCommand(Data.VALIDER_PANEL_MATRICE);
+		boutonValider.addActionListener(chControleur);
+		
 		//prend en paramètre une matrice afin de pouvoir créer le nombre de champs nécessaires pour remplir la matrice
-		panelMatrice.setLayout(new GridLayout(4, 4,40,40));
+		panelMatrice.setLayout(new GridLayout(pTailleMatrice,pTailleMatrice,40,40));
 		
 		//on ajoute les champs au panel pour remplir la matrice
-		for (int i=0;i<4;i++) {
-			for (int j=0;j<4;j++) {
+		for (int i=0;i<pTailleMatrice;i++) {
+			for (int j=0;j<pTailleMatrice;j++) {
 				champsInput[j] = new InputField();
 				panelMatrice.add(champsInput[j]);
 			}

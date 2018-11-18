@@ -10,10 +10,10 @@ public abstract class PanelMethode extends JPanel{
 	private JButton precedant;
 	
 	
-	public void setControleur(Controleur newControleur) { 
-		/* donne au controleur la posibilité d'écouter ce que font les 
-		boutons */
-		suivant.enregistreEcouteur(newControleur);
-		precedant.enregistreEcouteur(newControleur);
-	}
+//	public void setControleur(Controleur newControleur) { 
+//		/* donne au controleur la posibilité d'écouter ce que font les 
+//		boutons */
+//		suivant.enregistreEcouteur(newControleur);
+//		precedant.enregistreEcouteur(newControleur);
+//	}
 }
