@@ -9,4 +9,5 @@ public interface Data {
 	static String[] OPERATIONS = {"+","-","*","/"};
 	
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
+	public final String VALIDER_PANEL_COMMANDES = "ValiderPanelCommandes";
 }

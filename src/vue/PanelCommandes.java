@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Controleur.Controleur;
 import modele.Data;
 
 public class PanelCommandes extends JPanel implements Data{
@@ -26,6 +27,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton constante;
 	private GridBagLayout gestionnaire;
 	private GridBagConstraints contraintes;
+	private Controleur chControleur; //Controleur
 	
 	public PanelCommandes() {
 		this.setPreferredSize(new Dimension(700, 850));
@@ -34,6 +36,11 @@ public class PanelCommandes extends JPanel implements Data{
 		this.setBorder(BorderFactory.createCompoundBorder(raisedbevel,loweredbevel));
 
 		//instance des champs
+		/*
+		boutonValider.setActionCommand(Data.VALIDER_PANEL_MATRICE);
+		boutonValider.addActionListener(chControleur);
+		 */
+		
 		entete = new JLabel("Veuillez choisir la ligne à modifier");
 		valider = new JButton("Valider");
 		operations = new JButton[4];
@@ -105,6 +112,18 @@ public class PanelCommandes extends JPanel implements Data{
 			operations[i].setFont(new Font(Font.SERIF, 0, 20));
 			operations[i].setPreferredSize(new Dimension(100, 60));
 			this.add(operations[i],contraintes);
+		}
+		
+		//boutons à l'écoute
+		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
+		valider.addActionListener(chControleur);
+		for (int i = 0; i<Data.OPERATIONS.length;i++) {
+			operations[i].setActionCommand(Data.OPERATIONS[i]);
+			operations[i].addActionListener(chControleur);
+		}
+		for (int i = 0; i<lignes.length;i++) {
+			lignes[i].setActionCommand(Data.INTITULES[i]);
+			lignes[i].addActionListener(chControleur);
 		}
 	}
 	
