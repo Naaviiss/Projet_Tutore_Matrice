@@ -10,22 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controleur.Controleur;
 import modele.Data;
+import Controleur.Controleur;
 
 public class PanelMatrice extends JPanel{
-
-	JButton valider = new JButton("valider");
-	int taille;
 	private JPanel panelMatrice; //la partie où on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
 	private Controleur chControleur; //le controleur
-	private JButton boutonValider;//le bouton valider
-	
-	public PanelMatrice(int pTailleMatrice, Controleur pControleur) {
-		
-		chControleur = pControleur;
+	private JButton boutonValider = new JButton("Valider");
+	private int pTailleMatrice;
+	public PanelMatrice(int taille) {
+		pTailleMatrice = taille;//super.getPanTaille().getTaille();//panelChoix.getPanelTaille.getTaille();
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();
 		instruction = new JLabel("Veuillez compléter votre Matrice");
@@ -35,10 +31,9 @@ public class PanelMatrice extends JPanel{
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
 		
 		//le tableau avec tous les champs pour remplir la matrice
-		InputField[] champsInput = new InputField[4*4];
+		InputField[] champsInput = new InputField[3*3];
 		
-		//le bouton valider 
-		boutonValider = new JButton("Valider");
+		//le bouton valider
 		boutonValider.setPreferredSize(new Dimension(300, 100));
 		boutonValider.setFont(new Font(Font.SERIF, 20, 60));
 		
@@ -63,17 +58,20 @@ public class PanelMatrice extends JPanel{
 		//on personnalise l'instruction
 		instruction.setFont(new Font(Font.SERIF, 20, 30));
 		
-		//ajout des champs au panel
-		this.add(boutonValider, "valider");
+		//on lui ajoute le bouton valider et l'instruction
+		panelInstructions.add(instruction, BorderLayout.CENTER);
+		panelInstructions.add(boutonValider,BorderLayout.SOUTH);
+		
+		//on ajoute les panel au panelMatrice
+		this.add(panelMatrice, BorderLayout.WEST);
+		this.add(panelInstructions, BorderLayout.EAST);
 	}
 	
 	public void enregistreEcouteur(Controleur parControleur){
 		boutonValider.addActionListener(parControleur);
 	}
-
-	public void setTaille(int taille) {
-		this.taille = taille;
-		
+	
+	public void setTaille(int taille){
+		pTailleMatrice=taille;
 	}
-
 }
