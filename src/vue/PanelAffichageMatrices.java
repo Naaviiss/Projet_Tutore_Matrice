@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.ScrollPane;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -19,11 +20,13 @@ public class PanelAffichageMatrices extends JPanel{
 
 	private JTable tableMatrices; //String pour l'instant
 	private HashMap<Matrice, Matrice> chMatrices; //String pour l'instant
+	private List<String> chLigneModif;//pour les calculs effectués
 	
-	public PanelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices) {
+	public PanelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif) {
 		chMatrices = pMatrices;
+		chLigneModif = pLigneModif;
 		tableMatrices = new JTable();
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chLigneModif));
 		
 		//intitules des colonnes
 		tableMatrices.getTableHeader().setBackground(new Color(205, 0, 0));
