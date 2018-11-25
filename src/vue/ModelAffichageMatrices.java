@@ -50,7 +50,6 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 			setValueAt(ligneModifiees.get(i), indiceLigne, 2);
 			indiceLigne++;
 		}
-		
 	}
 	
 	public boolean isCellEditable(int indLigne, int indCol) {
