@@ -6,7 +6,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,15 +36,23 @@ public class PanelGauss extends JPanel{
 	    hm.put("40", "7");
 	    hm.put("50", "5");*/
 		HashMap<Matrice, Matrice> hm = new HashMap<Matrice,Matrice>();
+		List<String> hl = new ArrayList<String>();
 		hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
+	    
+	    hl.add("c");
+	    hl.add("c");
+	    hl.add("c");
+	    hl.add("c");
+	    hl.add("c");
+	    hl.add("c");
 		
 		//instance de la table affichant les matrices
-		affichageMatrices = new PanelAffichageMatrices(hm);
+		affichageMatrices = new PanelAffichageMatrices(hm,hl);
 		
 		//instance du panel avec les commandes
 		commandesMatrices = new PanelCommandes();
