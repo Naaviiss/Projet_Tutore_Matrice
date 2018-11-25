@@ -10,19 +10,22 @@ import vue.PanelMatrice;
 
 public class Controleur implements ActionListener{
 	
-//	PanelMatrice chPanMatrice;
+	PanelMatrice chPanMatrice;
 	PanelChoix chPanelChoix;
 	
-	public Controleur(/*PanelMatrice pPanMatrice*/PanelChoix pPanChoix) {
+	public Controleur(/*PanelMatrice pPanMatrice, */PanelChoix pPanChoix) {
 //		chPanMatrice = pPanMatrice;
 		chPanelChoix = pPanChoix;
-	}
 	
+	}
+
 	public void actionPerformed(ActionEvent pEvt) {
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
 		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {
+			chPanMatrice = new PanelMatrice(chPanelChoix.getPanTaille().getTaille());
+			chPanelChoix.add(chPanMatrice, "panel_matrice");
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
 		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {

@@ -17,24 +17,25 @@ public class PanelChoix extends JPanel implements ActionListener{
 	private PanelTaille panTaille;
 	private PanelGauss panGauss;
 	private PanelMatrice panMatrice;
-	private CardLayout cardLayout = new CardLayout();
+	private CardLayout cardLayout;
 	private Controleur chControleur;
 	
 	public PanelChoix() {
-		chControleur = new Controleur(this);
+		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
+		chControleur = new Controleur(this);
 		panAffichage = new PanelAffichage(chControleur);
 		panTaille = new PanelTaille();
 		panGauss = new PanelGauss();
-		panMatrice = new PanelMatrice(3, chControleur);
+		//panMatrice = new PanelMatrice();
 		this.add(panAffichage,"panel_affichage");
 		this.add(panTaille, "panel_taille");
 		this.add(panGauss, "panel_gauss");
-		this.add(panMatrice, "panel_matrice");
-		
+		//this.add(panMatrice, "panel_matrice");
+
 		panAffichage.enregistreEcouteur(chControleur);
 		panTaille.enregistreEcouteur(chControleur);
-		panMatrice.enregistreEcouteur(chControleur);
+		//panMatrice.enregistreEcouteur(chControleur);
 		
 		cardLayout.show(this,"panel_affichage");
 	}
