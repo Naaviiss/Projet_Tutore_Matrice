@@ -26,9 +26,11 @@ public class Controleur implements ActionListener{
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {
 			chPanMatrice = new PanelMatrice(chPanelChoix.getPanTaille().getTaille());
 			chPanelChoix.add(chPanMatrice, "panel_matrice");
+			chPanMatrice.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
 		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
+			System.out.println("la");
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
