@@ -5,6 +5,7 @@ public interface Data {
 	public final String [] Titre_Menu_Liste={"Simplex","Matrice"};
 	public final String [] CHOIX={"Simplex","Matrice"};
 
+	static String[] LIGNES = {"L1","L2","L3","L4","L5"};
 	static String[] INTITULES = {"Matrice","Identité","Calcul"};
 	static String[] OPERATIONS = {"+","-","*","/"};
 	

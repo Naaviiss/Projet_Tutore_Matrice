@@ -62,4 +62,12 @@ public class PanelGauss extends JPanel{
 		this.add(commandesMatrices,BorderLayout.EAST);
 		
 	}
+	
+	public PanelCommandes getPanelCommandes() {
+		return commandesMatrices;
+	}
+	
+	public PanelAffichageMatrices getPanelAffichageMatrices() {
+		return affichageMatrices;
+	}
 }

@@ -74,4 +74,5 @@ public class PanelMatrice extends JPanel{
 	public void setTaille(int taille){
 		pTailleMatrice=taille;
 	}
+	
 }
