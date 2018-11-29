@@ -15,12 +15,14 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	
 	//private HashMap<Integer, List<Matrice>> chMatrices;
 	private HashMap<Matrice, Matrice> chMatrices; // en attendant d'avoir la classe Matrice
-	private List<String> ligneModifiees; //pour les modifications de lignes
+	private List<String> chLigneModifiees; //pour les modifications de lignes
+	private List<String> chCommentaire;//pour les eventuels commentaires
 	
-	public ModelAffichageMatrices(/*private HashMap<Integer, List<Matrice>> pMatricese*/ HashMap<Matrice, Matrice> pMatrices,List<String> chLigneModif) {
+	public ModelAffichageMatrices(/*private HashMap<Integer, List<Matrice>> pMatricese*/ HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
 		
 		chMatrices = pMatrices;
-		ligneModifiees = chLigneModif;
+		chLigneModifiees = pLigneModif;
+		chCommentaire = pCommentaire;
 		
 		//on définit le modèle de la table
 		this.setColumnIdentifiers(Data.INTITULES);
@@ -46,8 +48,9 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 			indiceLigne ++;
 		}
 		indiceLigne = 0;
-		for (int i = 0; i<ligneModifiees.size();i++) {
-			setValueAt(ligneModifiees.get(i), indiceLigne, 2);
+		for (int i = 0; i<chLigneModifiees.size();i++) {
+			setValueAt(chLigneModifiees.get(i), indiceLigne, 2);
+			setValueAt(chCommentaire.get(i), indiceLigne, 3);
 			indiceLigne++;
 		}
 	}

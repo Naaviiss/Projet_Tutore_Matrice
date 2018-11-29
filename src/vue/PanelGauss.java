@@ -38,6 +38,7 @@ public class PanelGauss extends JPanel{
 	    hm.put("50", "5");*/
 		HashMap<Matrice, Matrice> hm = new HashMap<Matrice,Matrice>();
 		List<String> hl = new ArrayList<String>();
+		List<String> hc = new ArrayList<String>();
 		hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
 	    hm.put(new Matrice(3), new Matrice(3));
@@ -51,9 +52,16 @@ public class PanelGauss extends JPanel{
 	    hl.add("c");
 	    hl.add("c");
 	    hl.add("c");
+	    
+	    hc.add("c");
+	    hc.add("c");
+	    hc.add("c");
+	    hc.add("c");
+	    hc.add("c");
+	    hc.add("c");
 		
 		//instance de la table affichant les matrices
-		affichageMatrices = new PanelAffichageMatrices(hm,hl);
+		affichageMatrices = new PanelAffichageMatrices(hm,hl,hc);
 		
 		//instance du panel avec les commandes
 		commandesMatrices = new PanelCommandes();

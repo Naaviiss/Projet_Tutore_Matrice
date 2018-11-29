@@ -6,7 +6,7 @@ public interface Data {
 	public final String [] CHOIX={"Simplex","Matrice"};
 
 	static String[] LIGNES = {"L1","L2","L3","L4","L5"};
-	static String[] INTITULES = {"Matrice","Identité","Calcul"};
+	static String[] INTITULES = {"Matrice","Identité","Calcul","Commentaire"};
 	static String[] OPERATIONS = {"+","-","*","/"};
 	
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
