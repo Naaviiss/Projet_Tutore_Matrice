@@ -13,6 +13,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import Controleur.Controleur;
@@ -20,32 +22,29 @@ import modele.Data;
 
 public class PanelCommandes extends JPanel implements Data{
 	private JButton valider;
-	private JButton[] operations;
-	private JButton[] lignes;
+	private JButton[] operations;//boutons pour les opérateurs
+	private JButton[] lignes; //boutons pour les lignes
 	private JLabel entete;
 	private JLabel expression;
 	private String calcul;
 	private JButton constante;
 	private GridBagLayout gestionnaire;
 	private GridBagConstraints contraintes;
-//	private Controleur chControleur; //Controleur
+	private JTextArea zoneCommentaire;
+	private JLabel labelZoneCommentaire;
 	
 	public PanelCommandes() {
 		this.setPreferredSize(new Dimension(700, 850));
 		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
 		this.setBorder(BorderFactory.createCompoundBorder(raisedbevel,loweredbevel));
-
-		//instance des champs
-		/*
-		boutonValider.setActionCommand(Data.VALIDER_PANEL_MATRICE);
-		boutonValider.addActionListener(chControleur);
-		 */
 		
 		entete = new JLabel("Veuillez choisir la ligne à modifier");
 		valider = new JButton("Valider");
 		operations = new JButton[4];
 		lignes = new JButton[4];
+		zoneCommentaire = new JTextArea();
+		labelZoneCommentaire = new JLabel("Un commentaire ?");
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i] = new JButton(Data.OPERATIONS[i]);
 		}
@@ -73,7 +72,7 @@ public class PanelCommandes extends JPanel implements Data{
 		this.add(entete,contraintes);
 		
 		contraintes.gridx = 2;
-		contraintes.gridy = 2;
+		contraintes.gridy = 1;
 		contraintes.gridwidth = 1;
 		contraintes.gridheight = 1;
 		contraintes.weightx = 1;
@@ -85,7 +84,7 @@ public class PanelCommandes extends JPanel implements Data{
 		}
 		
 		contraintes.gridx = 0;
-		contraintes.gridy = 3;
+		contraintes.gridy = 2;
 		contraintes.gridwidth = 3;
 		contraintes.weighty = 2;
 		expression.setFont(new Font(Font.SERIF, 0, 22));
@@ -98,12 +97,13 @@ public class PanelCommandes extends JPanel implements Data{
 		this.add(valider,contraintes);
 		
 		contraintes.gridx = 4;
-		contraintes.gridy = 4;
+		contraintes.gridy = 3;
 		constante.setFont(new Font(Font.SERIF, 0, 20));
 		this.add(constante,contraintes);
 		
+		//disposition des boutons d'opérations
 		int x[] = {2,4,6,8};
-		contraintes.gridy = 5;
+		contraintes.gridy = 4;
 		contraintes.fill = GridBagConstraints.NONE;
 		contraintes.weightx = 1;
 		contraintes.weighty = 2;
@@ -122,6 +122,19 @@ public class PanelCommandes extends JPanel implements Data{
 		for (int i = 0; i<lignes.length;i++) {
 			lignes[i].setActionCommand(Data.LIGNES[i]);
 		}
+		
+		//instanciation, disposition et ajout de la zone de commentaire
+		contraintes.gridy = 5;
+		contraintes.gridx = 2;
+		labelZoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
+		this.add(labelZoneCommentaire,contraintes);
+		contraintes.gridwidth = 6;
+		contraintes.gridx = 4;
+		contraintes.gridheight=2;
+		contraintes.fill=GridBagConstraints.BOTH;
+		zoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
+		zoneCommentaire.setLineWrap(true);
+		this.add(zoneCommentaire,contraintes);
 	}
 	
 	public void setCalcul(String parCalcul) {

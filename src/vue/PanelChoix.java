@@ -35,7 +35,8 @@ public class PanelChoix extends JPanel implements ActionListener{
 		panTaille.enregistreEcouteur(chControleur);
 		panGauss.enregistreEcouteur(chControleur);
 		
-		cardLayout.show(this,"panel_affichage");
+//		cardLayout.show(this,"panel_affichage");
+		cardLayout.show(this,"panel_gauss");
 	}
 
 	public PanelAffichage getPanAffichage() {
