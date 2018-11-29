@@ -102,14 +102,13 @@ public class PanelCommandes extends JPanel implements Data{
 		constante.setFont(new Font(Font.SERIF, 0, 20));
 		this.add(constante,contraintes);
 		
-		int x[] = {3,5,5,3};
-		int y[] = {5,5,6,6};
+		int x[] = {2,4,6,8};
+		contraintes.gridy = 5;
 		contraintes.fill = GridBagConstraints.NONE;
 		contraintes.weightx = 1;
 		contraintes.weighty = 2;
 		for (int i = 0; i<operations.length;i++) {
 			contraintes.gridx = x[i];
-			contraintes.gridy = y[i];
 			operations[i].setFont(new Font(Font.SERIF, 0, 20));
 			operations[i].setPreferredSize(new Dimension(100, 60));
 			this.add(operations[i],contraintes);
