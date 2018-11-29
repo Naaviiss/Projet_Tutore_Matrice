@@ -382,9 +382,10 @@ public class Matrice {
 	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol();j++) {
-				System.out.print(Case[i][j].toStringV2() + " | ");
+				String frac = Case[i][j].toStringV2();
+				System.out.print(frac + " | ");
 			}
-			System.out.println();
+			System.out.print("\n");
 		}
 	}
 	
