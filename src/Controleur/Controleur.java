@@ -37,7 +37,6 @@ public class Controleur implements ActionListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-			System.out.println("la");
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		
@@ -53,7 +52,7 @@ public class Controleur implements ActionListener{
 		}
 		
 		if(Arrays.asList(Data.LIGNES).contains(pEvt.getActionCommand())) { //si la commande de la source est une ligne
-				System.out.println("Je clique sur une ligne\n");
+			System.out.println("Je clique sur une ligne\n");
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
