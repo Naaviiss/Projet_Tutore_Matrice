@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import Controleur.Controleur;
 import modele.*;
 
 public class PanelGauss extends JPanel{
@@ -61,5 +62,17 @@ public class PanelGauss extends JPanel{
 		this.add(affichageMatrices,BorderLayout.WEST);
 		this.add(commandesMatrices,BorderLayout.EAST);
 		
+	}
+	
+	public PanelCommandes getPanelCommandes() {
+		return commandesMatrices;
+	}
+	
+	public PanelAffichageMatrices getPanelAffichageMatrices() {
+		return affichageMatrices;
+	}
+	
+	public void enregistreEcouteur(Controleur pControleur) {
+		commandesMatrices.enregistreEcouteur(pControleur);
 	}
 }

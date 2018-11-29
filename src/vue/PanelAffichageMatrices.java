@@ -51,7 +51,11 @@ public class PanelAffichageMatrices extends JPanel{
 		
 		//ajout panneau defilant avec la table
 		this.add(panDefil);
-		
+	}
+	
+	public void ajoutMatrice(Matrice M1, Matrice M2) {
+		chMatrices.put(M1,M2);
+		tableMatrices.repaint();
 	}
 	
 }
