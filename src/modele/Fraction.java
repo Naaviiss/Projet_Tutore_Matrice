@@ -328,7 +328,7 @@ public class Fraction {
 		System.out.println("-----------------------------");
 		System.out.println();
 		
-		System.out.println("Création Fraction avec un String, on envoie le String '25/50'");
+		System.out.println("Création Fraction avec un String, on envoie le String '500001/200'");
 		Fraction f8 = new Fraction("500001/200");
 		System.out.println("f8 = \n" + f8.toString());
 		System.out.println();
