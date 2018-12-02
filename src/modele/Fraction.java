@@ -21,9 +21,29 @@ public class Fraction {
 		reduire();
 	}
 	//copie d'une fraction
-	public Fraction(Fraction parFac) {
-		numerateur = parFac.getNumerateur();
-		denominateur = parFac.getDenominateur();
+	public Fraction(Fraction parFrac) {
+		numerateur = parFrac.getNumerateur();
+		denominateur = parFrac.getDenominateur();
+		reduire();
+	}
+	//change un string en fraction : 3/5 devient Fraction(3,5)
+	public Fraction(String parFrac) {
+		int rencontre = 0;
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) {
+			if(ch == '/') {
+				rencontre = 1;
+			}
+			else if(ch != '/' && rencontre == 0) {
+				numerateurString += ch;
+			}
+			else {
+				denominateurString += ch;
+			}
+		}
+		numerateur = Integer.parseInt(numerateurString);
+		denominateur = Integer.parseInt(denominateurString);
 		reduire();
 	}
 	
@@ -200,6 +220,9 @@ public class Fraction {
 		System.out.println("f2 = (-2)/26 = " +  f2.toStringV2());
 		System.out.println();
 		System.out.println("-----------------------------");
+		System.out.println("f1 affciher en fraction graphique : \n\n"  + f1.toString());
+		System.out.println();
+		System.out.println("-----------------------------");
 		System.out.println();
 		
 		//OPERATION
@@ -301,6 +324,13 @@ public class Fraction {
 		Fraction ex = new Fraction(0);
 		int pgcd = Math.abs(ex.CalculPGCD(125,475));
 		System.out.println("PGCD de 125 et 475 = " + pgcd);
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
+		
+		System.out.println("Création Fraction avec un String, on envoie le String '500001/200'");
+		Fraction f8 = new Fraction("500001/200");
+		System.out.println("f8 = \n" + f8.toString());
 		System.out.println();
 		System.out.println("-----------------------------");
 	}
