@@ -12,4 +12,7 @@ public interface Data {
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
 	public final String VALIDER_PANEL_COMMANDES = "ValiderPanelCommandes";
 	public final String VALIDER_PANEL_TAILLE = "ValiderTaille";
+
+	public final String [] TITRE_MATRICE={"Retour au menu principal","Outils", "Aide","Quitter"};
+	public final String [] Titre_MATRICE_LISTE={"Revenir en avant", "Revenir en arrière"};
 }

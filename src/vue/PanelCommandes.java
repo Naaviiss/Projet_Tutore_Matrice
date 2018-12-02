@@ -33,7 +33,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JTextArea zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	
-	public PanelCommandes() {
+	public PanelCommandes(int pTaille) {
 		this.setPreferredSize(new Dimension(700, 850));
 		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
@@ -42,7 +42,7 @@ public class PanelCommandes extends JPanel implements Data{
 		entete = new JLabel("Veuillez choisir la ligne à modifier");
 		valider = new JButton("Valider");
 		operations = new JButton[4];
-		lignes = new JButton[4];
+		lignes = new JButton[pTaille];
 		zoneCommentaire = new JTextArea();
 		labelZoneCommentaire = new JLabel("Un commentaire ?");
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
@@ -79,7 +79,7 @@ public class PanelCommandes extends JPanel implements Data{
 		contraintes.weighty = 1;
 		for (int i = 0; i<lignes.length;i++) {
 			contraintes.gridx ++;
-			lignes[i].setFont(new Font(Font.SERIF, 0, 20));
+			lignes[i].setFont(new Font(Font.SERIF, 0, 15));
 			this.add(lignes[i],contraintes);
 		}
 		

@@ -2,7 +2,6 @@ package Controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Arrays;
 
 import modele.Data;
@@ -10,12 +9,14 @@ import modele.Fraction;
 import modele.Matrice;
 import vue.PanelAffichage;
 import vue.PanelChoix;
+import vue.PanelGauss;
 import vue.PanelMatrice;
 
 public class Controleur implements ActionListener{
 	
 	PanelMatrice chPanMatrice;
 	PanelChoix chPanelChoix;
+	PanelGauss chPanGauss;
 	
 	public Controleur(/*PanelMatrice pPanMatrice, */PanelChoix pPanChoix) {
 //		chPanMatrice = pPanMatrice;
@@ -37,6 +38,9 @@ public class Controleur implements ActionListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
+			chPanGauss = new PanelGauss(chPanelChoix.getPanTaille().getTaille());
+			chPanelChoix.add(chPanGauss, "panel_gauss");
+			chPanGauss.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		
