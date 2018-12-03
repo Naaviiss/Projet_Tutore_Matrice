@@ -26,6 +26,43 @@ public class Fraction {
 		denominateur = parFac.getDenominateur();
 		reduire();
 	}
+	//change un string en fraction : 3/5 devient Fraction(3,5)
+	public Fraction(String parFrac) {
+		int slash = 0;  //si il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+			if(ch == '/') {
+				slash = 1;
+			}
+		}
+		
+		if(slash == 1) {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch == '/') {
+					rencontre = 1;
+				}
+				else if(ch != '/' && rencontre == 0) {
+					numerateurString += ch;
+				}
+				else {
+					denominateurString += ch;
+				}
+			}
+			numerateur = Integer.parseInt(numerateurString);
+			denominateur = Integer.parseInt(denominateurString);
+			reduire();
+		}
+		else {
+			for(char ch : parFrac.toCharArray()) {
+				numerateurString += ch;
+			}
+			numerateur = Integer.parseInt(numerateurString);
+			denominateur = 1;
+			reduire();
+		}
+	}
 	
 	//GETTER
 	public int getNumerateur() {
