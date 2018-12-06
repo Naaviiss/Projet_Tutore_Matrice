@@ -26,7 +26,7 @@ public class PanelGauss extends JPanel{
 		
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
-		this.setBorder(new EmptyBorder(100, 100, 100, 100));
+		this.setBorder(new EmptyBorder(15, 5, 15, 5));
 		
 		//a supprimer
 		/*HashMap<String, String> hm = new HashMap<String,String>();

@@ -50,7 +50,7 @@ public class PanelCommandes extends JPanel implements Data{
 		for (int i = 0; i<lignes.length;i++) {
 			lignes[i] = new JButton("L"+(i+1));
 		}
-		constante = new JButton("Constante");
+		constante = new JButton(Data.CONSTANTE);
 		
 		//mise en place du gestionnaire
 		gestionnaire = new GridBagLayout();
@@ -133,6 +133,7 @@ public class PanelCommandes extends JPanel implements Data{
 		
 		//préparation des boutons à l'écoute
 		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
+		constante.setActionCommand(Data.CONSTANTE);
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i].setActionCommand(Data.OPERATIONS[i]);
 		}
@@ -157,6 +158,7 @@ public class PanelCommandes extends JPanel implements Data{
 	
 	public void enregistreEcouteur(Controleur pControleur) {
 		valider.addActionListener(pControleur);//bouton valider
+		constante.addActionListener(pControleur);//bouton constante
 		for (int i = 0; i<lignes.length;i++) { 
 			lignes[i].addActionListener(pControleur); //boutons de lignes
 		}
