@@ -24,19 +24,19 @@ public class PanelChoix extends JPanel implements ActionListener{
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		chControleur = new Controleur(this);
-		panAffichage = new PanelAffichage(chControleur);
+		//panAffichage = new PanelAffichage(chControleur);
 		panTaille = new PanelTaille();
-		panGauss = new PanelGauss();
-		this.add(panAffichage,"panel_affichage");
+		//panGauss = new PanelGauss();
+		//this.add(panAffichage,"panel_affichage");
 		this.add(panTaille, "panel_taille");
-		this.add(panGauss, "panel_gauss");
+		//this.add(panGauss, "panel_gauss");
 
-		panAffichage.enregistreEcouteur(chControleur);
+		//panAffichage.enregistreEcouteur(chControleur);
 		panTaille.enregistreEcouteur(chControleur);
-		panGauss.enregistreEcouteur(chControleur);
+		//panGauss.enregistreEcouteur(chControleur);
 		
-//		cardLayout.show(this,"panel_affichage");
-		cardLayout.show(this,"panel_gauss");
+		cardLayout.show(this,"panel_taille");
+		//cardLayout.show(this,"panel_gauss");
 	}
 
 	public PanelAffichage getPanAffichage() {
@@ -79,6 +79,34 @@ public class PanelChoix extends JPanel implements ActionListener{
 		this.chControleur = chControleur;
 	}
 
+	public CardLayout getCardLayout1() {
+		return cardLayout;
+	}
+
+	public void setCardLayout1(CardLayout cardLayout) {
+		this.cardLayout = cardLayout;
+	}
+	public void actionPerformed(ActionEvent pEvt){
+
+		//L'action concernant l'outils matrice : avancer
+		if (pEvt.getActionCommand().equals(Data.Titre_MATRICE_LISTE[0])){
+			String texte = new String("Devra passer à la matrice suivante");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		//L'action concernant l'outils matrice : reculer
+		if (pEvt.getActionCommand().equals(Data.Titre_MATRICE_LISTE[1])){
+			String texte = new String("Devra passer à la matrice précédente");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		//L'action concernant l'outils matrice : reculer
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
+			String texte = new String("Texte pour comprendre matrice");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
@@ -87,27 +115,6 @@ public class PanelChoix extends JPanel implements ActionListener{
 		this.cardLayout = cardLayout;
 	}
 	
-public void actionPerformed(ActionEvent pEvt){
-		
-		//L'action concernant le bouton quitter
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu[2])){
-			System.exit(0);
-		}//L'action concernant le bouton Retour Menu Principal
-//		if (actionCommand.equals(Data.Titre_Menu[1])){
-//			fenetre.setMenu();
-//		}
-		//L'action concernant l'aide pour les simplex
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[0])){
-			String texte = new String("Texte pour comprendre simplex");
-			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-		//L'action concernant l'aide pour les matrices
-		if (pEvt.getActionCommand().equals(Data.Titre_Menu_Liste[1])){
-			String texte = new String("Texte pour comprendre matrice");
-			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
 	public void enregistreEcouteur(FenetreMere parControleur){
 //		bouton_simplex.addActionListener(parControleur);
 //		bouton_matrice.addActionListener(parControleur);

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modele.Data;
+import modele.Fraction;
+import modele.Matrice;
 import Controleur.Controleur;
 
 public class PanelMatrice extends JPanel{
@@ -19,9 +21,17 @@ public class PanelMatrice extends JPanel{
 	private JLabel instruction;//instruction
 	private Controleur chControleur; //le controleur
 	private JButton boutonValider = new JButton("Valider");
-	private int pTailleMatrice;
+	private int pTailleMatrice;	
+	
+	//le tableau avec tous les champs pour remplir la matrice
+	private InputField[][] champsInput = new InputField[3*3][3*3];
+	
+	private Fraction tests[][];
+	
+	private Matrice matrice;
 	public PanelMatrice(int taille) {
 		pTailleMatrice = taille;//super.getPanTaille().getTaille();//panelChoix.getPanelTaille.getTaille();
+		matrice = new Matrice(pTailleMatrice);
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();
 		instruction = new JLabel("Veuillez compléter votre Matrice");
@@ -29,9 +39,7 @@ public class PanelMatrice extends JPanel{
 		//ce panel est divisé en 2
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
-		
-		//le tableau avec tous les champs pour remplir la matrice
-		InputField[] champsInput = new InputField[3*3];
+
 		
 		//le bouton valider
 		boutonValider.setPreferredSize(new Dimension(300, 100));
@@ -47,8 +55,8 @@ public class PanelMatrice extends JPanel{
 		//on ajoute les champs au panel pour remplir la matrice
 		for (int i=0;i<pTailleMatrice;i++) {
 			for (int j=0;j<pTailleMatrice;j++) {
-				champsInput[j] = new InputField();
-				panelMatrice.add(champsInput[j]);
+				champsInput[i][j] = new InputField();
+				panelMatrice.add(champsInput[i][j]);
 			}
 		}
 		
@@ -74,5 +82,14 @@ public class PanelMatrice extends JPanel{
 	public void setTaille(int taille){
 		pTailleMatrice=taille;
 	}
+	
+	public Matrice getMatriceSaisi(){
+		for (int i=0; i<matrice.getTaille();i++){
+			for(int j=0;j<matrice.getTaille();j++){
+				matrice.setCase(i,j,new Fraction(Integer.parseInt(champsInput[i][j].getText())));
+			}
+		}
+		return matrice;
+	}//getChronologieSaisi()
 	
 }

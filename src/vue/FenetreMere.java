@@ -4,56 +4,52 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import Controleur.Controleur;
 import modele.Data;
 
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class FenetreMere extends JFrame{
 	PanelChoix contentPane;
 	
-	public FenetreMere (String parTitre){
-		super(parTitre);
+	public FenetreMere (){
+		//super(parTitre);
 		contentPane = new PanelChoix();
 		this.add(contentPane);
 		this.setVisible(true);
-
+		
+		//test
 		//On s'occupe du menu en haut de l'écran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
-		for(int i=0;i<Data.Titre_Menu.length;i++){
-			if (i==0){
+		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
+			if (i==1){
 				//Si on est sur le bouton Aide, on crée un menu d'aide
-				JMenu menu = new JMenu (Data.Titre_Menu[i]);
-			    menu.setMnemonic('A');
+				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
+				menu.setMnemonic('A');
 				menu.addActionListener(contentPane);
-				menu.setActionCommand(Data.Titre_Menu[i]);
+				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
-				for(int j=0;j<Data.Titre_Menu_Liste.length;j++){
-					JMenuItem menuitem = new JMenuItem (Data.Titre_Menu_Liste[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu_Liste[j].charAt(0),java.awt.Event.CTRL_MASK));
+				for(int j=0;j<Data.Titre_MATRICE_LISTE.length;j++){
+					JMenuItem menuitem = new JMenuItem (Data.Titre_MATRICE_LISTE[j]);
+					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.addActionListener(contentPane);
-					menuitem.setActionCommand(Data.Titre_Menu_Liste[j]);
+					menuitem.setActionCommand(Data.Titre_MATRICE_LISTE[j]);
 					menu.add(menuitem);
 				}
 			}
 			else{
 				//Sinon, on ajoute les autres menus
-				JMenuItem menu = new JMenuItem (Data.Titre_Menu[i],Data.Titre_Menu[i].charAt(0));
-				menu.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu[i].charAt(0),java.awt.Event.CTRL_MASK));
+				JMenuItem menu = new JMenuItem (Data.TITRE_MATRICE[i],Data.TITRE_MATRICE[i].charAt(0));
+				menu.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE[i].charAt(0),java.awt.Event.CTRL_MASK));
 				menu.addActionListener(contentPane);
-				menu.setActionCommand(Data.Titre_Menu[i]);
+				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
 			}
 		}
@@ -65,6 +61,6 @@ public class FenetreMere extends JFrame{
 
 	}
 	public static void main (String []args){
-		new FenetreMere("Projet Simplex et Matrice");
+		//new FenetreMere("Projet Simplex et Matrice");
 	}// main()
 }
