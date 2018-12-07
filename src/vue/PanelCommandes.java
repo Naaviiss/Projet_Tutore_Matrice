@@ -177,5 +177,7 @@ public class PanelCommandes extends JPanel implements Data{
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i].addActionListener(pControleur);//boutons des opérateurs
 		}
+		
+		choixFleche.addActionListener(pControleur); //jcombobox pour le choix des flèches
 	}
 }
