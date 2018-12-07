@@ -272,9 +272,9 @@ public class Fraction {
 		}
 		int t1 = String.valueOf(numerateur).length();
 		int t2 = String.valueOf(denominateur).length();
-		if((t1 >= 2) || (t2 >= 2)) {
-			String tirets = "-";
-			String espaces = " ";
+		String tirets = "-";
+		String espaces = " ";
+		if((t1 >= 2) && (t2 >= 2)) {
 			if(t1 == t2) {
 				for(int i = 0 ; i < t2-1 ; i++) {
 					tirets = tirets.concat("-");
@@ -303,7 +303,11 @@ public class Fraction {
 			}
 		}
 		else {
-			return numerateur + "\n" + "-" + "\n" + denominateur;
+			int max = Math.max(t1,t2);
+			for(int i = 0 ; i <  max-1 ; i++) {
+				tirets = tirets.concat("-");
+			}
+			return numerateur + "\n" + tirets + "\n" + denominateur;
 		}
 	}
 	
@@ -425,7 +429,7 @@ public class Fraction {
 		System.out.println("-----------------------------");
 		System.out.println();
 		
-		Fraction exx = new Fraction("2/30000");
+		Fraction exx = new Fraction("2/500001");
 		System.out.println("frac = \n" + exx.toString());
 		System.out.println("test = " + isFraction("2/3"));
 		

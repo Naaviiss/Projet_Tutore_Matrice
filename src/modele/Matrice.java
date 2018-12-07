@@ -397,26 +397,6 @@ public class Matrice {
 			}	
 		}
 		
-		int k=0;
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol(); j++) {
-				int ecart = tailleMax-TailleMaxFraction[i][j];
-				int tnum = String.valueOf(TabFractionNumerateur[i][j]).length();
-				int tden = String.valueOf(TabFractionDenominateur[i][j]).length();
-				
-				for(int x=0; x < ecart-tnum; x++) {
-					System.out.print(TabFractionNumerateur[i][j] + " - ");
-				}	
-				for(int y=0; y < ecart-tden; y++) {
-					System.out.print(TabFractionNumerateur[i][j] + " - ");
-				}	
-				StringFraction[k] = "0";
-				k++;
-				StringFraction[k] = "0";
-				k++;
-			}	
-		}
-		
 		/////////////////
 		System.out.println();
 		System.out.print("Numerateur : ");
@@ -476,12 +456,10 @@ public class Matrice {
 		D.AfficheV2();
 		System.out.println();
 		System.out.println("F est une matrice 3 par 3 , remplite de nombres entiers qui se suivent");
-		//Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-		Fraction[][] tab2 =  {{new Fraction(1,245),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
+		Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
 		Matrice F = new Matrice(tab2);
 		F.AfficheV2();
-		F.Affiche();
-		/*System.out.println();
+		System.out.println();
 		System.out.println("-----------------------------");
 		System.out.println();
 		
@@ -597,7 +575,7 @@ public class Matrice {
 		System.out.println("La matrice F devient alors :");
 		G.AfficheV2();
 		System.out.println();
-		System.out.println("-----------------------------");*/
+		System.out.println("-----------------------------");
 		
 		
 		///////////////// Nancy /////////////////
