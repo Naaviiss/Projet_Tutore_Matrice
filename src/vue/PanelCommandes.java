@@ -32,7 +32,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JTextArea zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
-	private JComboBox<String> choixFleche; //menu déroulant pour que l'utilisateur choisit
+	private JComboBox choixFleche; //menu déroulant pour que l'utilisateur choisit
 	private String []fleches = new String[]{"<-","<->"};
 	
 	public PanelCommandes() {
