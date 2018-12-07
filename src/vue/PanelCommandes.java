@@ -11,6 +11,7 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -22,7 +23,7 @@ import modele.Data;
 
 public class PanelCommandes extends JPanel implements Data{
 	private JButton valider;
-	private JButton[] operations;//boutons pour les opÈrateurs
+	private JButton[] operations;//boutons pour les op√©rateurs
 	private JButton[] lignes; //boutons pour les lignes
 	private JLabel entete;
 	private JButton constante;
@@ -30,7 +31,9 @@ public class PanelCommandes extends JPanel implements Data{
 	private GridBagConstraints contraintes;
 	private JTextArea zoneCommentaire;
 	private JLabel labelZoneCommentaire;
-	private JLabel[] calcul;//labels avec le futur calcul de l'Ètudiant
+	private JLabel[] calcul;//labels avec le futur calcul de l'√©tudiant
+	private JComboBox<String> choixFleche; //menu d√©roulant pour que l'utilisateur choisit
+	private String []fleches = new String[]{"<-","<->"};
 	
 	public PanelCommandes() {
 		this.setPreferredSize(new Dimension(700, 850));
@@ -38,12 +41,14 @@ public class PanelCommandes extends JPanel implements Data{
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
 		this.setBorder(BorderFactory.createCompoundBorder(raisedbevel,loweredbevel));
 		
-		entete = new JLabel("Veuillez choisir la ligne ‡ modifier");
+		entete = new JLabel("Veuillez choisir la ligne √† modifier");
 		valider = new JButton("Valider");
 		operations = new JButton[4];
 		lignes = new JButton[4];
 		zoneCommentaire = new JTextArea();
 		labelZoneCommentaire = new JLabel("Un commentaire ?");
+		choixFleche = new JComboBox(fleches);
+		
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i] = new JButton(Data.OPERATIONS[i]);
 		}
@@ -90,27 +95,36 @@ public class PanelCommandes extends JPanel implements Data{
 		valider.setFont(new Font(Font.SERIF, 0, 18));
 		this.add(valider,contraintes);
 
-		//disposition des labels avec les ÈlÈments du calcul
+		//disposition des labels avec les √©l√©ments du calcul
 		contraintes.gridx = 1;
 		contraintes.gridy = 2;
 		contraintes.gridheight = 1;
+		contraintes.gridwidth = 2;
 		contraintes.weighty = 1;
-		calcul = new JLabel[7];
+		calcul = new JLabel[6];
 		for (int i =0;i<calcul.length;i++) {
 			if(i==0) {
-				contraintes.gridwidth = 3;
 				calcul[i] = new JLabel("L3");
+				calcul[i].setFont(new Font(Font.SERIF, 0, 24));
+				this.add(calcul[i], contraintes);
 			}
-			else if (i == 1) {
-				calcul[i] = new JLabel("<-");
+			else if (i == 1) { //correspond √† l'emplacement de la fl√®che donc on saute cette √©tape
+				contraintes.gridx += 1;
+				contraintes.gridwidth = 1;//on r√©duit la largeur des √©l√©ments suivants la fl√®che
+				contraintes.fill = GridBagConstraints.NONE;
 			}
 			else {
-				calcul[i] = new JLabel("la");
+				calcul[i] = new JLabel(i+"");
+				calcul[i].setFont(new Font(Font.SERIF, 0, 24));
+				this.add(calcul[i], contraintes);
 			}
-			calcul[i].setFont(new Font(Font.SERIF, 0, 24));
-			this.add(calcul[i], contraintes);
 			contraintes.gridx += 1;
 		}
+		//disposition du choix de la fl√®che
+		contraintes.fill = GridBagConstraints.HORIZONTAL;
+		contraintes.gridx = 3;
+		choixFleche.setFont(new Font(Font.SERIF, 0, 24));
+		this.add(choixFleche,contraintes);
 		
 		contraintes.gridwidth = 1;
 		contraintes.gridx = 4;
@@ -118,7 +132,7 @@ public class PanelCommandes extends JPanel implements Data{
 		constante.setFont(new Font(Font.SERIF, 0, 20));
 		this.add(constante,contraintes);
 		
-		//disposition des boutons d'opÈrations
+		//disposition des boutons d'op√©rations
 		int x[] = {2,4,6,8};
 		contraintes.gridy = 4;
 		contraintes.fill = GridBagConstraints.NONE;
@@ -131,7 +145,7 @@ public class PanelCommandes extends JPanel implements Data{
 			this.add(operations[i],contraintes);
 		}
 		
-		//prÈparation des boutons ‡ l'Ècoute
+		//pr√©paration des boutons √† l'√©coute
 		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i].setActionCommand(Data.OPERATIONS[i]);
@@ -161,7 +175,7 @@ public class PanelCommandes extends JPanel implements Data{
 			lignes[i].addActionListener(pControleur); //boutons de lignes
 		}
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
-			operations[i].addActionListener(pControleur);//boutons des opÈrateurs
+			operations[i].addActionListener(pControleur);//boutons des op√©rateurs
 		}
 	}
 }
