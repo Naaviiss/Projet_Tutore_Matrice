@@ -88,23 +88,28 @@ public class Controleur implements ActionListener{
 				}
 				test = false;
 			}
-			if(positionOperation!=7 && positionOperation!=0) { //si la chaine depasse les 7 actions on ne fait pas l'action ou si la constante est mal placer
-				if(positionOperation!=2 || pEvt.getActionCommand()!= "0") { //remplacer pEvt.getActionCommand() par la valeur donnee par l'utilisateur et "0" par un int
-					//si la premiere constante est differente de 0
-					String valider = "ok";
-					for(int i = 0; i<Data.LIGNES.length;i++) {
-						if(Data.LIGNES[i] == operation[positionOperation-1]) {
+			if(estUnEntier(constante)){ //vérifie que la constante donnee est bien un entier
+				if(positionOperation!=7 && positionOperation!=0) { //si la chaine depasse les 7 actions on ne fait pas l'action ou si la constante est mal placer
+					if(positionOperation!=2 || pEvt.getActionCommand()!= "0") { //remplacer pEvt.getActionCommand() par la valeur donnee par l'utilisateur et "0" par un int
+						//si la premiere constante est differente de 0
+						String valider = "ok";
+						for(int i = 0; i<Data.LIGNES.length;i++) {
+							if(Data.LIGNES[i] == operation[positionOperation-1]) {
+								valider = "non ok";
+							}
+						}
+						if(estUnEntier(operation[positionOperation-2])) {
 							valider = "non ok";
 						}
-					}
-					if(valider == "ok" || operation[positionOperation-2]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
-							valider = "ok";
-							if(Data.CONSTANTE == operation[positionOperation-1]) {
-								valider = "non ok";
-							} //fin du test
-						if(valider == "ok") {
-							operation[positionOperation]= pEvt.getActionCommand();
-							positionOperation+=1;
+						if(valider == "ok") {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+								valider = "ok";
+								if(estUnEntier(operation[positionOperation-1])) {
+									valider = "non ok";
+								}//fin du test
+							if(valider == "ok") {
+								operation[positionOperation]= constante;
+								positionOperation+=1;
+							}
 						}
 					}
 				}
@@ -123,22 +128,46 @@ public class Controleur implements ActionListener{
 					positionOperation+=1;
 				}
 				else {
-					String valider = "ok";
-					for(int i = 0; i<Data.LIGNES.length;i++) {
-						if(Data.LIGNES[i] == operation[positionOperation-2]) {
-							valider = "non ok";
-						}
-					}
-					if(valider == "ok" || operation[positionOperation-1]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
-						valider = "ok";
+					if(positionOperation == 2 || positionOperation == 3) { //est ce que c la premiere action de la chaine
+						String valider = "ok";
 						for(int i = 0; i<Data.LIGNES.length;i++) {
-							if(Data.LIGNES[i] == operation[positionOperation-1]) {
+							if(Data.LIGNES[i] == operation[positionOperation-2]) {
 								valider = "non ok";
 							}
-						} //fin du test
-						if(valider == "ok") {
-							operation[positionOperation]= pEvt.getActionCommand();
-							positionOperation+=1;
+						}
+						if(valider == "ok" || operation[positionOperation-1]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+							valider = "ok";
+							for(int i = 0; i<Data.LIGNES.length;i++) {
+								if(Data.LIGNES[i] == operation[positionOperation-1]) {
+									valider = "non ok";
+								}
+							} //fin du test
+							if(valider == "ok") {
+								if(pEvt.getActionCommand()==operation[0]){
+									operation[positionOperation]= pEvt.getActionCommand();
+									positionOperation+=1;
+								}
+							}
+						}
+					}	
+					else {
+						String valider = "ok";
+						for(int i = 0; i<Data.LIGNES.length;i++) {
+							if(Data.LIGNES[i] == operation[positionOperation-2]) {
+								valider = "non ok";
+							}
+						}
+						if(valider == "ok" || operation[positionOperation-1]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+							valider = "ok";
+							for(int i = 0; i<Data.LIGNES.length;i++) {
+								if(Data.LIGNES[i] == operation[positionOperation-1]) {
+									valider = "non ok";
+								}
+							} //fin du test
+							if(valider == "ok") {
+								operation[positionOperation]= pEvt.getActionCommand();
+								positionOperation+=1;
+							}
 						}
 					}
 				}
@@ -148,7 +177,7 @@ public class Controleur implements ActionListener{
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
 			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
-			if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6)	 { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
+			if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6 && positionOperation!=5)	 { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
 				//est ce que on a 2 operations a la suite (si oui rien ne se passe)
 				String valider = "ok"; 
 				for(int i = 0; i<Data.OPERATIONS.length;i++) {
@@ -165,7 +194,7 @@ public class Controleur implements ActionListener{
 		}
 	}
 
-	private void affichageOperation() {
+	private void affichageOperation() { //fonction test de pour la création de l'opération
 		
 		System.out.print("\nOpération : ");
 		for(int i = 0; i<7; i++) {
@@ -174,4 +203,13 @@ public class Controleur implements ActionListener{
 		System.out.println("");
 	}
 
+	public boolean estUnEntier(String chaine) { //fonction permettant de voir si la constante est un entier
+		try {
+			Integer.parseInt(chaine);
+		} catch (NumberFormatException e){
+			return false;
+		}
+		return true;
+	}
+	
 }
