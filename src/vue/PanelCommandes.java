@@ -32,7 +32,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JTextArea zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	private JLabel[] calcul;//labels avec le futur calcul de l'Ã©tudiant
-	private JComboBox choixFleche; //menu dÃ©roulant pour que l'utilisateur choisit
+	private JComboBox choixFleche; //menu déroulant pour que l'utilisateur choisisse sa flèche
 	private String []fleches = new String[]{"<-","<->"};
 	
 	public PanelCommandes() {
@@ -41,7 +41,7 @@ public class PanelCommandes extends JPanel implements Data{
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
 		this.setBorder(BorderFactory.createCompoundBorder(raisedbevel,loweredbevel));
 		
-		entete = new JLabel("Veuillez choisir la ligne Ã  modifier");
+		entete = new JLabel("Veuillez choisir la ligne à  modifier");
 		valider = new JButton("Valider");
 		operations = new JButton[4];
 		lignes = new JButton[4];

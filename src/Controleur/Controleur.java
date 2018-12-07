@@ -24,11 +24,11 @@ public class Controleur implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent pEvt) {
-		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {
+		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
 		}
 		
-		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {
+		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {//choix de la taille de la matrice
 			chPanMatrice = new PanelMatrice(chPanelChoix.getPanTaille().getTaille());
 			chPanelChoix.add(chPanMatrice, "panel_matrice");
 			chPanMatrice.enregistreEcouteur(this);
@@ -36,19 +36,20 @@ public class Controleur implements ActionListener{
 			chPanMatrice.enregistreEcouteur(this);
 		}
 		
-		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
+		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {//on entre sa matrice
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		
-		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
+		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {//on valide son opération
 			System.out.println("coucou");
-			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
-			Matrice M1 = new Matrice(tab);
-			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-			Matrice M2 = new Matrice(tab2);
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().revalidate();
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().repaint();
+//			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
+//			Matrice M1 = new Matrice(tab);
+//			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
+//			Matrice M2 = new Matrice(tab2);
+//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
+//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().revalidate();
+//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().repaint();
+			
 		}
 		
 		if(Arrays.asList(Data.LIGNES).contains(pEvt.getActionCommand())) { //si la commande de la source est une ligne
@@ -59,5 +60,40 @@ public class Controleur implements ActionListener{
 			System.out.println("Je clique sur un operateur\n");
 		}
 	}
-
+	
+//	public void effectueCalcul(String []tabCalcul) {
+//		int ligneA,ligneB;
+//		int ligneModifiee;
+//		
+//		Matrice matricePrincipale = ;//matrice principale
+//		Matrice matriceIdentite;//matrice identite
+//		
+//		ligneModifiee= getNumLigne(tabCalcul[0]);
+//		ligneB = getNumLigne(tabCalcul[6]);	//index de la deuxième ligne du calcul
+//		
+//		//Si l'étudiant veut intervertir 2 lignes
+//		if (tabCalcul[1].equals("<->")) {
+//			//on effectue le potentiel calcul sur la ligne avec laquelle il souhaite échanger la ligne choisie précédemment
+//			//on échange les lignes sur la matrice principale
+//			//on échange les lignes sur la matrice identité
+//		}
+//		
+//		//Si l'étudiant veut effectuer un calcul sur une ligne
+//		else {
+//			if (Arrays.asList(Data.LIGNES).contains(tabCalcul[3])) {//si c'est la deuxième ligne qui prend un calcul
+//				ligneA = getNumLigne(tabCalcul[3]); //index de la première ligne du calcul
+//				//on effectue le calcul sur la deuxième ligne du calcul
+//			}
+//			else {
+//				ligneA = getNumLigne(tabCalcul[4]); //index de la première ligne du calcul
+//				//on effectue le calcul sur la première ligne du calcul
+//			}
+//			//on fait l'opération sur la ligne de la matrice principale
+//			//on fait l'opération sur la ligne de la matrice indentité
+//		}
+//		
+//		//on ajoute la matrice principale et la matrice identité au hashmap
+//		
+//	}
+			
 }

@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -63,4 +64,65 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		return String.class;
 	}
 	
+	public void effectueCalcul(String []tabCalcul) {
+		int ligneA,ligneB;
+		int ligneModifiee;
+		
+		Matrice matricePrincipale; //matrice principale
+		Matrice matriceIdentite;//matrice identite
+		
+		Set<Matrice> cles = chMatrices.keySet();//set pour obtenir toutes le matrices principales
+		
+		//on récupère la dernière clé qui correcpond à la dernière matrice créée et donc à la matrice sur laquelle on travaille
+		Iterator<Matrice> it = cles.iterator();//on créé un itérateur pour parcourir le set de clés
+		Matrice courant = null;
+		while (it.hasNext()) {
+			courant = it.next();
+		}
+		//à la fin de la boucle, courant prend la valeur de la dernière matrice entrée
+				
+		matricePrincipale = courant;
+		matriceIdentite= chMatrices.get(matricePrincipale);
+		
+		ligneModifiee= getNumLigne(tabCalcul[0]);
+		ligneB = getNumLigne(tabCalcul[6]);	//index de la deuxième ligne du calcul
+		
+		//Si l'étudiant veut intervertir 2 lignes
+		if (tabCalcul[1].equals("<->")) {
+			//on effectue le potentiel calcul sur la ligne avec laquelle il souhaite échanger la ligne choisie précédemment
+			//on échange les lignes sur la matrice principale
+			//on échange les lignes sur la matrice identité
+		}
+		
+		//Si l'étudiant veut effectuer un calcul sur une ligne
+		else {
+			if (Arrays.asList(Data.LIGNES).contains(tabCalcul[3])) {//si c'est la deuxième ligne qui prend un calcul
+				ligneA = getNumLigne(tabCalcul[3]); //index de la première ligne du calcul
+				//on effectue le calcul sur la deuxième ligne du calcul
+			}
+			else {
+				ligneA = getNumLigne(tabCalcul[4]); //index de la première ligne du calcul
+				//on effectue le calcul sur la première ligne du calcul
+			}
+			matricePrincipale = modi//on fait l'opération sur la ligne de la matrice principale
+			//on fait l'opération sur la ligne de la matrice indentité
+		}
+		
+		//on ajoute la matrice principale et la matrice identité au hashmap
+		
+	}
+	
+	//retourne l'index correspondant à la ligne
+	public int getNumLigne(String ligne) {
+		if (ligne.equals("L1"))
+				return 0;
+		else if (ligne.equals("L2"))
+				return 1;
+		else if (ligne.equals("L3"))
+				return 2;
+		else if (ligne.equals("L4"))
+				return 3;
+		else
+				return 4;
+	}	
 }

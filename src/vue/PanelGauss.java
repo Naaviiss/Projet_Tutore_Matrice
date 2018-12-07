@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,4 +84,5 @@ public class PanelGauss extends JPanel{
 	public void enregistreEcouteur(Controleur pControleur) {
 		commandesMatrices.enregistreEcouteur(pControleur);
 	}
+	
 }

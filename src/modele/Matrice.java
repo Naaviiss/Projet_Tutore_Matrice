@@ -6,7 +6,7 @@ public class Matrice {
 	private int Col;
 	private Fraction[][] Case;
 	
-															/////MATRICE/////
+	/////MATRICE/////
 	
 	//creer une matrice carre vide de taille parTaille
 	public Matrice (int parTaille) {
@@ -354,19 +354,19 @@ public class Matrice {
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
 				if(ligneA==i) {
-					if(operand == "+") {
+					if(operand.equals("+")) {
 						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
 						Case[i][j] = getCase(i,j).FAddition(frac);
 					}
-					else if(operand == "-") {
+					else if(operand.equals("-")) {
 						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
 						Case[i][j] = getCase(i,j).FSoustraction(frac);
 					}
-					else if(operand == "*") {
+					else if(operand.equals("*")) {
 						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
 						Case[i][j] = getCase(i,j).FMultiplication(frac);
 					}
-					else if(operand == "/") {
+					else if(operand.equals("/")) {
 						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
 						Case[i][j] = getCase(i,j).FDivision(frac);
 					}
@@ -377,7 +377,8 @@ public class Matrice {
 			}
 		}
 	}
-															/////AFFICHE/////
+	
+	////AFFICHE/////
 	//affiche une matrice
 	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
