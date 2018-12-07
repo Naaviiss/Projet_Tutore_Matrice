@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import modele.Data;
 import modele.Fraction;
@@ -69,16 +70,35 @@ public class Controleur implements ActionListener{
 		
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
 			System.out.print("Je clique sur le bouton constante\n");
+			//Création du popup de la demande de la constante
+			String constante = null;
+			String txt = null;
+			Boolean test = true;
+			while (test){
+				txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante");
+				System.out.println(txt);
+				//Si on rentre une valeur pour la constante
+				if (txt != null){
+					if (txt.length() == 1 && txt.equalsIgnoreCase("0")){
+						constante = "1";
+					}
+					else{
+						constante = txt;
+					}
+				}
+				test = false;
+			}
 			if(positionOperation!=7 && positionOperation!=0) { //si la chaine depasse les 7 actions on ne fait pas l'action ou si la constante est mal placer
 				if(positionOperation!=2 || pEvt.getActionCommand()!= "0") { //remplacer pEvt.getActionCommand() par la valeur donnee par l'utilisateur et "0" par un int
 					//si la premiere constante est differente de 0
 					String valider = "ok";
 					for(int i = 0; i<Data.LIGNES.length;i++) {
-						if(Data.LIGNES[i] == operation[positionOperation-2]) {
+						if(Data.LIGNES[i] == operation[positionOperation-1]) {
 							valider = "non ok";
 						}
 					}
 					if(valider == "ok" || operation[positionOperation-2]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+							valider = "ok";
 							if(Data.CONSTANTE == operation[positionOperation-1]) {
 								valider = "non ok";
 							} //fin du test
@@ -128,7 +148,7 @@ public class Controleur implements ActionListener{
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
 			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
-			if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6) { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
+			if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6)	 { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
 				//est ce que on a 2 operations a la suite (si oui rien ne se passe)
 				String valider = "ok"; 
 				for(int i = 0; i<Data.OPERATIONS.length;i++) {
