@@ -44,24 +44,107 @@ public class Fraction {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
-					numerateurString += ch;
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						throw new RuntimeException("lettre dans le numerateur");
+					}
+					else {
+						numerateurString += ch;
+					}
+					
 				}
 				else {
-					denominateurString += ch;
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						throw new RuntimeException("lettre dans le denominateur");
+					}
+					else {
+						denominateurString += ch;
+					}
 				}
+			}
+			if(numerateurString == "" || denominateurString == "") {
+				throw new RuntimeException("numerateur ou dénominateur vide");
+			}
+			if(Integer.parseInt(denominateurString) == 0) {
+				throw new RuntimeException("Division par zero");
 			}
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = Integer.parseInt(denominateurString);
-			reduire();
 		}
 		else {
 			for(char ch : parFrac.toCharArray()) {
-				numerateurString += ch;
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					throw new RuntimeException("lettre dans le numerateur");
+				}
+				else {
+					numerateurString += ch;
+				}
+			}
+			if(numerateurString == "") {
+				throw new RuntimeException("numerateur vide");
 			}
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
-			reduire();
 		}
+		reduire();
+	}
+	
+	//ISFRACTION
+	// String.isFraction() dit si la string est eun fraction
+	public static boolean isFraction(String parFrac) {
+		int slash = 0;  //si il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+			if(ch == '/') {
+				slash = 1;
+			}
+		}
+		
+		if(slash == 1) {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch == '/') {
+					rencontre = 1;
+				}
+				else if(ch != '/' && rencontre == 0) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						numerateurString += ch;
+					}
+					
+				}
+				else {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						denominateurString += ch;
+					}
+				}
+			}
+			if(numerateurString == "" || denominateurString == "") {
+				return false;
+			}
+			if(Integer.parseInt(denominateurString) == 0) {
+				return false;
+			}
+		}
+		else {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					return false;
+				}
+				else {
+					numerateurString += ch;
+				}
+			}
+			if(numerateurString == "") {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	//GETTER
@@ -340,6 +423,13 @@ public class Fraction {
 		System.out.println("PGCD de 125 et 475 = " + pgcd);
 		System.out.println();
 		System.out.println("-----------------------------");
+		System.out.println();
+		
+		Fraction exx = new Fraction("2/30000");
+		System.out.println("frac = \n" + exx.toString());
+		System.out.println("test = " + isFraction("2/3"));
+		
+		System.out.println();
+		System.out.println("-----------------------------");
 	}
-
 }

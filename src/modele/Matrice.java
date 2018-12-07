@@ -384,10 +384,8 @@ public class Matrice {
 		int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
 		int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
 		int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice];   //tableau contenant la taille maximal entre le numérateur et le dénominateur pour chaques fractions
-		
-		int[] LargeurCol = new int[tailleMatrice]; //Largeur de chaque colonne de la matrice, en fonction des fractions présente dans cette colonne
-		
-		String[] StringFraction = new String[tailleMatrice*3];   //tableau contenant les fraction sous forme bien affiché ; 3 cases pour une fraction = 1 case numérateur, 1 case tirrets, une case dénominateur
+		int tailleMax = 5;
+		String[] StringFraction = new String[tailleMatrice*tailleMatrice*3];   //tableau contenant les fraction sous forme bien affiché ; 3 cases pour une fraction = 1 case numérateur, 1 case tirrets, une case dénominateur
 		String tirets = "-";
 		String espaces = " ";
 		
@@ -399,15 +397,24 @@ public class Matrice {
 			}	
 		}
 		
-		int max = -1;
+		int k=0;
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol(); j++) {
-				if(max < TailleMaxFraction[i][j]) {
-					LargeurCol[i] = TailleMaxFraction[i][j];
-					max = TailleMaxFraction[i][j];
-				}
-			}
-			max = -1;
+				int ecart = tailleMax-TailleMaxFraction[i][j];
+				int tnum = String.valueOf(TabFractionNumerateur[i][j]).length();
+				int tden = String.valueOf(TabFractionDenominateur[i][j]).length();
+				
+				for(int x=0; x < ecart-tnum; x++) {
+					System.out.print(TabFractionNumerateur[i][j] + " - ");
+				}	
+				for(int y=0; y < ecart-tden; y++) {
+					System.out.print(TabFractionNumerateur[i][j] + " - ");
+				}	
+				StringFraction[k] = "0";
+				k++;
+				StringFraction[k] = "0";
+				k++;
+			}	
 		}
 		
 		/////////////////
@@ -426,19 +433,13 @@ public class Matrice {
 			}	
 		}
 		System.out.println();
-		System.out.print("TailleFraction : ");
+		System.out.print("maxtaille : ");
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol(); j++) {
 				System.out.print(TailleMaxFraction[i][j] + " - ");
 			}	
 		}
-		System.out.println();
-		System.out.print("TailleCol : ");
-		for (int i=0; i < LargeurCol.length; i++) {
-			System.out.print(LargeurCol[i] + " - ");
-		}
-		System.out.println();
-		////////////////////////
+		/////////////////
 		
 	}
 	
@@ -462,7 +463,7 @@ public class Matrice {
 		A.AfficheV2();
 		System.out.println();
 		System.out.println("B est une matrice 3 par 3 , remplite de fractions et de nombres entiers");
-		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
+		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(122,16)}};
 		Matrice B = new Matrice(tab);
 		B.AfficheV2();
 		System.out.println();
