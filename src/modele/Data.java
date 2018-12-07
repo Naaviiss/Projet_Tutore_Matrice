@@ -12,4 +12,6 @@ public interface Data {
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
 	public final String VALIDER_PANEL_COMMANDES = "ValiderPanelCommandes";
 	public final String VALIDER_PANEL_TAILLE = "ValiderTaille";
+	
+	public final String CONSTANTE = "Constante";
 }

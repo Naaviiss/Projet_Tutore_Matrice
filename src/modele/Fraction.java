@@ -27,25 +27,126 @@ public class Fraction {
 		reduire();
 	}
 	//change un string en fraction : 3/5 devient Fraction(3,5)
-	public Fraction(String parFrac) {
-		int rencontre = 0;
-		String numerateurString = "";
-		String denominateurString = "";
-		for(char ch : parFrac.toCharArray()) {
-			if(ch == '/') {
-				rencontre = 1;
+	//change un string en fraction : 3/5 devient Fraction(3,5)
+		public Fraction(String parFrac) {
+			int slash = 0;  //si il y a un slash dans le String
+			int rencontre = 0;	//savoir quand on a passé le slash
+			String numerateurString = "";
+			String denominateurString = "";
+			for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+				if(ch == '/') {
+					slash = 1;
+				}
 			}
-			else if(ch != '/' && rencontre == 0) {
-				numerateurString += ch;
+			
+			if(slash == 1) {
+				for(char ch : parFrac.toCharArray()) {
+					if(ch == '/') {
+						rencontre = 1;
+					}
+					else if(ch != '/' && rencontre == 0) {
+						if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+							throw new RuntimeException("lettre dans le numerateur");
+						}
+						else {
+							numerateurString += ch;
+						}
+						
+					}
+					else {
+						if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+							throw new RuntimeException("lettre dans le denominateur");
+						}
+						else {
+							denominateurString += ch;
+						}
+					}
+				}
+				if(numerateurString == "" || denominateurString == "") {
+					throw new RuntimeException("numerateur ou dénominateur vide");
+				}
+				if(Integer.parseInt(denominateurString) == 0) {
+					throw new RuntimeException("Division par zero");
+				}
+				numerateur = Integer.parseInt(numerateurString);
+				denominateur = Integer.parseInt(denominateurString);
 			}
 			else {
-				denominateurString += ch;
+				for(char ch : parFrac.toCharArray()) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						throw new RuntimeException("lettre dans le numerateur");
+					}
+					else {
+						numerateurString += ch;
+					}
+				}
+				if(numerateurString == "") {
+					throw new RuntimeException("numerateur vide");
+				}
+				numerateur = Integer.parseInt(numerateurString);
+				denominateur = 1;
 			}
+			reduire();
 		}
-		numerateur = Integer.parseInt(numerateurString);
-		denominateur = Integer.parseInt(denominateurString);
-		reduire();
-	}
+		
+		//ISFRACTION
+		// String.isFraction() dit si la string est eun fraction
+		public boolean isFraction(String parFrac) {
+			int slash = 0;  //si il y a un slash dans le String
+			int rencontre = 0;	//savoir quand on a passé le slash
+			String numerateurString = "";
+			String denominateurString = "";
+			for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+				if(ch == '/') {
+					slash = 1;
+				}
+			}
+			
+			if(slash == 1) {
+				for(char ch : parFrac.toCharArray()) {
+					if(ch == '/') {
+						rencontre = 1;
+					}
+					else if(ch != '/' && rencontre == 0) {
+						if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+							return false;
+						}
+						else {
+							numerateurString += ch;
+						}
+						
+					}
+					else {
+						if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+							return false;
+						}
+						else {
+							denominateurString += ch;
+						}
+					}
+				}
+				if(numerateurString == "" || denominateurString == "") {
+					return false;
+				}
+				if(Integer.parseInt(denominateurString) == 0) {
+					return false;
+				}
+			}
+			else {
+				for(char ch : parFrac.toCharArray()) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						numerateurString += ch;
+					}
+				}
+				if(numerateurString == "") {
+					return false;
+				}
+			}
+			return true;
+		}
 	
 	//GETTER
 	public int getNumerateur() {

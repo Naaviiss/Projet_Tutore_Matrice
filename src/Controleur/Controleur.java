@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import java.util.Arrays;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import modele.Data;
 import modele.Fraction;
 import modele.Matrice;
@@ -17,10 +20,16 @@ public class Controleur implements ActionListener{
 	PanelMatrice chPanMatrice;
 	PanelChoix chPanelChoix;
 	
+	private String[] operation = new String[7]; //tableau contenant l'operation entrer par l'utilisateur
+	private int positionOperation; //position de actuel de l'opération
+	
 	public Controleur(/*PanelMatrice pPanMatrice, */PanelChoix pPanChoix) {
 //		chPanMatrice = pPanMatrice;
 		chPanelChoix = pPanChoix;
-	
+		for(int i = 0; i<7; i++) {
+			operation[i]="";
+			positionOperation = 0; //position de depart de l'opération
+		}
 	}
 
 	public void actionPerformed(ActionEvent pEvt) {
@@ -41,7 +50,7 @@ public class Controleur implements ActionListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
-			System.out.println("coucou");
+			System.out.print("Je clique sur le bouton valider\n");
 			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
 			Matrice M1 = new Matrice(tab);
 			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
@@ -49,15 +58,218 @@ public class Controleur implements ActionListener{
 			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
 			chPanelChoix.getPanGauss().getPanelAffichageMatrices().revalidate();
 			chPanelChoix.getPanGauss().getPanelAffichageMatrices().repaint();
+			chPanelChoix.getPanGauss().repaint();
+			chPanelChoix.repaint();
+			
+			for(int i = 0; i<7; i++) { //si on valide on reset l'operation
+				operation[i]="";
+			}
+			positionOperation = 0;
+			affichageOperation();
 		}
 		
+		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
+			System.out.print("Je clique sur le bouton constante\n");
+			//Création du popup de la demande de la constante
+			String constante = null;
+			String txt = null;
+			Boolean test = true;
+			while (test){
+				txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante");
+				System.out.println(txt);
+				//Si on rentre une valeur pour la constante
+				if (txt != null){
+					if (txt.length() == 1 && txt.equalsIgnoreCase("0")){
+						constante = "1";
+					}
+					else{
+						constante = txt;
+					}
+				}
+				test = false;
+			}
+			if(estUnEntier(constante)){ //vérifie que la constante donnee est bien un entier
+				if(positionOperation!=7 && positionOperation!=0) { //si la chaine depasse les 7 actions on ne fait pas l'action ou si la constante est mal placer
+					if(positionOperation!=2 || pEvt.getActionCommand()!= "0") { //remplacer pEvt.getActionCommand() par la valeur donnee par l'utilisateur et "0" par un int
+						//si la premiere constante est differente de 0
+						String valider = "ok";
+						for(int i = 0; i<Data.LIGNES.length;i++) {
+							if(Data.LIGNES[i] == operation[positionOperation-1]) {
+								valider = "non ok";
+							}
+						}
+						if(estUnEntier(operation[positionOperation-2])) {
+							valider = "non ok";
+						}
+						if(valider == "ok") {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+								valider = "ok";
+								if(estUnEntier(operation[positionOperation-1])) {
+									valider = "non ok";
+								}//fin du test
+							if(valider == "ok") {
+								operation[positionOperation]= constante;
+								positionOperation+=1;
+							}
+						}
+					}
+				}
+			}
+			//on fera la gestion de la constante une fois qu'elle aura ete ajoutee
+			affichageOperation();
+			}
+		
 		if(Arrays.asList(Data.LIGNES).contains(pEvt.getActionCommand())) { //si la commande de la source est une ligne
-			System.out.println("Je clique sur une ligne\n");
+			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
+			
+			//PARTIT AJOUT LIGNE
+			if(positionOperation!=7) { //si la chaine depasse les 7 actions on ne fait pas l'action
+				if(positionOperation == 0) { //est ce que c la premiere action de la chaine
+					operation[positionOperation]= pEvt.getActionCommand();
+					positionOperation+=1;
+					operation[positionOperation]= "<-";
+					positionOperation+=1;
+				}
+				else {
+					if(positionOperation == 2 || positionOperation == 3) { //est ce que c la premiere action de la chaine
+						if(positionOperation == 3) {
+							String valider = "ok";
+							for(int i = 0; i<Data.LIGNES.length;i++) {
+								if(Data.LIGNES[i] == operation[positionOperation-1]) {
+									valider = "non ok";
+								}
+							}
+							if(valider == "ok") {
+								if(pEvt.getActionCommand()==operation[0]){
+									operation[positionOperation]= pEvt.getActionCommand();
+									positionOperation+=1;
+								}
+							}
+						}
+						else {
+							if(pEvt.getActionCommand()==operation[0]){
+								operation[positionOperation]= pEvt.getActionCommand();
+								positionOperation+=1;
+							}
+						}
+					}	
+					else {
+						String valider = "ok";
+						for(int i = 0; i<Data.LIGNES.length;i++) {
+							if(Data.LIGNES[i] == operation[positionOperation-2]) {
+								valider = "non ok";
+							}
+						}
+						if(valider == "ok" || operation[positionOperation-1]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
+							valider = "ok";
+							for(int i = 0; i<Data.LIGNES.length;i++) {
+								if(Data.LIGNES[i] == operation[positionOperation-1]) {
+									valider = "non ok";
+								}
+							} //fin du test
+							if(valider == "ok") {
+								operation[positionOperation]= pEvt.getActionCommand();
+								positionOperation+=1;
+							}
+						}
+					}
+				}
+			}
+			affichageOperation();
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			System.out.println("Je clique sur un operateur\n");
+			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
+			if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6 && positionOperation!=5)	 { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
+				//est ce que on a 2 operations a la suite (si oui rien ne se passe)
+				String valider = "ok"; 
+				for(int i = 0; i<Data.OPERATIONS.length;i++) {
+					if(Data.OPERATIONS[i] == operation[positionOperation-1]) {
+						valider = "non ok";
+					}
+				}//fin du test
+				if(valider == "ok") {
+					operation[positionOperation]= pEvt.getActionCommand();
+					positionOperation+=1;
+				}
+			}
+			affichageOperation();
 		}
 	}
 
+	private void affichageOperation() { //fonction test de pour la création de l'opération
+		
+		System.out.print("\nOpération : ");
+		for(int i = 0; i<7; i++) {
+			System.out.print(operation[i]);
+		}
+		System.out.println("");
+	}
+
+	public boolean estUnEntier(String chaine) { //fonction permettant de voir si la constante est un entier
+		try {
+			Integer.parseInt(chaine);
+		} catch (NumberFormatException e){
+			return false;
+		}
+		return true;
+	}
+	
+	//ISFRACTION
+	// String.isFraction() dit si la string est une fraction
+	public boolean isFraction(String parFrac) {
+		int slash = 0;  //si il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+			if(ch == '/') {
+				slash = 1;
+			}
+		}
+		
+		if(slash == 1) {
+			for(char ch : parFrac.toCharArray()) {	
+				if(ch == '/') {
+					rencontre = 1;
+				}
+				else if(ch != '/' && rencontre == 0) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						numerateurString += ch;
+					}
+					
+				}
+				else {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						denominateurString += ch;
+					}
+				}
+			}
+			if(numerateurString == "" || denominateurString == "") {
+				return false;
+			}
+			if(Integer.parseInt(denominateurString) == 0) {
+				return false;
+			}
+		}
+		else {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					return false;
+				}
+				else {
+					numerateurString += ch;
+				}
+			}
+			if(numerateurString == "") {
+				return false;
+			}
+		}
+		return true;
+	}
 }
