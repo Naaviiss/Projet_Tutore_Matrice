@@ -2,43 +2,43 @@ package modele;
 
 public class Matrice {
 	
-	private int Lig;
-	private int Col;
-	private Fraction[][] Case;
+	private int chLigne;
+	private int chCol;
+	private Fraction[][] chCase;
 	
 	/////MATRICE/////
 	
 	//creer une matrice carre vide de taille parTaille
 	public Matrice (int parTaille) {
-		Lig = parTaille;
-		Col = parTaille;
-		Case = new Fraction[Lig][Col];
+		chLigne = parTaille;
+		chCol = parTaille;
+		chCase = new Fraction[chLigne][chCol];
 		this.remplir(0);
 	}
 	
 	//creer une matrice vide de taille parLig et parCol
 	public Matrice (int parLig, int parCol) {
-		Lig = parLig;
-		Col = parCol;
-		Case = new Fraction[Lig][Col];
+		chLigne = parLig;
+		chCol = parCol;
+		chCase = new Fraction[chLigne][chCol];
 		this.remplir(0);
 	}
 	
 	//creer une matrice avec un tableau donne en parametre
 	public Matrice (Fraction[][] parMat) {
-		Lig = parMat.length;
-		Col = parMat.length;
-		this.Case = new Fraction[Lig][Col];
+		chLigne = parMat.length;
+		chCol = parMat.length;
+		this.chCase = new Fraction[chLigne][chCol];
 		for(int i=0; i<this.getLig() ; i++) {
 			for(int j=0; j<this.getCol() ;j++) {
-				this.Case[i][j] = parMat[i][j];
+				this.chCase[i][j] = parMat[i][j];
 			}
 		}
 	}
 	
 	//creer une copie d'une matrice
 	public Matrice(Matrice A) {
-		this(A.Case);
+		this(A.chCase);
 	}
 	
 	//REMPLIR
@@ -46,7 +46,7 @@ public class Matrice {
 	public void remplir(int x) {
 		for(int i=0; i<this.getLig() ; i++) {
 			for(int j=0; j<this.getCol() ;j++) {
-				this.Case[i][j] = new Fraction(x);
+				this.chCase[i][j] = new Fraction(x);
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public class Matrice {
 			throw new RuntimeException("Case non existante");
 		}
 		else {
-			return this.Case[i][j];
+			return this.chCase[i][j];
 		}
 	}
 	//get une ligne sous forme de tableau de fraction
@@ -67,12 +67,12 @@ public class Matrice {
 			throw new RuntimeException("Ligne non existante");
 		}
 		else {
-			return Case[x];
+			return chCase[x];
 		}
 	}
 	//get toute la matrice sous forme de tableau de fraction ( ex : {{1,2,3} , {4,5,6} , {7,8,9}} )
 	public Fraction[][] getAll() {
-		return Case;
+		return chCase;
 	}
 	//get taille matrice carre
 	public int getTaille() {
@@ -85,11 +85,11 @@ public class Matrice {
 	}
 	//get nombre ligne d'une matrice
 	public int getLig() {
-		return Lig;
+		return chLigne;
 	}
 	//get nombre de colonne d'une matrice
 	public int getCol() {
-		return Col;
+		return chCol;
 	}
 	
 															/////SETTER/////
@@ -99,7 +99,7 @@ public class Matrice {
 			throw new RuntimeException("Case non existante");
 		}
 		else {
-			this.Case[i][j] = var;
+			this.chCase[i][j] = var;
 		}
 	}
 	//set une ligne de la matrice appelante avec un tableau donne en parametre
@@ -108,7 +108,7 @@ public class Matrice {
 			throw new RuntimeException("Ligne non existante");
 		}
 		else {
-			this.Case[x] = tab;
+			this.chCase[x] = tab;
 		}
 	}
 	
@@ -118,7 +118,7 @@ public class Matrice {
 	public static Matrice Identite(int Taille) {
         Matrice Ident = new Matrice(Taille);
         for (int i=0; i < Taille; i++) {
-        	Ident.Case[i][i] = new Fraction(1,1);
+        	Ident.chCase[i][i] = new Fraction(1,1);
         }
         return Ident;
     }
@@ -126,8 +126,8 @@ public class Matrice {
 	//echange deux lignes entre elles ( M[Li] <- M[Lj]   && M[Lj] <- M[Li])
 	public void Echange(int i, int j) {
 		Fraction[] tampon = getLigne(i);
-        Case[i] = getLigne(j);
-        Case[j] = tampon;
+        chCase[i] = getLigne(j);
+        chCase[j] = tampon;
     }
 	
 	//COMPARE
@@ -139,7 +139,7 @@ public class Matrice {
 		}
 		for (int i=0; i < this.getLig() ;i++) {
 			for(int j=0; j < this.getCol() ;j++) {
-				if(!(Mat.Case[i][j].FCompare(parMat.Case[i][j]))) {
+				if(!(Mat.chCase[i][j].FCompare(parMat.chCase[i][j]))) {
 					return false;
 				}
 			}
@@ -153,10 +153,10 @@ public class Matrice {
 		int zero = 0;
 		for(int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol(); j++) {
-				if(j==zero && !(Case[i][j].FCompare(new Fraction(1)))) {
+				if(j==zero && !(chCase[i][j].FCompare(new Fraction(1)))) {
 					return false;
 				}
-				else if(j!=zero && !(Case[i][j].FCompare(new Fraction(0)))) {
+				else if(j!=zero && !(chCase[i][j].FCompare(new Fraction(0)))) {
 					return false;
 				}
 			}
@@ -177,7 +177,7 @@ public class Matrice {
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ;j++) {
-				res.Case[i][j] = Mat.Case[i][j].FAddition(parMat.Case[i][j]);
+				res.chCase[i][j] = Mat.chCase[i][j].FAddition(parMat.chCase[i][j]);
 			}
 		}
 		return res;
@@ -188,7 +188,7 @@ public class Matrice {
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ;j++) {
-				res.Case[i][j] = Mat.Case[i][j].FAddition(parFrac);
+				res.chCase[i][j] = Mat.chCase[i][j].FAddition(parFrac);
 			}
 		}
 		return res;
@@ -215,7 +215,7 @@ public class Matrice {
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol();j++) {
-				res.Case[i][j] = Mat.Case[i][j].FSoustraction(parMat.Case[i][j]);
+				res.chCase[i][j] = Mat.chCase[i][j].FSoustraction(parMat.chCase[i][j]);
 			}
 		}
 		return res;
@@ -226,7 +226,7 @@ public class Matrice {
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ;j++) {
-				res.Case[i][j] = Mat.Case[i][j].FSoustraction(parFrac);
+				res.chCase[i][j] = Mat.chCase[i][j].FSoustraction(parFrac);
 			}
 		}
 		return res;
@@ -254,7 +254,7 @@ public class Matrice {
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ; j++) {
 				for(int k=0; k < Mat.getCol() ; k++) {
-					res.Case[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parMat.getCase(k,j))));
+					res.chCase[i][j] = (res.getCase(i, j)).FAddition((Mat.getCase(i,k).FMultiplication(parMat.getCase(k,j))));
 				}
 			}
 		}
@@ -266,7 +266,7 @@ public class Matrice {
 		Matrice res = new Matrice(this.getLig(),this.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ; j++) {
-				res.Case[i][j] = Mat.getCase(i,j).FMultiplication(parFrac);
+				res.chCase[i][j] = Mat.getCase(i,j).FMultiplication(parFrac);
 			}
 		}
 		return res;
@@ -295,7 +295,7 @@ public class Matrice {
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ;j++) {
-				res.Case[i][j] = Mat.Case[i][j].FDivision(parFrac);
+				res.chCase[i][j] = Mat.chCase[i][j].FDivision(parFrac);
 			}
 		}
 		return res;
@@ -312,31 +312,17 @@ public class Matrice {
 		return Mat;
 	}
 	
-															/////MODIFYLINE/////
+	/////MODIFYLINE/////
 	
 	// MODIFYLINE -> ( L3 -> 2L3 )
 	// Multiplication d'une ligne par un nombre non nul.
 	// Prend en paramètre : 
-	// int ligne(0 ou 1 ou 2), String operand ( add(+) | substract(-) | multiply(*) | divide(/) ), Fraction pFraction
-	public void modifyLine(int ligne, String operand, Fraction pFraction) {
+	// int ligne(0 ou 1 ou 2),Fraction pFraction
+	public void modifyLine(int ligne, Fraction pFraction) {
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
 				if(ligne==i) {
-					if(operand == "+") {
-						Case[i][j] = Case[i][j].FAddition(pFraction);
-					}
-					else if(operand == "-") {
-						Case[i][j] = Case[i][j].FSoustraction(pFraction);
-					}
-					else if(operand == "*") {
-						Case[i][j] = Case[i][j].FMultiplication(pFraction);
-					}
-					else if(operand == "/") {
-						Case[i][j] = Case[i][j].FDivision(pFraction);
-					}
-					else {
-						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
-					}
+					chCase[i][j] = chCase[i][j].FMultiplication(pFraction);
 				}//if
 			}
 		}
@@ -354,21 +340,18 @@ public class Matrice {
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
 				if(ligneA==i) {
+					frac = multiplicateur.FMultiplication(getCase(ligneB,j));
 					if(operand.equals("+")) {
-						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
-						Case[i][j] = getCase(i,j).FAddition(frac);
+						chCase[i][j] = getCase(i,j).FAddition(frac);
 					}
 					else if(operand.equals("-")) {
-						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
-						Case[i][j] = getCase(i,j).FSoustraction(frac);
+						chCase[i][j] = getCase(i,j).FSoustraction(frac);
 					}
 					else if(operand.equals("*")) {
-						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
-						Case[i][j] = getCase(i,j).FMultiplication(frac);
+						chCase[i][j] = getCase(i,j).FMultiplication(frac);
 					}
 					else if(operand.equals("/")) {
-						frac = multiplicateur.FMultiplication(getCase(ligneB,j));
-						Case[i][j] = getCase(i,j).FDivision(frac);
+						chCase[i][j] = getCase(i,j).FDivision(frac);
 					}
 					else {
 						System.out.println("ERREUR L'OPERATION DEMANDEE N'EXISTE PAS");
@@ -383,7 +366,7 @@ public class Matrice {
 	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol();j++) {
-				String frac = Case[i][j].toStringV2();
+				String frac = chCase[i][j].toStringV2();
 				System.out.print(frac + " | ");
 			}
 			System.out.print("\n");

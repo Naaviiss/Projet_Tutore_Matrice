@@ -10,16 +10,16 @@ import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 import modele.Data;
+import modele.Fraction;
 import modele.Matrice;
 
 public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	
-	//private HashMap<Integer, List<Matrice>> chMatrices;
 	private HashMap<Matrice, Matrice> chMatrices; // en attendant d'avoir la classe Matrice
 	private List<String> chLigneModifiees; //pour les modifications de lignes
 	private List<String> chCommentaire;//pour les eventuels commentaires
 	
-	public ModelAffichageMatrices(/*private HashMap<Integer, List<Matrice>> pMatricese*/ HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
+	public ModelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
 		
 		chMatrices = pMatrices;
 		chLigneModifiees = pLigneModif;
@@ -30,15 +30,12 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		this.setRowCount(20);
 		
 		//entrees est l'ensemble des couples clef-valeur de la hashmap chMatrices
-//		Set<Entry<Integer, List<Matrice>>> entrees = chMatrices.entrySet();
 		Set<Entry<Matrice, Matrice>> entrees = chMatrices.entrySet();
 		
 		//itérateur pour parcourir les entrees
-//		Iterator<Entry<Integer, List<Matrice>>> it = entrees.Iterator();
 		Iterator<Entry<Matrice,Matrice>> it = entrees.iterator();
 		
 		int indiceLigne = 0;
-//		Entry<Integer, List<Matrice>> entree;
 		Entry<Matrice, Matrice> entree;
 
 		String chaine;
@@ -89,7 +86,8 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		
 		//Si l'étudiant veut intervertir 2 lignes
 		if (tabCalcul[1].equals("<->")) {
-			//on effectue le potentiel calcul sur la ligne avec laquelle il souhaite échanger la ligne choisie précédemment
+			matricePrincipale.modifyLine(ligneModifiee, new Fraction(tabCalcul[2]));//on effectue le potentiel calcul sur la ligne avec laquelle il souhaite échanger la ligne choisie précédemment
+			matriceIdentite.modifyLine(ligneModifiee, new Fraction(tabCalcul[2]));
 			//on échange les lignes sur la matrice principale
 			//on échange les lignes sur la matrice identité
 		}
@@ -97,19 +95,18 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		//Si l'étudiant veut effectuer un calcul sur une ligne
 		else {
 			if (Arrays.asList(Data.LIGNES).contains(tabCalcul[3])) {//si c'est la deuxième ligne qui prend un calcul
-				ligneA = getNumLigne(tabCalcul[3]); //index de la première ligne du calcul
-				//on effectue le calcul sur la deuxième ligne du calcul
+				matricePrincipale.modifyLine2(ligneModifiee, tabCalcul[4], ligneB, new Fraction(tabCalcul[5]));//on fait l'opération sur la ligne de la matrice principale
+				matriceIdentite.modifyLine2(ligneModifiee, tabCalcul[4], ligneB, new Fraction(tabCalcul[5]));//on fait l'opération sur la ligne de la matrice identité
 			}
 			else {
-				ligneA = getNumLigne(tabCalcul[4]); //index de la première ligne du calcul
-				//on effectue le calcul sur la première ligne du calcul
+				matricePrincipale.modifyLine(ligneModifiee, new Fraction(tabCalcul[2]));//on fait l'opération sur la ligne de la matrice principale
+				matriceIdentite.modifyLine(ligneModifiee, new Fraction(tabCalcul[2]));//on fait l'opération sur la ligne de la matrice identité
 			}
-			matricePrincipale = modi//on fait l'opération sur la ligne de la matrice principale
-			//on fait l'opération sur la ligne de la matrice indentité
 		}
 		
-		//on ajoute la matrice principale et la matrice identité au hashmap
+		chMatrices.put(matricePrincipale, matriceIdentite);//on ajoute la matrice principale et la matrice identité au hashmap
 		
+		this.fireTableStructureChanged();//on met la table à jour
 	}
 	
 	//retourne l'index correspondant à la ligne
