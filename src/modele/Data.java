@@ -8,6 +8,7 @@ public interface Data {
 	public static String[] LIGNES = {"L1","L2","L3","L4","L5"};
 	public static String[] INTITULES = {"Matrice","Identité","Calcul","Commentaire"};
 	public static String[] OPERATIONS = {"+","-","*","/"};
+	public static String []FLECHES = {"<-","<->"};
 	
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
 	public final String VALIDER_PANEL_COMMANDES = "ValiderPanelCommandes";

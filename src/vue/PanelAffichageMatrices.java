@@ -3,16 +3,16 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.ScrollPane;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import modele.*;
 
@@ -24,11 +24,16 @@ public class PanelAffichageMatrices extends JPanel{
 	private List<String> chCommentaire;//pour les commentaires
 	
 	public PanelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
+		
 		chMatrices = pMatrices;
 		chLigneModif = pLigneModif;
 		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chLigneModif,chCommentaire));
+		
+		MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
+		tableMatrices.getColumnModel().getColumn(0).setCellRenderer(renderer);
+		tableMatrices.getColumnModel().getColumn(1).setCellRenderer(renderer);
 		
 		//intitules des colonnes
 		tableMatrices.getTableHeader().setBackground(new Color(205, 0, 0));
@@ -39,7 +44,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getTableHeader().setReorderingAllowed(false);
 		
 		//hauteur des lignes
-		tableMatrices.setRowHeight(100);
+		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
 		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(240);

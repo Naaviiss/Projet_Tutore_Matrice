@@ -41,8 +41,8 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		String chaine;
 		while (it.hasNext()) {
 			entree = it.next();
-			setValueAt(entree.getKey()+" A", indiceLigne, 0);
-			setValueAt(entree.getKey()+" B", indiceLigne, 1);
+			setValueAt(entree.getKey(), indiceLigne, 0);
+			setValueAt(entree.getKey(), indiceLigne, 1);
 			indiceLigne ++;
 		}
 		indiceLigne = 0;

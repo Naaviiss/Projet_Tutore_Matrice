@@ -54,12 +54,15 @@ public class PanelGauss extends JPanel{
 	    hc.add("c");
 	    hc.add("c");
 	    hc.add("c");
+	    
 		
 		//instance de la table affichant les matrices
 		affichageMatrices = new PanelAffichageMatrices(hm,hl,hc);
 		
 		//instance du panel avec les commandes
-		commandesMatrices = new PanelCommandes();
+		Matrice m = new Matrice(3);//à supprimer
+		commandesMatrices = new PanelCommandes(m);
+//		commandesMatrices.setChMatrice(m);
 		
 		//ajout des éléments au panel 
 		this.add(affichageMatrices,BorderLayout.WEST);
