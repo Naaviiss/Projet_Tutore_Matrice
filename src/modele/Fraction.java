@@ -303,11 +303,27 @@ public class Fraction {
 			}
 		}
 		else {
-			int max = Math.max(t1,t2);
-			for(int i = 0 ; i <  max-1 ; i++) {
-				tirets = tirets.concat("-");
+			espaces = "";
+			if(t1 < t2) {
+				int espace = (t2/t1)-2;
+				for(int i = 0 ; i < espace ; i++) {
+					espaces = espaces.concat(" ");
+				}
+				for(int i = 0 ; i < t2-1 ; i++) {
+					tirets = tirets.concat("-");
+				}
+				return espaces + numerateur + "\n" + tirets + "\n" + denominateur;
 			}
-			return numerateur + "\n" + tirets + "\n" + denominateur;
+			else {
+				int espace = (t1/t2)-2;
+				for(int i = 0 ; i < espace ; i++) {
+					espaces = espaces.concat(" ");
+				}
+				for(int i = 0 ; i <  t1-1 ; i++) {
+					tirets = tirets.concat("-");
+				}
+				return numerateur + "\n" + tirets + "\n" + espaces + denominateur;
+			}
 		}
 	}
 	
@@ -429,9 +445,10 @@ public class Fraction {
 		System.out.println("-----------------------------");
 		System.out.println();
 		
-		Fraction exx = new Fraction("2/500001");
-		System.out.println("frac = \n" + exx.toString());
-		System.out.println("test = " + isFraction("2/3"));
+		System.out.println("Affichage fraction vrai format et vérification si c'est bien une matrice ou non");
+		Fraction exx = new Fraction("501/2");
+		System.out.println("frac = 501/2 = \n" + exx.toString());
+		System.out.println("test si fraction = " + isFraction("2/3"));
 		
 		System.out.println();
 		System.out.println("-----------------------------");

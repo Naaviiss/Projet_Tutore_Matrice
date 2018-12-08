@@ -379,17 +379,18 @@ public class Matrice {
 	}
 															/////AFFICHE/////
 	//affiche une matrice
-	public void Affiche() {
+	public String toString() {
 		int tailleMatrice = this.getTaille();  //taille de la matrice carré
 		int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
 		int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
-		int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice];   //tableau contenant la taille maximal entre le numérateur et le dénominateur pour chaques fractions
+		int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice]; //le plus grand entre num et den
 		int tailleMax = 5;
-		String[] StringFraction = new String[tailleMatrice*tailleMatrice*3];   //tableau contenant les fraction sous forme bien affiché ; 3 cases pour une fraction = 1 case numérateur, 1 case tirrets, une case dénominateur
-		String tirets = "-";
-		String espaces = " ";
+		String tirets = "";
+		String espaces = "";
+		String espaces2 = "";
+		String resultat = "";
 		
-		for (int i=0; i < this.getLig(); i++) {
+		for(int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol(); j++) {
 				TabFractionNumerateur[i][j] = this.getCase(i,j).getNumerateur();
 				TabFractionDenominateur[i][j] = this.getCase(i,j).getDenominateur();
@@ -397,33 +398,93 @@ public class Matrice {
 			}	
 		}
 		
-		/////////////////
-		System.out.println();
-		System.out.print("Numerateur : ");
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol(); j++) {
-				System.out.print(TabFractionNumerateur[i][j] + " - ");
-			}	
+		for(int i=0; i < tailleMatrice; i++) {
+			for(int k=0; k < tailleMatrice; k++) {
+				for(int j=0; j < tailleMatrice; j++) {
+					if(TabFractionDenominateur[i][j] == 1) {
+						if(k%tailleMatrice == 0) {
+							for(int x=0; x < tailleMax; x++) {
+								espaces = espaces.concat(" ");
+							}
+							resultat = resultat.concat(espaces + "|");
+							//System.out.print(espaces + "|");
+						}
+						else if(k%tailleMatrice == 1) {
+							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionNumerateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+						}
+						else {
+							for(int x=0; x < tailleMax; x++) {
+								espaces = espaces.concat(" ");
+							}
+							resultat = resultat.concat(espaces + "|");
+							//System.out.print(espaces + "|");
+						}
+					}
+					else {
+						if(k%tailleMatrice == 0) {
+							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionNumerateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+						}
+						else if(k%tailleMatrice == 1) {
+							for(int y=0; y < TailleMaxFraction[i][j]; y++) {
+								tirets = tirets.concat("-");
+							}
+							for(int y=0; y < Math.floor(tailleMax-TailleMaxFraction[i][j])/2; y++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(espaces).length() == 2 && String.valueOf(tirets).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + tirets + espaces2 + "|");
+							//System.out.print(espaces + tirets + espaces2 + "|");
+						}
+						else {
+							float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartden)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionDenominateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
+						}
+					}
+					espaces = "";
+					espaces2 = "";
+					tirets = "";
+				}
+				resultat = resultat.concat("\n");
+				//System.out.println();
+			}
+			resultat = resultat.concat("\n");
+			//System.out.println();
 		}
-		System.out.println();
-		System.out.print("Denominateur : ");
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol(); j++) {
-				System.out.print(TabFractionDenominateur[i][j] + " - ");
-			}	
-		}
-		System.out.println();
-		System.out.print("maxtaille : ");
-		for (int i=0; i < this.getLig(); i++) {
-			for(int j=0; j < this.getCol(); j++) {
-				System.out.print(TailleMaxFraction[i][j] + " - ");
-			}	
-		}
-		/////////////////
 		
+		//System.out.println(resultat.toString());
+		return resultat;
 	}
 	
-	public void AfficheV2() {
+	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol();j++) {
 				System.out.print(Case[i][j].toStringV2() + " | ");
@@ -440,25 +501,25 @@ public class Matrice {
 		System.out.println();
 		System.out.println("A est une matrice 3 par 3 , vide");
 		Matrice A = new Matrice(3,3);
-		A.AfficheV2();
+		A.Affiche();
 		System.out.println();
 		System.out.println("B est une matrice 3 par 3 , remplite de fractions et de nombres entiers");
-		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(122,16)}};
+		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(2,5),new Fraction(122,16)}};
 		Matrice B = new Matrice(tab);
-		B.AfficheV2();
+		B.Affiche();
 		System.out.println();
 		System.out.println("C est la copie de la matrice B");
 		Matrice C = new Matrice(B);
-		C.AfficheV2();
+		C.Affiche();
 		System.out.println();
 		System.out.println("D est matrice identité de taille 4");
 		Matrice D = Matrice.Identite(4);
-		D.AfficheV2();
+		D.Affiche();
 		System.out.println();
 		System.out.println("F est une matrice 3 par 3 , remplite de nombres entiers qui se suivent");
 		Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
 		Matrice F = new Matrice(tab2);
-		F.AfficheV2();
+		F.Affiche();
 		System.out.println();
 		System.out.println("-----------------------------");
 		System.out.println();
@@ -482,7 +543,7 @@ public class Matrice {
 		
 		System.out.println("Nous pouvons effectuer une opération entre un matrice et une fraction (ou un entier) :");
 		System.out.println("F*2 :");
-		F.IMultiplication(new Fraction(2)).AfficheV2();
+		F.IMultiplication(new Fraction(2)).Affiche();
 		System.out.println();
 		System.out.println("Nous pouvons faire le même principe avec + , - et /");
 		
@@ -492,7 +553,7 @@ public class Matrice {
 		
 		System.out.println("Nous pouvons effectuer une opération entre deux matrices :");
 		System.out.println("F*F :");
-		F.MMultiplication(F).AfficheV2();
+		F.MMultiplication(F).Affiche();
 		System.out.println();
 		System.out.println("Nous pouvons faire le même principe avec + et -");
 		
@@ -506,10 +567,10 @@ public class Matrice {
 		System.out.println("Quelques opérations sur une seul ligne de la matrice F :");
 		Matrice G = new Matrice(F);//on dit que G c'est F, mais c'est un secret
 		System.out.println("Rappel de la matrice F :");
-		F.AfficheV2();
+		F.Affiche();
 		System.out.println("Nous allons additionner la ligne 1 à la ligne 0 de la matrice F, cela donne :");
 		F.LAddition(0,1);
-		F.AfficheV2();
+		F.Affiche();
 		System.out.println();
 		System.out.println("Nous pouvons faire le même principe avec - , * et /");
 		System.out.println();
@@ -519,7 +580,7 @@ public class Matrice {
 		//ECHANGE
 		System.out.println("Nous allons Echanger la ligne 0 et la ligne 2 de la matrice F, voici ce que l'on obtient :");
 		G.Echange(0,2);
-		G.AfficheV2();
+		G.Affiche();
 		G.Echange(0,2); //pour remettre comme avant, pour la suite
 		System.out.println();
 		System.out.println("-----------------------------");
@@ -529,7 +590,7 @@ public class Matrice {
 		
 		System.out.println("Nous allons récupérer la taille de la matrice F :");
 		System.out.println("Rappel de la matrice F :");
-		G.AfficheV2();
+		G.Affiche();
 		System.out.println("La taille de la matrice F est : " + G.getTaille());
 		System.out.println();
 		
@@ -559,13 +620,13 @@ public class Matrice {
 		System.out.println();
 		System.out.println();
 		
-		//
+		//AUTRES
 		
 		System.out.println("Nous allons changer une case en particulier de la matrice F :");
 		System.out.println("Nous allons changer la case [1][2] de la matrice F par 10");
 		G.setCase(1,2,new Fraction(10));
 		System.out.println("La matrice F devient alors :");
-		G.AfficheV2();
+		G.Affiche();
 		System.out.println();
 		
 		System.out.println("Nous allons changer une ligne en particulier de la matrice F :");
@@ -573,10 +634,25 @@ public class Matrice {
 		Fraction[] tab5 = {new Fraction(6), new Fraction(1), new Fraction(3,2)};
 		G.setLigne(2,tab5);
 		System.out.println("La matrice F devient alors :");
-		G.AfficheV2();
+		G.Affiche();
 		System.out.println();
 		System.out.println("-----------------------------");
+		System.out.println();
+
+		//AFFICHAGE BEAU
+		System.out.println("Affichage matrice sous deux formats");
+		System.out.println();
+		System.out.println("ancien format :");
+		Fraction[][] tab6 = {{new Fraction(1),new Fraction(25,2),new Fraction(501,2)},{new Fraction(501,20),new Fraction(2),new Fraction(20,501)},{new Fraction(3,2),new Fraction(2,501),new Fraction(5)}};
+		Matrice Z = new Matrice(tab6);
+		Z.Affiche();
+		System.out.println();
+		System.out.println("beau format (renvoie un string) :");
+		System.out.print(Z.toString());
 		
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
 		
 		///////////////// Nancy /////////////////
 		/*
