@@ -26,7 +26,7 @@ public class Fraction {
 		denominateur = parFrac.getDenominateur();
 		reduire();
 	}
-	//change un string en fraction : 3/5 devient Fraction(3,5)
+	/*//change un string en fraction : 3/5 devient Fraction(3,5)
 	public Fraction(String parFrac) {
 		int rencontre = 0;
 		String numerateurString = "";
@@ -49,6 +49,126 @@ public class Fraction {
 			denominateur = Integer.parseInt(denominateurString);
 		
 		reduire();
+	}*/
+	//change un string en fraction : 3/5 devient Fraction(3,5)
+	public Fraction(String parFrac) {
+		int slash = 0;  //si il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+			if(ch == '/') {
+				slash = 1;
+			}
+		}
+		
+		if(slash == 1) {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch == '/') {
+					rencontre = 1;
+				}
+				else if(ch != '/' && rencontre == 0) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						throw new RuntimeException("lettre dans le numerateur");
+					}
+					else {
+						numerateurString += ch;
+					}
+					
+				}
+				else {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						throw new RuntimeException("lettre dans le denominateur");
+					}
+					else {
+						denominateurString += ch;
+					}
+				}
+			}
+			if(numerateurString == "" || denominateurString == "") {
+				throw new RuntimeException("numerateur ou dénominateur vide");
+			}
+			if(Integer.parseInt(denominateurString) == 0) {
+				throw new RuntimeException("Division par zero");
+			}
+			numerateur = Integer.parseInt(numerateurString);
+			denominateur = Integer.parseInt(denominateurString);
+		}
+		else {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					throw new RuntimeException("lettre dans le numerateur");
+				}
+				else {
+					numerateurString += ch;
+				}
+			}
+			if(numerateurString == "") {
+				throw new RuntimeException("numerateur vide");
+			}
+			numerateur = Integer.parseInt(numerateurString);
+			denominateur = 1;
+		}
+		reduire();
+	}
+	
+	//ISFRACTION
+	// String.isFraction() dit si la string est eun fraction
+	public static boolean isFraction(String parFrac) {
+		int slash = 0;  //si il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
+		String numerateurString = "";
+		String denominateurString = "";
+		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+			if(ch == '/') {
+				slash = 1;
+			}
+		}
+		
+		if(slash == 1) {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch == '/') {
+					rencontre = 1;
+				}
+				else if(ch != '/' && rencontre == 0) {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						numerateurString += ch;
+					}
+					
+				}
+				else {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+						return false;
+					}
+					else {
+						denominateurString += ch;
+					}
+				}
+			}
+			if(numerateurString == "" || denominateurString == "") {
+				return false;
+			}
+			if(Integer.parseInt(denominateurString) == 0) {
+				return false;
+			}
+		}
+		else {
+			for(char ch : parFrac.toCharArray()) {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					return false;
+				}
+				else {
+					numerateurString += ch;
+				}
+			}
+			if(numerateurString == "") {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	//GETTER
@@ -176,9 +296,9 @@ public class Fraction {
 		}
 		int t1 = String.valueOf(numerateur).length();
 		int t2 = String.valueOf(denominateur).length();
-		if((t1 >= 2) || (t2 >= 2)) {
-			String tirets = "-";
-			String espaces = " ";
+		String tirets = "-";
+		String espaces = " ";
+		if((t1 >= 2) && (t2 >= 2)) {
 			if(t1 == t2) {
 				for(int i = 0 ; i < t2-1 ; i++) {
 					tirets = tirets.concat("-");
@@ -207,7 +327,27 @@ public class Fraction {
 			}
 		}
 		else {
-			return numerateur + "\n" + "-" + "\n" + denominateur;
+			espaces = "";
+			if(t1 < t2) {
+				int espace = (t2/t1)-2;
+				for(int i = 0 ; i < espace ; i++) {
+					espaces = espaces.concat(" ");
+				}
+				for(int i = 0 ; i < t2-1 ; i++) {
+					tirets = tirets.concat("-");
+				}
+				return espaces + numerateur + "\n" + tirets + "\n" + denominateur;
+			}
+			else {
+				int espace = (t1/t2)-2;
+				for(int i = 0 ; i < espace ; i++) {
+					espaces = espaces.concat(" ");
+				}
+				for(int i = 0 ; i <  t1-1 ; i++) {
+					tirets = tirets.concat("-");
+				}
+				return numerateur + "\n" + tirets + "\n" + espaces + denominateur;
+			}
 		}
 	}
 	
@@ -332,11 +472,18 @@ public class Fraction {
 		System.out.println("-----------------------------");
 		System.out.println();
 		
+
 		System.out.println("Création Fraction avec un String, on envoie le String '500001/200'");
 		Fraction f8 = new Fraction("500001/20");
 		System.out.println("f8 = \n" + f8.toString());
+
+		System.out.println("Affichage fraction vrai format et vérification si c'est bien une matrice ou non");
+		Fraction exx = new Fraction("501/2");
+		System.out.println("frac = 501/2 = \n" + exx.toString());
+		System.out.println("test si fraction = " + isFraction("2/3"));
+		
+
 		System.out.println();
 		System.out.println("-----------------------------");
 	}
-
 }

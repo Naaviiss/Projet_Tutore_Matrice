@@ -22,21 +22,15 @@ import modele.*;
 public class PanelGauss extends JPanel{
 	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
 	private PanelCommandes commandesMatrices; //là où l'étudiant pourra choisir ses actions
+	private Matrice chMatrice;//matrice de départ
 	
-	public PanelGauss() {
+	public PanelGauss(/*Matrice pMatrice*/) {
+		//chMatrice = pMatrice;
 		
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
 		
-		//a supprimer
-		/*HashMap<String, String> hm = new HashMap<String,String>();
-		hm.put("20", "1");
-	    hm.put("10", "2");
-	    hm.put("30", "3");
-	    hm.put("40", "4");
-	    hm.put("40", "7");
-	    hm.put("50", "5");*/
 		HashMap<Matrice, Matrice> hm = new HashMap<Matrice,Matrice>();
 		List<String> hl = new ArrayList<String>();
 		List<String> hc = new ArrayList<String>();

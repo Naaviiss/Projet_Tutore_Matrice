@@ -363,6 +363,111 @@ public class Matrice {
 	
 	////AFFICHE/////
 	//affiche une matrice
+	public String toString() {
+		int tailleMatrice = this.getTaille();  //taille de la matrice carré
+		int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
+		int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
+		int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice]; //le plus grand entre num et den
+		int tailleMax = 5;
+		String tirets = "";
+		String espaces = "";
+		String espaces2 = "";
+		String resultat = "";
+		
+		for(int i=0; i < this.getLig(); i++) {
+			for(int j=0; j < this.getCol(); j++) {
+				TabFractionNumerateur[i][j] = this.getCase(i,j).getNumerateur();
+				TabFractionDenominateur[i][j] = this.getCase(i,j).getDenominateur();
+				TailleMaxFraction[i][j] = String.valueOf(Math.max(TabFractionNumerateur[i][j],TabFractionDenominateur[i][j])).length();
+			}	
+		}
+		
+		for(int i=0; i < tailleMatrice; i++) {
+			for(int k=0; k < tailleMatrice; k++) {
+				for(int j=0; j < tailleMatrice; j++) {
+					if(TabFractionDenominateur[i][j] == 1) {
+						if(k%tailleMatrice == 0) {
+							for(int x=0; x < tailleMax; x++) {
+								espaces = espaces.concat(" ");
+							}
+							resultat = resultat.concat(espaces + "|");
+							//System.out.print(espaces + "|");
+						}
+						else if(k%tailleMatrice == 1) {
+							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionNumerateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+						}
+						else {
+							for(int x=0; x < tailleMax; x++) {
+								espaces = espaces.concat(" ");
+							}
+							resultat = resultat.concat(espaces + "|");
+							//System.out.print(espaces + "|");
+						}
+					}
+					else {
+						if(k%tailleMatrice == 0) {
+							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionNumerateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
+						}
+						else if(k%tailleMatrice == 1) {
+							for(int y=0; y < TailleMaxFraction[i][j]; y++) {
+								tirets = tirets.concat("-");
+							}
+							for(int y=0; y < Math.floor(tailleMax-TailleMaxFraction[i][j])/2; y++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(espaces).length() == 2 && String.valueOf(tirets).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + tirets + espaces2 + "|");
+							//System.out.print(espaces + tirets + espaces2 + "|");
+						}
+						else {
+							float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[i][j]).length());
+							for(int x=0; x < Math.floor(ecartden)/2; x++) {
+								espaces = espaces.concat(" ");
+								espaces2 = espaces2.concat(" ");
+							}
+							if(String.valueOf(TabFractionDenominateur[i][j]).length() == 2) {
+								espaces = espaces.substring(0,espaces.length()-1);
+							}
+							resultat = resultat.concat(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
+							//System.out.print(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
+						}
+					}
+					espaces = "";
+					espaces2 = "";
+					tirets = "";
+				}
+				resultat = resultat.concat("\n");
+				//System.out.println();
+			}
+			resultat = resultat.concat("\n");
+			//System.out.println();
+		}
+		
+		//System.out.println(resultat.toString());
+		return resultat;
+	}
+	
 	public void Affiche() {
 		for (int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol();j++) {
@@ -384,7 +489,7 @@ public class Matrice {
 		A.Affiche();
 		System.out.println();
 		System.out.println("B est une matrice 3 par 3 , remplite de fractions et de nombres entiers");
-		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
+		Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(2,5),new Fraction(122,16)}};
 		Matrice B = new Matrice(tab);
 		B.Affiche();
 		System.out.println();
@@ -500,7 +605,7 @@ public class Matrice {
 		System.out.println();
 		System.out.println();
 		
-		//
+		//AUTRES
 		
 		System.out.println("Nous allons changer une case en particulier de la matrice F :");
 		System.out.println("Nous allons changer la case [1][2] de la matrice F par 10");
@@ -517,7 +622,22 @@ public class Matrice {
 		G.Affiche();
 		System.out.println();
 		System.out.println("-----------------------------");
+		System.out.println();
+
+		//AFFICHAGE BEAU
+		System.out.println("Affichage matrice sous deux formats");
+		System.out.println();
+		System.out.println("ancien format :");
+		Fraction[][] tab6 = {{new Fraction(1),new Fraction(25,2),new Fraction(501,2)},{new Fraction(501,20),new Fraction(2),new Fraction(20,501)},{new Fraction(3,2),new Fraction(2,501),new Fraction(5)}};
+		Matrice Z = new Matrice(tab6);
+		Z.Affiche();
+		System.out.println();
+		System.out.println("beau format (renvoie un string) :");
+		System.out.print(Z.toString());
 		
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println();
 		
 		///////////////// Nancy /////////////////
 		/*

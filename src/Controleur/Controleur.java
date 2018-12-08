@@ -1,8 +1,10 @@
 package Controleur;
 
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 
 import modele.Data;
@@ -10,15 +12,16 @@ import modele.Fraction;
 import modele.Matrice;
 import vue.PanelAffichage;
 import vue.PanelChoix;
+import vue.PanelGauss;
 import vue.PanelMatrice;
 
-public class Controleur implements ActionListener{
+public class Controleur implements ActionListener,MouseListener{
 	
 	PanelMatrice chPanMatrice;
 	PanelChoix chPanelChoix;
+	PanelGauss chPanGauss;
 	
-	public Controleur(/*PanelMatrice pPanMatrice, */PanelChoix pPanChoix) {
-//		chPanMatrice = pPanMatrice;
+	public Controleur(PanelChoix pPanChoix) {
 		chPanelChoix = pPanChoix;
 	
 	}
@@ -37,6 +40,7 @@ public class Controleur implements ActionListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {//on entre sa matrice
+			chPanGauss = new PanelGauss(/*matrice*/);//on créer le panel gauss à partir de la matrice récupérée
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		
@@ -60,40 +64,34 @@ public class Controleur implements ActionListener{
 			System.out.println("Je clique sur un operateur\n");
 		}
 	}
-	
-//	public void effectueCalcul(String []tabCalcul) {
-//		int ligneA,ligneB;
-//		int ligneModifiee;
-//		
-//		Matrice matricePrincipale = ;//matrice principale
-//		Matrice matriceIdentite;//matrice identite
-//		
-//		ligneModifiee= getNumLigne(tabCalcul[0]);
-//		ligneB = getNumLigne(tabCalcul[6]);	//index de la deuxième ligne du calcul
-//		
-//		//Si l'étudiant veut intervertir 2 lignes
-//		if (tabCalcul[1].equals("<->")) {
-//			//on effectue le potentiel calcul sur la ligne avec laquelle il souhaite échanger la ligne choisie précédemment
-//			//on échange les lignes sur la matrice principale
-//			//on échange les lignes sur la matrice identité
-//		}
-//		
-//		//Si l'étudiant veut effectuer un calcul sur une ligne
-//		else {
-//			if (Arrays.asList(Data.LIGNES).contains(tabCalcul[3])) {//si c'est la deuxième ligne qui prend un calcul
-//				ligneA = getNumLigne(tabCalcul[3]); //index de la première ligne du calcul
-//				//on effectue le calcul sur la deuxième ligne du calcul
-//			}
-//			else {
-//				ligneA = getNumLigne(tabCalcul[4]); //index de la première ligne du calcul
-//				//on effectue le calcul sur la première ligne du calcul
-//			}
-//			//on fait l'opération sur la ligne de la matrice principale
-//			//on fait l'opération sur la ligne de la matrice indentité
-//		}
-//		
-//		//on ajoute la matrice principale et la matrice identité au hashmap
-//		
-//	}
-			
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
