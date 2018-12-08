@@ -16,7 +16,7 @@ public class ChoixLigneMatrice extends JPanel{
 		
 		//instance des labels
 		for (int i = 0; i<chMatrice.getTaille();i++) {
-			lignes[i] = new JLabel(chMatrice.toStringLigne(1));
+			lignes[i] = new JLabel(chMatrice.toString);
 			this.add(lignes[i]); //on ajoute la ligne au panel
 		}
 	}

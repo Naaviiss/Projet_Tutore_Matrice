@@ -391,7 +391,6 @@ public class Matrice {
 								espaces = espaces.concat(" ");
 							}
 							resultat = resultat.concat(espaces + "|");
-							//System.out.print(espaces + "|");
 						}
 						else if(k%tailleMatrice == 1) {
 							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
@@ -403,14 +402,12 @@ public class Matrice {
 								espaces = espaces.substring(0,espaces.length()-1);
 							}
 							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
-							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
 						}
 						else {
 							for(int x=0; x < tailleMax; x++) {
 								espaces = espaces.concat(" ");
 							}
 							resultat = resultat.concat(espaces + "|");
-							//System.out.print(espaces + "|");
 						}
 					}
 					else {
@@ -424,7 +421,6 @@ public class Matrice {
 								espaces = espaces.substring(0,espaces.length()-1);
 							}
 							resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
-							//System.out.print(espaces + TabFractionNumerateur[i][j] + espaces2 + "|");
 						}
 						else if(k%tailleMatrice == 1) {
 							for(int y=0; y < TailleMaxFraction[i][j]; y++) {
@@ -438,7 +434,6 @@ public class Matrice {
 								espaces = espaces.substring(0,espaces.length()-1);
 							}
 							resultat = resultat.concat(espaces + tirets + espaces2 + "|");
-							//System.out.print(espaces + tirets + espaces2 + "|");
 						}
 						else {
 							float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[i][j]).length());
@@ -450,7 +445,6 @@ public class Matrice {
 								espaces = espaces.substring(0,espaces.length()-1);
 							}
 							resultat = resultat.concat(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
-							//System.out.print(espaces + TabFractionDenominateur[i][j] + espaces2 + "|");
 						}
 					}
 					espaces = "";
@@ -458,13 +452,9 @@ public class Matrice {
 					tirets = "";
 				}
 				resultat = resultat.concat("\n");
-				//System.out.println();
 			}
 			resultat = resultat.concat("\n");
-			//System.out.println();
 		}
-		
-		//System.out.println(resultat.toString());
 		return resultat;
 	}
 	
