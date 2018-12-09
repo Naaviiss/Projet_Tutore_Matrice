@@ -109,6 +109,10 @@ public class Fraction {
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
 		}
+
+	public Fraction(Fraction parFac) {
+		numerateur = parFac.getNumerateur();
+		denominateur = parFac.getDenominateur();
 		reduire();
 	}
 	
@@ -200,7 +204,7 @@ public class Fraction {
 	
 	//REDUIRE reduit de facon definitive
 	//reduit la fraction jusqu'a ce qu'elle soit irreductible
-	void reduire() {
+	public void reduire() {
 		if(denominateur < 0) { //pour mettre le - devant
 			numerateur *= -1;
 			denominateur *= -1;
@@ -283,13 +287,6 @@ public class Fraction {
 	
 	//TOSTRING
 	//ecrit une fraction
-	public String toStringV2() {
-		if(denominateur == 1) {
-			return Integer.toString(numerateur);
-		}
-		return numerateur + "/" + denominateur;
-	}
-	
 	public String toString() {
 		if(denominateur == 1) {
 			return Integer.toString(numerateur);
@@ -349,141 +346,6 @@ public class Fraction {
 				return numerateur + "\n" + tirets + "\n" + espaces + denominateur;
 			}
 		}
-	}
-	
-	//TEST_MAIN
-	public static void main(String[] args) {
-		
-		//FRACTION
-		System.out.println();
-		System.out.println("Fractions utilisées dans la suite du programme");
-		//Fraction f1 = new Fraction(30,-13);
-		Fraction f1 = new Fraction(30,-13);
-		System.out.println("f1 = 30/(-13) = "  + f1.toStringV2());
-		Fraction f2 = new Fraction(-2,26);
-		System.out.println("f2 = (-2)/26 = " +  f2.toStringV2());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println("f1 affciher en fraction graphique : \n\n"  + f1.toString());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//OPERATION
-		System.out.println("PREMICE : f3 représentera le resultat de l'opération entre f1 et f2");
-		System.out.println();
-		
-		//ADDITION
-		System.out.println("Addition de deux fractions :");
-		System.out.println("f3 = f1 + f2");
-		System.out.println("f3 = (" + f1.toStringV2() + ") + (" + f2.toStringV2() + ")");
-		Fraction f3 = f1.FAddition(f2);
-		System.out.println("f3 = " + f3.toStringV2());
-		System.out.println();
-		
-		//SOUSTRACTION
-		System.out.println("Soustraction de deux fractions :");
-		System.out.println("f3 = f1 - f2");
-		System.out.println("f3 = (" + f1.toStringV2() + ") - (" + f2.toStringV2() + ")");
-		f3 = f1.FSoustraction(f2);
-		System.out.println("f3 = " + f3.toStringV2());
-		System.out.println();
-		
-		//MULTIPLICATION
-		System.out.println("Multiplication de deux fractions :");
-		System.out.println("f3 = f1 * f2");
-		System.out.println("f3 = (" + f1.toStringV2() + ") * (" + f2.toStringV2() + ")");
-		f3 = f1.FMultiplication(f2);
-		System.out.println("f3 = " + f3.toStringV2());
-		System.out.println();
-		
-		//DIVISION
-		System.out.println("Division de deux fractions :");
-		System.out.println("f3 = f1 / f2");
-		System.out.println("f3 = (" + f1.toStringV2() + ") / (" + f2.toStringV2() + ")");
-		f3 = f1.FDivision(f2);
-		System.out.println("f3 = " + f3.toStringV2());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//REDUCTION
-		System.out.println("Test de réduction d'une fraction :");
-		Fraction f4 = new Fraction(30,10);
-		System.out.println("f4 = 30/10");
-		System.out.println("f4 = " + f4.toStringV2());
-		Fraction f4bis = new Fraction(2051280,915750);
-		System.out.println("f4bis = 2051280 / 915750");
-		System.out.println("f4bis = " + f4bis.toStringV2());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//ECRITURE NON FRACTIONNELLE (MATH)
-		System.out.println("Test écriture décimale d'une fraction :");
-		System.out.println("Ecriture décimale de f1 = "+ f1.toStringV2() + " = " + f1.FMath());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//COMPARE
-		System.out.println("Test de comparaison de deux fractions ( 'true' si oui, 'false' sinon ) :");
-		System.out.println("f1 et f2 sont-elles égales ? résultat = " + f1.FCompare(f2));
-		System.out.println("f1 et -30/13 sont-elles égales ? résultat = " + f1.FCompare(new Fraction(-30,13)));
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//ORDRE
-		System.out.println("Test de l'ordre de deux fractions ( > ou <= ):");
-		Fraction f5 = new Fraction(10/2);
-		Fraction f6 = new Fraction(10/3);
-		System.out.println("f5 = 10/2 = " + f5.toStringV2() + " et f6 = 10/3 = " + f6.toStringV2());
-		System.out.println("f5 > f6 ? ( 'true' si oui, 'false' sinon ) : résultat = " + f5.FSup(f6));
-		System.out.println("f6 > f5 ? ( 'true' si oui, 'false' sinon ) : résultat = " + f6.FSup(f5));
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		//AUTRE
-		System.out.println("Test getter de fraction :");
-		System.out.println("f1 = 30/(-13) = " + f1.toStringV2());
-		System.out.println("f2 = (-2)/26 = " + f2.toStringV2());
-		System.out.println("Numérateur de f1 = "+ f1.getNumerateur() + " et dénominateur de f1 = " + f1.getDenominateur());
-		System.out.println("Numérateur de f2 = "+ f2.getNumerateur() + " et dénominateur de f2 = " + f2.getDenominateur());
-		System.out.println();
-		
-		System.out.println("Test setter de fraction :");
-		Fraction f7 = new Fraction(325,235);
-		System.out.println("f7 = 325/235 = " + f7.toStringV2());
-		System.out.println("On remplace le numérateur de f7 par 282");
-		f7.setNumerateur(282);
-		f7 = new Fraction(f7);
-		System.out.println("Maintenant f7 = 282/47 = " + f7.toStringV2());
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-		System.out.println("Test calcul PGCD d'une fraction :");
-		Fraction ex = new Fraction(0);
-		int pgcd = Math.abs(ex.CalculPGCD(125,475));
-		System.out.println("PGCD de 125 et 475 = " + pgcd);
-		System.out.println();
-		System.out.println("-----------------------------");
-		System.out.println();
-		
-
-		System.out.println("Création Fraction avec un String, on envoie le String '500001/200'");
-		Fraction f8 = new Fraction("500001/20");
-		System.out.println("f8 = \n" + f8.toString());
-
-		System.out.println("Affichage fraction vrai format et vérification si c'est bien une matrice ou non");
-		Fraction exx = new Fraction("501/2");
-		System.out.println("frac = 501/2 = \n" + exx.toString());
-		System.out.println("test si fraction = " + isFraction("2/3"));
-		
-
-		System.out.println();
-		System.out.println("-----------------------------");
+		return numerateur + "/" + denominateur;
 	}
 }

@@ -21,9 +21,11 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton valider;
 	private JButton[] operations;//boutons pour les opérateurs
 	private JLabel entete;
+	private JLabel expression;
 	private JButton constante;
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
+
 	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
 	private JPanel panelGlobal;//panel qui va contenir les autres panels
 	private JPanel []panels; //tableau de panels avec tous les elements graphiques
@@ -33,6 +35,8 @@ public class PanelCommandes extends JPanel implements Data{
 	
 	public PanelCommandes(Matrice pMatrice) {
 		//la taille du panel et les bordures
+	
+	public PanelCommandes(int pTaille) {
 		this.setPreferredSize(new Dimension(700, 850));
 		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();
@@ -132,8 +136,7 @@ public class PanelCommandes extends JPanel implements Data{
 	public void setChMatrice(Matrice pMatrice) {
 		this.chMatrice = pMatrice;
 	}
-
-
+	
 	public void enregistreEcouteur(Controleur pControleur) {
 		valider.addActionListener(pControleur);//bouton valider
 		constante.addActionListener(pControleur);

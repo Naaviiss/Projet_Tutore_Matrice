@@ -14,11 +14,11 @@ import modele.*;
 public class PanelGauss extends JPanel{
 	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
 	private PanelCommandes commandesMatrices; //là où l'étudiant pourra choisir ses actions
-	private Matrice chMatrice;//matrice de départ
 	
-	public PanelGauss(/*Matrice pMatrice*/) {
-		//chMatrice = pMatrice;
-		
+	public PanelGauss(int pTaille, Matrice matrice) {
+		chMatrice = matrice;
+		chMatrice.Affiche();
+
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
@@ -52,9 +52,7 @@ public class PanelGauss extends JPanel{
 		affichageMatrices = new PanelAffichageMatrices(hm,hl,hc);
 		
 		//instance du panel avec les commandes
-		Matrice m = new Matrice(3);//à supprimer
-		commandesMatrices = new PanelCommandes(m);
-//		commandesMatrices.setChMatrice(m);
+		commandesMatrices = new PanelCommandes(pTaille);
 		
 		//ajout des éléments au panel 
 		this.add(affichageMatrices,BorderLayout.WEST);
