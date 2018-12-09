@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,9 +22,9 @@ public class PanelAffichageMatrices extends JPanel{
 	private List<String> chLigneModif;//pour les calculs effectués
 	private List<String> chCommentaire;//pour les commentaires
 	
-	public PanelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
+	public PanelAffichageMatrices(List<String> pLigneModif,List<String> pCommentaire) {
 		
-		chMatrices = pMatrices;
+		chMatrices = new HashMap<Matrice, Matrice>();
 		chLigneModif = pLigneModif;
 		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
@@ -60,7 +62,21 @@ public class PanelAffichageMatrices extends JPanel{
 	
 	public void ajoutMatrice(Matrice M1, Matrice M2) {
 		chMatrices.put(M1,M2);
+		Set cles = chMatrices.keySet();
+		Iterator it = cles.iterator();
+		while(it.hasNext()) {
+			Object cle = it.next();
+			Object valeur = chMatrices.get(cle);
+		}
 		tableMatrices.repaint();
+	}
+
+	public HashMap<Matrice, Matrice> getChMatrices() {
+		return chMatrices;
+	}
+
+	public void setChMatrices(HashMap<Matrice, Matrice> chMatrices) {
+		this.chMatrices = chMatrices;
 	}
 	
 }

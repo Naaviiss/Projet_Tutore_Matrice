@@ -43,7 +43,8 @@ public class Controleur implements ActionListener,MouseListener{
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
 
-			Matrice M1 = new Matrice(chPanMatrice.getMatriceSaisi());
+			Matrice M1 = chPanMatrice.getMatriceSaisi();
+			System.out.println(M1.toString());
 			chPanGauss = new PanelGauss(chPanelChoix.getPanTaille().getTaille(),M1);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
@@ -51,7 +52,6 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {//on valide son opération
-			System.out.println("coucou");
 //			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
 //			Matrice M1 = new Matrice(tab);
 //			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};

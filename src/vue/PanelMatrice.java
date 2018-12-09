@@ -89,6 +89,6 @@ public class PanelMatrice extends JPanel{
 			}
 		}
 		return matrice;
-	}//getChronologieSaisi()
+	}//getMatriceSaisi()
 	
 }
