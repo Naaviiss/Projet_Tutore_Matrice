@@ -42,6 +42,7 @@ public class Controleur implements ActionListener,MouseListener{
 		
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
+
 			Matrice M1 = new Matrice(chPanMatrice.getMatriceSaisi());
 			chPanGauss = new PanelGauss(chPanelChoix.getPanTaille().getTaille(),M1);
 			chPanelChoix.add(chPanGauss, "panel_gauss");

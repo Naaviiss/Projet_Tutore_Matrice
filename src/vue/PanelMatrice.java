@@ -26,9 +26,8 @@ public class PanelMatrice extends JPanel{
 	//le tableau avec tous les champs pour remplir la matrice
 	private InputField[][] champsInput = new InputField[3*3][3*3];
 	
-	private Fraction tests[][];
-	
 	private Matrice matrice;
+	
 	public PanelMatrice(int taille) {
 		pTailleMatrice = taille;//super.getPanTaille().getTaille();//panelChoix.getPanelTaille.getTaille();
 		matrice = new Matrice(pTailleMatrice);

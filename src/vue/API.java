@@ -63,30 +63,30 @@ public class API extends JFrame implements ActionListener{
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
-		for(int i=0;i<Data.Titre_Menu.length;i++){
+		for(int i=0;i<Data.TITRE_MENU.length;i++){
 			if (i==0){
 				//Si on est sur le bouton Aide, on crée un menu d'aide
-				JMenu menu = new JMenu (Data.Titre_Menu[i]);
+				JMenu menu = new JMenu (Data.TITRE_MENU[i]);
 			    menu.setMnemonic('A');
 				menu.addActionListener(this);
-				menu.setActionCommand(Data.Titre_Menu[i]);
+				menu.setActionCommand(Data.TITRE_MENU[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
-				for(int j=0;j<Data.Titre_Menu_Liste.length;j++){
-					JMenuItem menuitem = new JMenuItem (Data.Titre_Menu_Liste[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu_Liste[j].charAt(0),java.awt.Event.CTRL_MASK));
+				for(int j=0;j<Data.TITRE_MENU_LISTE.length;j++){
+					JMenuItem menuitem = new JMenuItem (Data.TITRE_MENU_LISTE[j]);
+					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MENU_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.addActionListener(this);
-					menuitem.setActionCommand(Data.Titre_Menu_Liste[j]);
+					menuitem.setActionCommand(Data.TITRE_MENU_LISTE[j]);
 					menu.add(menuitem);
 				}
 			}
 			else{
 				//Sinon, on ajoute les autres menus
-				JMenuItem menu = new JMenuItem (Data.Titre_Menu[i],Data.Titre_Menu[i].charAt(0));
-				menu.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_Menu[i].charAt(0),java.awt.Event.CTRL_MASK));
+				JMenuItem menu = new JMenuItem (Data.TITRE_MENU[i],Data.TITRE_MENU[i].charAt(0));
+				menu.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MENU[i].charAt(0),java.awt.Event.CTRL_MASK));
 				menu.addActionListener(this);
-				menu.setActionCommand(Data.Titre_Menu[i]);
+				menu.setActionCommand(Data.TITRE_MENU[i]);
 				menuBar.add(menu);
 			}
 		}
@@ -97,28 +97,24 @@ public class API extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		new API();
 
 	}
 	public void actionPerformed(ActionEvent ev) {
-		// TODO Auto-generated method stub
-		
-		if (ev.getActionCommand().equals(Data.Titre_Menu[2])){
+		if (ev.getActionCommand().equals(Data.TITRE_MENU[2])){
 			System.exit(0);
 		}//L'action concernant le bouton Retour Menu Principal
 //		if (actionCommand.equals(Data.Titre_Menu[1])){
 //			fenetre.setMenu();
 //		}
 		//L'action concernant l'aide pour les simplex
-		else if (ev.getActionCommand().equals(Data.Titre_Menu_Liste[0])){
+		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[0])){
 			String texte = new String("Texte pour comprendre simplex");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		//L'action concernant l'aide pour les matrices
-		else if (ev.getActionCommand().equals(Data.Titre_Menu_Liste[1])){
+		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[1])){
 			String texte = new String("Texte pour comprendre matrice");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -133,5 +129,4 @@ public class API extends JFrame implements ActionListener{
 			new FenetreMere();
 		}
 	}
-
 }

@@ -363,7 +363,7 @@ public class Matrice {
 	
 	////AFFICHE/////
 	//affiche une matrice
-			public String toString() {
+		public String toString() {
 			int tailleMatrice = this.getTaille();  //taille de la matrice carré
 			int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
 			int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
@@ -463,8 +463,6 @@ public class Matrice {
 				resultat = resultat.concat("\n");
 				//System.out.println();
 			}
-			
-			//System.out.println(resultat.toString());
 			return resultat;
 		}
 		//affiche une ligne d'une matrice

@@ -50,10 +50,15 @@ public class PanelCommandes extends JPanel implements Data{
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
 		zoneCommentaire = new JTextField(50);
+
+		operations = new JButton[4];
+
+
 		labelZoneCommentaire = new JLabel("Un commentaire ?");
 		labelZoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
 		zoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
 		constante = new JButton("Constante");
+
 		constante.setFont(new Font(Font.SERIF, 0, 20));
 		chChoixMatrice = new ChoixLigneMatrice(chMatrice);
 
