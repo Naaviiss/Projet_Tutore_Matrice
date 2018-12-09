@@ -1,15 +1,10 @@
 package vue;
 
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
-
-import modele.Matrice;
 
 public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	

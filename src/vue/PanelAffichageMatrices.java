@@ -6,13 +6,10 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import modele.*;
 

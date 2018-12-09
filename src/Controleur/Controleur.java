@@ -56,21 +56,26 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			chPanGauss.getPanelCommandes().remplitCalcul(3,pEvt.getActionCommand());
+			chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
 		}
 	}
 	
 	//quand on clique sur une ligne
+	@Override
 	public void mouseClicked(MouseEvent e) {
-		chPanGauss.getPanelCommandes().remplitCalcul(0,e.getComponent().getName());
+		System.out.println("ici:"+chPanGauss.getPanelCommandes().getLabel(0).getText());
+		chPanGauss.getPanelCommandes().getLabel(0).setText(e.getComponent().getName());
+		System.out.println(chPanGauss.getPanelCommandes().getLabel(0).getText());
 	}
 
 	//pour le over sur une ligne
+	@Override
 	public void mouseEntered(MouseEvent e) {
 		e.getComponent().setForeground(Color.RED);
 	}
 
 	//quand on quitte le over
+	@Override
 	public void mouseExited(MouseEvent e) {
 		e.getComponent().setForeground(Color.BLACK);
 	}

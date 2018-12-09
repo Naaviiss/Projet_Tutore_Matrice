@@ -1,8 +1,6 @@
 package vue;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +22,7 @@ public class PanelChoix extends JPanel implements ActionListener{
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		chControleur = new Controleur(this);
-		panAffichage = new PanelAffichage(chControleur);
+		panAffichage = new PanelAffichage();
 		panTaille = new PanelTaille();
 		panGauss = new PanelGauss();
 		this.add(panAffichage,"panel_affichage");

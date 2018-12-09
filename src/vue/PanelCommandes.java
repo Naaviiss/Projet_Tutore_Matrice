@@ -3,9 +3,6 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -15,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import Controleur.Controleur;
 import modele.Data;
@@ -24,11 +20,8 @@ import modele.Matrice;
 public class PanelCommandes extends JPanel implements Data{
 	private JButton valider;
 	private JButton[] operations;//boutons pour les opérateurs
-	//	private JButton[] lignes; //boutons pour les lignes
 	private JLabel entete;
 	private JButton constante;
-	//	private GridBagLayout gestionnaire;
-	//	private GridBagConstraints contraintes;
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
@@ -37,6 +30,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton[]fleches; //boutons pour les flèches
 	private ChoixLigneMatrice chChoixMatrice;//panel affichant la matrice en cours d'utilisation
 	private Matrice chMatrice;//matrice en cours d'utilisation
+	
 	public PanelCommandes(Matrice pMatrice) {
 		//la taille du panel et les bordures
 		this.setPreferredSize(new Dimension(700, 850));
@@ -53,7 +47,6 @@ public class PanelCommandes extends JPanel implements Data{
 		calcul = new JLabel[7];
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
-		//		lignes = new JButton[4];
 		zoneCommentaire = new JTextField(50);
 		labelZoneCommentaire = new JLabel("Un commentaire ?");
 		labelZoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
@@ -156,8 +149,5 @@ public class PanelCommandes extends JPanel implements Data{
 	public JLabel getLabel(int i) {
 		return calcul[i];
 	}
-	
-	public void remplitCalcul(int i,String pTexte) {
-		this.getLabel(i).setText(pTexte);
-	}
+
 }

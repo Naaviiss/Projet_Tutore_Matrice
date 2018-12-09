@@ -19,11 +19,9 @@ public class PanelAffichage extends JPanel{
 	//On crée nos deux boutons
 	private JButton bouton_simplex = new JButton("Simplex");
 	private JButton bouton_matrice = new JButton("Matrice");
-	private Controleur chControleur;
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
 
-	public PanelAffichage(Controleur pControleur){
-		chControleur = pControleur;
+	public PanelAffichage(/*Controleur pControleur*/){
 		panelboutons = new JPanel();	
 		this.setBorder(new EmptyBorder(300,300,300,300));
 
