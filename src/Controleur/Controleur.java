@@ -3,16 +3,15 @@ package Controleur;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.util.Arrays;
 
 import javax.swing.JLabel;
 
 import modele.Data;
 import modele.Matrice;
+import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
 import vue.PanelGauss;
 import vue.PanelMatrice;
@@ -22,6 +21,7 @@ public class Controleur implements ActionListener,MouseListener{
 	PanelMatrice chPanMatrice;
 	PanelChoix chPanelChoix;
 	PanelGauss chPanGauss;
+	PanelAffichageMatrices chPanAffichageMatrices;
 	
 	public Controleur(PanelChoix pPanChoix) {
 		chPanelChoix = pPanChoix;
@@ -42,12 +42,12 @@ public class Controleur implements ActionListener,MouseListener{
 		
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-
 			Matrice M1 = chPanMatrice.getMatriceSaisi();
-			System.out.println(M1.toString());
+			//System.out.println(M1.toString());
 			chPanGauss = new PanelGauss(chPanelChoix.getPanTaille().getTaille(),M1);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
+			chPanGauss.getPanelAffichageMatrices().setTable();
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		

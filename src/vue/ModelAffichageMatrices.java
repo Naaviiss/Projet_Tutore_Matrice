@@ -27,7 +27,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		
 		//on définit le modèle de la table
 		this.setColumnIdentifiers(Data.INTITULES);
-		this.setRowCount(20);
+		this.setRowCount(200);
 		
 		//entrees est l'ensemble des couples clef-valeur de la hashmap chMatrices
 		Set<Entry<Matrice, Matrice>> entrees = chMatrices.entrySet();
@@ -38,7 +38,6 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		int indiceLigne = 0;
 		Entry<Matrice, Matrice> entree;
 
-		String chaine;
 		while (it.hasNext()) {
 			entree = it.next();
 			setValueAt(entree.getKey(), indiceLigne, 0);
@@ -57,12 +56,12 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		return false;
 	}
 	
-	public Class getColumnClass(int indCol) {
+	public Class<String> getColumnClass(int indCol) {
 		return String.class;
 	}
 	
 	public void effectueCalcul(String []tabCalcul) {
-		int ligneA,ligneB;
+		int ligneB;
 		int ligneModifiee;
 		
 		Matrice matricePrincipale; //matrice principale

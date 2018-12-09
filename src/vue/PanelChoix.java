@@ -24,10 +24,7 @@ public class PanelChoix extends JPanel implements ActionListener{
 		chControleur = new Controleur(this);
 		panTaille = new PanelTaille();
 		this.add(panTaille, "panel_taille");
-
 		panTaille.enregistreEcouteur(chControleur);
-
-		
 		cardLayout.show(this,"panel_taille");
 
 	}

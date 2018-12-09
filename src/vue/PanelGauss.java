@@ -19,7 +19,7 @@ public class PanelGauss extends JPanel{
 	
 	public PanelGauss(int pTaille, Matrice matrice) {
 		chMatrice = matrice;
-		chMatriceID = chMatrice.identite(chMatrice.getTaille());
+		chMatriceID = Matrice.identite(chMatrice.getTaille());
 
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
@@ -37,7 +37,8 @@ public class PanelGauss extends JPanel{
 		//instance du panel avec les commandes
 		commandesMatrices = new PanelCommandes(chMatrice);
 
-		
+		//System.out.println(chMatrice.toString() + "--------------\n" + chMatriceID.toString());
+
 		//ajout des éléments au panel 
 		this.add(affichageMatrices,BorderLayout.WEST);
 		this.add(commandesMatrices,BorderLayout.EAST);

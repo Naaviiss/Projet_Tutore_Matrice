@@ -3,6 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.AdjustmentEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -56,14 +57,17 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		panDefil.setPreferredSize(new Dimension(900, 850));
 		
+		tableMatrices.setDefaultRenderer(Matrice.class, new MultiLigneRenderer());
+
 		//ajout panneau defilant avec la table
 		this.add(panDefil);
 	}
 	
 	public void ajoutMatrice(Matrice M1, Matrice M2) {
+		System.out.println(M1.toString()+"--------\n"+M2.toString());
 		chMatrices.put(M1,M2);
-		Set cles = chMatrices.keySet();
-		Iterator it = cles.iterator();
+		Set<Matrice> cles = chMatrices.keySet();
+		Iterator<Matrice> it = cles.iterator();
 		while(it.hasNext()) {
 			Object cle = it.next();
 			Object valeur = chMatrices.get(cle);
@@ -79,4 +83,9 @@ public class PanelAffichageMatrices extends JPanel{
 		this.chMatrices = chMatrices;
 	}
 	
+	public void setTable(){
+		//Méthode qui permet d'actualiser
+		//tableMatrices.setDefaultRenderer(Matrice.class, new MultiLigneRenderer());
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chLigneModif,chCommentaire));
+	}//setTable()
 }

@@ -85,7 +85,7 @@ public class PanelMatrice extends JPanel{
 	public Matrice getMatriceSaisi(){
 		for (int i=0; i<matrice.getTaille();i++){
 			for(int j=0;j<matrice.getTaille();j++){
-				matrice.setCase(i,j,new Fraction(Integer.parseInt(champsInput[i][j].getText())));
+				matrice.setCase(i,j,new Fraction(champsInput[i][j].getText()));
 			}
 		}
 		return matrice;

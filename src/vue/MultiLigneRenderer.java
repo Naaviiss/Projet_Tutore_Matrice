@@ -14,9 +14,12 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	}
 	
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-    	if(value!=null)
+    	if(value!=null){
     		setText((String)value.toString());
-		
+    	}
+    	else{
+    		this.setText("Youpi");
+    	}
     	return this;
 	}
 
