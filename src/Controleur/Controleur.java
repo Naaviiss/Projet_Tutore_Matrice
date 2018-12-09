@@ -38,7 +38,6 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanelChoix.add(chPanMatrice, "panel_matrice");
 			chPanMatrice.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
-			//chPanMatrice.enregistreEcouteur(this);
 		}
 		
 

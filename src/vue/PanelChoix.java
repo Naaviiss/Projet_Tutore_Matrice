@@ -24,14 +24,11 @@ public class PanelChoix extends JPanel implements ActionListener{
 		chControleur = new Controleur(this);
 		panAffichage = new PanelAffichage();
 		panTaille = new PanelTaille();
-		panGauss = new PanelGauss();
 		this.add(panAffichage,"panel_affichage");
 		this.add(panTaille, "panel_taille");
-		this.add(panGauss, "panel_gauss");
 
 		panAffichage.enregistreEcouteur(chControleur);
 		panTaille.enregistreEcouteur(chControleur);
-		panGauss.enregistreEcouteur(chControleur);
 		
 		cardLayout.show(this,"panel_affichage");
 
@@ -87,13 +84,13 @@ public class PanelChoix extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent pEvt){
 
 		//L'action concernant l'outils matrice : avancer
-		if (pEvt.getActionCommand().equals(Data.Titre_MATRICE_LISTE[0])){
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
 			String texte = new String("Devra passer à la matrice suivante");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		//L'action concernant l'outils matrice : reculer
-		if (pEvt.getActionCommand().equals(Data.Titre_MATRICE_LISTE[1])){
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
 			String texte = new String("Devra passer à la matrice précédente");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -112,9 +109,5 @@ public class PanelChoix extends JPanel implements ActionListener{
 	public void setCardLayout(CardLayout cardLayout) {
 		this.cardLayout = cardLayout;
 	}
-	
-	public void enregistreEcouteur(FenetreMere parControleur){
-		bouton_simplex.addActionListener(parControleur);
-		bouton_matrice.addActionListener(parControleur);
-	}//enregistreEcouteur()
+
 }

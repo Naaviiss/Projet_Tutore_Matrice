@@ -35,8 +35,6 @@ public class PanelCommandes extends JPanel implements Data{
 	
 	public PanelCommandes(Matrice pMatrice) {
 		//la taille du panel et les bordures
-	
-	public PanelCommandes(int pTaille) {
 		this.setPreferredSize(new Dimension(700, 850));
 		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 		Border loweredbevel = BorderFactory.createLoweredBevelBorder();

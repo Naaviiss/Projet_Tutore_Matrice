@@ -109,11 +109,6 @@ public class Fraction {
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
 		}
-
-	public Fraction(Fraction parFac) {
-		numerateur = parFac.getNumerateur();
-		denominateur = parFac.getDenominateur();
-		reduire();
 	}
 	
 	//ISFRACTION
@@ -346,6 +341,5 @@ public class Fraction {
 				return numerateur + "\n" + tirets + "\n" + espaces + denominateur;
 			}
 		}
-		return numerateur + "/" + denominateur;
 	}
 }

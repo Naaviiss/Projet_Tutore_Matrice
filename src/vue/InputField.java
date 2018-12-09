@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
 public class InputField extends JTextField{
-	public InputField(/*Matrice pMatrice*/ ) {
+	public InputField() {
 		super();
 		this.setText("0"); //par défaut le champ est à 0
 		this.setPreferredSize(new Dimension(200, 200)); //peut-être change les 200 par un calcul en fonction de la taille de la matrice pour donner un truc à peu près responsive 

@@ -15,8 +15,8 @@ import java.awt.Frame;
 public class FenetreMere extends JFrame{
 	PanelChoix contentPane;
 	
-	public FenetreMere (){
-		//super(parTitre);
+	public FenetreMere(String parTitre){
+		super(parTitre);
 		contentPane = new PanelChoix();
 		this.add(contentPane);
 		this.setVisible(true);
@@ -37,11 +37,11 @@ public class FenetreMere extends JFrame{
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
-				for(int j=0;j<Data.Titre_MATRICE_LISTE.length;j++){
-					JMenuItem menuitem = new JMenuItem (Data.Titre_MATRICE_LISTE[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.Titre_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
+				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
+					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
+					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.addActionListener(contentPane);
-					menuitem.setActionCommand(Data.Titre_MATRICE_LISTE[j]);
+					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
 					menu.add(menuitem);
 				}
 			}
