@@ -1,14 +1,18 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controleur.Controleur;
+import modele.Data;
 import modele.Matrice;
 
 public class ChoixLigneMatrice extends JPanel{
@@ -30,6 +34,7 @@ public class ChoixLigneMatrice extends JPanel{
 		for (int i = 0; i<chMatrice.getTaille();i++) {
 			lignes[i] = new JLabel(chMatrice.toStringLigne(i));
 			lignes[i].setFont(new Font(Font.SERIF, 0, 30));
+			lignes[i].setName(Data.LIGNES[i]);
 			panelGlobal.add(lignes[i]);
 		}
 		

@@ -1,17 +1,15 @@
 package Controleur;
 
-import java.awt.Panel;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.nio.channels.SelectableChannel;
 import java.util.Arrays;
 
+import javax.swing.JLabel;
+
 import modele.Data;
-import modele.Fraction;
-import modele.Matrice;
-import vue.PanelAffichage;
 import vue.PanelChoix;
 import vue.PanelGauss;
 import vue.PanelMatrice;
@@ -57,31 +55,24 @@ public class Controleur implements ActionListener,MouseListener{
 			
 		}
 		
-		if(Arrays.asList(Data.LIGNES).contains(pEvt.getActionCommand())) { //si la commande de la source est une ligne
-			System.out.println("Je clique sur une ligne\n");
-		}
-		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			System.out.println("Je clique sur un operateur\n");
+			chPanGauss.getPanelCommandes().remplitCalcul(3,pEvt.getActionCommand());
 		}
 	}
-
-	@Override
+	
+	//quand on clique sur une ligne
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		chPanGauss.getPanelCommandes().remplitCalcul(0,e.getComponent().getName());
 	}
 
-	@Override
+	//pour le over sur une ligne
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		e.getComponent().setForeground(Color.RED);
 	}
 
-	@Override
+	//quand on quitte le over
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		e.getComponent().setForeground(Color.BLACK);
 	}
 
 	@Override
@@ -95,4 +86,5 @@ public class Controleur implements ActionListener,MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

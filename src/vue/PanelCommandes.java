@@ -62,122 +62,6 @@ public class PanelCommandes extends JPanel implements Data{
 		constante.setFont(new Font(Font.SERIF, 0, 20));
 		chChoixMatrice = new ChoixLigneMatrice(chMatrice);
 
-		//		//instance des boutons lignes � supprimer
-		//		for (int i = 0; i<lignes.length;i++) {
-		//			lignes[i] = new JButton("L"+(i+1));
-		//		}
-
-
-		/*//mise en place du gestionnaire
-		gestionnaire = new GridBagLayout();
-		contraintes = new GridBagConstraints();
-		this.setLayout(gestionnaire);
-		contraintes.fill = GridBagConstraints.NONE;
-		contraintes.insets = new Insets(10, 10, 10, 10);
-
-		//mise en place des composant avec les contraintes
-		contraintes.gridx = 2;
-		contraintes.gridy = 0;
-		contraintes.gridwidth = 7;
-		contraintes.gridheight = 1;
-		contraintes.weightx = 5;
-		contraintes.weighty = 1;
-		entete.setFont(new Font(Font.SERIF, 0, 25));
-		this.add(entete,contraintes);
-
-		contraintes.gridx = 2;
-		contraintes.gridy = 1;
-		contraintes.gridwidth = 1;
-		contraintes.gridheight = 1;
-		contraintes.weightx = 1;
-		contraintes.weighty = 1;
-		for (int i = 0; i<lignes.length;i++) {
-			contraintes.gridx ++;
-			lignes[i].setFont(new Font(Font.SERIF, 0, 20));
-			this.add(lignes[i],contraintes);
-		}
-
-		contraintes.gridy = 2;
-		contraintes.gridwidth = 2;
-		contraintes.weighty = 2;
-		contraintes.fill = GridBagConstraints.HORIZONTAL;
-		contraintes.gridx = 8;
-		contraintes.gridwidth = 2;
-		valider.setFont(new Font(Font.SERIF, 0, 18));
-		this.add(valider,contraintes);
-
-		//disposition des labels avec les éléments du calcul
-		contraintes.gridx = 1;
-		contraintes.gridy = 2;
-		contraintes.gridheight = 1;
-		contraintes.gridwidth = 2;
-		contraintes.weighty = 1;
-		calcul = new JLabel[6];
-		for (int i =0;i<calcul.length;i++) {
-			if(i==0) {
-				calcul[i] = new JLabel("L3");
-				calcul[i].setFont(new Font(Font.SERIF, 0, 24));
-				this.add(calcul[i], contraintes);
-			}
-			else if (i == 1) { //correspond à l'emplacement de la flèche donc on saute cette étape
-				contraintes.gridx += 1;
-				contraintes.gridwidth = 1;//on réduit la largeur des éléments suivants la flèche
-				contraintes.fill = GridBagConstraints.NONE;
-			}
-			else {
-				calcul[i] = new JLabel(i+"");
-				calcul[i].setFont(new Font(Font.SERIF, 0, 24));
-				this.add(calcul[i], contraintes);
-			}
-			contraintes.gridx += 1;
-		}
-		//disposition du choix de la flèche
-		contraintes.fill = GridBagConstraints.HORIZONTAL;
-		contraintes.gridx = 3;
-		choixFleche.setFont(new Font(Font.SERIF, 0, 24));
-		this.add(choixFleche,contraintes);
-
-		contraintes.gridwidth = 1;
-		contraintes.gridx = 4;
-		contraintes.gridy = 3;
-		constante.setFont(new Font(Font.SERIF, 0, 20));
-		this.add(constante,contraintes);
-
-		//disposition des boutons d'opérations
-		int x[] = {2,4,6,8};
-		contraintes.gridy = 4;
-		contraintes.fill = GridBagConstraints.NONE;
-		contraintes.weightx = 1;
-		contraintes.weighty = 2;
-		for (int i = 0; i<operations.length;i++) {
-			contraintes.gridx = x[i];
-			operations[i].setFont(new Font(Font.SERIF, 0, 20));
-			operations[i].setPreferredSize(new Dimension(100, 60));
-			this.add(operations[i],contraintes);
-		}
-
-		//préparation des boutons à l'écoute
-		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
-		for (int i = 0; i<Data.OPERATIONS.length;i++) {
-			operations[i].setActionCommand(Data.OPERATIONS[i]);
-		}
-		for (int i = 0; i<lignes.length;i++) {
-			lignes[i].setActionCommand(Data.LIGNES[i]);
-		}
-
-		//instanciation, disposition et ajout de la zone de commentaire
-		contraintes.gridy = 5;
-		contraintes.gridx = 2;
-		labelZoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
-		this.add(labelZoneCommentaire,contraintes);
-		contraintes.gridwidth = 6;
-		contraintes.gridx = 4;
-		contraintes.gridheight=2;
-		contraintes.fill=GridBagConstraints.BOTH;
-		zoneCommentaire.setFont(new Font(Font.SERIF, 0, 20));
-		zoneCommentaire.setLineWrap(true);
-		this.add(zoneCommentaire,contraintes);*/
-
 		//mise en place des pannels pour chaque ligne
 		//ligne avec l'entete
 		panels[0] = new JPanel();
@@ -195,7 +79,7 @@ public class PanelCommandes extends JPanel implements Data{
 		panels[2].setLayout(new BoxLayout(panels[2], BoxLayout.LINE_AXIS));
 		//instnce et ajout des labels
 		for (int i = 0;i<calcul.length;i++) {
-			calcul[i] = new JLabel("la");
+			calcul[i] = new JLabel();
 			calcul[i].setFont(new Font(Font.SERIF, 0, 24));
 			panels[2].add(calcul[i]);
 			panels[2].add(Box.createRigidArea(new Dimension(50,0)));
@@ -260,14 +144,20 @@ public class PanelCommandes extends JPanel implements Data{
 	public void enregistreEcouteur(Controleur pControleur) {
 		valider.addActionListener(pControleur);//bouton valider
 		constante.addActionListener(pControleur);
-		//		for (int i = 0; i<lignes.length;i++) { 
-		//			lignes[i].addActionListener(pControleur); //boutons de lignes
-		//		}
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i].addActionListener(pControleur);//boutons des op�rateurs
 		}
 		for (int i = 0; i<Data.FLECHES.length;i++) {
 			fleches[i].addActionListener(pControleur);//boutons des fl�ches
-		}		
+		}	
+		chChoixMatrice.enregistreEcouteur(pControleur);
+	}
+	
+	public JLabel getLabel(int i) {
+		return calcul[i];
+	}
+	
+	public void remplitCalcul(int i,String pTexte) {
+		this.getLabel(i).setText(pTexte);
 	}
 }

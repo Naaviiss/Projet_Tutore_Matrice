@@ -27,6 +27,7 @@ public class PanelTaille extends JPanel{
         this.setBorder(new EmptyBorder(300,300,300,300));
         valider.setPreferredSize(new Dimension(120, 40));
         comboTaille = new JComboBox(taille);
+        comboTaille.setFont(new Font(Font.SERIF, 20, 25));
         valider.setFont(new Font(Font.SERIF, 20, 25));
         valider.setActionCommand(Data.VALIDER_PANEL_TAILLE);
 

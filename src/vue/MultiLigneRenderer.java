@@ -14,7 +14,6 @@ import modele.Matrice;
 public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	
 	public MultiLigneRenderer() {
-		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		setLineWrap(true);
 	    setWrapStyleWord(true);
 	}
