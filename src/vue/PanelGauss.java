@@ -26,7 +26,7 @@ public class PanelGauss extends JPanel{
 		
 		//gestionnaire et bordure
 		this.setLayout(new BorderLayout());
-		this.setBorder(new EmptyBorder(100, 100, 100, 100));
+		this.setBorder(new EmptyBorder(0, 0, 0, 0));
 		
 		//a supprimer
 		/*HashMap<String, String> hm = new HashMap<String,String>();
@@ -64,7 +64,7 @@ public class PanelGauss extends JPanel{
 		affichageMatrices = new PanelAffichageMatrices(hm,hl,hc);
 		
 		//instance du panel avec les commandes
-		commandesMatrices = new PanelCommandes();
+		commandesMatrices = new PanelCommandes(new Matrice(3));
 		
 		//ajout des éléments au panel 
 		this.add(affichageMatrices,BorderLayout.WEST);
