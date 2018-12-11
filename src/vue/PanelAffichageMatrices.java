@@ -34,7 +34,7 @@ public class PanelAffichageMatrices extends JPanel{
 //		chLigneModif = pLigneModif;
 //		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
-//		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
 		
 		//on applique le renderer
 		setRenderer(renderer);
@@ -51,10 +51,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
-		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(240);
-		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(240);
-		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(200);
-		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(200);
+		setTable();
 		
 		//scrollbar
 		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -74,7 +71,8 @@ public class PanelAffichageMatrices extends JPanel{
 		chMatrices.add(M1);
 		chMatricesIdentités.add(M2);
 		System.out.println(chMatrices.size());
-//		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		setTailleCol();
 		setRenderer(renderer);
 	}
 
@@ -107,5 +105,10 @@ public class PanelAffichageMatrices extends JPanel{
 		this.tableMatrices = tableMatrices;
 	}
 	
-	
+	public void setTailleCol() {
+		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(240);
+		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(240);
+		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(200);
+		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(200);
+	}
 }
