@@ -368,7 +368,7 @@ public class Matrice {
 			int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
 			int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
 			int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice]; //le plus grand entre num et den
-			int tailleMax = 5;
+			int tailleMax = 10;
 			String tirets = "";
 			String espaces = "";
 			String espaces2 = "";
@@ -434,9 +434,7 @@ public class Matrice {
 									espaces = espaces.concat(" ");
 									espaces2 = espaces2.concat(" ");
 								}
-								if(String.valueOf(espaces).length() == 2 && String.valueOf(tirets).length() == 2) {
-									espaces = espaces.substring(0,espaces.length()-1);
-								}
+								espaces = espaces.concat(" ");
 								resultat = resultat.concat(espaces + tirets + espaces2);
 								//System.out.print(espaces + tirets + espaces2 + "|");
 							}
