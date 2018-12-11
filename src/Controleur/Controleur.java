@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JLabel;
 
@@ -25,7 +27,9 @@ public class Controleur implements ActionListener,MouseListener{
 	
 	public Controleur(PanelChoix pPanChoix) {
 		chPanelChoix = pPanChoix;
-	
+		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
+		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
+		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID);//on créé le panel affichage
 	}
 
 	public void actionPerformed(ActionEvent pEvt) {
@@ -42,12 +46,13 @@ public class Controleur implements ActionListener,MouseListener{
 		
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-			Matrice M1 = chPanMatrice.getMatriceSaisi();
-			//System.out.println(M1.toString());
-			chPanGauss = new PanelGauss(chPanelChoix.getPanTaille().getTaille(),M1);
+			Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
+			Matrice M2 = M1.identite(M1.getTaille());//création de la matrice identité
+			chPanGauss = new PanelGauss(M1);
+			chPanAffichageMatrices.ajoutMatrice(M1, M2);
+			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
-			chPanGauss.getPanelAffichageMatrices().setTable();
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		

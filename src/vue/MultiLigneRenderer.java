@@ -17,9 +17,10 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
     	if(value!=null){
     		setText((String)value.toString());
     	}
-    	else{
-    		this.setText("Youpi");
+    	else {
+    		setText("");
     	}
+    	
     	return this;
 	}
 

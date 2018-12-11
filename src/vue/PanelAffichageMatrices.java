@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.AdjustmentEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,21 +20,24 @@ import modele.*;
 public class PanelAffichageMatrices extends JPanel{
 
 	private JTable tableMatrices; //String pour l'instant
-	private HashMap<Matrice, Matrice> chMatrices; //String pour l'instant
+	private List<Matrice> chMatrices; //list avec les matrices
+	private List<Matrice> chMatricesIdentités;//liste des matrices identités
 	private List<String> chLigneModif;//pour les calculs effectués
 	private List<String> chCommentaire;//pour les commentaires
+	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
+	private JScrollPane panDefil;//panel avec la jscrollbar
 	
-	public PanelAffichageMatrices(List<String> pLigneModif,List<String> pCommentaire) {
+	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID) {
 		
-		chMatrices = new HashMap<Matrice, Matrice>();
-		chLigneModif = pLigneModif;
-		chCommentaire = pCommentaire;
+		chMatrices = pMatrices;
+		chMatricesIdentités = pMatricesID;
+//		chLigneModif = pLigneModif;
+//		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chLigneModif,chCommentaire));
+//		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
 		
-		MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
-		tableMatrices.getColumnModel().getColumn(0).setCellRenderer(renderer);
-		tableMatrices.getColumnModel().getColumn(1).setCellRenderer(renderer);
+		//on applique le renderer
+		setRenderer(renderer);
 		
 		//intitules des colonnes
 		tableMatrices.getTableHeader().setBackground(new Color(205, 0, 0));
@@ -53,39 +57,55 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(200);
 		
 		//scrollbar
-		JScrollPane panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		tableMatrices.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		panDefil.setPreferredSize(new Dimension(900, 850));
 		
-		tableMatrices.setDefaultRenderer(Matrice.class, new MultiLigneRenderer());
-
 		//ajout panneau defilant avec la table
 		this.add(panDefil);
 	}
 	
-	public void ajoutMatrice(Matrice M1, Matrice M2) {
-		System.out.println(M1.toString()+"--------\n"+M2.toString());
-		chMatrices.put(M1,M2);
-		Set<Matrice> cles = chMatrices.keySet();
-		Iterator<Matrice> it = cles.iterator();
-		while(it.hasNext()) {
-			Object cle = it.next();
-			Object valeur = chMatrices.get(cle);
-		}
-		tableMatrices.repaint();
+	public JTable getTableMatrices() {
+		return tableMatrices;
 	}
 
-	public HashMap<Matrice, Matrice> getChMatrices() {
+	public void ajoutMatrice(Matrice M1, Matrice M2) {
+		System.out.println(chMatrices.size());
+		chMatrices.add(M1);
+		chMatricesIdentités.add(M2);
+		System.out.println(chMatrices.size());
+//		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		setRenderer(renderer);
+	}
+
+	public List<Matrice> getChMatrices() {
 		return chMatrices;
 	}
 
-	public void setChMatrices(HashMap<Matrice, Matrice> chMatrices) {
+	public void setChMatrices (List<Matrice> chMatrices) {
 		this.chMatrices = chMatrices;
 	}
 	
 	public void setTable(){
 		//Méthode qui permet d'actualiser
-		//tableMatrices.setDefaultRenderer(Matrice.class, new MultiLigneRenderer());
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chLigneModif,chCommentaire));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
 	}//setTable()
+
+	public void setRenderer(MultiLigneRenderer renderer) {
+		for(int i = 0; i<tableMatrices.getColumnCount();i++) {
+			tableMatrices.getColumnModel().getColumn(i).setCellRenderer(renderer);
+		}
+	}
+
+	//créer la table
+	public void genereTable() {
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		
+	}
+	
+	public void setTableMatrices(JTable tableMatrices) {
+		this.tableMatrices = tableMatrices;
+	}
+	
+	
 }

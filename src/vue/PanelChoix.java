@@ -11,7 +11,7 @@ import Controleur.Controleur;
 import modele.Data;
 
 public class PanelChoix extends JPanel implements ActionListener{
-	private PanelAffichage panAffichage;
+//	private PanelAffichage panAffichage;
 	private PanelTaille panTaille;
 	private PanelGauss panGauss;
 	private PanelMatrice panMatrice;
@@ -29,13 +29,13 @@ public class PanelChoix extends JPanel implements ActionListener{
 
 	}
 
-	public PanelAffichage getPanAffichage() {
-		return panAffichage;
-	}
-
-	public void setPanAffichage(PanelAffichage panAffichage) {
-		this.panAffichage = panAffichage;
-	}
+//	public PanelAffichage getPanAffichage() {
+//		return panAffichage;
+//	}
+//
+//	public void setPanAffichage(PanelAffichage panAffichage) {
+//		this.panAffichage = panAffichage;
+//	}
 
 	public PanelTaille getPanTaille() {
 		return panTaille;

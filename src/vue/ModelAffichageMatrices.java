@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,13 +16,15 @@ import modele.Matrice;
 
 public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	
-	private HashMap<Matrice, Matrice> chMatrices; // en attendant d'avoir la classe Matrice
+	private List<Matrice> chMatrices; // liste des matrices
+	private List<Matrice> chMatricesID; // list des matrices identités
 	private List<String> chLigneModifiees; //pour les modifications de lignes
 	private List<String> chCommentaire;//pour les eventuels commentaires
 	
-	public ModelAffichageMatrices(HashMap<Matrice, Matrice> pMatrices,List<String> pLigneModif,List<String> pCommentaire) {
+	public ModelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif,List<String> pCommentaire) {
 		
 		chMatrices = pMatrices;
+		chMatricesID = pMatricesID;
 		chLigneModifiees = pLigneModif;
 		chCommentaire = pCommentaire;
 		
@@ -29,25 +32,13 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		this.setColumnIdentifiers(Data.INTITULES);
 		this.setRowCount(200);
 		
-		//entrees est l'ensemble des couples clef-valeur de la hashmap chMatrices
-		Set<Entry<Matrice, Matrice>> entrees = chMatrices.entrySet();
-		
-		//itérateur pour parcourir les entrees
-		Iterator<Entry<Matrice,Matrice>> it = entrees.iterator();
-		
 		int indiceLigne = 0;
-		Entry<Matrice, Matrice> entree;
-
-		while (it.hasNext()) {
-			entree = it.next();
-			setValueAt(entree.getKey(), indiceLigne, 0);
-			setValueAt(entree.getKey(), indiceLigne, 1);
-			indiceLigne ++;
-		}
-		indiceLigne = 0;
-		for (int i = 0; i<chLigneModifiees.size();i++) {
-			setValueAt(chLigneModifiees.get(i), indiceLigne, 2);
-			setValueAt(chCommentaire.get(i), indiceLigne, 3);
+		System.out.println(chMatrices.size());
+		for (int i = 0; i<chMatrices.size();i++) {
+			setValueAt(chMatrices.get(i), indiceLigne, 0);
+			setValueAt(chMatricesID.get(i), indiceLigne, 1);
+//			setValueAt(chLigneModifiees.get(i), indiceLigne, 2);
+//			setValueAt(chCommentaire.get(i), indiceLigne, 3);
 			indiceLigne++;
 		}
 	}
@@ -67,18 +58,9 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		Matrice matricePrincipale; //matrice principale
 		Matrice matriceIdentite;//matrice identite
 		
-		Set<Matrice> cles = chMatrices.keySet();//set pour obtenir toutes le matrices principales
-		
-		//on récupère la dernière clé qui correcpond à la dernière matrice créée et donc à la matrice sur laquelle on travaille
-		Iterator<Matrice> it = cles.iterator();//on créé un itérateur pour parcourir le set de clés
-		Matrice courant = null;
-		while (it.hasNext()) {
-			courant = it.next();
-		}
-		//à la fin de la boucle, courant prend la valeur de la dernière matrice entrée
-				
-		matricePrincipale = courant;
-		matriceIdentite= chMatrices.get(matricePrincipale);
+		//on recupere la derniere matrice de chaque liste
+		matricePrincipale = chMatrices.get(chMatrices.size());
+		matriceIdentite = chMatricesID.get(chMatricesID.size());
 		
 		ligneModifiee= getNumLigne(tabCalcul[0]);
 		ligneB = getNumLigne(tabCalcul[6]);	//index de la deuxième ligne du calcul
@@ -103,9 +85,9 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 			}
 		}
 		
-		chMatrices.put(matricePrincipale, matriceIdentite);//on ajoute la matrice principale et la matrice identité au hashmap
-		
-		this.fireTableStructureChanged();//on met la table à jour
+		chMatrices.add(matricePrincipale);//on ajoute la matrice à la liste
+		chMatricesID.add(matriceIdentite);//on ajoute la matrce identit à la liste des matrices identités
+		this.fireTableDataChanged();//on met la table à jour
 	}
 	
 	//retourne l'index correspondant à la ligne
