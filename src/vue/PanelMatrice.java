@@ -16,6 +16,7 @@ import modele.Matrice;
 import Controleur.Controleur;
 
 public class PanelMatrice extends JPanel{
+	private static final long serialVersionUID = 1L;
 	private JPanel panelMatrice; //la partie où on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
@@ -24,12 +25,12 @@ public class PanelMatrice extends JPanel{
 	private int pTailleMatrice;	
 	
 	//le tableau avec tous les champs pour remplir la matrice
-	private InputField[][] champsInput = new InputField[3*3][3*3];
+	private InputField[][] champsInput = new InputField[9][9];
 	
 	private Matrice matrice;
 	
 	public PanelMatrice(int taille) {
-		pTailleMatrice = taille;//super.getPanTaille().getTaille();//panelChoix.getPanelTaille.getTaille();
+		pTailleMatrice = taille;
 		matrice = new Matrice(pTailleMatrice);
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();

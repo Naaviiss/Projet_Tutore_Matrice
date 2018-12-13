@@ -48,7 +48,7 @@ public class Controleur implements ActionListener,MouseListener{
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
 			Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
-			Matrice M2 = M1.identite(M1.getTaille());//création de la matrice identité
+			Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
 			chPanGauss = new PanelGauss(M1);
 			chPanAffichageMatrices.ajoutMatrice(M1, M2);
 			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
@@ -66,7 +66,10 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
-			chPanGauss.getPanelCommandes().getLabel(1).setText(pEvt.getActionCommand());
+			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
+			panCom.getLabel(1).setText(pEvt.getActionCommand());
+			if(pEvt.getActionCommand().equals(Data.FLECHES[0]))//s'il sagit de la flèche <-
+				panCom.getLabel(3).setText(panCom.getLabel(0).getText());//la ligne suivant devient la même ligne que sur laquelle le calcul va s'effectuer
 		}
 		
 		//si on clique sur le bouton effacer, on efface le calcul en cours

@@ -13,13 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import org.omg.CORBA.DATA_CONVERSION;
-
 import Controleur.Controleur;
 import modele.Data;
 import modele.Matrice;
 
 public class PanelCommandes extends JPanel implements Data{
+	private static final long serialVersionUID = 1L;
 	private JButton valider;
 	private JButton[] operations;//boutons pour les opérateurs
 	private JLabel entete;
@@ -53,7 +52,7 @@ public class PanelCommandes extends JPanel implements Data{
 		calcul = new JLabel[7]; //pour afficher le calcul de l'utilisateur
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
-		zoneCommentaire = new JTextField(50);
+		zoneCommentaire = new JTextField("",50);
 
 		operations = new JButton[4];
 

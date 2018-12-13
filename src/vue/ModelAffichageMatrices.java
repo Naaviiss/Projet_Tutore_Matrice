@@ -1,12 +1,7 @@
 package vue;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +10,7 @@ import modele.Fraction;
 import modele.Matrice;
 
 public class ModelAffichageMatrices extends DefaultTableModel implements Data{
-	
+	private static final long serialVersionUID = 1L;
 	private List<Matrice> chMatrices; // liste des matrices
 	private List<Matrice> chMatricesID; // list des matrices identités
 	private List<String> chLigneModifiees; //pour les modifications de lignes

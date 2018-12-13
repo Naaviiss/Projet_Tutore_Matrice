@@ -13,7 +13,8 @@ import Controleur.Controleur;
 import modele.Data;
 
 public class PanelTaille extends JPanel{
-    private JButton valider = new JButton("valider");
+	private static final long serialVersionUID = 1L;
+	private JButton valider = new JButton("valider");
     private JComboBox comboTaille;
 
     private String taille[]= {"3","4","5"};
