@@ -394,14 +394,12 @@ public class Matrice {
 							}
 							else if(k%3 == 1) {
 								float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
-								for(int y=0; y < Math.ceil(ecartnum/2); y++) {
+								for(int y=0; y < Math.floor(ecartnum/2); y++) {
 									espaces = espaces.concat(" ");
 									espaces2 = espaces2.concat(" ");
 								}
-								if(String.valueOf(espaces2).length()%2 == 1 && String.valueOf(espaces2).length()>3) {
-									for(int u=0; u < TailleMaxFraction[i][j]; u++) {
-										espaces2 = espaces2.substring(1);
-									}
+								if(String.valueOf(espaces2).length()%2 == 0) {
+									espaces2 = espaces2.concat(" ");
 								}
 								resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2);
 							}
@@ -485,7 +483,7 @@ public class Matrice {
 			int tailleMatrice = this.getCol();  //taille de la matrice 1 sur colonne
 			int[] TabFractionNumerateur = new int[tailleMatrice];  //tableau contenant les numerateur des fraction
 			int[] TabFractionDenominateur = new int[tailleMatrice];  //tableau contenant les denominateurs des fraction
-			int tailleMax = 8;
+			int tailleMax = 10;
 			String espaces = "";
 			String espaces2 = "";
 			String resultat = "";
@@ -498,9 +496,12 @@ public class Matrice {
 			for(int j=0; j < tailleMatrice; j++) {
 				if(TabFractionDenominateur[j] == 1) {
 					float ecart = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
-					for(int x=0; x < Math.ceil(ecart/2); x++) {
+					for(int x=0; x < Math.floor(ecart/2); x++) {
 						espaces = espaces.concat(" ");
 						espaces2 = espaces2.concat(" ");
+					}
+					if(String.valueOf(espaces2).length()%2 == 0 && String.valueOf(TabFractionNumerateur[j]).length() < 2) {
+						espaces2 = espaces2.concat(" ");
 					}
 					resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
 				}
