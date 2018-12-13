@@ -2,11 +2,12 @@ package vue;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
 public class InputField extends JTextField{
+	private static final long serialVersionUID = 1L;
+
 	public InputField() {
 		super();
 		this.setText("0"); //par défaut le champ est à 0

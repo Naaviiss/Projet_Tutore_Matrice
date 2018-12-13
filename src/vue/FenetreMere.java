@@ -13,6 +13,7 @@ import java.awt.Frame;
 
 
 public class FenetreMere extends JFrame{
+	private static final long serialVersionUID = 1L;
 	PanelChoix contentPane;
 	public FenetreMere (){
 		contentPane = new PanelChoix();
