@@ -316,7 +316,7 @@ public class Matrice {
 	
 	// MODIFYLINE -> ( L3 -> 2L3 )
 	// Multiplication d'une ligne par un nombre non nul.
-	// Prend en param�tre : 
+	// Prend en paramètre : 
 	// int ligne(0 ou 1 ou 2),Fraction pFraction
 	public void modifyLine(int ligne, Fraction pFraction) {
 		for(int i=0; i<getTaille(); i++) {
@@ -329,7 +329,7 @@ public class Matrice {
 	}
 	
 	// MODIFYLINE 2 -> ( L3 -> L3 - 2L1 )
-	// Transformation d'une ligne � l'aide d'une autre ligne
+	// Transformation d'une ligne à l'aide d'une autre ligne
 	/*	
 	 * EXEMPLE pour : L3 -> L3 - 2L1
 	 * 				  Ligne3 = Ligne3 - 2*Ligne1
@@ -364,7 +364,7 @@ public class Matrice {
 	////AFFICHE/////
 	//affiche une matrice
 		public String toString() {
-			int tailleMatrice = this.getTaille();  //taille de la matrice carr�
+			int tailleMatrice = this.getTaille();  //taille de la matrice carré
 			int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
 			int[][] TabFractionDenominateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les denominateurs des fraction
 			int[][] TailleMaxFraction = new int[tailleMatrice][tailleMatrice]; //le plus grand entre num et den
@@ -378,36 +378,36 @@ public class Matrice {
 				for(int j=0; j < this.getCol(); j++) {
 					TabFractionNumerateur[i][j] = this.getCase(i,j).getNumerateur();
 					TabFractionDenominateur[i][j] = this.getCase(i,j).getDenominateur();
-					TailleMaxFraction[i][j] = String.valueOf(Math.max(TabFractionNumerateur[i][j],TabFractionDenominateur[i][j])).length();
+					TailleMaxFraction[i][j] = Math.max(String.valueOf(TabFractionNumerateur[i][j]).length(),String.valueOf(TabFractionDenominateur[i][j]).length());
 				}	
 			}
-
+			
 			for(int i=0; i < tailleMatrice; i++) {
 				for(int k=0; k < 3; k++) {
 					for(int j=0; j < tailleMatrice; j++) {
 						if(TabFractionDenominateur[i][j] == 1) {
 							if(k%3 == 0) {
 								for(int x=0; x < tailleMax; x++) {
-									espaces = espaces.concat(" ");
+									espaces = espaces.concat(" ");
 								}
 								resultat = resultat.concat(espaces);
 							}
 							else if(k%3 == 1) {
 								float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
 								for(int y=0; y < Math.ceil(ecartnum/2); y++) {
-									espaces = espaces.concat(" ");
-									espaces2 = espaces2.concat(" ");
+									espaces = espaces.concat(" ");
+									espaces2 = espaces2.concat(" ");
 								}
-								if(String.valueOf(espaces).length()%2 == 1) {
+								if(String.valueOf(espaces2).length()%2 == 1 && String.valueOf(espaces2).length()>3) {
 									for(int u=0; u < TailleMaxFraction[i][j]; u++) {
-										espaces = espaces.substring(1);
+										espaces2 = espaces2.substring(1);
 									}
 								}
 								resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2);
 							}
 							else if (k%3 == 2){
 								for(int z=0; z < tailleMax; z++) {
-									espaces = espaces.concat(" ");
+									espaces = espaces.concat(" ");
 								}
 								resultat = resultat.concat(espaces);
 							}
@@ -416,41 +416,44 @@ public class Matrice {
 							if(k%3 == 0) {
 								float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[i][j]).length());
 								for(int x=0; x < Math.ceil(ecartnum/2); x++) {
-									espaces = espaces.concat(" ");
-									espaces2 = espaces2.concat(" ");
+									espaces = espaces.concat(" ");
+									espaces2 = espaces2.concat(" ");
 								}
-								if((String.valueOf(espaces).length())%2 == 1) {
+								if((String.valueOf(espaces2).length())%2 == 1 && String.valueOf(espaces2).length()>3) {
 									for(int u=0; u < String.valueOf(TabFractionNumerateur[i][j]).length(); u++) {
-										espaces = espaces.substring(1);
+										espaces2 = espaces2.substring(1);
 									}
 								}
 								resultat = resultat.concat(espaces + TabFractionNumerateur[i][j] + espaces2);
 							}
 							else if(k%3 == 1) {
 								for(int y=0; y < TailleMaxFraction[i][j]; y++) {
-									tirets = tirets.concat("#");
+									tirets = tirets.concat("–");
 								}
 								float ecartnum = (tailleMax-TailleMaxFraction[i][j]);
 								for(int y=0; y < Math.ceil(ecartnum/2); y++) {
-									espaces = espaces.concat(" ");
-									espaces2 = espaces2.concat(" ");
+									espaces = espaces.concat(" ");
+									espaces2 = espaces2.concat(" ");
 								}
-								if(String.valueOf(espaces).length()%2 == 1) {
+								if(String.valueOf(espaces2).length()%2 == 1 && String.valueOf(espaces2).length()>3) {
 									for(int u=0; u < TailleMaxFraction[i][j]; u++) {
-										espaces = espaces.substring(1);
+										espaces2 = espaces2.substring(1);
 									}
+								}
+								if(j==1 || j==2 || j==3) {
+									espaces = espaces.concat(" ");
 								}
 								resultat = resultat.concat(espaces + tirets + espaces2);
 							}
 							else if (k%3 == 2) {
 								float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[i][j]).length());
 								for(int z=0; z < Math.ceil(ecartden/2); z++) {
-									espaces = espaces.concat(" ");
-									espaces2 = espaces2.concat(" ");
+									espaces = espaces.concat(" ");
+									espaces2 = espaces2.concat(" ");
 								}
-								if((String.valueOf(espaces).length())%2 == 1) {
+								if((String.valueOf(espaces2).length())%2 == 1 && String.valueOf(espaces2).length()>3) {
 									for(int u=0; u < String.valueOf(TabFractionDenominateur[i][j]).length(); u++) {
-										espaces = espaces.substring(1);
+										espaces2 = espaces2.substring(1);
 									}
 								}
 								resultat = resultat.concat(espaces + TabFractionDenominateur[i][j] + espaces2);
@@ -458,13 +461,13 @@ public class Matrice {
 						}
 						espaces = "";
 						espaces2 = "";
-						tirets = "";
+						tirets = "";	
 					}
 					resultat = resultat.concat("\n");
 				}
 				resultat = resultat.concat("\n");
 			}
-			System.out.println(resultat.toString());
+
 			return resultat;
 		}
 		
@@ -482,9 +485,7 @@ public class Matrice {
 			int tailleMatrice = this.getCol();  //taille de la matrice 1 sur colonne
 			int[] TabFractionNumerateur = new int[tailleMatrice];  //tableau contenant les numerateur des fraction
 			int[] TabFractionDenominateur = new int[tailleMatrice];  //tableau contenant les denominateurs des fraction
-			int[] TailleMaxFraction = new int[tailleMatrice]; //le plus grand entre num et den
-			int tailleMax = 5;
-			String tirets = "";
+			int tailleMax = 8;
 			String espaces = "";
 			String espaces2 = "";
 			String resultat = "";
@@ -492,89 +493,33 @@ public class Matrice {
 			for(int j=0; j < this.getCol(); j++) {
 				TabFractionNumerateur[j] = this.getCase(parLigne,j).getNumerateur();
 				TabFractionDenominateur[j] = this.getCase(parLigne,j).getDenominateur();
-				TailleMaxFraction[j] = String.valueOf(Math.max(TabFractionNumerateur[j],TabFractionDenominateur[j])).length();
 			}
 			
-			for(int k=0; k < tailleMatrice; k++) {
-				for(int j=0; j < tailleMatrice; j++) {
-					if(TabFractionDenominateur[j] == 1) {
-						if(k%tailleMatrice == 0) {
-							for(int x=0; x < tailleMax; x++) {
-								espaces = espaces.concat(" ");
-							}
-							resultat = resultat.concat(espaces);
-							//System.out.print(espaces + "|");
-						}
-						else if(k%tailleMatrice == 1) {
-							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
-							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
-								espaces = espaces.concat(" ");
-								espaces2 = espaces2.concat(" ");
-							}
-							if(String.valueOf(TabFractionNumerateur[j]).length() == 2) {
-								espaces = espaces.substring(0,espaces.length()-1);
-							}
-							resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
-							//System.out.print(espaces + TabFractionNumerateur[j] + espaces2 + "|");
-						}
-						else {
-							for(int x=0; x < tailleMax; x++) {
-								espaces = espaces.concat(" ");
-							}
-							resultat = resultat.concat(espaces);
-							//System.out.print(espaces + "|");
-						}
+			for(int j=0; j < tailleMatrice; j++) {
+				if(TabFractionDenominateur[j] == 1) {
+					float ecart = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
+					for(int x=0; x < Math.ceil(ecart/2); x++) {
+						espaces = espaces.concat(" ");
+						espaces2 = espaces2.concat(" ");
 					}
-					else {
-						if(k%tailleMatrice == 0) {
-							float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
-							for(int x=0; x < Math.floor(ecartnum)/2; x++) {
-								espaces = espaces.concat(" ");
-								espaces2 = espaces2.concat(" ");
-							}
-							if(String.valueOf(TabFractionNumerateur[j]).length() == 2) {
-								espaces = espaces.substring(0,espaces.length()-1);
-							}
-							resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
-							//System.out.print(espaces + TabFractionNumerateur[j] + espaces2 + "|");
-						}
-						else if(k%tailleMatrice == 1) {
-							for(int y=0; y < TailleMaxFraction[j]; y++) {
-								tirets = tirets.concat("-");
-							}
-							for(int y=0; y < Math.floor(tailleMax-TailleMaxFraction[j])/2; y++) {
-								espaces = espaces.concat(" ");
-								espaces2 = espaces2.concat(" ");
-							}
-							if(String.valueOf(espaces).length() == 2 && String.valueOf(tirets).length() == 2) {
-								espaces = espaces.substring(0,espaces.length()-1);
-							}
-							resultat = resultat.concat(espaces + tirets + espaces2);
-							//System.out.print(espaces + tirets + espaces2 + "|");
-						}
-						else {
-							float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[j]).length());
-							for(int x=0; x < Math.floor(ecartden)/2; x++) {
-								espaces = espaces.concat(" ");
-								espaces2 = espaces2.concat(" ");
-							}
-							if(String.valueOf(TabFractionDenominateur[j]).length() == 2) {
-								espaces = espaces.substring(0,espaces.length()-1);
-							}
-							resultat = resultat.concat(espaces + TabFractionDenominateur[j] + espaces2);
-							//System.out.print(espaces + TabFractionDenominateur[j] + espaces2 + "|");
-						}
-					}
-					espaces = "";
-					espaces2 = "";
-					tirets = "";
+					resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
 				}
-				resultat = resultat.concat("\n");
-				//System.out.println();
+				else {
+					float ecart = (tailleMax-(String.valueOf(TabFractionNumerateur[j]).length() + 1 + String.valueOf(TabFractionDenominateur[j]).length()));
+					for(int x=0; x < Math.ceil(ecart/2); x++) {
+						espaces = espaces.concat(" ");
+						espaces2 = espaces2.concat(" ");
+					}
+					if((String.valueOf(espaces).length())%2 == 1 && String.valueOf(espaces).length()>3) {
+						for(int u=0; u < (String.valueOf(TabFractionNumerateur[j]).length() + String.valueOf(TabFractionDenominateur[j]).length()); u++) {
+							espaces = espaces.substring(1);
+						}
+					}
+					resultat = resultat.concat(espaces + TabFractionNumerateur[j] + "/" + TabFractionDenominateur[j] + espaces2);
+				}
+				espaces = "";
+				espaces2 = "";
 			}
-			resultat = resultat.concat("\n");
-			//System.out.println();
-			//System.out.println(resultat.toString());
 			return resultat;
 		}
 }

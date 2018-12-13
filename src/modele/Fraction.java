@@ -26,30 +26,6 @@ public class Fraction {
 		denominateur = parFrac.getDenominateur();
 		reduire();
 	}
-	/*//change un string en fraction : 3/5 devient Fraction(3,5)
-	public Fraction(String parFrac) {
-		int rencontre = 0;
-		String numerateurString = "";
-		String denominateurString = "";
-		for(char ch : parFrac.toCharArray()) {
-			if(ch == '/') {
-				rencontre = 1;
-			}
-			else if(ch != '/' && rencontre == 0) {
-				numerateurString += ch;
-			}
-			else {
-				denominateurString += ch;
-			}
-		}
-		numerateur = Integer.parseInt(numerateurString);
-		if (rencontre == 0)
-			denominateur = 1;
-		else
-			denominateur = Integer.parseInt(denominateurString);
-		
-		reduire();
-	}*/
 	//change un string en fraction : 3/5 devient Fraction(3,5)
 	public Fraction(String parFrac) {
 		int slash = 0;  //si il y a un slash dans le String
@@ -68,7 +44,7 @@ public class Fraction {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 						throw new RuntimeException("lettre dans le numerateur");
 					}
 					else {
@@ -77,7 +53,7 @@ public class Fraction {
 					
 				}
 				else {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 						throw new RuntimeException("lettre dans le denominateur");
 					}
 					else {
@@ -96,7 +72,7 @@ public class Fraction {
 		}
 		else {
 			for(char ch : parFrac.toCharArray()) {
-				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 					throw new RuntimeException("lettre dans le numerateur");
 				}
 				else {
@@ -109,6 +85,7 @@ public class Fraction {
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
 		}
+		reduire();
 	}
 	
 	//ISFRACTION
@@ -130,7 +107,7 @@ public class Fraction {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
 					else {
@@ -139,7 +116,7 @@ public class Fraction {
 					
 				}
 				else {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
 					else {
