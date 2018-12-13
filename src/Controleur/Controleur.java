@@ -58,14 +58,7 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {//on valide son opération
-//			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
-//			Matrice M1 = new Matrice(tab);
-//			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-//			Matrice M2 = new Matrice(tab2);
 //			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
-//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().revalidate();
-//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().repaint();
-			
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
