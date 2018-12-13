@@ -15,6 +15,7 @@ import modele.Data;
 import modele.Matrice;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
+import vue.PanelCommandes;
 import vue.PanelGauss;
 import vue.PanelMatrice;
 
@@ -68,16 +69,28 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
+			chPanGauss.getPanelCommandes().getLabel(4).setText(pEvt.getActionCommand());
 		}
+		
+		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
+			chPanGauss.getPanelCommandes().getLabel(1).setText(pEvt.getActionCommand());
+		}
+		
+		//si on clique sur le bouton effacer, on efface le calcul en cours
+		if(pEvt.getActionCommand().equals(Data.EFFACER)) {
+			JLabel calcul[] = chPanGauss.getPanelCommandes().getCalcul(); //on récupère l'expression affichée par l'utilisateur
+			for (int i=0;i<calcul.length;i++) {
+				calcul[i].setText("");
+			}
+		}
+		
 	}
 	
 	//quand on clique sur une ligne
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("ici:"+chPanGauss.getPanelCommandes().getLabel(0).getText());
-		chPanGauss.getPanelCommandes().getLabel(0).setText(e.getComponent().getName());
-		System.out.println(chPanGauss.getPanelCommandes().getLabel(0).getText());
+		PanelCommandes panCom = chPanGauss.getPanelCommandes();
+		panCom.getLabel(panCom.getLabelVide()).setText(e.getComponent().getName());
 	}
 
 	//pour le over sur une ligne

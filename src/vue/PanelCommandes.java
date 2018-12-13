@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import org.omg.CORBA.DATA_CONVERSION;
+
 import Controleur.Controleur;
 import modele.Data;
 import modele.Matrice;
@@ -25,7 +27,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton constante;
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
-
+	private JButton effacer;//bouton pour effacer le calcul en cours
 	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
 	private JPanel panelGlobal;//panel qui va contenir les autres panels
 	private JPanel []panels; //tableau de panels avec tous les elements graphiques
@@ -43,10 +45,12 @@ public class PanelCommandes extends JPanel implements Data{
 		chMatrice = pMatrice;
 		entete = new JLabel("Veuillez choisir la ligne à  modifier");
 		entete.setFont(new Font(Font.SERIF, 0, 25));
+		effacer = new JButton(Data.EFFACER);
+		effacer.setFont(new Font(Font.SERIF, 0, 20));
 		valider = new JButton("Valider");
 		valider.setFont(new Font(Font.SERIF, 0, 20));
 		operations = new JButton[Data.OPERATIONS.length];
-		calcul = new JLabel[7];
+		calcul = new JLabel[7]; //pour afficher le calcul de l'utilisateur
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
 		zoneCommentaire = new JTextField(50);
@@ -82,9 +86,13 @@ public class PanelCommandes extends JPanel implements Data{
 			calcul[i] = new JLabel();
 			calcul[i].setFont(new Font(Font.SERIF, 0, 24));
 			panels[2].add(calcul[i]);
-			panels[2].add(Box.createRigidArea(new Dimension(50,0)));
+			panels[2].add(Box.createRigidArea(new Dimension(30,0)));
 		}
 		panels[2].add(valider);
+		panels[2].add(Box.createRigidArea(new Dimension(30,0)));
+		//ajout du bouton effacer
+		effacer.setActionCommand(Data.EFFACER);
+		panels[2].add(effacer);
 
 		//ligne avec le bouton constante et le choix de la flèche
 		panels[3] = new JPanel();
@@ -136,6 +144,11 @@ public class PanelCommandes extends JPanel implements Data{
 	}
 
 
+	public JLabel[] getCalcul() {
+		return calcul;
+	}
+
+
 	public void setChMatrice(Matrice pMatrice) {
 		this.chMatrice = pMatrice;
 	}
@@ -150,10 +163,22 @@ public class PanelCommandes extends JPanel implements Data{
 			fleches[i].addActionListener(pControleur);//boutons des flèches
 		}	
 		chChoixMatrice.enregistreEcouteur(pControleur);
+		effacer.addActionListener(pControleur);
 	}
 	
 	public JLabel getLabel(int i) {
 		return calcul[i];
+	}
+	
+	//retourne le premier emplacement disponible pour une ligne
+	public int getLabelVide() {
+		int emplacementsLignes[] = {0,3,6} ;//indice des labels correspondant aux emplacement des lignes
+		
+		for (int i = 0;i<emplacementsLignes.length;i++) {
+			if (getLabel(emplacementsLignes[i]).getText().equals(""))
+				return emplacementsLignes[i];
+		}
+		return 0;
 	}
 
 }

@@ -428,7 +428,7 @@ public class Matrice {
 							}
 							else if(k%tailleMatrice == 1) {
 								for(int y=0; y < TailleMaxFraction[i][j]; y++) {
-									tirets = tirets.concat("-");
+									tirets = tirets.concat("—");
 								}
 								for(int y=0; y < Math.floor(tailleMax-TailleMaxFraction[i][j])/2; y++) {
 									espaces = espaces.concat(" ");
