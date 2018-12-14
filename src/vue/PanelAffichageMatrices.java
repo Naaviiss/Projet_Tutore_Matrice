@@ -3,12 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.AdjustmentEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,6 +13,11 @@ import javax.swing.ScrollPaneConstants;
 import modele.*;
 
 public class PanelAffichageMatrices extends JPanel{
+
+	private static final long serialVersionUID = 1L;
+	public List<Matrice> getChMatricesIdentités() {
+		return chMatricesIdentités;
+	}
 
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices

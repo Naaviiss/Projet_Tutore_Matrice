@@ -3,11 +3,8 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -16,6 +13,8 @@ import Controleur.Controleur;
 import modele.Data;
 
 public class PanelAffichage extends JPanel{
+
+	private static final long serialVersionUID = 1L;
 	//On crée nos deux boutons
 	private JButton bouton_simplex = new JButton("Simplex");
 	private JButton bouton_matrice = new JButton("Matrice");

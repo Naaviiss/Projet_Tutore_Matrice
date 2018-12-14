@@ -97,26 +97,50 @@ public class Controleur implements ActionListener,MouseListener{
 			}
 		}
 		
+		//si on valide l'opération
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 			System.out.print("Je clique sur le bouton valider\n");
-			Fraction[][] tab = {{new Fraction(1,2),new Fraction(2,2),new Fraction(3,2)},{new Fraction(4,7),new Fraction(5,5),new Fraction(6,2)},{new Fraction(7,3),new Fraction(8,4),new Fraction(9,16)}};
-			Matrice M1 = new Matrice(tab);
-			Fraction[][] tab2 = {{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(4),new Fraction(5),new Fraction(6)},{new Fraction(7),new Fraction(8),new Fraction(9)}};
-			Matrice M2 = new Matrice(tab2);
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().revalidate();
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().repaint();
-			chPanelChoix.getPanGauss().repaint();
-			chPanelChoix.repaint();
 			
-			for(int i = 0; i<operation.length; i++) { //si on valide on reset l'operation
+			int ligneB;//index de la deuxième ligne choisie
+			int ligneModifiee = getNumLigne(operation[0]); //on récupère la ligne à modifier
+			
+			//on recupere la derniere matrice de chaque liste
+			Matrice matricePrincipale = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size());//on récupère la matrice sur laquelle on travaill
+			Matrice matriceIdentite = chPanAffichageMatrices.getChMatricesIdentités().get(chPanAffichageMatrices.getChMatricesIdentités().size());//idem pour son identité
+			
+			//Si l'étudiant veut intervertir 2 lignes
+			if (operation[1].equals(Data.FLECHES[1])) {
+				ligneB = getNumLigne(operation[2]);
+				matricePrincipale.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice principale
+				matriceIdentite.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice identité
+			}
+			//Si l'étudiant veut effectuer un calcul sur une ligne
+			else {
+				//si c'est la deuxième ligne qui prend un calcul
+				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
+					ligneB = getNumLigne(operation[5]);
+					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[5]));//on fait l'opération sur la ligne de la matrice principale
+					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[5]));//on fait l'opération sur la ligne de la matrice identité
+				}
+				//si c'est la première ligne qui prend un calcul
+				else {
+					matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice principale
+					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice identité
+				}
+			}
+			
+			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(matricePrincipale,matriceIdentite); //on ajoute les matrices à la table
+			
+			//si on valide on reset l'operation
+			for(int i = 0; i<operation.length; i++) { 
 				operation[i]="";
 			}
 			affichageOperation();
 		}
 		
+		//si on clique sur le bouton constante
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
-			if(operation[1] == "<-") {
+			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flèche <-
 				//Création du popup de la demande de la constante uniquement avec la flèche <-
 				Fraction constante; //constante de l'utilisateur récupérée
 				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
@@ -173,7 +197,7 @@ public class Controleur implements ActionListener,MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-}
+	}
 
 	private void affichageOperation() { //fonction test de pour la création de l'opération
 		
@@ -183,4 +207,19 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		System.out.println("");
 	}
+	
+	//retourne l'index correspondant à la ligne
+	public int getNumLigne(String ligne) {
+		if (ligne.equals(Data.LIGNES[0]))
+			return 0;
+		else if (ligne.equals(Data.FLECHES[1]))
+				return 1;
+		else if (ligne.equals(Data.FLECHES[2]))
+			return 2;
+		else if (ligne.equals(Data.FLECHES[3]))
+				return 3;
+		else
+			return 4;
+	}	
+	
 }

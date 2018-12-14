@@ -11,7 +11,9 @@ import Controleur.Controleur;
 import modele.Data;
 
 public class PanelChoix extends JPanel implements ActionListener{
-//	private PanelAffichage panAffichage;
+
+	private static final long serialVersionUID = 1L;
+	//	private PanelAffichage panAffichage;
 	private PanelTaille panTaille;
 	private PanelGauss panGauss;
 	private PanelMatrice panMatrice;
