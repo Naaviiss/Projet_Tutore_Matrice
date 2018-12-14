@@ -42,6 +42,7 @@ public class PanelCommandes extends JPanel implements Data{
 		this.setBorder(BorderFactory.createCompoundBorder(raisedbevel,loweredbevel));
 
 		chMatrice = pMatrice;
+
 		entete = new JLabel("Veuillez choisir la ligne à  modifier");
 		entete.setFont(new Font(Font.SERIF, 0, 25));
 		effacer = new JButton(Data.EFFACER);
@@ -92,6 +93,7 @@ public class PanelCommandes extends JPanel implements Data{
 		//ajout du bouton effacer
 		effacer.setActionCommand(Data.EFFACER);
 		panels[2].add(effacer);
+		panels[2].add(Box.createRigidArea(new Dimension(50,0)));
 
 		//ligne avec le bouton constante et le choix de la flèche
 		panels[3] = new JPanel();
@@ -142,11 +144,9 @@ public class PanelCommandes extends JPanel implements Data{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 
-
 	public JLabel[] getCalcul() {
 		return calcul;
 	}
-
 
 	public void setChMatrice(Matrice pMatrice) {
 		this.chMatrice = pMatrice;
@@ -181,3 +181,4 @@ public class PanelCommandes extends JPanel implements Data{
 	}
 
 }
+

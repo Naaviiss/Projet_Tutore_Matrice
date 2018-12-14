@@ -17,5 +17,7 @@ public interface Data {
 	public final String VALIDER_PANEL_TAILLE = "ValiderTaille";
 	
 	public final String EFFACER = "Effacer";
+	
+	public final String CONSTANTE = "Constante";
 
 }

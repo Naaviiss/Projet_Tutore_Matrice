@@ -26,30 +26,7 @@ public class Fraction {
 		denominateur = parFrac.getDenominateur();
 		reduire();
 	}
-	/*//change un string en fraction : 3/5 devient Fraction(3,5)
-	public Fraction(String parFrac) {
-		int rencontre = 0;
-		String numerateurString = "";
-		String denominateurString = "";
-		for(char ch : parFrac.toCharArray()) {
-			if(ch == '/') {
-				rencontre = 1;
-			}
-			else if(ch != '/' && rencontre == 0) {
-				numerateurString += ch;
-			}
-			else {
-				denominateurString += ch;
-			}
-		}
-		numerateur = Integer.parseInt(numerateurString);
-		if (rencontre == 0)
-			denominateur = 1;
-		else
-			denominateur = Integer.parseInt(denominateurString);
-		
-		reduire();
-	}*/
+
 	//change un string en fraction : 3/5 devient Fraction(3,5)
 	public Fraction(String parFrac) {
 		int slash = 0;  //si il y a un slash dans le String
@@ -169,6 +146,7 @@ public class Fraction {
 		}
 		return true;
 	}
+
 	
 	//GETTER
 	public int getNumerateur() {

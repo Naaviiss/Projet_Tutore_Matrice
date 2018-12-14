@@ -465,7 +465,7 @@ public class Matrice {
 			}
 			return resultat;
 		}
-		//affiche une ligne d'une matrice
+		/*//affiche une ligne d'une matrice
 		public String toStringLigne(int parLigne) {
 			Fraction[] ligne = new Fraction[this.getTaille()];
 			for(int i=0; i < this.getTaille(); i++) {
@@ -574,4 +574,152 @@ public class Matrice {
 			//System.out.println(resultat.toString());
 			return resultat;
 		}
+		}
+		
+		
+		///////////////// Nancy /////////////////
+		/*
+		// Test modif toute une ligne
+		Matrice Nancy = Matrice.Identite(3);
+		System.out.println("Matrice Identite Nancy");
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxième ligne)");
+		Nancy.modifyLine(1, "+", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("SOUSTRACTION -2 sur la ligne 1");
+		Nancy.modifyLine(1, "-", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("DIVISION /2 sur la ligne 1");
+		Nancy.modifyLine(1, "/", new Fraction(2));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println("MULTIPLICATION *2/3 sur la ligne 1");
+		Nancy.modifyLine(1, "*", new Fraction(2,3));
+		Nancy.Affiche();
+		System.out.println();
+		System.out.println();
+				
+		// Modifier avec d'autre lignes
+		// L3 -> L3 - 2L1
+		System.out.println("modifyLine2");
+		System.out.println("L3 -> L3 - 2L1");
+		Nancy.modifyLine2(2, "-", 0, new Fraction(2));
+		Nancy.Affiche();
+		// L3 -> L3 + L2
+		// L3 -> L3/4
+		*/
+
+
+	public String toStringLigne(int parLigne) {
+		Fraction[] ligne = new Fraction[this.getTaille()];
+		for(int i=0; i < this.getTaille(); i++) {
+			for(int j=0; j < this.getTaille(); j++) {
+				if(i == parLigne) {
+					ligne[j] = this.getCase(1,j);
+				}
+			}
+		}
+		
+		int tailleMatrice = this.getCol();  //taille de la matrice 1 sur colonne
+		int[] TabFractionNumerateur = new int[tailleMatrice];  //tableau contenant les numerateur des fraction
+		int[] TabFractionDenominateur = new int[tailleMatrice];  //tableau contenant les denominateurs des fraction
+		int[] TailleMaxFraction = new int[tailleMatrice]; //le plus grand entre num et den
+		int tailleMax = 5;
+		String tirets = "";
+		String espaces = "";
+		String espaces2 = "";
+		String resultat = "";
+		
+		for(int j=0; j < this.getCol(); j++) {
+			TabFractionNumerateur[j] = this.getCase(parLigne,j).getNumerateur();
+			TabFractionDenominateur[j] = this.getCase(parLigne,j).getDenominateur();
+			TailleMaxFraction[j] = String.valueOf(Math.max(TabFractionNumerateur[j],TabFractionDenominateur[j])).length();
+		}
+		
+		for(int k=0; k < tailleMatrice; k++) {
+			for(int j=0; j < tailleMatrice; j++) {
+				if(TabFractionDenominateur[j] == 1) {
+					if(k%tailleMatrice == 0) {
+						for(int x=0; x < tailleMax; x++) {
+							espaces = espaces.concat(" ");
+						}
+						resultat = resultat.concat(espaces);
+						//System.out.print(espaces + "|");
+					}
+					else if(k%tailleMatrice == 1) {
+						float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
+						for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+							espaces = espaces.concat(" ");
+							espaces2 = espaces2.concat(" ");
+						}
+						if(String.valueOf(TabFractionNumerateur[j]).length() == 2) {
+							espaces = espaces.substring(0,espaces.length()-1);
+						}
+						resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
+						//System.out.print(espaces + TabFractionNumerateur[j] + espaces2 + "|");
+					}
+					else {
+						for(int x=0; x < tailleMax; x++) {
+							espaces = espaces.concat(" ");
+						}
+						resultat = resultat.concat(espaces);
+						//System.out.print(espaces + "|");
+					}
+				}
+				else {
+					if(k%tailleMatrice == 0) {
+						float ecartnum = (tailleMax-String.valueOf(TabFractionNumerateur[j]).length());
+						for(int x=0; x < Math.floor(ecartnum)/2; x++) {
+							espaces = espaces.concat(" ");
+							espaces2 = espaces2.concat(" ");
+						}
+						if(String.valueOf(TabFractionNumerateur[j]).length() == 2) {
+							espaces = espaces.substring(0,espaces.length()-1);
+						}
+						resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
+						//System.out.print(espaces + TabFractionNumerateur[j] + espaces2 + "|");
+					}
+					else if(k%tailleMatrice == 1) {
+						for(int y=0; y < TailleMaxFraction[j]; y++) {
+							tirets = tirets.concat("-");
+						}
+						for(int y=0; y < Math.floor(tailleMax-TailleMaxFraction[j])/2; y++) {
+							espaces = espaces.concat(" ");
+							espaces2 = espaces2.concat(" ");
+						}
+						if(String.valueOf(espaces).length() == 2 && String.valueOf(tirets).length() == 2) {
+							espaces = espaces.substring(0,espaces.length()-1);
+						}
+						resultat = resultat.concat(espaces + tirets + espaces2);
+						//System.out.print(espaces + tirets + espaces2 + "|");
+					}
+					else {
+						float ecartden = (tailleMax-String.valueOf(TabFractionDenominateur[j]).length());
+						for(int x=0; x < Math.floor(ecartden)/2; x++) {
+							espaces = espaces.concat(" ");
+							espaces2 = espaces2.concat(" ");
+						}
+						if(String.valueOf(TabFractionDenominateur[j]).length() == 2) {
+							espaces = espaces.substring(0,espaces.length()-1);
+						}
+						resultat = resultat.concat(espaces + TabFractionDenominateur[j] + espaces2);
+						//System.out.print(espaces + TabFractionDenominateur[j] + espaces2 + "|");
+					}
+				}
+				espaces = "";
+				espaces2 = "";
+				tirets = "";
+			}
+			resultat = resultat.concat("\n");
+			//System.out.println();
+		}
+		resultat = resultat.concat("\n");
+		//System.out.println();
+		//System.out.println(resultat.toString());
+		return resultat;
+}
+
 }
