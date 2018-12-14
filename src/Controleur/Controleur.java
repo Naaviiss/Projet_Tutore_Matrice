@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modele.Data;
@@ -26,25 +25,25 @@ import vue.PanelMatrice;
 
 public class Controleur implements ActionListener,MouseListener{
 	
-	PanelMatrice chPanMatrice;
-	PanelChoix chPanelChoix;
-	PanelGauss chPanGauss;
-	PanelAffichageMatrices chPanAffichageMatrices;
+	private PanelMatrice chPanMatrice;
+	private PanelChoix chPanelChoix;
+	private PanelGauss chPanGauss;
+	private PanelAffichageMatrices chPanAffichageMatrices;
+	private String[] operation = new String[5]; //tableau correspondant au calcul de l'utilisateur
 	
-	private String[] operation = new String[7]; //tableau contenant l'operation entrer par l'utilisateur
-	private int positionOperation; //position de actuel de l'opération
 	
 	public Controleur(PanelChoix pPanChoix) {
+		//on instancie le tableau de string correspondant au calcul de l'utilisateur
+		for(int i=0;i<operation.length;i++) {
+			operation[i]= ""; //au départ, le tableau est vide
+		}
+		
 		chPanelChoix = pPanChoix;
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
 		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
 		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID);//on créé le panel affichage
-		for(int i = 0; i<7; i++) {
-			operation[i]="";
-			positionOperation = 0; //position de depart de l'opération
-		}
 	}
-
+	
 	public void actionPerformed(ActionEvent pEvt) {
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
@@ -75,21 +74,26 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			chPanGauss.getPanelCommandes().getLabel(4).setText(pEvt.getActionCommand());
+			if(operation[3].equals("")) {
+				chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
+				operation[3] = pEvt.getActionCommand();	
+			}
 		}
 		
 		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
+			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
 			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
 			panCom.getLabel(1).setText(pEvt.getActionCommand());
-			if(pEvt.getActionCommand().equals(Data.FLECHES[0]))//s'il sagit de la flèche <-
-				panCom.getLabel(3).setText(panCom.getLabel(0).getText());//la ligne suivant devient la même ligne que sur laquelle le calcul va s'effectuer
+			operation[1]= pEvt.getActionCommand();
+			affichageOperation();
 		}
-		
+
 		//si on clique sur le bouton effacer, on efface le calcul en cours
 		if(pEvt.getActionCommand().equals(Data.EFFACER)) {
 			JLabel calcul[] = chPanGauss.getPanelCommandes().getCalcul(); //on récupère l'expression affichée par l'utilisateur
 			for (int i=0;i<calcul.length;i++) {
 				calcul[i].setText("");
+				operation[i] = "";
 			}
 		}
 		
@@ -105,174 +109,46 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanelChoix.getPanGauss().repaint();
 			chPanelChoix.repaint();
 			
-			for(int i = 0; i<7; i++) { //si on valide on reset l'operation
+			for(int i = 0; i<operation.length; i++) { //si on valide on reset l'operation
 				operation[i]="";
-			}
-			positionOperation = 0;
-			affichageOperation();
-		}
-		
-		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) {
-			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
-			operation[1]= pEvt.getActionCommand();
-			positionOperation=2;
-			for(int i = 2; i<7;i++) {
-				operation[i]= "";
 			}
 			affichageOperation();
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
-			System.out.print("Je clique sur le bouton constante\n");
 			if(operation[1] == "<-") {
-				//Création du popup de la demande de la constante
-				String constante = null;
-				String txt = null;
-				Boolean test = true;
-				while (test){
-					txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante");
-					System.out.println(txt);
-					//Si on rentre une valeur pour la constante
-					if (txt != null){
-						if (txt.length() == 1 && txt.equalsIgnoreCase("0")){
-							constante = "1";
-						}
-						else{
-							constante = txt;
-						}
-					}
-					test = false;
+				//Création du popup de la demande de la constante uniquement avec la flèche <-
+				Fraction constante; //constante de l'utilisateur récupérée
+				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
+				//Si on rentre une valeur pour la constante
+				if (txt.equals("") || txt.equals("0")) {
+					constante = new Fraction("1");//valeur par défaut à 1
 				}
-				if(estUnEntier(constante)){ //vérifie que la constante donnee est bien un entier
-					if(positionOperation!=7 && positionOperation!=0) { //si la chaine depasse les 7 actions on ne fait pas l'action ou si la constante est mal placer
-						if(positionOperation!=2 || pEvt.getActionCommand()!= "0") { //remplacer pEvt.getActionCommand() par la valeur donnee par l'utilisateur et "0" par un int
-							//si la premiere constante est differente de 0
-							String valider = "ok";
-							for(int i = 0; i<Data.LIGNES.length;i++) {
-								if(Data.LIGNES[i] == operation[positionOperation-1]) {
-									valider = "non ok";
-								}
-							}
-							if(estUnEntier(operation[positionOperation-2])) {
-								valider = "non ok";
-							}
-							if(valider == "ok") {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
-									valider = "ok";
-									if(estUnEntier(operation[positionOperation-1])) {
-										valider = "non ok";
-									}//fin du test
-								if(valider == "ok") {
-									operation[positionOperation]= constante;
-									positionOperation+=1;
-								}
-							}
-						}
-					}
+				else {
+					constante = new Fraction(txt); //on convertit la chaine en fraction					
 				}
-				//on fera la gestion de la constante une fois qu'elle aura ete ajoutee
+				//on ajoute la constante au premier emplacement vide
+				int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on récupère l'indice du premier label disponible pour une constante
+				operation[labelVideConstante] = constante.toString();
+				if (!constante.toString().equals("1"))
+					chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
 				affichageOperation();
 			}
 		}
 		
-		if(Arrays.asList(Data.LIGNES).contains(pEvt.getActionCommand())) { //si la commande de la source est une ligne
-			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
-			if(operation[1] == "<-") {
-				//PARTIT AJOUT LIGNE
-				if(positionOperation!=7) { //si la chaine depasse les 7 actions on ne fait pas l'action
-					if(positionOperation == 0) { //est ce que c la premiere action de la chaine
-						operation[positionOperation]= pEvt.getActionCommand();
-						positionOperation+=1;
-					}
-					else {
-						if(positionOperation == 2 || positionOperation == 3) { //est ce que c la premiere action de la chaine
-							if(positionOperation == 3) {
-								String valider = "ok";
-								for(int i = 0; i<Data.LIGNES.length;i++) {
-									if(Data.LIGNES[i] == operation[positionOperation-1]) {
-										valider = "non ok";
-									}
-								}
-								if(valider == "ok") {
-									if(pEvt.getActionCommand()==operation[0]){
-										operation[positionOperation]= pEvt.getActionCommand();
-										positionOperation+=1;
-									}
-								}
-							}
-							else {
-								if(pEvt.getActionCommand()==operation[0]){
-									operation[positionOperation]= pEvt.getActionCommand();
-									positionOperation+=1;
-								}
-							}
-						}	
-						else {
-							String valider = "ok";
-							for(int i = 0; i<Data.LIGNES.length;i++) {
-								if(Data.LIGNES[i] == operation[positionOperation-2]) {
-									valider = "non ok";
-								}
-							}
-							if(valider == "ok" || operation[positionOperation-1]!=Data.CONSTANTE) {//est ce que on a 2 lignes a la suite (si oui rien ne se passe)
-								valider = "ok";
-								for(int i = 0; i<Data.LIGNES.length;i++) {
-									if(Data.LIGNES[i] == operation[positionOperation-1]) {
-										valider = "non ok";
-									}
-								} //fin du test
-								if(valider == "ok") {
-									operation[positionOperation]= pEvt.getActionCommand();
-									positionOperation+=1;
-								}
-							}
-						}
-					}
-				}
-				affichageOperation();
-			}
-			else {
-				if(operation[0]=="") {
-					operation[0]=pEvt.getActionCommand();
-				}
-				else {
-					String valider = "ok";
-					for(int i = 0; i<Data.LIGNES.length;i++) {
-						if(Data.LIGNES[i] == operation[0]) {
-							valider = "non ok";
-						}
-					}
-					if(valider == "ok") {
-						operation[2]=pEvt.getActionCommand();
-					}
-				}
-			}
+		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opérateur
+			operation[4] = pEvt.getActionCommand();
 		}
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
-			if(operation[1] == "<-") {
-				if(positionOperation!=7 && positionOperation!=0 && positionOperation!=2 && positionOperation!=6 && positionOperation!=5)	 { //si la chaine depasse les 7 actions ou si l'operateur ce trouve en premiere position on ne fait pas l'action 
-					//est ce que on a 2 operations a la suite (si oui rien ne se passe)
-					String valider = "ok"; 
-					for(int i = 0; i<Data.OPERATIONS.length;i++) {
-						if(Data.OPERATIONS[i] == operation[positionOperation-1]) {
-							valider = "non ok";
-						}
-					}//fin du test
-					if(valider == "ok") {
-						operation[positionOperation]= pEvt.getActionCommand();
-						positionOperation+=1;
-					}
-				}
-				affichageOperation();
-			}
-		}	
 	}
 	
 	//quand on clique sur une ligne
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		PanelCommandes panCom = chPanGauss.getPanelCommandes();
-		panCom.getLabel(panCom.getLabelVide()).setText(e.getComponent().getName());
+		int labelVide = panCom.getLabelVideLigne();
+		panCom.getLabel(labelVide).setText(e.getComponent().getName());
+		operation[labelVide] = e.getComponent().getName();
+		affichageOperation();
 	}
 
 	//pour le over sur une ligne
@@ -302,19 +178,9 @@ public class Controleur implements ActionListener,MouseListener{
 	private void affichageOperation() { //fonction test de pour la création de l'opération
 		
 		System.out.print("\nOpération : ");
-		for(int i = 0; i<7; i++) {
+		for(int i = 0; i<operation.length; i++) {
 			System.out.print(operation[i]);
 		}
 		System.out.println("");
 	}
-	
-	public boolean estUnEntier(String chaine) { //fonction permettant de voir si la constante est un entier
-		try {
-			Integer.parseInt(chaine);
-		} catch (NumberFormatException e){
-			return false;
-		}
-		return true;
-	}
-	
 }

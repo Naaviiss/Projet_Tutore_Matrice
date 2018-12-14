@@ -86,6 +86,7 @@ public class Fraction {
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
 		}
+		reduire();
 	}
 	
 	//ISFRACTION
@@ -260,7 +261,7 @@ public class Fraction {
 	
 	//TOSTRING
 	//ecrit une fraction
-	public String toString() {
+	public String toStringHoriz() {
 		if(denominateur == 1) {
 			return Integer.toString(numerateur);
 		}
@@ -319,6 +320,10 @@ public class Fraction {
 				return numerateur + "\n" + tirets + "\n" + espaces + denominateur;
 			}
 		}
+	}
+	
+	public String toString() {
+		return numerateur+"/"+denominateur;
 	}
 
 }

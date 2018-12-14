@@ -22,7 +22,6 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton valider;
 	private JButton[] operations;//boutons pour les opérateurs
 	private JLabel entete;
-	private JLabel expression;
 	private JButton constante;
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
@@ -33,6 +32,7 @@ public class PanelCommandes extends JPanel implements Data{
 	private JButton[]fleches; //boutons pour les flèches
 	private ChoixLigneMatrice chChoixMatrice;//panel affichant la matrice en cours d'utilisation
 	private Matrice chMatrice;//matrice en cours d'utilisation
+	private String[] operationChaine;//tableau correspondant au calcul de l'utilisateur sous forme de tableau
 	
 	public PanelCommandes(Matrice pMatrice) {
 		//la taille du panel et les bordures
@@ -50,7 +50,7 @@ public class PanelCommandes extends JPanel implements Data{
 		valider = new JButton("Valider");
 		valider.setFont(new Font(Font.SERIF, 0, 20));
 		operations = new JButton[Data.OPERATIONS.length];
-		calcul = new JLabel[7]; //pour afficher le calcul de l'utilisateur
+		calcul = new JLabel[5]; //pour afficher le calcul de l'utilisateur
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
 		zoneCommentaire = new JTextField("",50);
@@ -144,6 +144,14 @@ public class PanelCommandes extends JPanel implements Data{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 
+	public String[] getOperationChaine() {
+		return operationChaine;
+	}
+
+	public void setOperationChaine(String[] operationChaine) {
+		this.operationChaine = operationChaine;
+	}
+
 	public JLabel[] getCalcul() {
 		return calcul;
 	}
@@ -170,14 +178,24 @@ public class PanelCommandes extends JPanel implements Data{
 	}
 	
 	//retourne le premier emplacement disponible pour une ligne
-	public int getLabelVide() {
-		int emplacementsLignes[] = {0,3,6} ;//indice des labels correspondant aux emplacement des lignes
+	public int getLabelVideLigne() {
+		int emplacementsLignes[] = {0,3,5} ;//indice des labels correspondant aux emplacement des lignes
 		
 		for (int i = 0;i<emplacementsLignes.length;i++) {
 			if (getLabel(emplacementsLignes[i]).getText().equals(""))
 				return emplacementsLignes[i];
 		}
 		return 0;
+	}
+	
+	//retourne le premier emplacement disponible pour une ligne
+	public int getLabelVideConstante() {
+		int emplacementsConstante[] = {2,4} ;//indice des labels correspondant aux emplacement des constantes
+		for (int i = 0;i<emplacementsConstante.length;i++) {
+			if (getLabel(emplacementsConstante[i]).getText().equals(""))
+				return emplacementsConstante[i];
+			}
+		return 4;
 	}
 
 }
