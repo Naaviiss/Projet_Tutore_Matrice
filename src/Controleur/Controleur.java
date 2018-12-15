@@ -41,7 +41,8 @@ public class Controleur implements ActionListener,MouseListener{
 		chPanelChoix = pPanChoix;
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
 		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
-		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID);//on créé le panel affichage
+		List<String> chLigneModif = new ArrayList<String>();//liste des opérations effectuées sous forme de chaîne de caractères
+		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif);//on créé le panel affichage
 	}
 	
 	public void actionPerformed(ActionEvent pEvt) {
@@ -61,16 +62,11 @@ public class Controleur implements ActionListener,MouseListener{
 			Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
 			Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
 			chPanGauss = new PanelGauss(M1);
-			chPanAffichageMatrices.ajoutMatrice(M1, M2);
+			chPanAffichageMatrices.ajoutMatrice(M1, M2,"");//au départ la chaine est vide
 			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
-		}
-		
-
-		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {//on valide son opération
-//			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(M1,M2);
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
@@ -81,11 +77,13 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
-			System.out.print("Je clique sur le bouton "+pEvt.getActionCommand());
 			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
+			for (int i = 2;i<operation.length;i++) { //si on change de clèche la site du calcul est réinitialisée
+				panCom.getLabel(i).setText("");
+				operation[i] = "";
+			}
 			panCom.getLabel(1).setText(pEvt.getActionCommand());
 			operation[1]= pEvt.getActionCommand();
-			affichageOperation();
 		}
 
 		//si on clique sur le bouton effacer, on efface le calcul en cours
@@ -102,6 +100,15 @@ public class Controleur implements ActionListener,MouseListener{
 
 			int ligneB;//index de la deuxième ligne choisie
 			int ligneModifiee = getNumLigne(operation[0]); //on récupère la ligne à modifier
+			
+			//on récupère le calcul sous forme de chaine
+			String chaine = new String();
+			for (int i =0;i<operation.length;i++) {
+				chaine+=operation[i];
+			}
+			System.out.println("chaine: "+chaine);
+			
+			//on recupere l'éventuel commentaire
 			
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupère la matrice sur laquelle on travaille
@@ -134,9 +141,8 @@ public class Controleur implements ActionListener,MouseListener{
 					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice identité
 				}
 			}
-			for (int i = 0;i<chPanAffichageMatrices.getChMatrices().size();i++)
-				System.out.println(chPanAffichageMatrices.getChMatrices().get(i).toString());
-			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite); //on ajoute les matrices à la table
+			
+			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine); //on ajoute les matrices,l'opération à la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
 			chPanGauss.getPanelCommandes().getEffacer().doClick();
@@ -162,7 +168,6 @@ public class Controleur implements ActionListener,MouseListener{
 				operation[labelVideConstante] = constante.toString();
 				if (!constante.toString().equals("1"))
 					chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
-				affichageOperation();
 			}
 		}
 		
@@ -178,7 +183,6 @@ public class Controleur implements ActionListener,MouseListener{
 		int labelVide = panCom.getLabelVideLigne();
 		panCom.getLabel(labelVide).setText(e.getComponent().getName());
 		operation[labelVide] = e.getComponent().getName();
-		affichageOperation();
 	}
 
 	//pour le over sur une ligne

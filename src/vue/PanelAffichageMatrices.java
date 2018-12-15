@@ -22,16 +22,16 @@ public class PanelAffichageMatrices extends JPanel{
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
 	private List<Matrice> chMatricesIdentités;//liste des matrices identités
-	private List<String> chLigneModif;//pour les calculs effectués
+	private List<String> chLigneModif;//pour les calculs effectués sous forme de chaine
 	private List<String> chCommentaire;//pour les commentaires
 	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
 	
-	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID) {
+	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif) {
 		
 		chMatrices = pMatrices;
 		chMatricesIdentités = pMatricesID;
-//		chLigneModif = pLigneModif;
+		chLigneModif = pLigneModif;
 //		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
@@ -65,10 +65,18 @@ public class PanelAffichageMatrices extends JPanel{
 	public JTable getTableMatrices() {
 		return tableMatrices;
 	}
-
-	public void ajoutMatrice(Matrice M1, Matrice M2) {
+	
+	//cette méthode est utilisée lors d'un ajout d'un calcul à la table
+	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine) {
 		chMatrices.add(M1);//on ajoute la matrice à la liste
 		chMatricesIdentités.add(M2);//on ajoute la matrice identité à la liste
+	
+		//la chaine correspondant au calcul doit s'afficher une ligne avant
+		if (chLigneModif.size() == 0)//si aucun calcul n'a été effectué
+			chLigneModif.add(chLigneModif.size(),operationChaine);//on ajoute la chaine correspondant au calcul sur la première ligne de la table
+		else
+			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
+		
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));//on raffraichit la table
 		setTailleCol();
 		setRenderer(renderer);
