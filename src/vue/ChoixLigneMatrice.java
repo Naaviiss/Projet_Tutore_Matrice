@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.BorderLayout;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
@@ -21,7 +20,6 @@ public class ChoixLigneMatrice extends JPanel{
 	
 	public ChoixLigneMatrice(Matrice pMatrice) {
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(100, 100));
 		
 		chMatrice = pMatrice;
 		lignes = new JLabel[chMatrice.getTaille()];
