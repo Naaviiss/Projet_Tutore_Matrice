@@ -27,12 +27,12 @@ public class PanelAffichageMatrices extends JPanel{
 	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
 	
-	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif) {
+	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif,List<String> pCommentaire) {
 		
 		chMatrices = pMatrices;
 		chMatricesIdentités = pMatricesID;
 		chLigneModif = pLigneModif;
-//		chCommentaire = pCommentaire;
+		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
 		
@@ -67,15 +67,19 @@ public class PanelAffichageMatrices extends JPanel{
 	}
 	
 	//cette méthode est utilisée lors d'un ajout d'un calcul à la table
-	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine) {
+	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine,String commentaire) {
 		chMatrices.add(M1);//on ajoute la matrice à la liste
 		chMatricesIdentités.add(M2);//on ajoute la matrice identité à la liste
 	
-		//la chaine correspondant au calcul doit s'afficher une ligne avant
-		if (chLigneModif.size() == 0)//si aucun calcul n'a été effectué
+		//la chaine correspondant au calcul et le commentaire doivet s'afficher une ligne avant
+		if (chLigneModif.size() == 0) {//si aucun calcul n'a été effectué
 			chLigneModif.add(chLigneModif.size(),operationChaine);//on ajoute la chaine correspondant au calcul sur la première ligne de la table
-		else
+			chCommentaire.add(chCommentaire.size(),commentaire);//on ajoute le commentaire sur la première ligne de la table
+		}
+		else {
 			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
+			chCommentaire.add(chCommentaire.size()-1,commentaire);//on ajoute le commentaire sur la ligne d'avant
+		}
 		
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));//on raffraichit la table
 		

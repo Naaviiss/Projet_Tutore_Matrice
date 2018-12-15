@@ -31,7 +31,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 			setValueAt(chMatrices.get(i), indiceLigne, 0);
 			setValueAt(chMatricesID.get(i), indiceLigne, 1);
 			setValueAt(chLigneModifiees.get(i), indiceLigne, 2);
-//			setValueAt(chCommentaire.get(i), indiceLigne, 3);
+			setValueAt(chCommentaire.get(i), indiceLigne, 3);
 			indiceLigne++;
 		}
 	}

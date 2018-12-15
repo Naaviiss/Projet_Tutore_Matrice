@@ -178,6 +178,10 @@ public class PanelCommandes extends JPanel implements Data{
 		effacer.addActionListener(pControleur);
 	}
 	
+	public JTextField getZoneCommentaire() {
+		return zoneCommentaire;
+	}
+
 	public JLabel getLabel(int i) {
 		return calcul[i];
 	}

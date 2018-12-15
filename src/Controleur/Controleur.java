@@ -42,7 +42,8 @@ public class Controleur implements ActionListener,MouseListener{
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
 		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
 		List<String> chLigneModif = new ArrayList<String>();//liste des opérations effectuées sous forme de chaîne de caractères
-		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif);//on créé le panel affichage
+		List<String> chCommentaires= new ArrayList<String>();//liste des commentaires sur les calculs
+		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on créé le panel affichage
 	}
 	
 	public void actionPerformed(ActionEvent pEvt) {
@@ -62,7 +63,7 @@ public class Controleur implements ActionListener,MouseListener{
 			Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
 			Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
 			chPanGauss = new PanelGauss(M1);
-			chPanAffichageMatrices.ajoutMatrice(M1, M2,"");//au départ la chaine est vide
+			chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au départ la chaine pour le calcul et celle pour le commentaire sont vides
 			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
@@ -93,6 +94,8 @@ public class Controleur implements ActionListener,MouseListener{
 				calcul[i].setText("");
 				operation[i] = "";
 			}
+			//on remet la zone de commentaire à vide
+			chPanGauss.getPanelCommandes().getZoneCommentaire().setText("");
 		}
 		
 		//si on valide l'opération
@@ -106,7 +109,9 @@ public class Controleur implements ActionListener,MouseListener{
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
 			}
-			System.out.println("chaine: "+chaine);
+			
+			//on récupère le commentaire
+			String commentaire = chPanGauss.getPanelCommandes().getZoneCommentaire().getText();
 			
 			//on recupere l'éventuel commentaire
 			
@@ -142,7 +147,7 @@ public class Controleur implements ActionListener,MouseListener{
 				}
 			}
 			
-			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine); //on ajoute les matrices,l'opération à la table
+			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opération à la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
 			chPanGauss.getPanelCommandes().getEffacer().doClick();
