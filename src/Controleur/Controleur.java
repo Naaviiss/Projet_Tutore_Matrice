@@ -99,14 +99,20 @@ public class Controleur implements ActionListener,MouseListener{
 		
 		//si on valide l'opération
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
-			System.out.print("Je clique sur le bouton valider\n");
-			
+
 			int ligneB;//index de la deuxième ligne choisie
 			int ligneModifiee = getNumLigne(operation[0]); //on récupère la ligne à modifier
 			
 			//on recupere la derniere matrice de chaque liste
-			Matrice matricePrincipale = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size());//on récupère la matrice sur laquelle on travaill
-			Matrice matriceIdentite = chPanAffichageMatrices.getChMatricesIdentités().get(chPanAffichageMatrices.getChMatricesIdentités().size());//idem pour son identité
+			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupère la matrice sur laquelle on travaille
+			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentités().get(chPanAffichageMatrices.getChMatricesIdentités().size()-1);//idem pour son identité
+			
+			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
+			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
+			
+			//on copie les matrices
+			matricePrincipale.copie(actuelle);
+			matriceIdentite.copie(actuelleID);
 			
 			//Si l'étudiant veut intervertir 2 lignes
 			if (operation[1].equals(Data.FLECHES[1])) {
@@ -128,14 +134,14 @@ public class Controleur implements ActionListener,MouseListener{
 					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice identité
 				}
 			}
+			for (int i = 0;i<chPanAffichageMatrices.getChMatrices().size();i++)
+				System.out.println(chPanAffichageMatrices.getChMatrices().get(i).toString());
+			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite); //on ajoute les matrices à la table
 			
-			chPanelChoix.getPanGauss().getPanelAffichageMatrices().ajoutMatrice(matricePrincipale,matriceIdentite); //on ajoute les matrices à la table
+			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
+			chPanGauss.getPanelCommandes().getEffacer().doClick();
 			
-			//si on valide on reset l'operation
-			for(int i = 0; i<operation.length; i++) { 
-				operation[i]="";
-			}
-			affichageOperation();
+			//on change la matrice affichée dans le panelCommande
 		}
 		
 		//si on clique sur le bouton constante
@@ -212,11 +218,11 @@ public class Controleur implements ActionListener,MouseListener{
 	public int getNumLigne(String ligne) {
 		if (ligne.equals(Data.LIGNES[0]))
 			return 0;
-		else if (ligne.equals(Data.FLECHES[1]))
+		else if (ligne.equals(Data.LIGNES[1]))
 				return 1;
-		else if (ligne.equals(Data.FLECHES[2]))
+		else if (ligne.equals(Data.LIGNES[2]))
 			return 2;
-		else if (ligne.equals(Data.FLECHES[3]))
+		else if (ligne.equals(Data.LIGNES[3]))
 				return 3;
 		else
 			return 4;

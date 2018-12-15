@@ -31,6 +31,10 @@ public class PanelCommandes extends JPanel implements Data{
 	private JPanel []panels; //tableau de panels avec tous les elements graphiques
 	private JButton[]fleches; //boutons pour les flèches
 	private ChoixLigneMatrice chChoixMatrice;//panel affichant la matrice en cours d'utilisation
+	public JButton getEffacer() {
+		return effacer;
+	}
+
 	private Matrice chMatrice;//matrice en cours d'utilisation
 	private String[] operationChaine;//tableau correspondant au calcul de l'utilisateur sous forme de tableau
 	
@@ -88,6 +92,7 @@ public class PanelCommandes extends JPanel implements Data{
 			panels[2].add(calcul[i]);
 			panels[2].add(Box.createRigidArea(new Dimension(30,0)));
 		}
+		valider.setActionCommand(Data.VALIDER_PANEL_COMMANDES);
 		panels[2].add(valider);
 		panels[2].add(Box.createRigidArea(new Dimension(30,0)));
 		//ajout du bouton effacer
@@ -179,7 +184,7 @@ public class PanelCommandes extends JPanel implements Data{
 	
 	//retourne le premier emplacement disponible pour une ligne
 	public int getLabelVideLigne() {
-		int emplacementsLignes[] = {0,3,5} ;//indice des labels correspondant aux emplacement des lignes
+		int emplacementsLignes[] = {0,2,3,5} ;//indice des labels correspondant aux emplacement des lignes
 		
 		for (int i = 0;i<emplacementsLignes.length;i++) {
 			if (getLabel(emplacementsLignes[i]).getText().equals(""))

@@ -51,7 +51,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
-		setTable();
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
 		
 		//scrollbar
 		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -67,11 +67,9 @@ public class PanelAffichageMatrices extends JPanel{
 	}
 
 	public void ajoutMatrice(Matrice M1, Matrice M2) {
-		System.out.println(chMatrices.size());
-		chMatrices.add(M1);
-		chMatricesIdentités.add(M2);
-		System.out.println(chMatrices.size());
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		chMatrices.add(M1);//on ajoute la matrice à la liste
+		chMatricesIdentités.add(M2);//on ajoute la matrice identité à la liste
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));//on raffraichit la table
 		setTailleCol();
 		setRenderer(renderer);
 	}
@@ -79,26 +77,11 @@ public class PanelAffichageMatrices extends JPanel{
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
 	}
-
-	public void setChMatrices (List<Matrice> chMatrices) {
-		this.chMatrices = chMatrices;
-	}
 	
-	public void setTable(){
-		//Méthode qui permet d'actualiser
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
-	}//setTable()
-
 	public void setRenderer(MultiLigneRenderer renderer) {
 		for(int i = 0; i<tableMatrices.getColumnCount();i++) {
 			tableMatrices.getColumnModel().getColumn(i).setCellRenderer(renderer);
 		}
-	}
-
-	//créer la table
-	public void genereTable() {
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
-		
 	}
 	
 	public void setTableMatrices(JTable tableMatrices) {

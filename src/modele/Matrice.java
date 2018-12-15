@@ -37,8 +37,12 @@ public class Matrice {
 	}
 	
 	//creer une copie d'une matrice
-	public Matrice(Matrice A) {
-		this(A.chCase);
+	public void copie(Matrice A) {
+		for(int i =0;i<chLigne;i++) {
+			for(int j=0;j<chCol;j++) {
+				this.chCase[i][j] = A.getCase(i, j);
+			}
+		}
 	}
 	
 	//REMPLIR
