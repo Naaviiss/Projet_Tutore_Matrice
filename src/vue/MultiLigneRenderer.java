@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -16,6 +17,14 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	}
 	
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    	
+    	if(column == 2)
+    		setFont(new Font(Font.SERIF, Font.BOLD, 20));
+    	else if (column == 3)
+    		setFont(new Font(Font.SERIF, 0, 20));
+    	else
+    		setFont(new Font(Font.SERIF, Font.BOLD, 10));
+    	
     	if(value!=null){
     		setText((String)value.toString());
     	}

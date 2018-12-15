@@ -23,7 +23,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		
 		//on définit le modèle de la table
 		this.setColumnIdentifiers(Data.INTITULES);
-		this.setRowCount(200);
+		this.setRowCount(20);
 		
 		int indiceLigne = 0;
 		System.out.println(chMatrices.size());

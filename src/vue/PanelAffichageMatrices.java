@@ -47,7 +47,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getTableHeader().setResizingAllowed(false);
 		tableMatrices.getTableHeader().setReorderingAllowed(false);
 		
-		//hauteur des lignes
+		//hauteur des lignes par défaut
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
@@ -78,6 +78,11 @@ public class PanelAffichageMatrices extends JPanel{
 			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
 		
 		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));//on raffraichit la table
+		
+		//hauteur des lignes en focntion de la taille de la matrice
+		int tailleMatrice = chMatrices.get(0).getTaille();
+		tableMatrices.setRowHeight(90*tailleMatrice);
+		
 		setTailleCol();
 		setRenderer(renderer);
 	}
