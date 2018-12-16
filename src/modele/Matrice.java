@@ -430,7 +430,6 @@ public class Matrice {
 							}
 							else if(k%3 == 1) {
 								for(int y=0; y < TailleMaxFraction[i][j]; y++) {
-									tirets = tirets.concat("—");
 									tirets = tirets.concat("â€“");
 								}
 								float ecartnum = (tailleMax-TailleMaxFraction[i][j]);
@@ -537,7 +536,7 @@ public class Matrice {
 		System.out.println("Matrice Identite Nancy");
 		Nancy.Affiche();
 		System.out.println();
-		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxième ligne)");
+		System.out.println("ADDITION +2 sur la ligne 1 (donc la deuxiï¿½me ligne)");
 		Nancy.modifyLine(1, "+", new Fraction(2));
 		Nancy.Affiche();
 		System.out.println();
