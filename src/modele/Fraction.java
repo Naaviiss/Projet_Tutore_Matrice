@@ -46,7 +46,7 @@ public class Fraction {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 						throw new RuntimeException("lettre dans le numerateur");
 					}
 					else {
@@ -55,7 +55,7 @@ public class Fraction {
 					
 				}
 				else {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 						throw new RuntimeException("lettre dans le denominateur");
 					}
 					else {
@@ -74,7 +74,7 @@ public class Fraction {
 		}
 		else {
 			for(char ch : parFrac.toCharArray()) {
-				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 					throw new RuntimeException("lettre dans le numerateur");
 				}
 				else {
@@ -109,7 +109,7 @@ public class Fraction {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
 					else {
@@ -118,7 +118,7 @@ public class Fraction {
 					
 				}
 				else {
-					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
+					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
 					else {
