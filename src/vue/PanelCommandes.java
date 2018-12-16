@@ -54,7 +54,7 @@ public class PanelCommandes extends JPanel implements Data{
 		valider = new JButton("Valider");
 		valider.setFont(new Font(Font.SERIF, 0, 20));
 		operations = new JButton[Data.OPERATIONS.length];
-		calcul = new JLabel[5]; //pour afficher le calcul de l'utilisateur
+		calcul = new JLabel[6]; //pour afficher le calcul de l'utilisateur
 		panels = new JPanel[6];
 		fleches = new JButton[Data.FLECHES.length];
 		zoneCommentaire = new JTextField("",50);

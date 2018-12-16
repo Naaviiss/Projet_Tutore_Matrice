@@ -29,7 +29,7 @@ public class Controleur implements ActionListener,MouseListener{
 	private PanelChoix chPanelChoix;
 	private PanelGauss chPanGauss;
 	private PanelAffichageMatrices chPanAffichageMatrices;
-	private String[] operation = new String[5]; //tableau correspondant au calcul de l'utilisateur
+	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
 	
 	
 	public Controleur(PanelChoix pPanChoix) {
@@ -79,7 +79,7 @@ public class Controleur implements ActionListener,MouseListener{
 		
 		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
 			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
-			for (int i = 2;i<operation.length;i++) { //si on change de clèche la site du calcul est réinitialisée
+			for (int i = 2;i<operation.length;i++) { //si on change de flèche la site du calcul est réinitialisée
 				panCom.getLabel(i).setText("");
 				operation[i] = "";
 			}
@@ -137,8 +137,8 @@ public class Controleur implements ActionListener,MouseListener{
 				//si c'est la deuxième ligne qui prend un calcul
 				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
 					ligneB = getNumLigne(operation[5]);
-					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[5]));//on fait l'opération sur la ligne de la matrice principale
-					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[5]));//on fait l'opération sur la ligne de la matrice identité
+					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice principale
+					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice identité
 				}
 				//si c'est la première ligne qui prend un calcul
 				else {
