@@ -35,15 +35,15 @@ public class Controleur implements ActionListener,MouseListener{
 	public Controleur(PanelChoix pPanChoix) {
 		//on instancie le tableau de string correspondant au calcul de l'utilisateur
 		for(int i=0;i<operation.length;i++) {
-			operation[i]= ""; //au départ, le tableau est vide
+			operation[i]= ""; //au dï¿½part, le tableau est vide
 		}
 		
 		chPanelChoix = pPanChoix;
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
-		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
-		List<String> chLigneModif = new ArrayList<String>();//liste des opérations effectuées sous forme de chaîne de caractères
+		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identitï¿½s
+		List<String> chLigneModif = new ArrayList<String>();//liste des opï¿½rations effectuï¿½es sous forme de chaï¿½ne de caractï¿½res
 		List<String> chCommentaires= new ArrayList<String>();//liste des commentaires sur les calculs
-		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on créé le panel affichage
+		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on crï¿½ï¿½ le panel affichage
 	}
 	
 	public void actionPerformed(ActionEvent pEvt) {
@@ -60,26 +60,26 @@ public class Controleur implements ActionListener,MouseListener{
 		
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-			Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
-			Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
+			Matrice M1 = chPanMatrice.getMatriceSaisi();//crï¿½ation de la matrice
+			Matrice M2 = Matrice.identite(M1.getTaille());//crï¿½ation de la matrice identitï¿½
 			chPanGauss = new PanelGauss(M1);
-			chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au départ la chaine pour le calcul et celle pour le commentaire sont vides
+			chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au dï¿½part la chaine pour le calcul et celle pour le commentaire sont vides
 			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 		}
 		
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
+		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opï¿½rateur
 			if(operation[3].equals("")) {
 				chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
 				operation[3] = pEvt.getActionCommand();	
 			}
 		}
 		
-		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
+		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flï¿½che
 			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
-			for (int i = 2;i<operation.length;i++) { //si on change de flèche la site du calcul est réinitialisée
+			for (int i = 2;i<operation.length;i++) { //si on change de flï¿½che la site du calcul est rï¿½initialisï¿½e
 				panCom.getLabel(i).setText("");
 				operation[i] = "";
 			}
@@ -89,94 +89,94 @@ public class Controleur implements ActionListener,MouseListener{
 
 		//si on clique sur le bouton effacer, on efface le calcul en cours
 		if(pEvt.getActionCommand().equals(Data.EFFACER)) {
-			JLabel calcul[] = chPanGauss.getPanelCommandes().getCalcul(); //on récupère l'expression affichée par l'utilisateur
+			JLabel calcul[] = chPanGauss.getPanelCommandes().getCalcul(); //on rï¿½cupï¿½re l'expression affichï¿½e par l'utilisateur
 			for (int i=0;i<calcul.length;i++) {
 				calcul[i].setText("");
 				operation[i] = "";
 			}
-			//on remet la zone de commentaire à vide
+			//on remet la zone de commentaire ï¿½ vide
 			chPanGauss.getPanelCommandes().getZoneCommentaire().setText("");
 		}
 		
-		//si on valide l'opération
+		//si on valide l'opï¿½ration
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 
-			int ligneB;//index de la deuxième ligne choisie
-			int ligneModifiee = getNumLigne(operation[0]); //on récupère la ligne à modifier
+			int ligneB;//index de la deuxiï¿½me ligne choisie
+			int ligneModifiee = getNumLigne(operation[0]); //on rï¿½cupï¿½re la ligne ï¿½ modifier
 			
-			//on récupère le calcul sous forme de chaine
+			//on rï¿½cupï¿½re le calcul sous forme de chaine
 			String chaine = new String();
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
 			}
 			
-			//on récupère le commentaire
+			//on rï¿½cupï¿½re le commentaire
 			String commentaire = chPanGauss.getPanelCommandes().getZoneCommentaire().getText();
 			
-			//on recupere l'éventuel commentaire
+			//on recupere l'Ã©ventuel commentaire
 			
 			//on recupere la derniere matrice de chaque liste
-			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupère la matrice sur laquelle on travaille
-			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentités().get(chPanAffichageMatrices.getChMatricesIdentités().size()-1);//idem pour son identité
+			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on rï¿½cupï¿½re la matrice sur laquelle on travaille
+			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identitï¿½
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
+			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identitï¿½ sur laquelle on va effectuer les calculs
 			
 			//on copie les matrices
 			matricePrincipale.copie(actuelle);
 			matriceIdentite.copie(actuelleID);
 			
-			//Si l'étudiant veut intervertir 2 lignes
+			//Si l'ï¿½tudiant veut intervertir 2 lignes
 			if (operation[1].equals(Data.FLECHES[1])) {
 				ligneB = getNumLigne(operation[2]);
-				matricePrincipale.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice principale
-				matriceIdentite.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice identité
+				matricePrincipale.echange(ligneModifiee, ligneB);//on ï¿½change les lignes sur la matrice principale
+				matriceIdentite.echange(ligneModifiee, ligneB);//on ï¿½change les lignes sur la matrice identitï¿½
 			}
-			//Si l'étudiant veut effectuer un calcul sur une ligne
+			//Si l'ï¿½tudiant veut effectuer un calcul sur une ligne
 			else {
-				//si c'est la deuxième ligne qui prend un calcul
+				//si c'est la deuxiï¿½me ligne qui prend un calcul
 				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
 					ligneB = getNumLigne(operation[5]);
-					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice principale
-					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice identité
+					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opï¿½ration sur la ligne de la matrice principale
+					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opï¿½ration sur la ligne de la matrice identitï¿½
 				}
-				//si c'est la première ligne qui prend un calcul
+				//si c'est la premiï¿½re ligne qui prend un calcul
 				else {
-					matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice principale
-					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice identité
+					matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opï¿½ration sur la ligne de la matrice principale
+					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opï¿½ration sur la ligne de la matrice identitï¿½
 				}
 			}
 			
-			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opération à la table
+			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opï¿½ration ï¿½ la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
 			chPanGauss.getPanelCommandes().getEffacer().doClick();
 			
-			//on change la matrice affichée dans le panelCommande
+			//on change la matrice affichï¿½e dans le panelCommande
 		}
 		
 		//si on clique sur le bouton constante
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
-			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flèche <-
-				//Création du popup de la demande de la constante uniquement avec la flèche <-
-				Fraction constante; //constante de l'utilisateur récupérée
-				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
+			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flï¿½che <-
+				//Crï¿½ation du popup de la demande de la constante uniquement avec la flï¿½che <-
+				Fraction constante; //constante de l'utilisateur rï¿½cupï¿½rï¿½e
+				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va rï¿½cupï¿½rer
 				//Si on rentre une valeur pour la constante
 				if (txt.equals("") || txt.equals("0")) {
-					constante = new Fraction("1");//valeur par défaut à 1
+					constante = new Fraction("1");//valeur par dï¿½faut ï¿½ 1
 				}
 				else {
 					constante = new Fraction(txt); //on convertit la chaine en fraction					
 				}
 				//on ajoute la constante au premier emplacement vide
-				int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on récupère l'indice du premier label disponible pour une constante
+				int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on rï¿½cupï¿½re l'indice du premier label disponible pour une constante
 				operation[labelVideConstante] = constante.toString();
 				if (!constante.toString().equals("1"))
 					chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
 			}
 		}
 		
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opérateur
+		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opï¿½rateur
 			operation[4] = pEvt.getActionCommand();
 		}
 	}
@@ -214,16 +214,16 @@ public class Controleur implements ActionListener,MouseListener{
 		
 	}
 
-	private void affichageOperation() { //fonction test de pour la création de l'opération
+	private void affichageOperation() { //fonction test de pour la crÃ©ation de l'opï¿½ration
 		
-		System.out.print("\nOpération : ");
+		System.out.print("\nOpï¿½ration : ");
 		for(int i = 0; i<operation.length; i++) {
 			System.out.print(operation[i]);
 		}
 		System.out.println("");
 	}
 	
-	//retourne l'index correspondant à la ligne
+	//retourne l'index correspondant ï¿½ la ligne
 	public int getNumLigne(String ligne) {
 		if (ligne.equals(Data.LIGNES[0]))
 			return 0;

@@ -20,16 +20,16 @@ import modele.Matrice;
 public class PanelCommandes extends JPanel implements Data{
 	private static final long serialVersionUID = 1L;
 	private JButton valider;
-	private JButton[] operations;//boutons pour les opérateurs
+	private JButton[] operations;//boutons pour les opï¿½rateurs
 	private JLabel entete;
 	private JButton constante;
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	private JButton effacer;//bouton pour effacer le calcul en cours
-	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
+	private JLabel[] calcul;//labels avec le futur calcul de l'ï¿½tudiant
 	private JPanel panelGlobal;//panel qui va contenir les autres panels
 	private JPanel []panels; //tableau de panels avec tous les elements graphiques
-	private JButton[]fleches; //boutons pour les flèches
+	private JButton[]fleches; //boutons pour les flï¿½ches
 	private ChoixLigneMatrice chChoixMatrice;//panel affichant la matrice en cours d'utilisation
 	public JButton getEffacer() {
 		return effacer;
@@ -47,7 +47,7 @@ public class PanelCommandes extends JPanel implements Data{
 
 		chMatrice = pMatrice;
 
-		entete = new JLabel("Veuillez choisir la ligne à  modifier");
+		entete = new JLabel("Veuillez choisir la ligne Ã  modifier");
 		entete.setFont(new Font(Font.SERIF, 0, 25));
 		effacer = new JButton(Data.EFFACER);
 		effacer.setFont(new Font(Font.SERIF, 0, 20));
@@ -82,7 +82,7 @@ public class PanelCommandes extends JPanel implements Data{
 		panels[1].add(Box.createRigidArea(new Dimension(110,0)));
 		panels[1].add(chChoixMatrice);
 
-		//ligne avec l'opération
+		//ligne avec l'opï¿½ration
 		panels[2] = new JPanel();
 		panels[2].setLayout(new BoxLayout(panels[2], BoxLayout.LINE_AXIS));
 		//instnce et ajout des labels
@@ -100,10 +100,10 @@ public class PanelCommandes extends JPanel implements Data{
 		panels[2].add(effacer);
 		panels[2].add(Box.createRigidArea(new Dimension(50,0)));
 
-		//ligne avec le bouton constante et le choix de la flèche
+		//ligne avec le bouton constante et le choix de la flï¿½che
 		panels[3] = new JPanel();
 		panels[3].setLayout(new BoxLayout(panels[3], BoxLayout.LINE_AXIS));
-		//instance et ajoutdes boutons flèches
+		//instance et ajoutdes boutons flï¿½ches
 		for (int i = 0; i<fleches.length;i++) {
 			fleches[i] = new JButton(Data.FLECHES[i]);
 			fleches[i].setFont(new Font(Font.SERIF, 0, 20));
@@ -114,11 +114,11 @@ public class PanelCommandes extends JPanel implements Data{
 		//ajout du bouton constante
 		panels[3].add(constante);
 
-		//ligne avec les boutons pour les opérations
+		//ligne avec les boutons pour les opï¿½rations
 		panels[4] = new JPanel();
 		panels[4].setLayout(new BoxLayout(panels[4], BoxLayout.LINE_AXIS));
 		panels[4].add(Box.createRigidArea(new Dimension(100,0)));
-		//instance et ajout des boutons d'opéraion
+		//instance et ajout des boutons d'opï¿½raion
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
 			operations[i] = new JButton(Data.OPERATIONS[i]);
 			operations[i].setActionCommand(Data.OPERATIONS[i]);
@@ -140,7 +140,7 @@ public class PanelCommandes extends JPanel implements Data{
 		panelGlobal = new JPanel();
 		panelGlobal.setLayout(new BoxLayout(panelGlobal, BoxLayout.PAGE_AXIS));
 		panelGlobal.add(Box.createVerticalStrut(30));
-		//on y ajoute les panels créés précédemment
+		//on y ajoute les panels crï¿½ï¿½s prï¿½cï¿½demment
 		for (int i=0;i<panels.length;i++) {
 			panelGlobal.add(panels[i]);
 			panelGlobal.add(Box.createVerticalStrut(50));
@@ -169,10 +169,10 @@ public class PanelCommandes extends JPanel implements Data{
 		valider.addActionListener(pControleur);//bouton valider
 		constante.addActionListener(pControleur);
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {
-			operations[i].addActionListener(pControleur);//boutons des opérateurs
+			operations[i].addActionListener(pControleur);//boutons des opï¿½rateurs
 		}
 		for (int i = 0; i<Data.FLECHES.length;i++) {
-			fleches[i].addActionListener(pControleur);//boutons des flèches
+			fleches[i].addActionListener(pControleur);//boutons des flï¿½ches
 		}	
 		chChoixMatrice.enregistreEcouteur(pControleur);
 		effacer.addActionListener(pControleur);

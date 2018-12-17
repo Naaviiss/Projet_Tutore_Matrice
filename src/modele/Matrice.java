@@ -504,7 +504,7 @@ public class Matrice {
 						espaces2 = espaces2.concat(" ");
 					}
 					if(String.valueOf(espaces2).length()%2 == 0 && String.valueOf(TabFractionNumerateur[j]).length() < 2) {
-						espaces2 = espaces2.concat(" ");
+						espaces2 = espaces2.concat(" ");
 					}
 					resultat = resultat.concat(espaces + TabFractionNumerateur[j] + espaces2);
 				}

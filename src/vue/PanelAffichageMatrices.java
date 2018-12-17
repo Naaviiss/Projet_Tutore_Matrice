@@ -15,14 +15,14 @@ import modele.*;
 public class PanelAffichageMatrices extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	public List<Matrice> getChMatricesIdentités() {
-		return chMatricesIdentités;
+	public List<Matrice> getChMatricesIdentites() {
+		return chMatricesIdentites;
 	}
 
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
-	private List<Matrice> chMatricesIdentités;//liste des matrices identités
-	private List<String> chLigneModif;//pour les calculs effectués sous forme de chaine
+	private List<Matrice> chMatricesIdentites;//liste des matrices identitï¿½s
+	private List<String> chLigneModif;//pour les calculs effectuï¿½s sous forme de chaine
 	private List<String> chCommentaire;//pour les commentaires
 	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
@@ -30,11 +30,11 @@ public class PanelAffichageMatrices extends JPanel{
 	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif,List<String> pCommentaire) {
 		
 		chMatrices = pMatrices;
-		chMatricesIdentités = pMatricesID;
+		chMatricesIdentites = pMatricesID;
 		chLigneModif = pLigneModif;
 		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
 		
 		//on applique le renderer
 		setRenderer(renderer);
@@ -43,15 +43,15 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getTableHeader().setBackground(new Color(205, 0, 0));
 		tableMatrices.getTableHeader().setFont(new Font(Font.SERIF,Font.BOLD,20));
 		
-		//empecher les redimensionnements et réordonnancements
+		//empecher les redimensionnements et rï¿½ordonnancements
 		tableMatrices.getTableHeader().setResizingAllowed(false);
 		tableMatrices.getTableHeader().setReorderingAllowed(false);
 		
-		//hauteur des lignes par défaut
+		//hauteur des lignes par dï¿½faut
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
 		
 		//scrollbar
 		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -66,22 +66,22 @@ public class PanelAffichageMatrices extends JPanel{
 		return tableMatrices;
 	}
 	
-	//cette méthode est utilisée lors d'un ajout d'un calcul à la table
+	//cette mï¿½thode est utilisï¿½e lors d'un ajout d'un calcul ï¿½ la table
 	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine,String commentaire) {
-		chMatrices.add(M1);//on ajoute la matrice à la liste
-		chMatricesIdentités.add(M2);//on ajoute la matrice identité à la liste
+		chMatrices.add(M1);//on ajoute la matrice ï¿½ la liste
+		chMatricesIdentites.add(M2);//on ajoute la matrice identitï¿½ ï¿½ la liste
 	
 		//la chaine correspondant au calcul et le commentaire doivet s'afficher une ligne avant
-		if (chLigneModif.size() == 0) {//si aucun calcul n'a été effectué
-			chLigneModif.add(chLigneModif.size(),operationChaine);//on ajoute la chaine correspondant au calcul sur la première ligne de la table
-			chCommentaire.add(chCommentaire.size(),commentaire);//on ajoute le commentaire sur la première ligne de la table
+		if (chLigneModif.size() == 0) {//si aucun calcul n'a ï¿½tï¿½ effectuï¿½
+			chLigneModif.add(chLigneModif.size(),operationChaine);//on ajoute la chaine correspondant au calcul sur la premiï¿½re ligne de la table
+			chCommentaire.add(chCommentaire.size(),commentaire);//on ajoute le commentaire sur la premiï¿½re ligne de la table
 		}
 		else {
 			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
 			chCommentaire.add(chCommentaire.size()-1,commentaire);//on ajoute le commentaire sur la ligne d'avant
 		}
 		
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentités,chLigneModif,chCommentaire));//on raffraichit la table
+		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));//on raffraichit la table
 		
 		//hauteur des lignes en focntion de la taille de la matrice
 		int tailleMatrice = chMatrices.get(0).getTaille();
@@ -106,9 +106,9 @@ public class PanelAffichageMatrices extends JPanel{
 	}
 	
 	public void setTailleCol() {
-		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(240);
-		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(240);
-		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(200);
-		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(200);
+		tableMatrices.getColumnModel().getColumn(0).setPreferredWidth(260);
+		tableMatrices.getColumnModel().getColumn(1).setPreferredWidth(260);
+		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(180);
+		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(180);
 	}
 }

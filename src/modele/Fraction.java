@@ -324,7 +324,10 @@ public class Fraction {
 	}
 	
 	public String toString() {
-		return numerateur+"/"+denominateur;
+		if (denominateur != 1)
+			return numerateur+"/"+denominateur;
+		else
+			return Integer.toString(numerateur);
 	}
 
 }
