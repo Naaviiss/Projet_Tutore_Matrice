@@ -22,8 +22,19 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
     		setFont(new Font(Font.SERIF, Font.BOLD, 20));
     	else if (column == 3)
     		setFont(new Font(Font.SERIF, 0, 20));
-    	else
-    		setFont(new Font(Font.SERIF, 0, 10));
+    	else {
+    		/*if(taille == 3) {
+    			setFont(new Font(Font.SERIF, 0, 14));
+    		}
+    		else if(taille == 4) {
+    			setFont(new Font(Font.SERIF, 0, 13));
+    		}
+    		else {
+    			setFont(new Font(Font.SERIF, 0, 12));
+    		}*/
+    		setFont(new Font(Font.SERIF, 0, 12));
+    	}
+    		
     	
     	if(value!=null){
     		setText((String)value.toString());
