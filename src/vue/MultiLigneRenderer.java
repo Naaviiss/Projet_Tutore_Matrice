@@ -23,11 +23,11 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
     	else if (column == 3)
     		setFont(new Font(Font.SERIF, 0, 20));
     	else {
-    		/*if(taille == 3) {
-    			setFont(new Font(Font.SERIF, 0, 14));
+    		/*if(taille == 3) {       les tailles de polices sont déjà bonnes (17, 14 et 12)
+    			setFont(new Font(Font.SERIF, 0, 17));
     		}
     		else if(taille == 4) {
-    			setFont(new Font(Font.SERIF, 0, 13));
+    			setFont(new Font(Font.SERIF, 0, 14));
     		}
     		else {
     			setFont(new Font(Font.SERIF, 0, 12));
