@@ -11,13 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modele.Data;
+import modele.ExceptCaseVide;
+import modele.ExceptEntreFraction;
+import modele.ExceptNegatifMalPlace;
+import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
 import Controleur.Controleur;
 
 public class PanelMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private JPanel panelMatrice; //la partie où on entre la matrice
+	private JPanel panelMatrice; //la partie oï¿½ on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
 	private Controleur chControleur; //le controleur
@@ -34,9 +38,9 @@ public class PanelMatrice extends JPanel{
 		matrice = new Matrice(pTailleMatrice);
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();
-		instruction = new JLabel("Veuillez compléter votre Matrice");
+		instruction = new JLabel("Veuillez complï¿½ter votre Matrice");
 		
-		//ce panel est divisé en 2
+		//ce panel est divisï¿½ en 2
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(100, 100, 100, 100));
 
@@ -45,11 +49,11 @@ public class PanelMatrice extends JPanel{
 		boutonValider.setPreferredSize(new Dimension(300, 100));
 		boutonValider.setFont(new Font(Font.SERIF, 20, 60));
 		
-		//on met les boutons à l'écoute
+		//on met les boutons ï¿½ l'ï¿½coute
 		boutonValider.setActionCommand(Data.VALIDER_PANEL_MATRICE);
 		boutonValider.addActionListener(chControleur);
 		
-		//prend en paramètre une matrice afin de pouvoir créer le nombre de champs nécessaires pour remplir la matrice
+		//prend en paramï¿½tre une matrice afin de pouvoir crï¿½er le nombre de champs nï¿½cessaires pour remplir la matrice
 		panelMatrice.setLayout(new GridLayout(pTailleMatrice,pTailleMatrice,40,40));
 		
 		//on ajoute les champs au panel pour remplir la matrice
@@ -60,7 +64,7 @@ public class PanelMatrice extends JPanel{
 			}
 		}
 		
-		//le panel instruction sera géré par un bordere layout
+		//le panel instruction sera gï¿½rï¿½ par un bordere layout
 		panelInstructions.setLayout(new BorderLayout(20,20));
 		
 		//on personnalise l'instruction
@@ -83,7 +87,7 @@ public class PanelMatrice extends JPanel{
 		pTailleMatrice=taille;
 	}
 	
-	public Matrice getMatriceSaisi(){
+	public Matrice getMatriceSaisi() throws ExceptEntreFraction,ExceptZeroDivision,ExceptCaseVide,ExceptNegatifMalPlace{
 		for (int i=0; i<matrice.getTaille();i++){
 			for(int j=0;j<matrice.getTaille();j++){
 				matrice.setCase(i,j,new Fraction(champsInput[i][j].getText()));

@@ -6,13 +6,13 @@ public class Fraction {
 	
 	//FRACTION
 	//une fraction composee d'une numerateur et d'un denominateur
-	public Fraction(int parNum, int parDen) {
-		if(parDen == 0) {
-			throw new RuntimeException("Division par zero");
-		}
+	public Fraction(int parNum, int parDen){
+//		if(parDen == 0) {
+//			throw new RuntimeException("Division par zero");
+//		}
 		numerateur = parNum;
 		denominateur = parDen;
-		reduire();   //A voir si on veut que la fraction soit reduite directement ou non
+		reduire();  
 	}
 	//si la fraction est un nombre entier
 	public Fraction(int parVal) {
@@ -28,26 +28,26 @@ public class Fraction {
 	}
 
 	//change un string en fraction : 3/5 devient Fraction(3,5)
-	public Fraction(String parFrac) {
+	public Fraction(String parFrac) throws ExceptEntreFraction,ExceptZeroDivision,ExceptNegatifMalPlace,ExceptCaseVide{
 		System.out.println("fraction:"+parFrac);
 		int slash = 0;  //si il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a pass� le slash
+		int rencontre = 0;	//savoir quand on a passé le slash
 		String numerateurString = "";
 		String denominateurString = "";
-		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
+		for(char ch : parFrac.toCharArray()) { //Test s'il y a un slash dans le String
 			if(ch == '/') {
 				slash = 1;
 			}
 		}
 		
-		if(slash == 1) {
+		if(slash == 1) { //si c'est une fraction
 			for(char ch : parFrac.toCharArray()) {
 				if(ch == '/') {
 					rencontre = 1;
 				}
 				else if(ch != '/' && rencontre == 0) {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
-						throw new RuntimeException("lettre dans le numerateur");
+						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la fraction
 					}
 					else {
 						numerateurString += ch;
@@ -56,7 +56,7 @@ public class Fraction {
 				}
 				else {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
-						throw new RuntimeException("lettre dans le denominateur");
+						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la fraction
 					}
 					else {
 						denominateurString += ch;
@@ -64,51 +64,51 @@ public class Fraction {
 				}
 			}
 			if(numerateurString == "") {
-				throw new RuntimeException("numerateur vide");
+				throw new ExceptCaseVide();
 			}
 			if(denominateurString == "") {
-				throw new RuntimeException("denominateur vide");
+				throw new ExceptCaseVide();
 			}
-			if(numerateurString.equals("-")) {
-				throw new RuntimeException("numerateur sans nombre");
-			}
-			if(denominateurString.equals("-")) {
-				throw new RuntimeException("denominateur sans nombre");
-			}
+//			if(numerateurString.equals("-")) {
+//				throw new ExceptCaseVide();
+//			}
+//			if(denominateurString.equals("-")) {
+//				throw new ExceptCaseVide();
+//			}
 			if(Integer.parseInt(denominateurString) == 0) {
-				throw new RuntimeException("Division par zero");
+				throw new ExceptZeroDivision();
 			}
 			for(int i=1 ; i < numerateurString.length() ; i++) {
 				if(numerateurString.charAt(i) == '-') {
-					throw new RuntimeException("signe negatif mal placee dans le numerateur");
+					throw new ExceptNegatifMalPlace();
 				}
 			}
 			for(int i=1 ; i < denominateurString.length() ; i++) {
 				if(denominateurString.charAt(i) == '-') {
-					throw new RuntimeException("signe negatif mal placee dans le denominateur");
+					throw new ExceptNegatifMalPlace();
 				}
 			}
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = Integer.parseInt(denominateurString);
 		}
-		else {
+		else {//si c'est un entier
 			for(char ch : parFrac.toCharArray()) {
 				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
-					throw new RuntimeException("lettre dans le numerateur");
+					throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la case
 				}
 				else {
 					numerateurString += ch;
 				}
 			}
 			if(numerateurString == "") {
-				throw new RuntimeException("chiffre vide");
+				throw new ExceptCaseVide();
 			}
 			if(numerateurString.equals("-")) {
-				throw new RuntimeException("chiffre sans nombre");
+				throw new ExceptCaseVide();
 			}
 			for(int i=1 ; i < numerateurString.length() ; i++) {
 				if(numerateurString.charAt(i) == '-') {
-					throw new RuntimeException("signe negatif mal placee");
+					throw new ExceptNegatifMalPlace();
 				}
 			}
 			numerateur = Integer.parseInt(numerateurString);
@@ -118,10 +118,10 @@ public class Fraction {
 	}
 	
 	//ISFRACTION
-	// String.isFraction() dit si la string est eun fraction
+	// String.isFraction() dit si la string est une fraction
 	public static boolean isFraction(String parFrac) {
-		int slash = 0;  //si il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a pass� le slash
+		int slash = 0;  //s'il y a un slash dans le String
+		int rencontre = 0;	//savoir quand on a passé le slash
 		String numerateurString = "";
 		String denominateurString = "";
 		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String

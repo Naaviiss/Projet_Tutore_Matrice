@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import modele.Data;
+import modele.ExceptCaseVide;
+import modele.ExceptEntreFraction;
+import modele.ExceptNegatifMalPlace;
+import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
 import vue.PanelAffichageMatrices;
@@ -46,7 +50,7 @@ public class Controleur implements ActionListener,MouseListener{
 		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on cr�� le panel affichage
 	}
 	
-	public void actionPerformed(ActionEvent pEvt) {
+	public void actionPerformed(ActionEvent pEvt){
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
 		}
@@ -60,14 +64,20 @@ public class Controleur implements ActionListener,MouseListener{
 		
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
-			Matrice M1 = chPanMatrice.getMatriceSaisi();//cr�ation de la matrice
-			Matrice M2 = Matrice.identite(M1.getTaille());//cr�ation de la matrice identit�
-			chPanGauss = new PanelGauss(M1);
-			chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au d�part la chaine pour le calcul et celle pour le commentaire sont vides
-			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
-			chPanelChoix.add(chPanGauss, "panel_gauss");
-			chPanGauss.enregistreEcouteur(this);
-			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
+			try {
+				Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
+				Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
+				chPanGauss = new PanelGauss(M1);
+				chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au départ la chaine pour le calcul et celle pour le commentaire sont vides
+				chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
+				chPanelChoix.add(chPanGauss, "panel_gauss");
+				chPanGauss.enregistreEcouteur(this);
+				chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
+			} 
+			catch (ExceptEntreFraction e) {}
+			catch (ExceptNegatifMalPlace e) {}
+			catch (ExceptZeroDivision e) {}
+			catch (ExceptCaseVide e) {}
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un op�rateur
@@ -94,7 +104,7 @@ public class Controleur implements ActionListener,MouseListener{
 				calcul[i].setText("");
 				operation[i] = "";
 			}
-			//on remet la zone de commentaire � vide
+			//on remet la zone de commentaire à vide
 			chPanGauss.getPanelCommandes().getZoneCommentaire().setText("");
 		}
 		
@@ -137,13 +147,25 @@ public class Controleur implements ActionListener,MouseListener{
 				//si c'est la deuxi�me ligne qui prend un calcul
 				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
 					ligneB = getNumLigne(operation[5]);
-					matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'op�ration sur la ligne de la matrice principale
-					matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'op�ration sur la ligne de la matrice identit�
+					try {
+						matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice principale
+						matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice identité
+					} catch (ExceptEntreFraction e) {}
+					catch (ExceptNegatifMalPlace e) {}
+					catch (ExceptZeroDivision e) {}
+					catch (ExceptCaseVide e) {}
+					
 				}
-				//si c'est la premi�re ligne qui prend un calcul
+				//si c'est la première ligne qui prend un calcul
 				else {
-					matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice principale
-					matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice identit�
+					try {
+						matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice principale
+						matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice identité
+					} 
+					catch (ExceptEntreFraction e) {}
+					catch (ExceptNegatifMalPlace e) {}
+					catch (ExceptZeroDivision e) {}
+					catch (ExceptCaseVide e) {}
 				}
 			}
 			
@@ -158,21 +180,36 @@ public class Controleur implements ActionListener,MouseListener{
 		//si on clique sur le bouton constante
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
 			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la fl�che <-
-				//Cr�ation du popup de la demande de la constante uniquement avec la fl�che <-
-				Fraction constante; //constante de l'utilisateur r�cup�r�e
+				//Création du popup de la demande de la constante uniquement avec la fl�che <-
+				Fraction constante; //constante de l'utilisateur récupérée
 				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va r�cup�rer
-				//Si on rentre une valeur pour la constante
-				if (txt.equals("") || txt.equals("0")) {
-					constante = new Fraction("1");//valeur par d�faut � 1
+				try {
+					//Si on rentre une valeur pour la constante
+					if (txt.equals("") || txt.equals("0")) {
+						constante = new Fraction("1");//valeur par défaut à 1
+					}
+					else {
+						constante = new Fraction(txt); //on convertit la chaine en fraction					
+					}
+					
+					//on ajoute la constante au premier emplacement vide
+					int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on r�cup�re l'indice du premier label disponible pour une constante
+					operation[labelVideConstante] = constante.toString();
+					if (!constante.toString().equals("1"))
+						chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
 				}
-				else {
-					constante = new Fraction(txt); //on convertit la chaine en fraction					
+				catch(ExceptEntreFraction e) { //si on lève une exception
+					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
-				//on ajoute la constante au premier emplacement vide
-				int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on r�cup�re l'indice du premier label disponible pour une constante
-				operation[labelVideConstante] = constante.toString();
-				if (!constante.toString().equals("1"))
-					chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
+				catch (ExceptNegatifMalPlace e) {
+					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+				}
+				catch (ExceptZeroDivision e) {
+					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+				}
+				catch (ExceptCaseVide e) {
+					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+				}
 			}
 		}
 		
