@@ -31,7 +31,7 @@ public class Fraction {
 	public Fraction(String parFrac) {
 		System.out.println("fraction:"+parFrac);
 		int slash = 0;  //si il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a passé le slash
+		int rencontre = 0;	//savoir quand on a passï¿½ le slash
 		String numerateurString = "";
 		String denominateurString = "";
 		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
@@ -63,11 +63,30 @@ public class Fraction {
 					}
 				}
 			}
-			if(numerateurString == "" || denominateurString == "") {
-				throw new RuntimeException("numerateur ou dénominateur vide");
+			if(numerateurString == "") {
+				throw new RuntimeException("numerateur vide");
+			}
+			if(denominateurString == "") {
+				throw new RuntimeException("denominateur vide");
+			}
+			if(numerateurString.equals("-")) {
+				throw new RuntimeException("numerateur sans nombre");
+			}
+			if(denominateurString.equals("-")) {
+				throw new RuntimeException("denominateur sans nombre");
 			}
 			if(Integer.parseInt(denominateurString) == 0) {
 				throw new RuntimeException("Division par zero");
+			}
+			for(int i=1 ; i < numerateurString.length() ; i++) {
+				if(numerateurString.charAt(i) == '-') {
+					throw new RuntimeException("signe negatif mal placee dans le numerateur");
+				}
+			}
+			for(int i=1 ; i < denominateurString.length() ; i++) {
+				if(denominateurString.charAt(i) == '-') {
+					throw new RuntimeException("signe negatif mal placee dans le denominateur");
+				}
 			}
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = Integer.parseInt(denominateurString);
@@ -82,7 +101,15 @@ public class Fraction {
 				}
 			}
 			if(numerateurString == "") {
-				throw new RuntimeException("numerateur vide");
+				throw new RuntimeException("chiffre vide");
+			}
+			if(numerateurString.equals("-")) {
+				throw new RuntimeException("chiffre sans nombre");
+			}
+			for(int i=1 ; i < numerateurString.length() ; i++) {
+				if(numerateurString.charAt(i) == '-') {
+					throw new RuntimeException("signe negatif mal placee");
+				}
 			}
 			numerateur = Integer.parseInt(numerateurString);
 			denominateur = 1;
@@ -94,7 +121,7 @@ public class Fraction {
 	// String.isFraction() dit si la string est eun fraction
 	public static boolean isFraction(String parFrac) {
 		int slash = 0;  //si il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a passé le slash
+		int rencontre = 0;	//savoir quand on a passï¿½ le slash
 		String numerateurString = "";
 		String denominateurString = "";
 		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
@@ -159,7 +186,7 @@ public class Fraction {
 		return denominateur;
 	}
 	
-	//SETTER (ne pas oublier de recreer la fraction apres pour qu'elle soit réduite)
+	//SETTER (ne pas oublier de recreer la fraction apres pour qu'elle soit rï¿½duite)
 	public void setNumerateur(int parNum) {
 		this.numerateur = parNum;
 	}
@@ -190,7 +217,7 @@ public class Fraction {
 	}
 	
 	//REDUIREV2 reduit juste pour l'affichage
-	//reduit la fraction jusqu'a ce qu'elle soit irreductible -- ne sert a rien si "reduire()" est activé dans les constructeur "Fraction"
+	//reduit la fraction jusqu'a ce qu'elle soit irreductible -- ne sert a rien si "reduire()" est activï¿½ dans les constructeur "Fraction"
 	public Fraction reduireV2(Fraction frac) {
 		int pgcd = CalculPGCD(frac.getNumerateur(),frac.getDenominateur());
 		frac.setNumerateur(frac.getNumerateur()/pgcd);
