@@ -38,11 +38,6 @@ public class ChoixLigneMatrice extends JPanel{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 	
-	//pour changer la matrice du panel commande
-	public void refresh(Matrice pMatrice) {
-		
-	}
-	
 	public void enregistreEcouteur(Controleur pControleur) {
 		//on mets les labels à l'écoute du controleur
 		for (int i = 0; i<chMatrice.getTaille();i++) {

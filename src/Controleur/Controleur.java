@@ -39,15 +39,15 @@ public class Controleur implements ActionListener,MouseListener{
 	public Controleur(PanelChoix pPanChoix) {
 		//on instancie le tableau de string correspondant au calcul de l'utilisateur
 		for(int i=0;i<operation.length;i++) {
-			operation[i]= ""; //au d�part, le tableau est vide
+			operation[i]= ""; //au départ, le tableau est vide
 		}
 		
 		chPanelChoix = pPanChoix;
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
-		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identit�s
-		List<String> chLigneModif = new ArrayList<String>();//liste des op�rations effectu�es sous forme de cha�ne de caract�res
+		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
+		List<String> chLigneModif = new ArrayList<String>();//liste des opérations effectuées sous forme de chaine de caractères
 		List<String> chCommentaires= new ArrayList<String>();//liste des commentaires sur les calculs
-		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on cr�� le panel affichage
+		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on créé le panel affichage
 	}
 	
 	public void actionPerformed(ActionEvent pEvt){
@@ -80,7 +80,7 @@ public class Controleur implements ActionListener,MouseListener{
 			catch (ExceptCaseVide e) {}
 		}
 		
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un op�rateur
+		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
 			if(operation[3].equals("")) {
 				chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
 				operation[3] = pEvt.getActionCommand();	
@@ -175,14 +175,20 @@ public class Controleur implements ActionListener,MouseListener{
 			//on change la matrice affichée dans le panelCommande
 			chPanGauss.getPanelCommandes().refresh(matricePrincipale);
 			chPanGauss.getPanelCommandes().getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à l'écoute du controleur
+			
+			//si l'utilisateur réussit son calcul
+			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
+				//on lance un popup pour le féliciter
+				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matricé identité !\n Pensez à exporter votre travil en PDF pour ne pas en perdre une miette ;)","Bravo !",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		
 		//si on clique sur le bouton constante
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
-			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la fl�che <-
-				//Création du popup de la demande de la constante uniquement avec la fl�che <-
+			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flèche <-
+				//Création du popup de la demande de la constante uniquement avec la flèche <-
 				Fraction constante; //constante de l'utilisateur récupérée
-				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va r�cup�rer
+				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
 				try {
 					//Si on rentre une valeur pour la constante
 					if (txt.equals("") || txt.equals("0")) {

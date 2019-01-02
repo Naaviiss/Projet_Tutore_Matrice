@@ -66,7 +66,7 @@ public class PanelAffichageMatrices extends JPanel{
 		return tableMatrices;
 	}
 	
-	//cette m�thode est utilis�e lors d'un ajout d'un calcul � la table
+	//cette méthode est utiliée lors d'un ajout d'un calcul à la table
 	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine,String commentaire) {
 		chMatrices.add(M1);//on ajoute la matrice � la liste
 		chMatricesIdentites.add(M2);//on ajoute la matrice identit� � la liste
