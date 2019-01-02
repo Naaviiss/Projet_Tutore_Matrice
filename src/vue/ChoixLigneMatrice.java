@@ -14,7 +14,7 @@ import modele.Matrice;
 
 public class ChoixLigneMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private Matrice chMatrice;//la matrice à afficher
+	private Matrice chMatrice;//la matrice ï¿½ afficher
 	private JLabel []lignes;//un tableau de jlabel, chaque case va contenir une ligne du tableau
 	private JPanel panelGlobal;//va contenir les lignes
 	
@@ -38,8 +38,13 @@ public class ChoixLigneMatrice extends JPanel{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 	
+	//pour changer la matrice du panel commande
+	public void refresh(Matrice pMatrice) {
+		
+	}
+	
 	public void enregistreEcouteur(Controleur pControleur) {
-		//on mets les labels à l'écoute du controleur
+		//on mets les labels Ã  l'Ã©coute du controleur
 		for (int i = 0; i<chMatrice.getTaille();i++) {
 			lignes[i].addMouseListener(pControleur);
 		}

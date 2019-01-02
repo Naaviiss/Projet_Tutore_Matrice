@@ -10,8 +10,8 @@ import modele.*;
 
 public class PanelGauss extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private PanelAffichageMatrices affichageMatrices; //là où les matrices seront affichées
-	private PanelCommandes commandesMatrices; //là où l'étudiant pourra choisir ses actions
+	private PanelAffichageMatrices affichageMatrices; //lÃ  oÃ¹ les matrices seront affichÃ©es
+	private PanelCommandes commandesMatrices; //lÃ  oÃ¹ l'utilisateur pourra choisir ses actions
 	private Matrice chMatrice;
 	
 	public PanelGauss(/*int pTaille, */Matrice matrice) {
@@ -24,7 +24,7 @@ public class PanelGauss extends JPanel{
 		//instance du panel avec les commandes
 		commandesMatrices = new PanelCommandes(chMatrice);
 
-		//ajout des éléments au panel 
+		//ajout des Ã©lÃ©ments au panel 
 		this.add(commandesMatrices,BorderLayout.EAST);
 		
 	}

@@ -108,43 +108,41 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanGauss.getPanelCommandes().getZoneCommentaire().setText("");
 		}
 		
-		//si on valide l'op�ration
+		//si on valide l'opération
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 
-			int ligneB;//index de la deuxi�me ligne choisie
+			int ligneB;//index de la deuxième ligne choisie
 			int ligneModifiee = getNumLigne(operation[0]); //on r�cup�re la ligne � modifier
 			
-			//on r�cup�re le calcul sous forme de chaine
+			//on récupère le calcul sous forme de chaine
 			String chaine = new String();
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
 			}
 			
-			//on r�cup�re le commentaire
+			//on récupère le commentaire
 			String commentaire = chPanGauss.getPanelCommandes().getZoneCommentaire().getText();
-			
-			//on recupere l'éventuel commentaire
 			
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on r�cup�re la matrice sur laquelle on travaille
 			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identit�
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identit� sur laquelle on va effectuer les calculs
+			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
 			
 			//on copie les matrices
 			matricePrincipale.copie(actuelle);
 			matriceIdentite.copie(actuelleID);
 			
-			//Si l'�tudiant veut intervertir 2 lignes
+			//Si l'utilisateur veut intervertir 2 lignes
 			if (operation[1].equals(Data.FLECHES[1])) {
 				ligneB = getNumLigne(operation[2]);
-				matricePrincipale.echange(ligneModifiee, ligneB);//on �change les lignes sur la matrice principale
-				matriceIdentite.echange(ligneModifiee, ligneB);//on �change les lignes sur la matrice identit�
+				matricePrincipale.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice principale
+				matriceIdentite.echange(ligneModifiee, ligneB);//on échange les lignes sur la matrice identité
 			}
-			//Si l'�tudiant veut effectuer un calcul sur une ligne
+			//Si l'utilisateur veut effectuer un calcul sur une ligne
 			else {
-				//si c'est la deuxi�me ligne qui prend un calcul
+				//si c'est la deuxième ligne qui prend un calcul
 				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
 					ligneB = getNumLigne(operation[5]);
 					try {
@@ -159,8 +157,8 @@ public class Controleur implements ActionListener,MouseListener{
 				//si c'est la première ligne qui prend un calcul
 				else {
 					try {
-						matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice principale
-						matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'op�ration sur la ligne de la matrice identité
+						matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice principale
+						matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opération sur la ligne de la matrice identité
 					} 
 					catch (ExceptEntreFraction e) {}
 					catch (ExceptNegatifMalPlace e) {}
@@ -169,12 +167,14 @@ public class Controleur implements ActionListener,MouseListener{
 				}
 			}
 			
-			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'op�ration � la table
+			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opération à la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
 			chPanGauss.getPanelCommandes().getEffacer().doClick();
 			
-			//on change la matrice affich�e dans le panelCommande
+			//on change la matrice affichée dans le panelCommande
+			chPanGauss.getPanelCommandes().refresh(matricePrincipale);
+			chPanGauss.getPanelCommandes().getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à l'écoute du controleur
 		}
 		
 		//si on clique sur le bouton constante
@@ -253,14 +253,14 @@ public class Controleur implements ActionListener,MouseListener{
 
 	private void affichageOperation() { //fonction test de pour la création de l'op�ration
 		
-		System.out.print("\nOp�ration : ");
+		System.out.print("\nOpération : ");
 		for(int i = 0; i<operation.length; i++) {
 			System.out.print(operation[i]);
 		}
 		System.out.println("");
 	}
 	
-	//retourne l'index correspondant � la ligne
+	//retourne l'index correspondant à la ligne
 	public int getNumLigne(String ligne) {
 		if (ligne.equals(Data.LIGNES[0]))
 			return 0;
