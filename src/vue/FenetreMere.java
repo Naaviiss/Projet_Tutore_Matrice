@@ -21,7 +21,7 @@ public class FenetreMere extends JFrame{
 		this.setVisible(true);
 		
 		//test
-		//On s'occupe du menu en haut de l'écran
+		//On s'occupe du menu en haut de l'Ã©cran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
@@ -29,24 +29,25 @@ public class FenetreMere extends JFrame{
 
 		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
 			if (i==1){
-				//Si on est sur le bouton Aide, on crée un menu d'aide
+				//CrÃ©ation menu OUTILS
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
-				menu.setMnemonic('A');
 				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
-				//Et on ajoute des items à la suite suivant si on veut
-				//de l'aide pour les simplex ou les matrices
 
+				//Et on ajoute des items Ã  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.addActionListener(contentPane);
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
+					// Commande supplÃ©mentaires
+					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
+					menuitem.setMnemonic('A');
 
 					menu.add(menuitem);
 				}
 			}
+
 			else{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.TITRE_MATRICE[i],Data.TITRE_MATRICE[i].charAt(0));
@@ -57,7 +58,7 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'écran en entier
+		//On fait en sorte que cela s'affiche sur l'Ã©cran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
