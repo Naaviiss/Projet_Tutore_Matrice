@@ -81,20 +81,20 @@ public class PanelChoix extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent pEvt){
 
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-			String texte = new String("Devra passer à la matrice suivante");
+			String texte = new String("Devra passer ï¿½ la matrice suivante");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		
-		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-			String texte = new String("Devra passer à la matrice précédente");
-			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-		}
 		
 		
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
 			String texte = new String("Texte pour comprendre matrice");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
+			System.exit(0);
 		}
 	}
 	
