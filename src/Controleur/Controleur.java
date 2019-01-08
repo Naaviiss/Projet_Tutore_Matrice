@@ -34,6 +34,8 @@ public class Controleur implements ActionListener,MouseListener{
 	private PanelGauss chPanGauss;
 	private PanelAffichageMatrices chPanAffichageMatrices;
 	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
+	Fraction constante; //constante de l'utilisateur récupérée, par défaut, elle vaut 1
+	private PanelCommandes panCom; //panel commande
 	
 	
 	public Controleur(PanelChoix pPanChoix) {
@@ -73,23 +75,24 @@ public class Controleur implements ActionListener,MouseListener{
 				chPanelChoix.add(chPanGauss, "panel_gauss");
 				chPanGauss.enregistreEcouteur(this);
 				chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
+				panCom = chPanGauss.getPanelCommandes();//on récupère le panel commande
 			} 
 			catch (ExceptEntreFraction e) {}
 			catch (ExceptNegatifMalPlace e) {}
 			catch (ExceptZeroDivision e) {}
 			catch (ExceptCaseVide e) {}
+			
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
 			if(operation[3].equals("")) {
-				chPanGauss.getPanelCommandes().getLabel(3).setText(pEvt.getActionCommand());
+				panCom.getLabel(3).setText(pEvt.getActionCommand());
 				operation[3] = pEvt.getActionCommand();	
 			}
 		}
 		
-		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une fl�che
-			PanelCommandes panCom = chPanGauss.getPanelCommandes();//on recupere le panel commande
-			for (int i = 2;i<operation.length;i++) { //si on change de fl�che la site du calcul est r�initialis�e
+		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
+			for (int i = 2;i<operation.length;i++) { //si on change de flèche la suite du calcul est réinitialisée
 				panCom.getLabel(i).setText("");
 				operation[i] = "";
 			}
@@ -99,20 +102,20 @@ public class Controleur implements ActionListener,MouseListener{
 
 		//si on clique sur le bouton effacer, on efface le calcul en cours
 		if(pEvt.getActionCommand().equals(Data.EFFACER)) {
-			JLabel calcul[] = chPanGauss.getPanelCommandes().getCalcul(); //on r�cup�re l'expression affich�e par l'utilisateur
+			JLabel calcul[] = panCom.getCalcul(); //on récupère l'expression affichée par l'utilisateur
 			for (int i=0;i<calcul.length;i++) {
 				calcul[i].setText("");
 				operation[i] = "";
 			}
 			//on remet la zone de commentaire à vide
-			chPanGauss.getPanelCommandes().getZoneCommentaire().setText("");
+			panCom.getZoneCommentaire().setText("");
 		}
 		
 		//si on valide l'opération
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 
 			int ligneB;//index de la deuxième ligne choisie
-			int ligneModifiee = getNumLigne(operation[0]); //on r�cup�re la ligne � modifier
+			int ligneModifiee = getNumLigne(operation[0]); //on r�cup�re la ligne à modifier
 			
 			//on récupère le calcul sous forme de chaine
 			String chaine = new String();
@@ -121,10 +124,10 @@ public class Controleur implements ActionListener,MouseListener{
 			}
 			
 			//on récupère le commentaire
-			String commentaire = chPanGauss.getPanelCommandes().getZoneCommentaire().getText();
+			String commentaire = panCom.getZoneCommentaire().getText();
 			
 			//on recupere la derniere matrice de chaque liste
-			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on r�cup�re la matrice sur laquelle on travaille
+			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupère la matrice sur laquelle on travaille
 			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identit�
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
@@ -170,11 +173,11 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opération à la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
-			chPanGauss.getPanelCommandes().getEffacer().doClick();
+			panCom.getEffacer().doClick();
 			
 			//on change la matrice affichée dans le panelCommande
-			chPanGauss.getPanelCommandes().refresh(matricePrincipale);
-			chPanGauss.getPanelCommandes().getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à l'écoute du controleur
+			panCom.refresh(matricePrincipale);
+			panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à l'écoute du controleur
 			
 			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
@@ -187,7 +190,6 @@ public class Controleur implements ActionListener,MouseListener{
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
 			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flèche <-
 				//Création du popup de la demande de la constante uniquement avec la flèche <-
-				Fraction constante; //constante de l'utilisateur récupérée
 				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
 				try {
 					//Si on rentre une valeur pour la constante
@@ -199,38 +201,52 @@ public class Controleur implements ActionListener,MouseListener{
 					}
 					
 					//on ajoute la constante au premier emplacement vide
-					int labelVideConstante = chPanGauss.getPanelCommandes().getLabelVideConstante();//on r�cup�re l'indice du premier label disponible pour une constante
+					int labelVideConstante = panCom.getLabelVideConstante();//on récupère l'indice du premier label disponible pour une constante
 					operation[labelVideConstante] = constante.toString();
+					
 					if (!constante.toString().equals("1"))
-						chPanGauss.getPanelCommandes().getLabel(labelVideConstante).setText(constante.toString());
+						panCom.getLabel(labelVideConstante).setText(constante.toString());
 				}
 				catch(ExceptEntreFraction e) { //si on lève une exception
-					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptNegatifMalPlace e) {
-					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptZeroDivision e) {
-					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptCaseVide e) {
-					chPanGauss.getPanelCommandes().getEffacer().doClick();//pour l'instant, le calcul est reset
+					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 			}
 		}
 		
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un op�rateur
+		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opérateur
 			operation[4] = pEvt.getActionCommand();
 		}
 	}
 	
 	//quand on clique sur une ligne
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		PanelCommandes panCom = chPanGauss.getPanelCommandes();
+	public void mouseClicked(MouseEvent e) {//si on clique sur une ligne
 		int labelVide = panCom.getLabelVideLigne();
-		panCom.getLabel(labelVide).setText(e.getComponent().getName());
-		operation[labelVide] = e.getComponent().getName();
+
+		if (labelVide == 0 || operation[1].equals(Data.FLECHES[0])){ //si on choisit la ligne à modifier ou si on a utilisé la flèche <-
+			if(Arrays.asList(Data.LIGNES).contains(operation[2])){ //si on a déjà choisi une ligne juste après la flèche
+				if (labelVide == 3) {//si le label vide est celui qui suit la ligne
+					labelVide = 5; //on le met à 5 qui vaut au dernier emplacement possible pour une ligne
+				}
+			}
+			panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+			operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+		}
+		else if (labelVide == 2 && operation[1].equals(Data.FLECHES[1])) {//s'il s'agit de la flèche <-> et qu'on choisit la ligne avec laquelle on va intervertir la première
+			panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+			operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+		}
+		//ces if permettent d'éviter le calculs comme L2<-> L2 L3 ou L1 <- L2 L3 L2, etc.
+		
 	}
 
 	//pour le over sur une ligne

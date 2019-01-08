@@ -29,7 +29,6 @@ public class Fraction {
 
 	//change un string en fraction : 3/5 devient Fraction(3,5)
 	public Fraction(String parFrac) throws ExceptEntreFraction,ExceptZeroDivision,ExceptNegatifMalPlace,ExceptCaseVide{
-		System.out.println("fraction:"+parFrac);
 		int slash = 0;  //si il y a un slash dans le String
 		int rencontre = 0;	//savoir quand on a passé le slash
 		String numerateurString = "";

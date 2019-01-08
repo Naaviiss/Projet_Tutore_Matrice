@@ -96,7 +96,7 @@ public class PanelCommandes extends JPanel implements Data{
 		panels[2].add(effacer);
 		panels[2].add(Box.createRigidArea(new Dimension(50,0)));
 
-		//ligne avec le bouton constante et le choix de la fl�che
+		//ligne avec le bouton constante et le choix de la flèche
 		panels[3] = new JPanel();
 		panels[3].setLayout(new BoxLayout(panels[3], BoxLayout.LINE_AXIS));
 		//instance et ajoutdes boutons fl�ches
@@ -110,7 +110,7 @@ public class PanelCommandes extends JPanel implements Data{
 		//ajout du bouton constante
 		panels[3].add(constante);
 
-		//ligne avec les boutons pour les op�rations
+		//ligne avec les boutons pour les opérations
 		panels[4] = new JPanel();
 		panels[4].setLayout(new BoxLayout(panels[4], BoxLayout.LINE_AXIS));
 		panels[4].add(Box.createRigidArea(new Dimension(100,0)));
