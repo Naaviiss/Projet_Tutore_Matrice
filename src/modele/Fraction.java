@@ -7,9 +7,6 @@ public class Fraction {
 	//FRACTION
 	//une fraction composee d'une numerateur et d'un denominateur
 	public Fraction(int parNum, int parDen){
-//		if(parDen == 0) {
-//			throw new RuntimeException("Division par zero");
-//		}
 		numerateur = parNum;
 		denominateur = parDen;
 		reduire();  
@@ -55,6 +52,7 @@ public class Fraction {
 				}
 				else {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
+						System.out.println("la");
 						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la fraction
 					}
 					else {
@@ -68,12 +66,12 @@ public class Fraction {
 			if(denominateurString == "") {
 				throw new ExceptCaseVide();
 			}
-//			if(numerateurString.equals("-")) {
-//				throw new ExceptCaseVide();
-//			}
-//			if(denominateurString.equals("-")) {
-//				throw new ExceptCaseVide();
-//			}
+			if(numerateurString.equals("-")) {
+				throw new ExceptCaseVide();
+			}
+			if(denominateurString.equals("-")) {
+				throw new ExceptCaseVide();
+			}
 			if(Integer.parseInt(denominateurString) == 0) {
 				throw new ExceptZeroDivision();
 			}
@@ -93,6 +91,7 @@ public class Fraction {
 		else {//si c'est un entier
 			for(char ch : parFrac.toCharArray()) {
 				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
+					System.out.println("ici");
 					throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la case
 				}
 				else {

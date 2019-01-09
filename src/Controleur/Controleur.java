@@ -39,6 +39,10 @@ public class Controleur implements ActionListener,MouseListener{
 	
 	
 	public Controleur(PanelChoix pPanChoix) {
+		//on met une constante par défaut oau cas où l'utilisateur n'en renseigne pas
+		constante = new Fraction(1);
+		
+		
 		//on instancie le tableau de string correspondant au calcul de l'utilisateur
 		for(int i=0;i<operation.length;i++) {
 			operation[i]= ""; //au départ, le tableau est vide
@@ -77,10 +81,18 @@ public class Controleur implements ActionListener,MouseListener{
 				chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 				panCom = chPanGauss.getPanelCommandes();//on récupère le panel commande
 			} 
-			catch (ExceptEntreFraction e) {}
-			catch (ExceptNegatifMalPlace e) {}
-			catch (ExceptZeroDivision e) {}
-			catch (ExceptCaseVide e) {}
+			catch (ExceptEntreFraction e) {
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractères spéciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
+			}
+			catch (ExceptNegatifMalPlace e) {
+				JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);
+			}
+			catch (ExceptZeroDivision e) {
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas diviser un entier par 0 !","Erreur",JOptionPane.ERROR_MESSAGE);
+			}
+			catch (ExceptCaseVide e) {
+				JOptionPane.showMessageDialog(null, "Vous devez remplir toutes les cases de la matrice !","Erreur",JOptionPane.ERROR_MESSAGE);
+			}
 			
 		}
 		
@@ -122,6 +134,9 @@ public class Controleur implements ActionListener,MouseListener{
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
 			}
+			
+			//TEMPORAIRE
+			affichageOperation();
 			
 			//on récupère le commentaire
 			String commentaire = panCom.getZoneCommentaire().getText();
@@ -182,13 +197,13 @@ public class Controleur implements ActionListener,MouseListener{
 			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
 				//on lance un popup pour le féliciter
-				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matricé identité !\n Pensez à exporter votre travil en PDF pour ne pas en perdre une miette ;)","Bravo !",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matricé identité !\n Pensez à exporter votre travil en PDF pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
 		//si on clique sur le bouton constante
 		if(pEvt.getActionCommand().equals(Data.CONSTANTE)) { //si la commande de la source est le bouton constante
-			if(operation[1].equals(Data.FLECHES[0])) { //on  nepeut avoir une constante qu'avec la flèche <-
+			if( operation[1].equals(Data.FLECHES[0]) && (operation[2].equals("") || Arrays.asList(Data.LIGNES).contains(operation[2])) ) { //on  ne peut avoir une constante qu'avec la flèche <- et si une constante n'a pas déjà été entrée auparavant
 				//Création du popup de la demande de la constante uniquement avec la flèche <-
 				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va récupérer
 				try {
@@ -208,15 +223,19 @@ public class Controleur implements ActionListener,MouseListener{
 						panCom.getLabel(labelVideConstante).setText(constante.toString());
 				}
 				catch(ExceptEntreFraction e) { //si on lève une exception
+					JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractères spéciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
 					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptNegatifMalPlace e) {
+					JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);
 					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptZeroDivision e) {
+					JOptionPane.showMessageDialog(null, "Vous ne pouvez pas diviser un entier par 0 !","Erreur",JOptionPane.ERROR_MESSAGE);
 					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 				catch (ExceptCaseVide e) {
+					JOptionPane.showMessageDialog(null, "Vous devez remplir toutes les cases de la matrice !","Erreur",JOptionPane.ERROR_MESSAGE);
 					panCom.getEffacer().doClick();//pour l'instant, le calcul est reset
 				}
 			}
@@ -232,8 +251,8 @@ public class Controleur implements ActionListener,MouseListener{
 	public void mouseClicked(MouseEvent e) {//si on clique sur une ligne
 		int labelVide = panCom.getLabelVideLigne();
 
-		if (labelVide == 0 || operation[1].equals(Data.FLECHES[0])){ //si on choisit la ligne à modifier ou si on a utilisé la flèche <-
-			if(Arrays.asList(Data.LIGNES).contains(operation[2])){ //si on a déjà choisi une ligne juste après la flèche
+		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne à modifier ou si on a utilisé la flèche <-
+			if( Arrays.asList(Data.LIGNES).contains(operation[2]) ){ //si on a déjà choisi une ligne juste après la flèche
 				if (labelVide == 3) {//si le label vide est celui qui suit la ligne
 					labelVide = 5; //on le met à 5 qui vaut au dernier emplacement possible pour une ligne
 				}
