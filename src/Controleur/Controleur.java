@@ -96,12 +96,6 @@ public class Controleur implements ActionListener,MouseListener{
 			
 		}
 		
-		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la commande de la source est un opérateur
-			if(operation[3].equals("")) {
-				panCom.getLabel(3).setText(pEvt.getActionCommand());
-				operation[3] = pEvt.getActionCommand();	
-			}
-		}
 		
 		if(Arrays.asList(Data.FLECHES).contains(pEvt.getActionCommand())) { //si la commande de la source est une flèche
 			for (int i = 2;i<operation.length;i++) { //si on change de flèche la suite du calcul est réinitialisée
@@ -242,7 +236,11 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opérateur
-			operation[4] = pEvt.getActionCommand();
+			//uniquement si la première ligne = ligne à modifier et qu'aucun signe n'a été renseigné
+			if( operation[2].equals(operation[0]) && operation[3].equals("") ) {
+				operation[3] = pEvt.getActionCommand();
+				panCom.getLabel(3).setText(pEvt.getActionCommand());
+			}
 		}
 	}
 	
@@ -252,13 +250,15 @@ public class Controleur implements ActionListener,MouseListener{
 		int labelVide = panCom.getLabelVideLigne();
 
 		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne à modifier ou si on a utilisé la flèche <-
-			if( Arrays.asList(Data.LIGNES).contains(operation[2]) ){ //si on a déjà choisi une ligne juste après la flèche
-				if (labelVide == 3) {//si le label vide est celui qui suit la ligne
+			if( Arrays.asList(Data.LIGNES).contains(operation[2])){ //si on a déjà choisi une ligne juste après la flèche 
+				if (labelVide == 3) {//si le label vide est celui qui suit la ligne 
 					labelVide = 5; //on le met à 5 qui vaut au dernier emplacement possible pour une ligne
 				}
 			}
-			panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
-			operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			if( labelVide == 2 || operation[2].equals(operation[0]) ) {//si le premier emplacement vide correspond à la première ligne à choisir ou que la première ligne après la flèche est la même que celle à modifier
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			}
 		}
 		else if (labelVide == 2 && operation[1].equals(Data.FLECHES[1])) {//s'il s'agit de la flèche <-> et qu'on choisit la ligne avec laquelle on va intervertir la première
 			panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
@@ -292,11 +292,11 @@ public class Controleur implements ActionListener,MouseListener{
 		
 	}
 
-	private void affichageOperation() { //fonction test de pour la création de l'op�ration
+	private void affichageOperation() { //fonction test de pour la création de l'opération
 		
 		System.out.print("\nOpération : ");
 		for(int i = 0; i<operation.length; i++) {
-			System.out.print(operation[i]);
+			System.out.print(""+i+" : "+operation[i]+"\n");
 		}
 		System.out.println("");
 	}
