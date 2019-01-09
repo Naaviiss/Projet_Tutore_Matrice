@@ -3,8 +3,10 @@ package vue;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Controleur.Controleur;
 import modele.Data;
@@ -103,6 +105,9 @@ public class PanelChoix extends JPanel implements ActionListener{
 					+ "Bonne chance!");
 		        
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}		
+		if (pEvt.getActionCommand().equals(Data.TITRE_MENU[2])){
+             SwingUtilities.getWindowAncestor(this).dispose();
 		}
 	}
 	
