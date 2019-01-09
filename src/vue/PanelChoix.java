@@ -3,12 +3,12 @@ package vue;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controleur.Controleur;
 import modele.Data;
+import modele.Matrice;
 
 public class PanelChoix extends JPanel implements ActionListener{
 
@@ -81,19 +81,27 @@ public class PanelChoix extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent pEvt){
 
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-			String texte = new String("Devra passer � la matrice suivante");
+			String texte = new String("Devra passer à la matrice suivante");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-			String texte = new String("Devra passer � la matrice pr�c�dente");
+			String texte = new String("Devra passer à la matrice précédente");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
-			String texte = new String("Texte pour comprendre matrice");
+			String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là, on comprend le principe avec des tailles encore plus grandes.\n\n"
+					+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, négatifs, nuls) et des fractions (positives,négatives). Les fractions seront réduites automatiquement.\n\n"
+					+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'écrirent correctement. Les différents formes de calculs possibles sont les suivantes :\n\n"
+					+ "Ligne_i ↔ Ligne_j\n"
+					+ "Ligne_i ← lambda * ligne_i (Si lambda ≠ 0)\n"
+					+ "Ligne_i ← ligne_i + lambda * ligne_j\n\n"
+					+ "Une matrice identité correspond à : \n" + Matrice.identite(3).toString()
+					+ "Bonne chance!");
+		        
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
