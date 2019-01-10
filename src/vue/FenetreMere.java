@@ -4,12 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import modele.Data;
 
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
 
 
 public class FenetreMere extends JFrame{
@@ -20,29 +22,27 @@ public class FenetreMere extends JFrame{
 		this.add(contentPane);
 		this.setVisible(true);
 		
-		//test
-		//On s'occupe du menu en haut de l'�cran
+		//On s'occupe du menu en haut de l'Ã©cran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
 
-
 		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
 			if (i==1){
-				//Si on est sur le bouton Aide, on cr�e un menu d'aide
+				//CrÃ©ation menu OUTILS
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
-				menu.setMnemonic('A');
 				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
-				//Et on ajoute des items � la suite suivant si on veut
-				//de l'aide pour les simplex ou les matrices
 
+				//Et on ajoute des items Ã  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.addActionListener(contentPane);
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
+					// Commande supplÃ©mentaires
+					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
+					menuitem.setMnemonic('A');
 
 					menu.add(menuitem);
 				}
@@ -57,10 +57,10 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'�cran en entier
+		//On fait en sorte que cela s'affiche sur l'Ã©cran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
-
 	}
+	
 }

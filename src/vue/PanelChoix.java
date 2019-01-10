@@ -72,19 +72,32 @@ public class PanelChoix extends JPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent pEvt){
 
-		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-			String texte = new String("Devra passer à la matrice suivante");
+		if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
+			System.exit(0);
+		}
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
+			String texte = new String("Devra revenir en arrière");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
+			String texte = new String("Devra agrandir le texte");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
+			String texte = new String("Devra retrecir le texte");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
+			String texte = new String("Devra recommencer le calcul");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		
-		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-			String texte = new String("Devra passer à la matrice précédente");
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
+			String texte = new String("RETOUR AU MENU PRINCIPAL");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+			
 		}
-		
-		
-		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
+		else if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
 			String texte = new String("Texte pour comprendre matrice");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
