@@ -109,13 +109,13 @@ public class API extends JFrame implements ActionListener{
 //		}
 		//L'action concernant l'aide pour les simplex
 		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[0])){
-			String texte = new String("Texte pour comprendre simplex");
+			String texte = new String("Pour travailler sur les simplexes, veuillez cliquer sur le bouton 'Simplexe'");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		//L'action concernant l'aide pour les matrices
 		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[1])){
-			String texte = new String("Texte pour comprendre matrice");
+			String texte = new String("Pour travailler sur la méthode du pivot de Gauss, veuillez cliquer sur le bouton 'Matrice'");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		//else if (pEvt.getActionCommand().equals(Data.CHOIX[1])){

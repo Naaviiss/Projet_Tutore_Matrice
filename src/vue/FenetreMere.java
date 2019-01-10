@@ -22,18 +22,22 @@ public class FenetreMere extends JFrame{
 		this.add(contentPane);
 		this.setVisible(true);
 		
-		//On s'occupe du menu en haut de l'Ã©cran
+		//test
+		//On s'occupe du menu en haut de l'écran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
 
 		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
 			if (i==1){
-				//CrÃ©ation menu OUTILS
+				//Cr�ation menu OUTILS
+				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
 				menu.addActionListener(contentPane);
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
+				//Et on ajoute des items à la suite suivant si on veut
+				//de l'aide pour les simplex ou les matrices
 
 				//Et on ajoute des items Ã  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
@@ -57,7 +61,7 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'Ã©cran en entier
+		//On fait en sorte que cela s'affiche sur l'�cran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
