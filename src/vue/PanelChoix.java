@@ -99,9 +99,6 @@ public class PanelChoix extends JPanel implements ActionListener{
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
-		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
-			String texte = new String("Texte pour comprendre matrice");
-		}
 		
 		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
 			String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là, on comprend le principe avec des tailles encore plus grandes.\n\n"
@@ -111,7 +108,7 @@ public class PanelChoix extends JPanel implements ActionListener{
 					+ "Ligne_i ← lambda * ligne_i (Si lambda ≠ 0)\n"
 					+ "Ligne_i ← ligne_i + lambda * ligne_j\n\n"
 					+ "Une matrice identité correspond à : \n" + Matrice.identite(3).toString()
-					+ "Bonne chance!");
+					+ "Bonne chance !");
 
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}		

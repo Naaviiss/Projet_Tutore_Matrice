@@ -4,14 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import modele.Data;
 
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
 
 
 public class FenetreMere extends JFrame{
@@ -30,7 +28,7 @@ public class FenetreMere extends JFrame{
 
 		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
 			if (i==1){
-				//Cr�ation menu OUTILS
+				//Création menu OUTILS
 				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
 				menu.addActionListener(contentPane);
@@ -44,7 +42,7 @@ public class FenetreMere extends JFrame{
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
 					menuitem.addActionListener(contentPane);
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
-					// Commande supplÃ©mentaires
+					// Commandes supplémentaires
 					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
 					menuitem.setMnemonic('A');
 
@@ -61,7 +59,7 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'�cran en entier
+		//On fait en sorte que cela s'affiche sur l'�cran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);

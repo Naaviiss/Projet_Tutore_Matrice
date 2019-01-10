@@ -15,7 +15,7 @@ import modele.Data;
 public class PanelTaille extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JButton valider = new JButton("valider");
-    private JComboBox<String> comboTaille;
+    private JComboBox comboTaille;
 
     private String taille[]= {"3","4","5"};
     private JLabel monlabel;
@@ -27,7 +27,7 @@ public class PanelTaille extends JPanel{
 				
 		this.setBorder(new EmptyBorder(300,300,300,300));
 		valider.setPreferredSize(new Dimension(120, 40));		
-		comboTaille = new JComboBox<String>(taille);
+		comboTaille = new JComboBox(taille);
 		comboTaille.setFont(font);
 		valider.setFont(font);
 		valider.setActionCommand(Data.VALIDER_PANEL_TAILLE);
