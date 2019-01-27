@@ -66,6 +66,8 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanelChoix.add(chPanMatrice, "panel_matrice");
 			chPanMatrice.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
+			
+			
 		}
 		
 
@@ -129,9 +131,6 @@ public class Controleur implements ActionListener,MouseListener{
 				chaine+=operation[i];
 			}
 			
-			//TEMPORAIRE
-			affichageOperation();
-			
 			//on récupère le commentaire
 			String commentaire = panCom.getZoneCommentaire().getText();
 			
@@ -157,6 +156,9 @@ public class Controleur implements ActionListener,MouseListener{
 				//si c'est la deuxième ligne qui prend un calcul
 				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
 					ligneB = getNumLigne(operation[5]);
+					if (operation[4].equals("")) {
+						operation[4] = "1";
+					}
 					try {
 						matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice principale
 						matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opération sur la ligne de la matrice identité
@@ -178,7 +180,6 @@ public class Controleur implements ActionListener,MouseListener{
 					catch (ExceptCaseVide e) {}
 				}
 			}
-			
 			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opération à la table
 			
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
@@ -191,7 +192,7 @@ public class Controleur implements ActionListener,MouseListener{
 			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
 				//on lance un popup pour le féliciter
-				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matricé identité !\n Pensez à exporter votre travil en PDF pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matricé identité !\n Pensez à exporter votre travail en PDF pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
@@ -211,6 +212,12 @@ public class Controleur implements ActionListener,MouseListener{
 					
 					//on ajoute la constante au premier emplacement vide
 					int labelVideConstante = panCom.getLabelVideConstante();//on récupère l'indice du premier label disponible pour une constante
+					//si la constante est à son premier emplacement vide
+					if (labelVideConstante == 2) {
+						//la ligne qui suit doit être la même que celle à modifier
+						operation[3] = operation[0];
+						panCom.getLabel(3).setText(operation[3]);
+					}
 					operation[labelVideConstante] = constante.toString();
 					
 					if (!constante.toString().equals("1"))
@@ -241,6 +248,9 @@ public class Controleur implements ActionListener,MouseListener{
 				operation[3] = pEvt.getActionCommand();
 				panCom.getLabel(3).setText(pEvt.getActionCommand());
 			}
+			else {
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas choisir un opérateur si vous n'avez pas écrit un calcul de la bonne forme !\n","Erreur",JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
@@ -250,19 +260,26 @@ public class Controleur implements ActionListener,MouseListener{
 		int labelVide = panCom.getLabelVideLigne();
 
 		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne à modifier ou si on a utilisé la flèche <-
-			if( Arrays.asList(Data.LIGNES).contains(operation[2])){ //si on a déjà choisi une ligne juste après la flèche 
-				if (labelVide == 3) {//si le label vide est celui qui suit la ligne 
-					labelVide = 5; //on le met à 5 qui vaut au dernier emplacement possible pour une ligne
-				}
-			}
-			if( labelVide == 2 || operation[2].equals(operation[0]) ) {//si le premier emplacement vide correspond à la première ligne à choisir ou que la première ligne après la flèche est la même que celle à modifier
+			if (labelVide == 0) {
 				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
 				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
 			}
+			if( labelVide == 2 && operation[0].equals( e.getComponent().getName() ) ) {//si la première ligne après la flèche est la même que celle à modifier
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			}
+			if (labelVide == 5 && !( operation[0].equals( e.getComponent().getName() ) ) ) { //si la troisième ligne du calcul est différente de la ligne à modifier
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			}
+			
+			
 		}
 		else if (labelVide == 2 && operation[1].equals(Data.FLECHES[1])) {//s'il s'agit de la flèche <-> et qu'on choisit la ligne avec laquelle on va intervertir la première
-			panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
-			operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			if (!(e.getComponent().getName().equals(operation[0]))) { //si la ligne à échangée est différente de la première ligne choisie
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
+			}
 		}
 		//ces if permettent d'éviter le calculs comme L2<-> L2 L3 ou L1 <- L2 L3 L2, etc.
 		
