@@ -268,7 +268,7 @@ public class Controleur implements ActionListener,MouseListener{
 				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
 				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
 			}
-			if (labelVide == 5 && !( operation[0].equals( e.getComponent().getName() ) ) ) { //si la troisième ligne du calcul est différente de la ligne à modifier
+			if (labelVide == 5 && !( operation[0].equals( e.getComponent().getName() ) ) && !Arrays.asList(Data.LIGNES).contains(operation[3]) ) { //si la troisième ligne du calcul est différente de la ligne à modifier et que la deuxime ligne choisie ne prend pas de calcul
 				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
 				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
 			}
