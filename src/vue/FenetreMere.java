@@ -31,7 +31,7 @@ public class FenetreMere extends JFrame{
 				//Création menu OUTILS
 				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
-				menu.addActionListener(contentPane);
+				menu.addActionListener(contentPane.getChControleur());
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
 				//Et on ajoute des items à la suite suivant si on veut
@@ -40,7 +40,7 @@ public class FenetreMere extends JFrame{
 				//Et on ajoute des items Ã  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
-					menuitem.addActionListener(contentPane);
+					menuitem.addActionListener(contentPane.getChControleur());
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
 					// Commandes supplémentaires
 					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
@@ -53,7 +53,7 @@ public class FenetreMere extends JFrame{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.TITRE_MATRICE[i],Data.TITRE_MATRICE[i].charAt(0));
 				menu.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE[i].charAt(0),java.awt.Event.CTRL_MASK));
-				menu.addActionListener(contentPane);
+				menu.addActionListener(contentPane.getChControleur());
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
 			}

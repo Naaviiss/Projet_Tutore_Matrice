@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -20,6 +21,7 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
+import vue.FenetreMere;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
 import vue.PanelCommandes;
@@ -36,12 +38,13 @@ public class Controleur implements ActionListener,MouseListener{
 	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
 	Fraction constante; //constante de l'utilisateur récupérée, par défaut, elle vaut 1
 	private PanelCommandes panCom; //panel commande
+	private FenetreMere fenMere; //la fenetre Mere
 	
 	
 	public Controleur(PanelChoix pPanChoix) {
-		//on met une constante par défaut oau cas où l'utilisateur n'en renseigne pas
-		constante = new Fraction(1);
 		
+		//on met une constante par défaut au cas où l'utilisateur n'en renseigne pas
+		constante = new Fraction(1);
 		
 		//on instancie le tableau de string correspondant au calcul de l'utilisateur
 		for(int i=0;i<operation.length;i++) {
@@ -49,6 +52,7 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		chPanelChoix = pPanChoix;
+		fenMere = (FenetreMere) SwingUtilities.windowForComponent(chPanelChoix);
 		List<Matrice> chMatrices = new ArrayList<Matrice>();//list des matrices
 		List<Matrice> chMatricesID = new ArrayList<Matrice>();//liste des matrices identités
 		List<String> chLigneModif = new ArrayList<String>();//liste des opérations effectuées sous forme de chaine de caractères
@@ -252,6 +256,50 @@ public class Controleur implements ActionListener,MouseListener{
 				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas choisir un opérateur si vous n'avez pas écrit un calcul de la bonne forme !\n","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		//PARTIE SUR LE MENU
+				if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
+					System.exit(0);
+				}
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
+					String texte = new String("Devra revenir en arrière");
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				}
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
+					String texte = new String("Devra agrandir le texte");
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				}
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
+					String texte = new String("Devra retrecir le texte");
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				}
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
+					String texte = new String("Devra recommencer le calcul");
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
+					String texte = new String("RETOUR AU MENU PRINCIPAL");
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+				
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
+					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là, on comprend le principe avec des tailles encore plus grandes.\n\n"
+							+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, négatifs, nuls) et des fractions (positives,négatives). Les fractions seront réduites automatiquement.\n\n"
+							+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'écrirent correctement. Les différents formes de calculs possibles sont les suivantes :\n\n"
+							+ "Ligne_i ↔ Ligne_j\n"
+							+ "Ligne_i ← lambda * ligne_i (Si lambda ≠ 0)\n"
+							+ "Ligne_i ← ligne_i + lambda * ligne_j\n\n"
+							+ "Une matrice identité correspond à : \n" + Matrice.identite(3).toString()
+							+ "Bonne chance !");
+
+					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				}		
+				if (pEvt.getActionCommand().equals(Data.TITRE_MENU[2])){
+		             SwingUtilities.getWindowAncestor(fenMere).dispose();
+				}
+		
 	}
 	
 	//quand on clique sur une ligne
@@ -282,6 +330,8 @@ public class Controleur implements ActionListener,MouseListener{
 			}
 		}
 		//ces if permettent d'éviter le calculs comme L2<-> L2 L3 ou L1 <- L2 L3 L2, etc.
+		
+		
 		
 	}
 
