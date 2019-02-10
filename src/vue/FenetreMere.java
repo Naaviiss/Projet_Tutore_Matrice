@@ -10,6 +10,7 @@ import modele.Data;
 
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 
 
 public class FenetreMere extends JFrame{
@@ -42,10 +43,18 @@ public class FenetreMere extends JFrame{
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
 					menuitem.addActionListener(contentPane.getChControleur());
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
-					// Commandes supplémentaires
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
-					menuitem.setMnemonic('A');
-
+					if (j == 0){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,java.awt.Event.CTRL_MASK));
+					}
+					else if (j==1){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_UP,java.awt.Event.CTRL_MASK));
+					}
+					else if (j==2){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_DOWN,java.awt.Event.CTRL_MASK));	
+					}
+					else {
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,java.awt.Event.CTRL_MASK));
+					}
 					menu.add(menuitem);
 				}
 			}
