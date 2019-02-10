@@ -59,19 +59,19 @@ public class API extends JFrame implements ActionListener{
 		
 		this.add(pan);
 		
-		//On s'occupe du menu en haut de l'écran
+		//On s'occupe du menu en haut de l'ï¿½cran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
 		for(int i=0;i<Data.TITRE_MENU.length;i++){
 			if (i==0){
-				//Si on est sur le bouton Aide, on crée un menu d'aide
+				//Si on est sur le bouton Aide, on crï¿½e un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MENU[i]);
 			    menu.setMnemonic('A');
 				menu.addActionListener(this);
 				menu.setActionCommand(Data.TITRE_MENU[i]);
 				menuBar.add(menu);
-				//Et on ajoute des items à la suite suivant si on veut
+				//Et on ajoute des items ï¿½ la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
 				for(int j=0;j<Data.TITRE_MENU_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MENU_LISTE[j]);
@@ -104,28 +104,19 @@ public class API extends JFrame implements ActionListener{
 		if (ev.getActionCommand().equals(Data.TITRE_MENU[2])){
 			System.exit(0);
 		}//L'action concernant le bouton Retour Menu Principal
-//		if (actionCommand.equals(Data.Titre_Menu[1])){
-//			fenetre.setMenu();
-//		}
+		
 		//L'action concernant l'aide pour les simplex
-		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[0])){
+		if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[0])){
 			String texte = new String("Pour travailler sur les simplexes, veuillez cliquer sur le bouton 'Simplexe'");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		//L'action concernant l'aide pour les matrices
-		else if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[1])){
-			String texte = new String("Pour travailler sur la méthode du pivot de Gauss, veuillez cliquer sur le bouton 'Matrice'");
+		if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[1])){
+			String texte = new String("Pour travailler sur la mÃ©thode du pivot de Gauss, veuillez cliquer sur le bouton 'Matrice'");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 		}
-		//else if (pEvt.getActionCommand().equals(Data.CHOIX[1])){
-
-		//}
-		
-		else if(ev.getActionCommand().equals("simplexe")){
-			//new FenetreMere();
-		}
-		else if(ev.getActionCommand().equals("matrice")){
+		if(ev.getActionCommand().equals("matrice")){
 			new FenetreMere();
 		}
 	}
