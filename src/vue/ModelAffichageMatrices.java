@@ -10,7 +10,7 @@ import modele.Matrice;
 public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	private static final long serialVersionUID = 1L;
 	private List<Matrice> chMatrices; // liste des matrices
-	private List<Matrice> chMatricesID; // list des matrices identités
+	private List<Matrice> chMatricesID; // list des matrices identitï¿½s
 	private List<String> chLigneModifiees; //pour les modifications de lignes
 	private List<String> chCommentaire;//pour les eventuels commentaires
 	
@@ -21,7 +21,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		chLigneModifiees = pLigneModif;
 		chCommentaire = pCommentaire;
 		
-		//on définit le modèle de la table
+		//on dï¿½finit le modï¿½le de la table
 		this.setColumnIdentifiers(Data.INTITULES);
 		this.setRowCount(20);
 		
@@ -43,5 +43,4 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	public Class<String> getColumnClass(int indCol) {
 		return String.class;
 	}
-	
 }

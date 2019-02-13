@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 
 import modele.*;
 
@@ -26,6 +27,8 @@ public class PanelAffichageMatrices extends JPanel{
 	private List<String> chCommentaire;//pour les commentaires
 	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
+	private ModelAffichageMatrices modele; 
+
 	
 	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif,List<String> pCommentaire) {
 		
@@ -34,8 +37,8 @@ public class PanelAffichageMatrices extends JPanel{
 		chLigneModif = pLigneModif;
 		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
-		
+		modele  = new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire);
+		tableMatrices.setModel(modele);
 		//on applique le renderer
 		setRenderer(renderer);
 		
@@ -51,7 +54,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
+		tableMatrices.setModel(modele);
 		
 		//scrollbar
 		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -80,8 +83,9 @@ public class PanelAffichageMatrices extends JPanel{
 			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
 			chCommentaire.add(chCommentaire.size()-1,commentaire);//on ajoute le commentaire sur la ligne d'avant
 		}
-		
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));//on raffraichit la table
+		modele  = new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire);
+
+		tableMatrices.setModel(modele);
 		
 		//hauteur des lignes en focntion de la taille de la matrice
 		int tailleMatrice = chMatrices.get(0).getTaille();
@@ -91,6 +95,13 @@ public class PanelAffichageMatrices extends JPanel{
 		setRenderer(renderer);
 	}
 
+	public void viderListe(){
+		this.chMatrices.clear();
+		this.chMatricesIdentites.clear();
+		this.chCommentaire.clear();
+		this.chLigneModif.clear();
+	}
+	
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
 	}
@@ -111,4 +122,23 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(180);
 		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(180);
 	}
+
+	public ModelAffichageMatrices getModel() {
+		return modele;
+	}
+	
+	public static void clearTable(final JTable table) { 
+	    for (int i = 1; i < table.getRowCount(); i++){ 
+	    	for(int j = 0; j < table.getColumnCount(); j++) {
+	    		table.setValueAt("", i, j); 
+	    	} 
+		}
+	table.setValueAt("",0,2);
+	}
+	
+	public static void deleteAllRows(ModelAffichageMatrices model) { 
+	    for(int i = model.getRowCount() - 1; i >= 0; i--) { 
+	     model.removeRow(i); 
+	    } 
+	} 
 }
