@@ -14,10 +14,6 @@ import modele.*;
 public class PanelAffichageMatrices extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	public List<Matrice> getChMatricesIdentites() {
-		return chMatricesIdentites;
-	}
-
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
 	private List<Matrice> chMatricesIdentites;//liste des matrices identit�s
@@ -98,11 +94,15 @@ public class PanelAffichageMatrices extends JPanel{
 		this.chMatricesIdentites.clear();
 		this.chCommentaire.clear();
 		this.chLigneModif.clear();
-	}
-	
+	}	
+
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
 	}
+	public List<Matrice> getchMatricesIdentites(){
+		return chMatricesIdentites;
+	}
+
 	
 	public void setRenderer(MultiLigneRenderer renderer) {
 		for(int i = 0; i<tableMatrices.getColumnCount();i++) {
@@ -134,6 +134,28 @@ public class PanelAffichageMatrices extends JPanel{
 	table.setValueAt("",0,2);
 	}
 	
+	public static void clearTableAt(final JTable table, int endroit) { 
+	    for (int i = endroit; i < table.getRowCount(); i++){ 
+	    	for(int j = 0; j < table.getColumnCount(); j++) {
+	    		table.setValueAt("", i, j); 
+	    	} 
+		}
+	    //Sur la ligne encore au dessus.
+	    //Pour le calcul
+		table.setValueAt("",endroit-1,2);
+		//Pour le commentaire
+		table.setValueAt("",endroit-1,3);
+
+	}
+	
+	public List<String> getChLigneModif() {
+		return chLigneModif;
+	}
+
+	public List<String> getChCommentaire() {
+		return chCommentaire;
+	}
+
 	public static void deleteAllRows(ModelAffichageMatrices model) { 
 	    for(int i = model.getRowCount() - 1; i >= 0; i--) { 
 	     model.removeRow(i); 

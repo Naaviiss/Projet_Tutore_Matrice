@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -138,7 +140,7 @@ public class Controleur implements ActionListener,MouseListener{
 			
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on rÃ©cupÃ¨re la matrice sur laquelle on travaille
-			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identitï¿½
+			Matrice actuelleID = chPanAffichageMatrices.getchMatricesIdentites().get(chPanAffichageMatrices.getchMatricesIdentites().size()-1);//idem pour son identitï¿½
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
 			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identitÃ© sur laquelle on va effectuer les calculs
@@ -256,12 +258,40 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		//PARTIE SUR LE MENU
-				if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
-					System.exit(0);
-				}
+				//Si l'utilisateur décide d'aller au calcul précédent
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-					String texte = new String("Devra revenir en arriÃ¨re");
+					String texte = new String("Devra revenir en arrière");
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+					
+					//On récupère chaque liste
+					List<Matrice> chMatrice = chPanAffichageMatrices.getChMatrices();
+					List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
+					List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
+					List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
+
+					//on enlève le dernier élèment pour chaque liste
+				    chMatrice.remove(chMatrice.size()-1);
+				    chMatriceID.remove(chMatrice.size()-1);
+				    chLignes.remove(chMatrice.size()-1);
+				    chCommentaires.remove(chMatrice.size()-1);
+
+				    //On actualise pour chaque table du coup
+					PanelAffichageMatrices.clearTableAt(chPanAffichageMatrices.getTableMatrices(),chMatrice.size()); 
+					
+					Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chMatrice.size()-1);//on rÃ©cupÃ¨re la matrice sur laquelle on travaille
+					
+					Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
+					System.out.println(matricePrincipale.toString());
+					//chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opÃ©ration Ã  la table
+					
+					//si on valide on reset l'operation en simulant un clic sur le bouton effacer
+					//panCom.getEffacer().doClick();
+					
+					//on change la matrice affichÃ©e dans le panelCommande
+					panCom.refresh(matricePrincipale);
+					panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel Ã  l'Ã©coute du controleur
+					
+				
 				}
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
 					String texte = new String("Devra agrandir le texte");
