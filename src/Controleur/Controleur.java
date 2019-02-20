@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
 import modele.Data;
@@ -21,8 +20,6 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
-import vue.FenetreMere;
-import vue.ModelAffichageMatrices;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
 import vue.PanelCommandes;
@@ -38,7 +35,8 @@ public class Controleur implements ActionListener,MouseListener{
 	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
 	Fraction constante; //constante de l'utilisateur rÃ©cupÃ©rÃ©e, par dÃ©faut, elle vaut 1
 	private PanelCommandes panCom; //panel commande
-	private FenetreMere fenMere; //la fenetre Mere
+	private Boolean etat=false; //etat pour savoir où l'utilisateur se trouve dans l'application
+								//utilisé pour revenir au tout début du calcul de la matrice inverse
 	
 	
 	public Controleur(PanelChoix pPanChoix) {
@@ -60,6 +58,7 @@ public class Controleur implements ActionListener,MouseListener{
 		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on crÃ©Ã© le panel affichage
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent pEvt){
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
@@ -84,6 +83,7 @@ public class Controleur implements ActionListener,MouseListener{
 				chPanGauss.enregistreEcouteur(this);
 				chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
 				panCom = chPanGauss.getPanelCommandes();//on rÃ©cupÃ¨re le panel commande
+				etat = true;
 			} 
 			catch (ExceptEntreFraction e) {
 				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractÃ¨res spÃ©ciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -271,52 +271,46 @@ public class Controleur implements ActionListener,MouseListener{
 					String texte = new String("Devra retrecir le texte");
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				//Permettre à l'utilisateur de recommencer des calculs depuis le début sur sa matrice
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
 					
 					String texte = new String("Devra recommencer le calcul");
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 					//PanelAffichageMatrices.deleteAllRows(chPanAffichageMatrices.getModel());
+					//On efface ce qui est présent dans la JTable
 					PanelAffichageMatrices.clearTable(chPanAffichageMatrices.getTableMatrices());
+					//On vide toutes les listes (qui contiennent la matrice, l'inverse, l'opération et le commentaire)
 					chPanAffichageMatrices.viderListe();
 
-					
-					try {
-						Matrice M1 = chPanMatrice.getMatriceSaisi();//crÃ©ation de la matrice
-						Matrice M2 = Matrice.identite(M1.getTaille());//crÃ©ation de la matrice identitÃ©
-						chPanGauss = new PanelGauss(M1);
-						chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au dÃ©part la chaine pour le calcul et celle pour le commentaire sont vides
-						chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
-						chPanelChoix.add(chPanGauss, "panel_gauss");
-						chPanGauss.enregistreEcouteur(this);
-						chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
-						panCom = chPanGauss.getPanelCommandes();//on rÃ©cupÃ¨re le panel commande
-					} 
-					catch (ExceptEntreFraction e) {
-						JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractÃ¨res spÃ©ciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
+					//On vérifie si l'utilisateur est au niveau de la JTable ou avant
+					if (etat != false) {
+						//s'il est au niveau de la JTable, on remet tout comme avant.
+						try {
+							Matrice M1 = chPanMatrice.getMatriceSaisi();//crÃ©ation de la matrice
+							Matrice M2 = Matrice.identite(M1.getTaille());//crÃ©ation de la matrice identitÃ©
+							chPanGauss = new PanelGauss(M1);
+							chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au dÃ©part la chaine pour le calcul et celle pour le commentaire sont vides
+							chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
+							chPanelChoix.add(chPanGauss, "panel_gauss");
+							chPanGauss.enregistreEcouteur(this);
+							chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
+							panCom = chPanGauss.getPanelCommandes();//on rÃ©cupÃ¨re le panel commande
+						} 
+						catch (ExceptEntreFraction e) {
+							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractÃ¨res spÃ©ciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
+						}
+						catch (ExceptNegatifMalPlace e) {
+							JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);
+						}
+						catch (ExceptZeroDivision e) {
+							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas diviser un entier par 0 !","Erreur",JOptionPane.ERROR_MESSAGE);
+						}
+						catch (ExceptCaseVide e) {
+							JOptionPane.showMessageDialog(null, "Vous devez remplir toutes les cases de la matrice !","Erreur",JOptionPane.ERROR_MESSAGE);
+						}
 					}
-					catch (ExceptNegatifMalPlace e) {
-						JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);
-					}
-					catch (ExceptZeroDivision e) {
-						JOptionPane.showMessageDialog(null, "Vous ne pouvez pas diviser un entier par 0 !","Erreur",JOptionPane.ERROR_MESSAGE);
-					}
-					catch (ExceptCaseVide e) {
-						JOptionPane.showMessageDialog(null, "Vous devez remplir toutes les cases de la matrice !","Erreur",JOptionPane.ERROR_MESSAGE);
-					}
-					
-					/*Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on rÃ©cupÃ¨re la matrice sur laquelle on travaille
-					Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identitï¿½
-					
-					Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-					Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identitÃ© sur laquelle on va effectuer les calculs
-					
-					//on copie les matrices
-					matricePrincipale.copie(actuelle);
-					matriceIdentite.copie(actuelleID);
-					chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,"",""); //on ajoute les matrices,l'opÃ©ration Ã  la table
-*/
-		
-
+					//Sinon, il ne se passe rien.
 				}
 				
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
@@ -335,10 +329,13 @@ public class Controleur implements ActionListener,MouseListener{
 							+ "Bonne chance !");
 
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}		
+				}
+				//Fermer seulement la fenêtre actuelle
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[3])){
 		             SwingUtilities.getWindowAncestor(chPanelChoix).dispose();
 				}
+				
+				//Fermer entièrement l'application
 				if(pEvt.getActionCommand().equals(Data.TITRE_MATRICE[4])) {
 					System.exit(0);
 				}

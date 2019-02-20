@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 
 import modele.Data;
 
@@ -46,7 +47,7 @@ public class API extends JFrame implements ActionListener{
 		
 		contrainte.gridx = 0; contrainte.gridy = 0;
 		contrainte.gridheight = 2; contrainte.gridwidth = 2;
-		pan.add(new JLabel("Bienvenue dans l'API Simplexe-Matrice",JLabel.CENTER),
+		pan.add(new JLabel("Bienvenue dans l'API Simplexe-Matrice",SwingConstants.CENTER),
 				contrainte);
 		
 		contrainte.gridx = 0; contrainte.gridy = 2;
@@ -100,6 +101,7 @@ public class API extends JFrame implements ActionListener{
 		new API();
 
 	}
+	@Override
 	public void actionPerformed(ActionEvent ev) {
 		if (ev.getActionCommand().equals(Data.TITRE_MENU[2])){
 			System.exit(0);

@@ -348,6 +348,7 @@ public class Fraction {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		if (denominateur != 1)
 			return numerateur+"/"+denominateur;

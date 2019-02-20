@@ -16,7 +16,8 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	    setWrapStyleWord(true);
 	}
 	
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    @Override
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     	
     	if(column == 2)
     		setFont(new Font(Font.SERIF, Font.BOLD, 20));
@@ -37,7 +38,7 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
     		
     	
     	if(value!=null){
-    		setText((String)value.toString());
+    		setText(value.toString());
     	}
     	else {
     		setText("");

@@ -367,6 +367,7 @@ public class Matrice {
 	
 	////AFFICHE/////
 	//affiche une matrice
+		@Override
 		public String toString() {
 			int tailleMatrice = this.getTaille();  //taille de la matrice carré
 			int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction
