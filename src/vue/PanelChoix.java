@@ -12,10 +12,9 @@ import Controleur.Controleur;
 import modele.Data;
 import modele.Matrice;
 
-public class PanelChoix extends JPanel /*implements ActionListener*/{
+public class PanelChoix extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	//	private PanelAffichage panAffichage;
 	private PanelTaille panTaille;
 	private PanelGauss panGauss;
 	private PanelMatrice panMatrice;
@@ -72,10 +71,6 @@ public class PanelChoix extends JPanel /*implements ActionListener*/{
 	public void setCardLayout1(CardLayout cardLayout) {
 		this.cardLayout = cardLayout;
 	}
-	/*public void actionPerformed(ActionEvent pEvt){
-
-		
-	}*/
 	
 	public CardLayout getCardLayout() {
 		return cardLayout;

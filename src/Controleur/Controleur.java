@@ -1,6 +1,9 @@
 package Controleur;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,7 +15,9 @@ import java.util.List;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableColumn;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -22,6 +27,7 @@ import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
 import vue.FenetreMere;
+import vue.MultiLigneRenderer;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
 import vue.PanelCommandes;
@@ -70,11 +76,8 @@ public class Controleur implements ActionListener,MouseListener{
 			chPanelChoix.add(chPanMatrice, "panel_matrice");
 			chPanMatrice.enregistreEcouteur(this);
 			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_matrice");
-			
-			
 		}
 		
-
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
 			try {
 				Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
@@ -258,34 +261,61 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		//PARTIE SUR LE MENU
-				if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
-					System.exit(0);
-				}
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-					String texte = new String("Devra revenir en arrière");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-					String texte = new String("Devra agrandir le texte");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
-					String texte = new String("Devra retrecir le texte");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
-					String texte = new String("Devra recommencer le calcul");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}
+		if(pEvt.getActionCommand().equals(Data.TITRE_MENU[2])) {
+			System.exit(0);
+		}
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
+			String texte = new String("Devra revenir en arrière");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
+			//Correspond au zoom
+			JTable table = chPanAffichageMatrices.getTableMatrices();
+			int taillePolice = table.getFont().getSize();
+			taillePolice+=2;
+			
+			for(int ligne = 0; ligne < table.getRowCount()-2;ligne++) {
+				//on récupère la hauteur de la ligne pour l'agrandir par la suite
+				int hauteur = table.getRowHeight();
 				
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
-					String texte = new String("RETOUR AU MENU PRINCIPAL");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+				for (int colonne = 0; colonne < table.getColumnCount(); colonne++) {
 					
+					//on récupère la colonne qu'on va élargir
+					TableColumn laColonne = table.getColumnModel().getColumn(colonne);
+					int largeur = laColonne.getWidth();
+					
+					largeur = largeur + 50;
+					
+					//on change la largeur de la colonne
+					laColonne.setPreferredWidth(largeur);
 				}
 				
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
-					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là, on comprend le principe avec des tailles encore plus grandes.\n\n"
+				table.setRowHeight(hauteur);
+			}
+			
+			MultiLigneRenderer rend = new MultiLigneRenderer(taillePolice-8,taillePolice);
+			
+			for (int i=0; i< table.getColumnCount(); i++) {
+				table.getColumnModel().getColumn(i).setCellRenderer(rend);
+			}
+		}
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
+			//correspond au dezoom
+			String texte = new String("Devra retrecir le texte");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
+			String texte = new String("Devra recommencer le calcul");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+				
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
+			String texte = new String("RETOUR AU MENU PRINCIPAL");
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+				
+		if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
+			String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là, on comprend le principe avec des tailles encore plus grandes.\n\n"
 							+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, négatifs, nuls) et des fractions (positives,négatives). Les fractions seront réduites automatiquement.\n\n"
 							+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'écrirent correctement. Les différents formes de calculs possibles sont les suivantes :\n\n"
 							+ "Ligne_i ↔ Ligne_j\n"
@@ -294,11 +324,11 @@ public class Controleur implements ActionListener,MouseListener{
 							+ "Une matrice identité correspond à : \n" + Matrice.identite(3).toString()
 							+ "Bonne chance !");
 
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-				}		
-				if (pEvt.getActionCommand().equals(Data.TITRE_MENU[2])){
-		             SwingUtilities.getWindowAncestor(fenMere).dispose();
-				}
+			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}		
+		if (pEvt.getActionCommand().equals(Data.TITRE_MENU[2])){
+			SwingUtilities.getWindowAncestor(fenMere).dispose();
+		}
 		
 	}
 	
