@@ -259,39 +259,48 @@ public class Controleur implements ActionListener,MouseListener{
 		
 		//PARTIE SUR LE MENU
 				//Si l'utilisateur décide d'aller au calcul précédent
-				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0])){
-					String texte = new String("Devra revenir en arrière");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-					
-					//On récupère chaque liste
-					List<Matrice> chMatrice = chPanAffichageMatrices.getChMatrices();
-					List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
-					List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
-					List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
-
-					//on enlève le dernier élèment pour chaque liste
-				    chMatrice.remove(chMatrice.size()-1);
-				    chMatriceID.remove(chMatrice.size()-1);
-				    chLignes.remove(chMatrice.size()-1);
-				    chCommentaires.remove(chMatrice.size()-1);
-
-				    //On actualise pour chaque table du coup
-					PanelAffichageMatrices.clearTableAt(chPanAffichageMatrices.getTableMatrices(),chMatrice.size()); 
-					
-					Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chMatrice.size()-1);//on rÃ©cupÃ¨re la matrice sur laquelle on travaille
-					
-					Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-					System.out.println(matricePrincipale.toString());
-					//chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opÃ©ration Ã  la table
-					
-					//si on valide on reset l'operation en simulant un clic sur le bouton effacer
-					//panCom.getEffacer().doClick();
-					
-					//on change la matrice affichÃ©e dans le panelCommande
-					panCom.refresh(matricePrincipale);
-					panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel Ã  l'Ã©coute du controleur
-					
-				
+				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[0]))
+				{
+					//On vérifie si l'utilisateur est au niveau de la JTable ou avant
+					if (etat != false) {
+						//On récupère la liste des matrices
+						List<Matrice> chMatrice = chPanAffichageMatrices.getChMatrices();
+						//Si on n'est pas à la toute première ligne
+						//on peut continuer, sinon, on ne fait rien.
+						if (chMatrice.size() != 1){
+							String texte = new String("Devra revenir en arrière");
+							JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+							
+							//On récupère chaque liste
+							List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
+							List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
+							List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
+		
+							//on enlève le dernier élèment pour chaque liste
+						    chMatrice.remove(chMatrice.size()-1);
+						    chMatriceID.remove(chMatrice.size());
+						    chLignes.remove(chMatrice.size()-1);
+						    chCommentaires.remove(chMatrice.size()-1);
+		
+						    //On actualise dans la JTable les changements 
+							PanelAffichageMatrices.clearTableAt(chPanAffichageMatrices.getTableMatrices(),chMatrice.size()); 
+							
+							//On récupère la matrice sur laquelle on va dorénavant travailler
+							Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chMatrice.size()-1);
+							
+							//On l'actualise sur l'affichage
+							chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
+							chPanelChoix.add(chPanGauss, "panel_gauss");										
+							chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
+							
+							//si on valide on reset l'operation en simulant un clic sur le bouton effacer
+							panCom.getEffacer().doClick();
+							
+							//on change la matrice affichage dans le panelCommande
+							panCom.refresh(actuelle);
+							panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à l'écoute du controleur
+						}
+					}
 				}
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
 					String texte = new String("Devra agrandir le texte");

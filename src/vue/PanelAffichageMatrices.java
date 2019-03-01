@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+
 import modele.*;
 
 public class PanelAffichageMatrices extends JPanel{
@@ -148,6 +149,23 @@ public class PanelAffichageMatrices extends JPanel{
 
 	}
 	
+	public List<Matrice> getChMatricesIdentites() {
+		return chMatricesIdentites;
+	}
+
+	public void setChMatricesIdentites(List<Matrice> chMatricesIdentites) {
+		this.chMatricesIdentites = chMatricesIdentites;
+	}
+
+	public void setChMatrices(List<Matrice> chMatrices) {
+		this.chMatrices = chMatrices;
+	}
+
+	public void setChLigneModif(List<String> chLigneModif) {
+		this.chLigneModif = chLigneModif;
+	}
+
+
 	public List<String> getChLigneModif() {
 		return chLigneModif;
 	}
@@ -160,5 +178,10 @@ public class PanelAffichageMatrices extends JPanel{
 	    for(int i = model.getRowCount() - 1; i >= 0; i--) { 
 	     model.removeRow(i); 
 	    } 
+	}
+
+	public void setChCommentaire(List<String> chCommentaires) {
+		this.chCommentaire = chCommentaire;
+		
 	} 
 }
