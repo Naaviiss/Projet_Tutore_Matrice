@@ -5,7 +5,7 @@ public interface Data {
 	public final String [] TITRE_MENU_LISTE={"Simplex","Matrice"};
 	public final String [] CHOIX={"Simplex","Matrice"};
 	public final String [] TITRE_MATRICE={"Retour au menu principal","Outils", "Aide","Sortir de l'application actuelle","Quitter"};
-	public final String [] TITRE_MATRICE_LISTE={"Revenir en arriere", "+ (agrandir)", "- (rétrécir)","Recommencer le calcul"};
+	public final String [] TITRE_MATRICE_LISTE={"Revenir en arriere", "+ (agrandir)", "- (rétrécir)","Recommencer le calcul","Exporter en PDF"};
 
 	public final String[] LIGNES = {"L1","L2","L3","L4","L5"};
 	public final String[] INTITULES = {"Matrice","IdentitÃ©","Calcul","Commentaire"};

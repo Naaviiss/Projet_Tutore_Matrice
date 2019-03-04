@@ -132,7 +132,7 @@ public class Controleur implements ActionListener,MouseListener{
 			int ligneB;//index de la deuxiÃ¨me ligne choisie
 			int ligneModifiee = getNumLigne(operation[0]); //on rï¿½cupï¿½re la ligne Ã  modifier
 			
-			//on rÃ©cupÃ¨re le calcul sous forme de chaine
+			//on récupère le calcul sous forme de chaine
 			String chaine = new String();
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
