@@ -10,6 +10,7 @@ import modele.Data;
 
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 
 
 public class FenetreMere extends JFrame{
@@ -21,29 +22,39 @@ public class FenetreMere extends JFrame{
 		this.setVisible(true);
 		
 		//test
-		//On s'occupe du menu en haut de l'écran
+		//On s'occupe du menu en haut de l'Ã©cran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
 
-
 		for(int i=0;i<Data.TITRE_MATRICE.length;i++){
 			if (i==1){
-				//Si on est sur le bouton Aide, on crée un menu d'aide
+				//CrÃ©ation menu OUTILS
+				//Si on est sur le bouton Aide, on crÃ©e un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MATRICE[i]);
-				menu.setMnemonic('A');
-				menu.addActionListener(contentPane);
+				menu.addActionListener(contentPane.getChControleur());
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
-				//Et on ajoute des items à la suite suivant si on veut
+				//Et on ajoute des items Ã  la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
 
+				//Et on ajoute des items ÃƒÂ  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
-					menuitem.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE_LISTE[j].charAt(0),java.awt.Event.CTRL_MASK));
-					menuitem.addActionListener(contentPane);
+					menuitem.addActionListener(contentPane.getChControleur());
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
-
+					if (j == 0){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,java.awt.Event.CTRL_MASK));
+					}
+					else if (j==1){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_UP,java.awt.Event.CTRL_MASK));
+					}
+					else if (j==2){
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_DOWN,java.awt.Event.CTRL_MASK));	
+					}
+					else {
+						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,java.awt.Event.CTRL_MASK));
+					}
 					menu.add(menuitem);
 				}
 			}
@@ -51,16 +62,16 @@ public class FenetreMere extends JFrame{
 				//Sinon, on ajoute les autres menus
 				JMenuItem menu = new JMenuItem (Data.TITRE_MATRICE[i],Data.TITRE_MATRICE[i].charAt(0));
 				menu.setAccelerator(KeyStroke.getKeyStroke(Data.TITRE_MATRICE[i].charAt(0),java.awt.Event.CTRL_MASK));
-				menu.addActionListener(contentPane);
+				menu.addActionListener(contentPane.getChControleur());
 				menu.setActionCommand(Data.TITRE_MATRICE[i]);
 				menuBar.add(menu);
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'écran en entier
+		//On fait en sorte que cela s'affiche sur l'ï¿½cran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
-
 	}
+	
 }

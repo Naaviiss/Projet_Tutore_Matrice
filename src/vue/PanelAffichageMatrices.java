@@ -15,7 +15,6 @@ import modele.*;
 public class PanelAffichageMatrices extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
 	private List<Matrice> chMatricesIdentites;//liste des matrices identit�s
@@ -23,6 +22,8 @@ public class PanelAffichageMatrices extends JPanel{
 	private List<String> chCommentaire;//pour les commentaires
 	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
+	private ModelAffichageMatrices modele; 
+
 	
 	public PanelAffichageMatrices(List<Matrice> pMatrices,List<Matrice> pMatricesID,List<String> pLigneModif,List<String> pCommentaire) {
 		
@@ -31,8 +32,8 @@ public class PanelAffichageMatrices extends JPanel{
 		chLigneModif = pLigneModif;
 		chCommentaire = pCommentaire;
 		tableMatrices = new JTable();
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
-		
+		modele  = new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire);
+		tableMatrices.setModel(modele);
 		//on applique le renderer
 		setRenderer(renderer);
 		
@@ -48,7 +49,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setRowHeight(180);
 		
 		//taille des colonnes et de la table
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));
+		tableMatrices.setModel(modele);
 		
 		//scrollbar
 		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -63,7 +64,7 @@ public class PanelAffichageMatrices extends JPanel{
 		return tableMatrices;
 	}
 	
-	//cette m�thode est utilis�e lors d'un ajout d'un calcul � la table
+	//cette méthode est utiliée lors d'un ajout d'un calcul à la table
 	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine,String commentaire) {
 		chMatrices.add(M1);//on ajoute la matrice � la liste
 		chMatricesIdentites.add(M2);//on ajoute la matrice identit� � la liste
@@ -77,8 +78,9 @@ public class PanelAffichageMatrices extends JPanel{
 			chLigneModif.add(chLigneModif.size()-1,operationChaine);//on ajoute la chaine correspondant au calcul sur la ligne d'avant
 			chCommentaire.add(chCommentaire.size()-1,commentaire);//on ajoute le commentaire sur la ligne d'avant
 		}
-		
-		tableMatrices.setModel(new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire));//on raffraichit la table
+		modele  = new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire);
+
+		tableMatrices.setModel(modele);
 		
 		//hauteur des lignes en focntion de la taille de la matrice
 		int tailleMatrice = chMatrices.get(0).getTaille();
@@ -95,6 +97,13 @@ public class PanelAffichageMatrices extends JPanel{
 	public List<String> getChCommentaire() {
 		return chCommentaire;
 	}
+
+	public void viderListe(){
+		this.chMatrices.clear();
+		this.chMatricesIdentites.clear();
+		this.chCommentaire.clear();
+		this.chLigneModif.clear();
+	}	
 
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
@@ -120,4 +129,67 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getColumnModel().getColumn(2).setPreferredWidth(180);
 		tableMatrices.getColumnModel().getColumn(3).setPreferredWidth(180);
 	}
+
+	public ModelAffichageMatrices getModel() {
+		return modele;
+	}
+	
+	public static void clearTable(final JTable table) { 
+	    for (int i = 1; i < table.getRowCount(); i++){ 
+	    	for(int j = 0; j < table.getColumnCount(); j++) {
+	    		table.setValueAt("", i, j); 
+	    	} 
+		}
+	table.setValueAt("",0,2);
+	}
+	
+	public static void clearTableAt(final JTable table, int endroit) { 
+	    for (int i = endroit; i < table.getRowCount(); i++){ 
+	    	for(int j = 0; j < table.getColumnCount(); j++) {
+	    		table.setValueAt("", i, j); 
+	    	} 
+		}
+	    //Sur la ligne encore au dessus.
+	    //Pour le calcul
+		table.setValueAt("",endroit-1,2);
+		//Pour le commentaire
+		table.setValueAt("",endroit-1,3);
+
+	}
+	
+	public List<Matrice> getChMatricesIdentites() {
+		return chMatricesIdentites;
+	}
+
+	public void setChMatricesIdentites(List<Matrice> chMatricesIdentites) {
+		this.chMatricesIdentites = chMatricesIdentites;
+	}
+
+	public void setChMatrices(List<Matrice> chMatrices) {
+		this.chMatrices = chMatrices;
+	}
+
+	public void setChLigneModif(List<String> chLigneModif) {
+		this.chLigneModif = chLigneModif;
+	}
+
+
+	public List<String> getChLigneModif() {
+		return chLigneModif;
+	}
+
+	public List<String> getChCommentaire() {
+		return chCommentaire;
+	}
+
+	public static void deleteAllRows(ModelAffichageMatrices model) { 
+	    for(int i = model.getRowCount() - 1; i >= 0; i--) { 
+	     model.removeRow(i); 
+	    } 
+	}
+
+	public void setChCommentaire(List<String> chCommentaires) {
+		this.chCommentaire = chCommentaire;
+		
+	} 
 }

@@ -26,15 +26,11 @@ public class PanelCommandes extends JPanel implements Data{
 	private JTextField zoneCommentaire;
 	private JLabel labelZoneCommentaire;
 	private JButton effacer;//bouton pour effacer le calcul en cours
-	private JLabel[] calcul;//labels avec le futur calcul de l'�tudiant
+	private JLabel[] calcul;//labels avec le futur calcul de l'étudiant
 	private JPanel panelGlobal;//panel qui va contenir les autres panels
 	private JPanel []panels; //tableau de panels avec tous les elements graphiques
-	private JButton[]fleches; //boutons pour les fl�ches
+	private JButton[]fleches; //boutons pour les flèches
 	private ChoixLigneMatrice chChoixMatrice;//panel affichant la matrice en cours d'utilisation
-	public JButton getEffacer() {
-		return effacer;
-	}
-
 	private Matrice chMatrice;//matrice en cours d'utilisation
 	private String[] operationChaine;//tableau correspondant au calcul de l'utilisateur sous forme de tableau
 	
@@ -85,7 +81,7 @@ public class PanelCommandes extends JPanel implements Data{
 		//ligne avec l'op�ration
 		panels[2] = new JPanel();
 		panels[2].setLayout(new BoxLayout(panels[2], BoxLayout.LINE_AXIS));
-		//instnce et ajout des labels
+		//instance et ajout des labels
 		for (int i = 0;i<calcul.length;i++) {
 			calcul[i] = new JLabel();
 			calcul[i].setFont(new Font(Font.SERIF, 0, 24));
@@ -100,7 +96,7 @@ public class PanelCommandes extends JPanel implements Data{
 		panels[2].add(effacer);
 		panels[2].add(Box.createRigidArea(new Dimension(50,0)));
 
-		//ligne avec le bouton constante et le choix de la fl�che
+		//ligne avec le bouton constante et le choix de la flèche
 		panels[3] = new JPanel();
 		panels[3].setLayout(new BoxLayout(panels[3], BoxLayout.LINE_AXIS));
 		//instance et ajoutdes boutons fl�ches
@@ -114,7 +110,7 @@ public class PanelCommandes extends JPanel implements Data{
 		//ajout du bouton constante
 		panels[3].add(constante);
 
-		//ligne avec les boutons pour les op�rations
+		//ligne avec les boutons pour les opérations
 		panels[4] = new JPanel();
 		panels[4].setLayout(new BoxLayout(panels[4], BoxLayout.LINE_AXIS));
 		panels[4].add(Box.createRigidArea(new Dimension(100,0)));
@@ -140,13 +136,29 @@ public class PanelCommandes extends JPanel implements Data{
 		panelGlobal = new JPanel();
 		panelGlobal.setLayout(new BoxLayout(panelGlobal, BoxLayout.PAGE_AXIS));
 		panelGlobal.add(Box.createVerticalStrut(30));
-		//on y ajoute les panels cr��s pr�c�demment
+		//on y ajoute les panels créés précédemment
 		for (int i=0;i<panels.length;i++) {
 			panelGlobal.add(panels[i]);
 			panelGlobal.add(Box.createVerticalStrut(50));
 		}
 		this.setLayout(new BorderLayout());
 		this.add(panelGlobal,BorderLayout.CENTER);
+	}
+
+	//change la matrice affichée dans le panel commande
+	public void refresh(Matrice pMatrice) {
+		panels[1].remove(chChoixMatrice); //on retire le panel
+		ChoixLigneMatrice nouveauChoix = new ChoixLigneMatrice(pMatrice);
+		setChChoixMatrice(nouveauChoix); //on créé le nouveau panel
+		panels[1].add(chChoixMatrice); //on ajoute le nouveau panel
+	}
+	
+	public ChoixLigneMatrice getChChoixLigneMatrice() {
+		return chChoixMatrice;
+	}
+	
+	public void setChChoixMatrice(ChoixLigneMatrice chChoixMatrice) {
+		this.chChoixMatrice = chChoixMatrice;
 	}
 
 	public String[] getOperationChaine() {
@@ -205,6 +217,11 @@ public class PanelCommandes extends JPanel implements Data{
 				return emplacementsConstante[i];
 			}
 		return 4;
+	}
+	
+	//retourne le bouton Effacer
+	public JButton getEffacer() {
+		return effacer;
 	}
 
 }

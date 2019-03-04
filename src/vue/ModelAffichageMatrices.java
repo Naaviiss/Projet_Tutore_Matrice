@@ -36,12 +36,13 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		}
 	}
 	
+	@Override
 	public boolean isCellEditable(int indLigne, int indCol) {
 		return false;
 	}
 	
+	@Override
 	public Class<String> getColumnClass(int indCol) {
 		return String.class;
 	}
-	
 }
