@@ -64,7 +64,7 @@ public class PanelMatrice extends JPanel{
 			}
 		}
 		
-		//le panel instruction sera géré par un bordere layout
+		//le panel instruction sera géré par un border layout
 		panelInstructions.setLayout(new BorderLayout(20,20));
 		
 		//on personnalise l'instruction
