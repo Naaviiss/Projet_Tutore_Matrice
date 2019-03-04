@@ -13,7 +13,9 @@ import java.util.ListIterator;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableColumn;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -22,6 +24,7 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
+import vue.MultiLigneRenderer;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
 import vue.PanelCommandes;
@@ -141,6 +144,7 @@ public class Controleur implements ActionListener,MouseListener{
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on r�cup�re la matrice sur laquelle on travaille
 			Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identit�
+
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
 			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
@@ -267,10 +271,7 @@ public class Controleur implements ActionListener,MouseListener{
 						List<Matrice> chMatrice = chPanAffichageMatrices.getChMatrices();
 						//Si on n'est pas à la toute première ligne
 						//on peut continuer, sinon, on ne fait rien.
-						if (chMatrice.size() != 1){
-							String texte = new String("Devra revenir en arrière");
-							JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-							
+						if (chMatrice.size() != 1) {							
 							//On récupère chaque liste
 							List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
 							List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
@@ -303,8 +304,35 @@ public class Controleur implements ActionListener,MouseListener{
 					}
 				}
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-					String texte = new String("Devra agrandir le texte");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+					//Correspond au zoom
+					JTable table = chPanAffichageMatrices.getTableMatrices();
+					int taillePolice = table.getFont().getSize();
+					taillePolice+=2;
+					
+					for(int ligne = 0; ligne < table.getRowCount()-2;ligne++) {
+						//on rÃ©cupÃ¨re la hauteur de la ligne pour l'agrandir par la suite
+						int hauteur = table.getRowHeight();
+						
+						for (int colonne = 0; colonne < table.getColumnCount(); colonne++) {
+							
+							//on rÃ©cupÃ¨re la colonne qu'on va Ã©largir
+							TableColumn laColonne = table.getColumnModel().getColumn(colonne);
+							int largeur = laColonne.getWidth();
+							
+							largeur = largeur + 50;
+							
+							//on change la largeur de la colonne
+							laColonne.setPreferredWidth(largeur);
+						}
+						
+						table.setRowHeight(hauteur);
+					}
+					
+					MultiLigneRenderer rend = new MultiLigneRenderer(taillePolice-8,taillePolice);
+					
+					for (int i=0; i< table.getColumnCount(); i++) {
+						table.getColumnModel().getColumn(i).setCellRenderer(rend);
+					}
 				}
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
 					String texte = new String("Devra retrecir le texte");

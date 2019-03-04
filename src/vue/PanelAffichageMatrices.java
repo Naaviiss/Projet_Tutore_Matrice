@@ -17,10 +17,10 @@ public class PanelAffichageMatrices extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
-	private List<Matrice> chMatricesIdentites;//liste des matrices identit�s
-	private List<String> chLigneModif;//pour les calculs effectu�s sous forme de chaine
+	private List<Matrice> chMatricesIdentites;//liste des matrices identités
+	private List<String> chLigneModif;//pour les calculs effectués sous forme de chaine
 	private List<String> chCommentaire;//pour les commentaires
-	MultiLigneRenderer renderer = new MultiLigneRenderer(); //renderer pour faire du multiligne
+	MultiLigneRenderer renderer; //renderer pour faire du multiligne
 	private JScrollPane panDefil;//panel avec la jscrollbar
 	private ModelAffichageMatrices modele; 
 
@@ -35,6 +35,7 @@ public class PanelAffichageMatrices extends JPanel{
 		modele  = new ModelAffichageMatrices(chMatrices,chMatricesIdentites,chLigneModif,chCommentaire);
 		tableMatrices.setModel(modele);
 		//on applique le renderer
+		renderer = new MultiLigneRenderer();
 		setRenderer(renderer);
 		
 		//intitules des colonnes
@@ -52,12 +53,13 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setModel(modele);
 		
 		//scrollbar
-		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		tableMatrices.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panDefil.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);		
 		panDefil.setPreferredSize(new Dimension(900, 850));
 		
 		//ajout panneau defilant avec la table
 		this.add(panDefil);
+		tableMatrices.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	
 	public JTable getTableMatrices() {
@@ -157,7 +159,7 @@ public class PanelAffichageMatrices extends JPanel{
 
 	}
 	
-	public List<Matrice> getChMatricesIdentites() {
+	public List<Matrice> getChMatricesID() {
 		return chMatricesIdentites;
 	}
 
