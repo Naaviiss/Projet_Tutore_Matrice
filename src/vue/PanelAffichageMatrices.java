@@ -15,9 +15,6 @@ import modele.*;
 public class PanelAffichageMatrices extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	public List<Matrice> getChMatricesIdentites() {
-		return chMatricesIdentites;
-	}
 
 	private JTable tableMatrices; //String pour l'instant
 	private List<Matrice> chMatrices; //list avec les matrices
@@ -43,7 +40,7 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.getTableHeader().setBackground(new Color(205, 0, 0));
 		tableMatrices.getTableHeader().setFont(new Font(Font.SERIF,Font.BOLD,20));
 		
-		//empecher les redimensionnements et r�ordonnancements
+		//empecher les redimensionnements et réordonnancements
 		tableMatrices.getTableHeader().setResizingAllowed(false);
 		tableMatrices.getTableHeader().setReorderingAllowed(false);
 		
@@ -91,8 +88,20 @@ public class PanelAffichageMatrices extends JPanel{
 		setRenderer(renderer);
 	}
 
+	public List<String> getChLigneModif() {
+		return chLigneModif;
+	}
+
+	public List<String> getChCommentaire() {
+		return chCommentaire;
+	}
+
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
+	}
+	
+	public List<Matrice> getChMatricesID(){
+		return chMatricesIdentites;
 	}
 	
 	public void setRenderer(MultiLigneRenderer renderer) {

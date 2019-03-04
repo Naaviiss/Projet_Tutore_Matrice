@@ -117,10 +117,10 @@ public class Controleur implements ActionListener,MouseListener{
 			
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on r�cup�re la matrice sur laquelle on travaille
-			Matrice actuelleID = chPanAffichageMatrices.getChMatricesIdentites().get(chPanAffichageMatrices.getChMatricesIdentites().size()-1);//idem pour son identit�
+			Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identit�
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identit� sur laquelle on va effectuer les calculs
+			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
 			
 			//on copie les matrices
 			matricePrincipale.copie(actuelle);
@@ -163,7 +163,7 @@ public class Controleur implements ActionListener,MouseListener{
 				String txt = JOptionPane.showInputDialog(null,"Veuillez rentrer une constante"); //chaine de caractere qu'on va r�cup�rer
 				//Si on rentre une valeur pour la constante
 				if (txt.equals("") || txt.equals("0")) {
-					constante = new Fraction("1");//valeur par d�faut � 1
+					constante = new Fraction("1");//valeur par défaut à 1
 				}
 				else {
 					constante = new Fraction(txt); //on convertit la chaine en fraction					
