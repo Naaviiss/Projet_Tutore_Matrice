@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import vue.PanelAffichageMatrices;
 
 public class TablePDF {
 		
-	public void createPDF(String pDestination, PanelAffichageMatrices pPanel) throws IOException, DocumentException,FileNotFoundException, DocumentException {
+	public void createPDF(File pDestination, PanelAffichageMatrices pPanel) throws IOException, DocumentException,FileNotFoundException, DocumentException {
 		/*Prend en paramètre la destination du PDF et le panel dans lequel se trouvent les données de la table*/
 		
 		//on récupère les données de la table
@@ -26,9 +27,12 @@ public class TablePDF {
 		List<String> chLigneModif= pPanel.getChLigneModif();
 		List<String> chCommentaire = pPanel.getChCommentaire();
 		
+		//on recupere la destination en String
+		String destinationStr = pDestination.getAbsolutePath();
+		
 		Document myDoc = new Document(PageSize.A4,30,30,30,30); //notre document au format A4
 		
-		PdfWriter.getInstance(myDoc, new FileOutputStream(pDestination)); //on écrit sur le document
+		PdfWriter.getInstance(myDoc, new FileOutputStream(destinationStr)); //on écrit sur le document
 		
 		myDoc.open(); //on l'ouvre pour y écrire
 		

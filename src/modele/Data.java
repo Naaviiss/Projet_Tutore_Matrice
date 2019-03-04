@@ -8,7 +8,7 @@ public interface Data {
 	public final String [] TITRE_MATRICE_LISTE={"Revenir en arriere", "+ (agrandir)", "- (rétrécir)","Recommencer le calcul","Exporter en PDF"};
 
 	public final String[] LIGNES = {"L1","L2","L3","L4","L5"};
-	public final String[] INTITULES = {"Matrice","IdentitÃ©","Calcul","Commentaire"};
+	public final String[] INTITULES = {"Matrice","Identité","Calcul","Commentaire"};
 	public final String[] OPERATIONS = {"+","-"};
 	public final String []FLECHES = {"<-","<->"};
 	
