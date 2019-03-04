@@ -47,12 +47,11 @@ public class TablePDF {
 		
 		//on fait les entetes
 		tablePdf.getDefaultCell().setBackgroundColor(BaseColor.ORANGE);
-		for(int i=0;i<4;i++) {
-			tablePdf.addCell("Matrices");
-			tablePdf.addCell("Matrices Identité");
-			tablePdf.addCell("Opérations");
-			tablePdf.addCell("Commentaires");
-		}
+		tablePdf.addCell("Matrices");
+		tablePdf.addCell("Matrices Identité");
+		tablePdf.addCell("Opérations");
+		tablePdf.addCell("Commentaires");
+		
 		
 		//on remplit avec les données
 		tablePdf.getDefaultCell().setBackgroundColor(BaseColor.WHITE);
