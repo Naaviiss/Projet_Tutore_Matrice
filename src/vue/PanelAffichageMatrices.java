@@ -111,10 +111,6 @@ public class PanelAffichageMatrices extends JPanel{
 		return chMatrices;
 	}
 	
-	public List<Matrice> getChMatricesID(){
-		return chMatricesIdentites;
-	}
-	
 	public void setRenderer(MultiLigneRenderer renderer) {
 		for(int i = 0; i<tableMatrices.getColumnCount();i++) {
 			tableMatrices.getColumnModel().getColumn(i).setCellRenderer(renderer);

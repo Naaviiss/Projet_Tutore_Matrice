@@ -273,7 +273,7 @@ public class Controleur implements ActionListener,MouseListener{
 						//on peut continuer, sinon, on ne fait rien.
 						if (chMatrice.size() != 1) {							
 							//On récupère chaque liste
-							List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
+							List<Matrice> chMatriceID = chPanAffichageMatrices.getChMatricesID();
 							List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
 							List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
 		
