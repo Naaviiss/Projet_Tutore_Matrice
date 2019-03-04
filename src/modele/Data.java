@@ -15,6 +15,8 @@ public interface Data {
 	public final String VALIDER_PANEL_MATRICE = "ValiderPanelMatrice";
 	public final String VALIDER_PANEL_COMMANDES = "ValiderPanelCommandes";
 	public final String VALIDER_PANEL_TAILLE = "ValiderTaille";
+	public final String VALIDER_DIDACTICIEL = "Didacticiel";
+	public final String VALIDER_AUTONOME = "Autonome";
 	
 	public final String EFFACER = "Effacer";
 	
