@@ -28,8 +28,7 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
 	    
 	}
 	
-    @Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     	
     	if(column == 2)
     		setFont(new Font(Font.SERIF, Font.BOLD, tailleUne));
@@ -41,7 +40,7 @@ public class MultiLigneRenderer extends JTextArea implements TableCellRenderer {
     		
     	
     	if(value!=null){
-    		setText(value.toString());
+    		setText((String)value.toString());
     	}
     	else {
     		setText("");

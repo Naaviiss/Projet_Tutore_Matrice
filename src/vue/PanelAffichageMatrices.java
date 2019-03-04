@@ -151,7 +151,7 @@ public class PanelAffichageMatrices extends JPanel{
 
 	}
 	
-	public List<Matrice> getChMatricesIdentites() {
+	public List<Matrice> getChMatricesID() {
 		return chMatricesIdentites;
 	}
 
