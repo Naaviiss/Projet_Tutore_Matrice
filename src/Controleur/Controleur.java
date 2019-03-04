@@ -35,7 +35,7 @@ public class Controleur implements ActionListener,MouseListener{
 	private PanelGauss chPanGauss;
 	private PanelAffichageMatrices chPanAffichageMatrices;
 	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
-	Fraction constante; //constante de l'utilisateur rÃ©cupÃ©rÃ©e, par dÃ©faut, elle vaut 1
+	Fraction constante; //constante de l'utilisateur récupérée, par défaut, elle vaut 1
 	private PanelCommandes panCom; //panel commande
 	private Boolean etat=false; //etat pour savoir où l'utilisateur se trouve dans l'application
 								//utilisé pour revenir au tout début du calcul de la matrice inverse
@@ -76,7 +76,7 @@ public class Controleur implements ActionListener,MouseListener{
 
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_MATRICE)) {
 			try {
-				Matrice M1 = chPanMatrice.getMatriceSaisi();//crÃ©ation de la matrice
+				Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
 				Matrice M2 = Matrice.identite(M1.getTaille());//crÃ©ation de la matrice identitÃ©
 				chPanGauss = new PanelGauss(M1);
 				chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au dÃ©part la chaine pour le calcul et celle pour le commentaire sont vides
@@ -88,7 +88,7 @@ public class Controleur implements ActionListener,MouseListener{
 				etat = true;
 			} 
 			catch (ExceptEntreFraction e) {
-				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractÃ¨res spÃ©ciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractères spéciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 			catch (ExceptNegatifMalPlace e) {
 				JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);

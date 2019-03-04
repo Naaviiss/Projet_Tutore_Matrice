@@ -173,15 +173,6 @@ public class PanelAffichageMatrices extends JPanel{
 		this.chLigneModif = chLigneModif;
 	}
 
-
-	public List<String> getChLigneModif() {
-		return chLigneModif;
-	}
-
-	public List<String> getChCommentaire() {
-		return chCommentaire;
-	}
-
 	public static void deleteAllRows(ModelAffichageMatrices model) { 
 	    for(int i = model.getRowCount() - 1; i >= 0; i--) { 
 	     model.removeRow(i); 
