@@ -110,18 +110,18 @@ public class Controleur implements ActionListener,MouseListener{
 			//Création de toutes les opérations suivantes
 			//que ce soit pour les lignes, le signe, la multiplication, l'opération
 			//ou le commentaire
-			int []LigneA = {0,1,2,2,2,1,0};
-			int []LigneB = {1,0,0,1,2,2,2};
-			String []signe = {"-","-","-","-","","-","+"};
-			Fraction [] frac = {new Fraction(1),new Fraction(1),new Fraction(2),new Fraction(2),new Fraction(-1,5),new Fraction(4),new Fraction(1)};
-			String [] operations = {"L1<-L1-L2","L2<-L2-L1","L3<-L3-2L1","L3<-L3-2L2","L3<-1/5L3","L2<-L2-4L3","L1<-L1+L3"};
-			String [] commentaires = {"On va cherche à ce que le premier 2 devienne un 1 et que tout ce qui tourne autour de lui soit un 0",
+			int []chLigneA = {0,1,2,2,2,1,0};
+			int []chLigneB = {1,0,0,1,2,2,2};
+			String []chSigne = {"-","-","-","-","","-","+"};
+			Fraction [] chFraction = {new Fraction(1),new Fraction(1),new Fraction(2),new Fraction(2),new Fraction(-1,5),new Fraction(4),new Fraction(1)};
+			String [] chOperations = {"L1<-L1-L2","L2<-L2-L1","L3<-L3-2L1","L3<-L3-2L2","L3<-1/5L3","L2<-L2-4L3","L1<-L1+L3"};
+			String [] chCommentaires = {"On va cherche à ce que le premier 2 devienne un 1 et que tout ce qui tourne autour de lui soit un 0",
 					"On cherche maintenant à ce que le 1 en dessous du 1 en haut à gauche devienne un 0 aussi. Comme ça, le coin en haut à gauche sera déjà parfait.",
 					"On va chercher à ce que le 2 en bas à gauche devienne un 0",
 					"On continue en voulant que le 2 devienne un 0 pour ressembler de plus en plus à une matrice inverse",
 					"Toute la partie de gauche correspond à une matrice inverse. On va donc changer le -5 en un 1 pour avoir notre diagonale de 1",
 					"On va enlever le 4 pour obtenir un 0",
-					"On va chercher à enlever ce -1 pour obtenir la matice inverse."};
+					"On va chercher à enlever ce -1 pour obtenir la matice inverse.\n\nBravo! Vous avez réussi et tout compris!"};
 			//et on fait une boucle pour remplir tout dans la JTable
 			for (int i = 0;i<=6;i++) {
 				if (i == 4) {
@@ -135,9 +135,9 @@ public class Controleur implements ActionListener,MouseListener{
 					matricePrincipale.copie(actuelle);
 					matriceIdentite.copie(actuelleID);
 					
-					matricePrincipale.modifyLine(LigneA[i], frac[i]);
-					matriceIdentite.modifyLine(LigneA[i], frac[i]);
-					chPanAffichageMatrices.ajoutMatrice(matricePrincipale, matriceIdentite,operations[i],commentaires[i]);
+					matricePrincipale.modifyLine(chLigneA[i], chFraction[i]);
+					matriceIdentite.modifyLine(chLigneA[i], chFraction[i]);
+					chPanAffichageMatrices.ajoutMatrice(matricePrincipale, matriceIdentite,chOperations[i],chCommentaires[i]);
 				}
 				else {
 					actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupére la matrice sur laquelle on travaille
@@ -150,12 +150,11 @@ public class Controleur implements ActionListener,MouseListener{
 					matricePrincipale.copie(actuelle);
 					matriceIdentite.copie(actuelleID);
 					
-					matricePrincipale.modifyLine2(LigneA[i],signe[i], LigneB[i],frac[i]);
-					matriceIdentite.modifyLine2(LigneA[i],signe[i], LigneB[i],frac[i]);
-					chPanAffichageMatrices.ajoutMatrice(matricePrincipale, matriceIdentite,operations[i],commentaires[i]);
+					matricePrincipale.modifyLine2(chLigneA[i],chSigne[i], chLigneB[i],chFraction[i]);
+					matriceIdentite.modifyLine2(chLigneA[i],chSigne[i], chLigneB[i],chFraction[i]);
+					chPanAffichageMatrices.ajoutMatrice(matricePrincipale, matriceIdentite,chOperations[i],chCommentaires[i]);
 				}
 			}
-			
 			chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 			chPanelChoix.add(chPanGauss, "panel_gauss");
 			chPanGauss.enregistreEcouteur(this);
