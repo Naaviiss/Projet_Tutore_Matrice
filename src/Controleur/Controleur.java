@@ -5,17 +5,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
+
+import com.itextpdf.text.DocumentException;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -24,6 +31,7 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
+import modele.TablePDF;
 import vue.MultiLigneRenderer;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
@@ -130,9 +138,9 @@ public class Controleur implements ActionListener,MouseListener{
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 
 			int ligneB;//index de la deuxiÃ¨me ligne choisie
-			int ligneModifiee = getNumLigne(operation[0]); //on rï¿½cupï¿½re la ligne Ã  modifier
+			int ligneModifiee = getNumLigne(operation[0]); //on récupère la ligne à  modifier
 			
-			//on rÃ©cupÃ¨re le calcul sous forme de chaine
+			//on récupère le calcul sous forme de chaine
 			String chaine = new String();
 			for (int i =0;i<operation.length;i++) {
 				chaine+=operation[i];
@@ -144,6 +152,7 @@ public class Controleur implements ActionListener,MouseListener{
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on r�cup�re la matrice sur laquelle on travaille
 			Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identité
+
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
 			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
@@ -192,14 +201,14 @@ public class Controleur implements ActionListener,MouseListener{
 			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
 			panCom.getEffacer().doClick();
 			
-			//on change la matrice affichÃ©e dans le panelCommande
+			//on change la matrice affichée dans le panelCommande
 			panCom.refresh(matricePrincipale);
 			panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel Ã  l'Ã©coute du controleur
 			
-			//si l'utilisateur rÃ©ussit son calcul
+			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
-				//on lance un popup pour le fÃ©liciter
-				JOptionPane.showMessageDialog(null, "FÃ©licitations !\nVous avez rÃ©ussi Ã  retrouver la matricÃ© identitÃ© !\n Pensez Ã  exporter votre travail en PDF pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversÃ©e:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
+				//on lance un popup pour le féliciter
+				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussiàÃ  retrouver la matrice identité !\n Pensez à  exporter votre travail en PDF (Ctrl + P) pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
@@ -272,7 +281,7 @@ public class Controleur implements ActionListener,MouseListener{
 						//on peut continuer, sinon, on ne fait rien.
 						if (chMatrice.size() != 1) {							
 							//On récupère chaque liste
-							List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
+							List<Matrice> chMatriceID = chPanAffichageMatrices.getChMatricesID();
 							List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
 							List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
 		
@@ -302,8 +311,8 @@ public class Controleur implements ActionListener,MouseListener{
 						}
 					}
 				}
+				//si l'utilisateur veut zoomer
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-					//Correspond au zoom
 					JTable table = chPanAffichageMatrices.getTableMatrices();
 					int taillePolice = table.getFont().getSize();
 					taillePolice+=2;
@@ -379,6 +388,36 @@ public class Controleur implements ActionListener,MouseListener{
 					//Sinon, il ne se passe rien.
 				}
 				
+				//si l'utilisateur veut exporter son travail en PDF
+				if(pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[4])) {
+					JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse là où il veut crée son fichier
+					fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par défaut on se place dans le répertoire utilisateur
+					FileNameExtensionFilter filtre = new FileNameExtensionFilter(null, "*pdf");//on veut que le fichier soit uniquement au format pdf
+					fichier.addChoosableFileFilter(filtre);
+					
+					//on regarde si l'utilisateur a bien choisi un fichier
+					int resultat = fichier.showSaveDialog(null);
+					
+					if(resultat == JFileChooser.APPROVE_OPTION) {//si c'est bon
+						try {
+							new TablePDF().createPDF(fichier.getSelectedFile(), chPanAffichageMatrices);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (DocumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else if(resultat == JFileChooser.CANCEL_OPTION) {
+						JOptionPane.showMessageDialog(null, "Erreur, mauvais fichier sélectionné","Erreur",JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+				//si l'utilisateur souhaite revenir au menu principal
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
 					String texte = new String("RETOUR AU MENU PRINCIPAL");
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
@@ -386,12 +425,12 @@ public class Controleur implements ActionListener,MouseListener{
 				
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
 					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les Ã©tapes suivantes. Toutes les Ã©tapes nÃ©cessitent d'appuyer sur un bouton 'valider' Ã  chaque fois.\n\n\nPremiÃ¨rement, choisir la taille de sa matrice. Celle-ci peut Ãªtre comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-lÃ , on comprend le principe avec des tailles encore plus grandes.\n\n"
-							+ "DeuxiÃ¨mement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, nÃ©gatifs, nuls) et des fractions (positives,nÃ©gatives). Les fractions seront rÃ©duites automatiquement.\n\n"
-							+ "TroisiÃ¨mement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'Ã©crirent correctement. Les diffÃ©rents formes de calculs possibles sont les suivantes :\n\n"
+							+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, nÃ©gatifs, nuls) et des fractions (positives,nÃ©gatives). Les fractions seront rÃ©duites automatiquement.\n\n"
+							+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'Ã©crirent correctement. Les diffÃ©rents formes de calculs possibles sont les suivantes :\n\n"
 							+ "Ligne_i â†” Ligne_j\n"
 							+ "Ligne_i â†� lambda * ligne_i (Si lambda â‰  0)\n"
 							+ "Ligne_i â†� ligne_i + lambda * ligne_j\n\n"
-							+ "Une matrice identitÃ© correspond Ã  : \n" + Matrice.identite(3).toString()
+							+ "Une matrice identité correspond à  : \n" + Matrice.identite(3).toString()
 							+ "Bonne chance !");
 
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);

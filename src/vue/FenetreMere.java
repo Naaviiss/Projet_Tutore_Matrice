@@ -21,7 +21,6 @@ public class FenetreMere extends JFrame{
 		this.add(contentPane);
 		this.setVisible(true);
 		
-		//test
 		//On s'occupe du menu en haut de l'écran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -38,23 +37,29 @@ public class FenetreMere extends JFrame{
 				//Et on ajoute des items à la suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
 
-				//Et on ajoute des items Ã  la suite
+				//Et on ajoute des items à  la suite
 				for(int j=0;j<Data.TITRE_MATRICE_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MATRICE_LISTE[j]);
 					menuitem.addActionListener(contentPane.getChControleur());
 					menuitem.setActionCommand(Data.TITRE_MATRICE_LISTE[j]);
-					if (j == 0){
-						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,java.awt.Event.CTRL_MASK));
+					switch(j) {
+						case 0:
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,java.awt.Event.CTRL_MASK));
+							break;
+						case 1:
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS,java.awt.Event.CTRL_MASK));
+							break;
+						case 2:
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS,java.awt.Event.CTRL_MASK));	
+							break;
+						case 3:
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,java.awt.Event.CTRL_MASK));
+							break;
+						case 4:
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,java.awt.Event.CTRL_MASK));
+							break;
 					}
-					else if (j==1){
-						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_UP,java.awt.Event.CTRL_MASK));
-					}
-					else if (j==2){
-						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_KP_DOWN,java.awt.Event.CTRL_MASK));	
-					}
-					else {
-						menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,java.awt.Event.CTRL_MASK));
-					}
+					
 					menu.add(menuitem);
 				}
 			}
@@ -68,7 +73,7 @@ public class FenetreMere extends JFrame{
 			}
 		}
 		
-		//On fait en sorte que cela s'affiche sur l'�cran en entier
+		//On fait en sorte que cela s'affiche sur l'écran en entier
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.pack();
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
