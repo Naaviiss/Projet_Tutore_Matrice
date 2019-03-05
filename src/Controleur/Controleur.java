@@ -24,7 +24,6 @@ import javax.swing.table.TableColumn;
 
 import com.itextpdf.text.DocumentException;
 
-import javafx.stage.FileChooser;
 import modele.Data;
 import modele.ExceptCaseVide;
 import modele.ExceptEntreFraction;

@@ -57,8 +57,8 @@ public class TablePDF {
 		tablePdf.getDefaultCell().setBackgroundColor(BaseColor.WHITE);
 		tablePdf.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 		for (int i = 0; i<chMatrices.size();i++) {
-			tablePdf.addCell(chMatrices.get(i).toString());
-			tablePdf.addCell(chMatricesID.get(i).toString());
+			tablePdf.addCell(chMatrices.get(i).toString2());
+			tablePdf.addCell(chMatricesID.get(i).toString2());
 			tablePdf.addCell(chLigneModif.get(i));
 			tablePdf.addCell(chCommentaire.get(i));
 		}
