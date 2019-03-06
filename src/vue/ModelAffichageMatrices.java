@@ -21,7 +21,7 @@ public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 		chLigneModifiees = pLigneModif;
 		chCommentaire = pCommentaire;
 		
-		//on d�finit le mod�le de la table
+		//on définit le modèle de la table
 		this.setColumnIdentifiers(Data.INTITULES);
 		this.setRowCount(20);
 		

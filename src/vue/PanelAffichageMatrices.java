@@ -92,6 +92,14 @@ public class PanelAffichageMatrices extends JPanel{
 		setRenderer(renderer);
 	}
 
+	public List<String> getChLigneModif() {
+		return chLigneModif;
+	}
+
+	public List<String> getChCommentaire() {
+		return chCommentaire;
+	}
+
 	public void viderListe(){
 		this.chMatrices.clear();
 		this.chMatricesIdentites.clear();
@@ -102,10 +110,6 @@ public class PanelAffichageMatrices extends JPanel{
 	public List<Matrice> getChMatrices() {
 		return chMatrices;
 	}
-	public List<Matrice> getchMatricesIdentites(){
-		return chMatricesIdentites;
-	}
-
 	
 	public void setRenderer(MultiLigneRenderer renderer) {
 		for(int i = 0; i<tableMatrices.getColumnCount();i++) {
@@ -165,15 +169,6 @@ public class PanelAffichageMatrices extends JPanel{
 
 	public void setChLigneModif(List<String> chLigneModif) {
 		this.chLigneModif = chLigneModif;
-	}
-
-
-	public List<String> getChLigneModif() {
-		return chLigneModif;
-	}
-
-	public List<String> getChCommentaire() {
-		return chCommentaire;
 	}
 
 	public static void deleteAllRows(ModelAffichageMatrices model) { 

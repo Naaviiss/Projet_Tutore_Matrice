@@ -498,4 +498,22 @@ public class Matrice {
 			}
 			return resultat;
 		}
+		
+		public String toString2() {
+			String chaine = new String();
+			chaine+="\n\n";
+			
+			for (int i=0; i <chLigne;i++) {
+				for(int j=0;j<chCol;j++) {
+					chaine += chCase[i][j];
+					for(int espace=0; espace < 10-chCol;espace++) {
+						chaine += " ";
+					}
+					
+				}
+				chaine+="\n\n";
+			}
+			
+			return chaine;
+		}
 }

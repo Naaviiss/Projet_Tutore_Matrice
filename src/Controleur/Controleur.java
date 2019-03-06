@@ -5,15 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
+
+import com.itextpdf.text.DocumentException;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -22,6 +29,7 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
+import modele.TablePDF;
 import vue.MultiLigneRenderer;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;
@@ -235,6 +243,7 @@ public class Controleur implements ActionListener,MouseListener{
 			//on recupere la derniere matrice de chaque liste
 			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on récupére la matrice sur laquelle on travaille
 			Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identité
+
 			
 			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
 			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identité sur laquelle on va effectuer les calculs
@@ -290,7 +299,7 @@ public class Controleur implements ActionListener,MouseListener{
 			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
 				//on lance un popup pour le féliciter
-				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi Ã  retrouver la matrice identité !\n Pensez à exporter votre travail en PDF pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée :\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matrice identité !\n Pensez à  exporter votre travail en PDF (Ctrl + P) pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
@@ -302,7 +311,7 @@ public class Controleur implements ActionListener,MouseListener{
 				try {
 					//Si on rentre une valeur pour la constante
 					if (txt.equals("") || txt.equals("0")) {
-						constante = new Fraction("1");//valeur par défaut Ã  1
+						constante = new Fraction("1");//valeur par défaut à  1
 					}
 					else {
 						constante = new Fraction(txt); //on convertit la chaine en fraction					
@@ -341,7 +350,7 @@ public class Controleur implements ActionListener,MouseListener{
 		}
 		
 		if(Arrays.asList(Data.OPERATIONS).contains(pEvt.getActionCommand())) { //si la source de la commande est un opérateur
-			//uniquement si la première ligne = ligne Ã  modifier et qu'aucun signe n'a été renseigné
+			//uniquement si la première ligne = ligne à  modifier et qu'aucun signe n'a été renseigné
 			if( operation[2].equals(operation[0]) && operation[3].equals("") ) {
 				operation[3] = pEvt.getActionCommand();
 				panCom.getLabel(3).setText(pEvt.getActionCommand());
@@ -363,7 +372,7 @@ public class Controleur implements ActionListener,MouseListener{
 						//on peut continuer, sinon, on ne fait rien.
 						if (chMatrice.size() != 1) {							
 							//On récupère chaque liste
-							List<Matrice> chMatriceID = chPanAffichageMatrices.getchMatricesIdentites();
+							List<Matrice> chMatriceID = chPanAffichageMatrices.getChMatricesID();
 							List<String> chLignes = chPanAffichageMatrices.getChLigneModif();
 							List<String> chCommentaires= chPanAffichageMatrices.getChCommentaire();
 		
@@ -393,8 +402,8 @@ public class Controleur implements ActionListener,MouseListener{
 						}
 					}
 				}
+				//si l'utilisateur veut zoomer
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-					//Correspond au zoom
 					JTable table = chPanAffichageMatrices.getTableMatrices();
 					int taillePolice = table.getFont().getSize();
 					taillePolice+=2;
@@ -467,6 +476,36 @@ public class Controleur implements ActionListener,MouseListener{
 					//Sinon, il ne se passe rien.
 				}
 				
+				//si l'utilisateur veut exporter son travail en PDF
+				if(pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[4])) {
+					JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse là où il veut crée son fichier
+					fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par défaut on se place dans le répertoire utilisateur
+					FileNameExtensionFilter filtre = new FileNameExtensionFilter(null, "*pdf");//on veut que le fichier soit uniquement au format pdf
+					fichier.addChoosableFileFilter(filtre);
+					
+					//on regarde si l'utilisateur a bien choisi un fichier
+					int resultat = fichier.showSaveDialog(null);
+					
+					if(resultat == JFileChooser.APPROVE_OPTION) {//si c'est bon
+						try {
+							new TablePDF().createPDF(fichier.getSelectedFile(), chPanAffichageMatrices);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (DocumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else if(resultat == JFileChooser.CANCEL_OPTION) {
+						JOptionPane.showMessageDialog(null, "Erreur, mauvais fichier sélectionné","Erreur",JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+				//si l'utilisateur souhaite revenir au menu principal
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
 					String texte = new String("RETOUR AU MENU PRINCIPAL");
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
