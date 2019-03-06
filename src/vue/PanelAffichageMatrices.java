@@ -20,7 +20,9 @@ public class PanelAffichageMatrices extends JPanel{
 	private List<Matrice> chMatricesIdentites;//liste des matrices identités
 	private List<String> chLigneModif;//pour les calculs effectués sous forme de chaine
 	private List<String> chCommentaire;//pour les commentaires
-	MultiLigneRenderer renderer; //renderer pour faire du multiligne
+	private MultiLigneRenderer renderer; //renderer pour faire du multiligne
+
+
 	private JScrollPane panDefil;//panel avec la jscrollbar
 	private ModelAffichageMatrices modele; 
 
@@ -181,4 +183,7 @@ public class PanelAffichageMatrices extends JPanel{
 		this.chCommentaire = chCommentaire;
 		
 	} 
+	public MultiLigneRenderer getRenderer() {
+		return renderer;
+	}
 }

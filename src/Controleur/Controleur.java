@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
 import com.itextpdf.text.DocumentException;
+import java.awt.Font;
 
 import modele.Data;
 import modele.ExceptCaseVide;
@@ -51,7 +52,7 @@ public class Controleur implements ActionListener,MouseListener{
 	private PanelCommandes panCom; //panel commande
 	private Boolean etat=false; //etat pour savoir où l'utilisateur se trouve dans l'application
 								//utilisé pour revenir au tout début du calcul de la matrice inverse
-	
+	private int taillePolice; //correspond à la taille de la police dans la JTable
 	
 	public Controleur(PanelChoix pPanChoix) {
 		
@@ -404,38 +405,80 @@ public class Controleur implements ActionListener,MouseListener{
 				}
 				//si l'utilisateur veut zoomer
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[1])){
-					JTable table = chPanAffichageMatrices.getTableMatrices();
-					int taillePolice = table.getFont().getSize();
-					taillePolice+=2;
-					
-					for(int ligne = 0; ligne < table.getRowCount()-2;ligne++) {
-						//on récupère la hauteur de la ligne pour l'agrandir par la suite
-						int hauteur = table.getRowHeight();
-						
-						for (int colonne = 0; colonne < table.getColumnCount(); colonne++) {
+					//On vérifie si l'utilisateur est au niveau de la JTable ou avant
+					if (etat != false) {
+						JTable table = chPanAffichageMatrices.getTableMatrices();
+						taillePolice = table.getFont().getSize();
+						//On bloque à un certain moment sinon c'est beaucoup trop grand
+						if (taillePolice < 20) {
+							taillePolice+=2;
+							for(int ligne = 0; ligne < table.getRowCount()-2;ligne++) {
+								//on récupère la hauteur de la ligne pour l'agrandir par la suite
+								int hauteur = table.getRowHeight();
+								
+								for (int colonne = 0; colonne < table.getColumnCount(); colonne++) {
+									
+									//on récupère la colonne qu'on va élargir
+									TableColumn laColonne = table.getColumnModel().getColumn(colonne);
+									int largeur = laColonne.getWidth();
+									
+									largeur = largeur + 50;
+									
+									//on change la largeur de la colonne
+									laColonne.setPreferredWidth(largeur);
+								}
+								
+								table.setRowHeight(hauteur);
+							}
+							MultiLigneRenderer rend = chPanAffichageMatrices.getRenderer();
+							rend = new MultiLigneRenderer(taillePolice-8,taillePolice);
 							
-							//on récupère la colonne qu'on va élargir
-							TableColumn laColonne = table.getColumnModel().getColumn(colonne);
-							int largeur = laColonne.getWidth();
-							
-							largeur = largeur + 50;
-							
-							//on change la largeur de la colonne
-							laColonne.setPreferredWidth(largeur);
+							table.setFont(new Font("Serif", Font.BOLD, taillePolice)); 
+												
+							for (int i=0; i< table.getColumnCount(); i++) {
+								table.getColumnModel().getColumn(i).setCellRenderer(rend);
+							}
 						}
-						
-						table.setRowHeight(hauteur);
-					}
-					
-					MultiLigneRenderer rend = new MultiLigneRenderer(taillePolice-8,taillePolice);
-					
-					for (int i=0; i< table.getColumnCount(); i++) {
-						table.getColumnModel().getColumn(i).setCellRenderer(rend);
 					}
 				}
+				//si l'utilisateur veut dézoomer
+
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[2])){
-					String texte = new String("Devra retrecir le texte");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+					//On vérifie si l'utilisateur est au niveau de la JTable ou avant
+					if (etat != false) {
+						JTable table = chPanAffichageMatrices.getTableMatrices();
+						taillePolice = table.getFont().getSize();
+						//On bloque à un certain moment sinon ce n'est plus lisible, trop petit 
+						if (taillePolice > 12) {
+							taillePolice-=2;
+							for(int ligne = 0; ligne < table.getRowCount()-2;ligne++) {
+								//on récupère la hauteur de la ligne pour la rétrécir par la suite
+								int hauteur = table.getRowHeight();
+								
+								for (int colonne = 0; colonne < table.getColumnCount(); colonne++) {
+									
+									//on récupère la colonne qu'on va élargir
+									TableColumn laColonne = table.getColumnModel().getColumn(colonne);
+									int largeur = laColonne.getWidth();
+									
+									largeur = largeur - 50;
+									
+									//on change la largeur de la colonne
+									laColonne.setPreferredWidth(largeur);
+								}
+								
+								table.setRowHeight(hauteur);
+							}
+							MultiLigneRenderer rend = chPanAffichageMatrices.getRenderer();
+							rend = new MultiLigneRenderer(taillePolice-8,taillePolice);
+							
+							table.setFont(new Font("Serif", Font.BOLD, taillePolice)); 
+												
+							for (int i=0; i< table.getColumnCount(); i++) {
+								table.getColumnModel().getColumn(i).setCellRenderer(rend);
+							}
+						}
+					}
 				}
 				
 				//Permettre à l'utilisateur de recommencer des calculs depuis le début sur sa matrice
