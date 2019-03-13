@@ -295,7 +295,7 @@ public class Controleur implements ActionListener,MouseListener{
 			
 			//on change la matrice affichée dans le panelCommande
 			panCom.refresh(matricePrincipale);
-			panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel Ã  l'écoute du controleur
+			panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel à  l'écoute du controleur
 			
 			//si l'utilisateur réussit son calcul
 			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
