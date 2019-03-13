@@ -1,13 +1,20 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import modele.Data;
@@ -19,7 +26,7 @@ import modele.Fraction;
 import modele.Matrice;
 import Controleur.Controleur;
 
-public class PanelMatrice extends JPanel{
+public class PanelMatrice extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel panelMatrice; //la partie où on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
@@ -29,12 +36,13 @@ public class PanelMatrice extends JPanel{
 	private int pTailleMatrice;	
 	
 	//le tableau avec tous les champs pour remplir la matrice
-	private InputField[][] champsInput = new InputField[9][9];
+	private InputField[][] champsInput;
 	
 	private Matrice matrice;
 	
 	public PanelMatrice(int taille) {
 		pTailleMatrice = taille;
+		champsInput = new InputField[pTailleMatrice][pTailleMatrice];
 		matrice = new Matrice(pTailleMatrice);
 		panelMatrice = new JPanel();
 		panelInstructions = new JPanel();
@@ -60,6 +68,17 @@ public class PanelMatrice extends JPanel{
 		for (int i=0;i<pTailleMatrice;i++) {
 			for (int j=0;j<pTailleMatrice;j++) {
 				champsInput[i][j] = new InputField();
+				champsInput[i][j].setName(Integer.toString((i+1) + j));
+				if (i==0 && j==0) {
+					champsInput[0][0].setText(null);
+					//on met le focus sur la première case 
+					SwingUtilities.invokeLater(new Runnable() {
+					      public void run() {
+					    	  champsInput[0][0].requestFocus();
+					      }
+					    });
+				}
+					
 				panelMatrice.add(champsInput[i][j]);
 			}
 		}
@@ -73,6 +92,8 @@ public class PanelMatrice extends JPanel{
 		//on lui ajoute le bouton valider et l'instruction
 		panelInstructions.add(instruction, BorderLayout.CENTER);
 		panelInstructions.add(boutonValider,BorderLayout.SOUTH);
+		
+		
 		
 		//on ajoute les panel au panelMatrice
 		this.add(panelMatrice, BorderLayout.WEST);
@@ -95,5 +116,21 @@ public class PanelMatrice extends JPanel{
 		}
 		return matrice;
 	}//getMatriceSaisi()
+	
+	public void actionPerformed(ActionEvent pEvt) {
+		//si on appuie sur la touche entrée
+		if(pEvt.getActionCommand().equals(KeyEvent.VK_ENTER)) { 
+			//si le focus est sur une des cases de la matrice
+			Component aLeFocus = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+			//si le focus est sur la touche valider
+			if (aLeFocus instanceof JButton) {
+				((JButton) aLeFocus).doClick();
+			}
+			//si le focus est sur un chmp de la matrice
+			if (aLeFocus instanceof InputField) {
+				aLeFocus.getName()
+			}
+		}
+	}
 	
 }
