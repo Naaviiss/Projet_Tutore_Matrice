@@ -227,80 +227,80 @@ public class Controleur implements ActionListener,MouseListener{
 		//si on valide l'opÃ©ration
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_COMMANDES)) {
 			if(!operation[0].equals("")) {
-			int ligneB;//index de la deuxiÃ¨me ligne choisie
-			int ligneModifiee = getNumLigne(operation[0]); //on rÃ©cupÃ©re la ligne Ã  modifier
-			
-			//on rÃ©cupÃ¨re le calcul sous forme de chaine
-			String chaine = new String();
-			for (int i =0;i<operation.length;i++) {
-				chaine+=operation[i];
-			}
-			
-			//on rÃ©cupÃ¨re le commentaire
-			String commentaire = panCom.getZoneCommentaire().getText();
-			
-			//on recupere la derniere matrice de chaque liste
-			Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on rÃ©cupÃ©re la matrice sur laquelle on travaille
-			Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identitÃ©
-
-			
-			Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
-			Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identitÃ© sur laquelle on va effectuer les calculs
-			
-			//on copie les matrices
-			matricePrincipale.copie(actuelle);
-			matriceIdentite.copie(actuelleID);
-			
-			//Si l'utilisateur veut intervertir 2 lignes
-			if (operation[1].equals(Data.FLECHES[1])) {
-				ligneB = getNumLigne(operation[2]);
-				matricePrincipale.echange(ligneModifiee, ligneB);//on Ã©change les lignes sur la matrice principale
-				matriceIdentite.echange(ligneModifiee, ligneB);//on Ã©change les lignes sur la matrice identitÃ©
-			}
-			//Si l'utilisateur veut effectuer un calcul sur une ligne
-			else {
-				//si c'est la deuxiÃ¨me ligne qui prend un calcul
-				if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
-					ligneB = getNumLigne(operation[5]);
-					if (operation[4].equals("")) {
-						operation[4] = "1";
-					}
-					try {
-						matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opÃ©ration sur la ligne de la matrice principale
-						matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opÃ©ration sur la ligne de la matrice identitÃ©
-					} catch (ExceptEntreFraction e) {}
-					catch (ExceptNegatifMalPlace e) {}
-					catch (ExceptZeroDivision e) {}
-					catch (ExceptCaseVide e) {}
-					
+				int ligneB;//index de la deuxième ligne choisie
+				int ligneModifiee = getNumLigne(operation[0]); //on rÃ©cupÃ©re la ligne Ã  modifier
+				
+				//on rÃ©cupÃ¨re le calcul sous forme de chaine
+				String chaine = new String();
+				for (int i =0;i<operation.length;i++) {
+					chaine+=operation[i];
 				}
-				//si c'est la premiÃ¨re ligne qui prend un calcul
+				
+				//on rÃ©cupÃ¨re le commentaire
+				String commentaire = panCom.getZoneCommentaire().getText();
+				
+				//on recupere la derniere matrice de chaque liste
+				Matrice actuelle = chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1);//on rÃ©cupÃ©re la matrice sur laquelle on travaille
+				Matrice actuelleID = chPanAffichageMatrices.getChMatricesID().get(chPanAffichageMatrices.getChMatricesID().size()-1);//idem pour son identitÃ©
+	
+				
+				Matrice matricePrincipale = new Matrice(actuelle.getTaille());//matrice sur laquelle on va effectuer les calculs
+				Matrice matriceIdentite = new Matrice(actuelleID.getTaille());//matrice identitÃ© sur laquelle on va effectuer les calculs
+				
+				//on copie les matrices
+				matricePrincipale.copie(actuelle);
+				matriceIdentite.copie(actuelleID);
+				
+				//Si l'utilisateur veut intervertir 2 lignes
+				if (operation[1].equals(Data.FLECHES[1])) {
+					ligneB = getNumLigne(operation[2]);
+					matricePrincipale.echange(ligneModifiee, ligneB);//on Ã©change les lignes sur la matrice principale
+					matriceIdentite.echange(ligneModifiee, ligneB);//on Ã©change les lignes sur la matrice identitÃ©
+				}
+				//Si l'utilisateur veut effectuer un calcul sur une ligne
 				else {
-					try {
-						matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opÃ©ration sur la ligne de la matrice principale
-						matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opÃ©ration sur la ligne de la matrice identitÃ©
-					} 
-					catch (ExceptEntreFraction e) {}
-					catch (ExceptNegatifMalPlace e) {}
-					catch (ExceptZeroDivision e) {}
-					catch (ExceptCaseVide e) {}
+					//si c'est la deuxiÃ¨me ligne qui prend un calcul
+					if (Arrays.asList(Data.LIGNES).contains(operation[5])) {
+						ligneB = getNumLigne(operation[5]);
+						if (operation[4].equals("")) {
+							operation[4] = "1";
+						}
+						try {
+							matricePrincipale.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opÃ©ration sur la ligne de la matrice principale
+							matriceIdentite.modifyLine2(ligneModifiee, operation[3], ligneB, new Fraction(operation[4]));//on fait l'opÃ©ration sur la ligne de la matrice identitÃ©
+						} catch (ExceptEntreFraction e) {}
+						catch (ExceptNegatifMalPlace e) {}
+						catch (ExceptZeroDivision e) {}
+						catch (ExceptCaseVide e) {}
+						
+					}
+					//si c'est la premiÃ¨re ligne qui prend un calcul
+					else {
+						try {
+							matricePrincipale.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opÃ©ration sur la ligne de la matrice principale
+							matriceIdentite.modifyLine(ligneModifiee, new Fraction(operation[2]));//on fait l'opÃ©ration sur la ligne de la matrice identitÃ©
+						} 
+						catch (ExceptEntreFraction e) {}
+						catch (ExceptNegatifMalPlace e) {}
+						catch (ExceptZeroDivision e) {}
+						catch (ExceptCaseVide e) {}
+					}
+				}
+				chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opÃ©ration ÃƒÂ  la table
+				
+				//si on valide on reset l'operation en simulant un clic sur le bouton effacer
+				panCom.getEffacer().doClick();
+				
+				//on change la matrice affichÃ©e dans le panelCommande
+				panCom.refresh(matricePrincipale);
+				panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel ÃƒÂ  l'Ã©coute du controleur
+				
+				//si l'utilisateur rÃ©ussit son calcul
+				if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
+					//on lance un popup pour le fÃ©liciter
+					JOptionPane.showMessageDialog(null, "FÃ©licitations !\nVous avez rÃ©ussi Ã  retrouver la matrice identitÃ© !\n Pensez Ã Â  exporter votre travail en PDF (Ctrl + P) pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversÃ©e:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-			chPanAffichageMatrices.ajoutMatrice(matricePrincipale,matriceIdentite,chaine,commentaire); //on ajoute les matrices,l'opÃ©ration ÃƒÂ  la table
-			
-			//si on valide on reset l'operation en simulant un clic sur le bouton effacer
-			panCom.getEffacer().doClick();
-			
-			//on change la matrice affichÃ©e dans le panelCommande
-			panCom.refresh(matricePrincipale);
-			panCom.getChChoixLigneMatrice().enregistreEcouteur(this); //on met le nouveau panel ÃƒÂ  l'Ã©coute du controleur
-			
-			//si l'utilisateur rÃ©ussit son calcul
-			if(chPanAffichageMatrices.getChMatrices().get(chPanAffichageMatrices.getChMatrices().size()-1).isIdentite()) {
-				//on lance un popup pour le fÃ©liciter
-				JOptionPane.showMessageDialog(null, "FÃ©licitations !\nVous avez rÃ©ussi Ã  retrouver la matrice identitÃ© !\n Pensez Ã Â  exporter votre travail en PDF (Ctrl + P) pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversÃ©e:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
 		}
 		
 		//si on clique sur le bouton constante
