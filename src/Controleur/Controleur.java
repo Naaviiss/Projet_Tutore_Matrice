@@ -583,9 +583,9 @@ public class Controleur implements ActionListener,MouseListener{
 	public void mouseClicked(MouseEvent e) {//si on clique sur une ligne
 		int labelVide = panCom.getLabelVideLigne();
 
-		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne ÃƒÂ  modifier ou si on a utilisÃ© la flÃ¨che <-
+		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne à  modifier ou si on a utilisé la flèche <-
 			if (labelVide == 0) {
-				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquÃ©e
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
 				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne ÃƒÂ  l'opÃ©ration
 			}
 			if( labelVide == 2 && operation[0].equals( e.getComponent().getName() ) ) {//si la premiÃ¨re ligne aprÃ¨s la flÃ¨che est la mÃƒÂªme que celle ÃƒÂ  modifier
