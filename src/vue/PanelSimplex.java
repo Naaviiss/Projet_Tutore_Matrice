@@ -1,8 +1,6 @@
 package vue;
 
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import Controleur.Controleur;
 import Modele.ContrainteExplicite;
@@ -55,7 +52,7 @@ public class PanelSimplex extends JPanel {
 		gridLim.gridy = 0;
 		gridLim.gridx = 0;
 
-		for(Iterator j = simplexe.getContraintes().iterator(); j.hasNext();) {
+		for(Iterator<?> j = simplexe.getContraintes().iterator(); j.hasNext();) {
 			gridLim.gridx = 0;
 			ContrainteExplicite ce = (ContrainteExplicite) j.next();
 			JLabel lab = new JLabel(ce.getNom()+" =",JLabel.LEFT);

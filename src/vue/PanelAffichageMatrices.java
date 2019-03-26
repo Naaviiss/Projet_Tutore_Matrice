@@ -180,7 +180,7 @@ public class PanelAffichageMatrices extends JPanel{
 	}
 
 	public void setChCommentaire(List<String> chCommentaires) {
-		this.chCommentaire = chCommentaire;
+		this.chCommentaire = chCommentaires;
 		
 	} 
 	public MultiLigneRenderer getRenderer() {

@@ -67,7 +67,7 @@ public class Historique implements Serializable{
 	 * @param Historique histo
 	 */
 	public Historique(Historique histo) {
-		listeSimplexe=new LinkedList();
+		listeSimplexe=new LinkedList<Simplexe>();
 		
 		for(int i=0;i<histo.listeSimplexe.size();i++) {
 			listeSimplexe.add(new Simplexe(histo.listeSimplexe.get(i)));

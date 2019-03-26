@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Simplexe implements Serializable{
-	List contraintes;
+	List<ContrainteExplicite> contraintes;
 	FonctionEco fonctionEco;
 	
 	/**
@@ -13,7 +13,7 @@ public class Simplexe implements Serializable{
 	 * @param List contraintes
 	 * @param FonctionEco fonctionEco
 	 */
-	public Simplexe(List contraintes, FonctionEco fonctionEco) {
+	public Simplexe(List<ContrainteExplicite> contraintes, FonctionEco fonctionEco) {
 		this.contraintes=contraintes;
 		this.fonctionEco=fonctionEco;
 	}
@@ -30,9 +30,9 @@ public class Simplexe implements Serializable{
 	 * @param Simplexe simp
 	 */
 	public Simplexe(Simplexe simp) {
-		List cont = new LinkedList();
+		List<ContrainteExplicite> cont = new LinkedList<ContrainteExplicite>();
 		for(int i=0;i<simp.contraintes.size();i++) {
-			ContrainteExplicite ce = (ContrainteExplicite) simp.contraintes.get(i);
+			ContrainteExplicite ce = simp.contraintes.get(i);
 			cont.add(new ContrainteExplicite(ce));
 		}
 		contraintes=cont;
@@ -45,7 +45,7 @@ public class Simplexe implements Serializable{
 	 */
 	public void passageDico1() {
 		for(int i = 0; i<contraintes.size();i++) {
-			((ContrainteExplicite)contraintes.get(i)).passageDico1();
+			contraintes.get(i).passageDico1();
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class Simplexe implements Serializable{
 	public String toString() {
 		String chaineFinale="";
 		for(int i=0; i<contraintes.size(); i++) {
-			chaineFinale += "<p>"+((ContrainteExplicite) contraintes.get(i)).toString()+"</p><br>";
+			chaineFinale += "<p>"+contraintes.get(i).toString()+"</p><br>";
 		}
 		chaineFinale+= "<p>"+fonctionEco.toString()+"</p><br><hr><br>";
 		return chaineFinale;
@@ -71,7 +71,7 @@ public class Simplexe implements Serializable{
 	public String toString2() {
 		String chaineFinale="";
 		for(int i=0; i<contraintes.size(); i++) {
-			chaineFinale += ((ContrainteExplicite) contraintes.get(i)).toString() + "\n";
+			chaineFinale += contraintes.get(i).toString() + "\n";
 			
 		}
 		chaineFinale+=fonctionEco.toString();
@@ -91,11 +91,11 @@ public class Simplexe implements Serializable{
 		
 		for(int i=0; i<contraintes.size(); i++) {
 			
-			if(((ContrainteExplicite)contraintes.get(i)).getMonomes().get(inconnueBase)!=null) {
-				if(((ContrainteExplicite)contraintes.get(i)).majorant(inconnueBase)<max /*&& ((ContrainteExplicite)contraintes.get(i)*/){
+			if(contraintes.get(i).getMonomes().get(inconnueBase)!=null) {
+				if(contraintes.get(i).majorant(inconnueBase)<max /*&& ((ContrainteExplicite)contraintes.get(i)*/){
 				
-				inconnueHorsBase = ((ContrainteExplicite)contraintes.get(i)).getNom();
-				max=((ContrainteExplicite)contraintes.get(i)).majorant(inconnueBase);
+				inconnueHorsBase = contraintes.get(i).getNom();
+				max=contraintes.get(i).majorant(inconnueBase);
 				}
 			}
 			
@@ -115,8 +115,8 @@ public class Simplexe implements Serializable{
 		int mem=-1;
 		ContrainteExplicite memCE=new ContrainteExplicite(new Fraction(1,1), "");
 		for(int i = 0; i<contraintes.size();i++) {
-			if(((ContrainteExplicite) contraintes.get(i)).getNom().equals(inconnueHorsBase)) {
-				memCE = ((ContrainteExplicite) contraintes.get(i));
+			if(contraintes.get(i).getNom().equals(inconnueHorsBase)) {
+				memCE = contraintes.get(i);
 				memCE.rentrerBase(inconnueBase);
 				fonctionEco.echanger(memCE, inconnueBase);
 				mem=i;
@@ -125,7 +125,7 @@ public class Simplexe implements Serializable{
 		}
 		for(int i=0;i<contraintes.size();i++) {
 			if(i != mem) {
-				((ContrainteExplicite) contraintes.get(i)).echanger(memCE, inconnueBase);
+				contraintes.get(i).echanger(memCE, inconnueBase);
 			}
 		}
 	}
@@ -134,7 +134,7 @@ public class Simplexe implements Serializable{
 	 * Renvoie le champ contraintes(List) de this
 	 * @return List contraintes
 	 */
-	public List getContraintes() {
+	public List<ContrainteExplicite> getContraintes() {
 		return contraintes;
 	}
 	
@@ -142,7 +142,7 @@ public class Simplexe implements Serializable{
 	 * Défini le champ contraintes de this avec le paramètre fourni
 	 * @param List contraintes
 	 */
-	public void setContraintes(List contraintes) {
+	public void setContraintes(List<ContrainteExplicite> contraintes) {
 		this.contraintes = contraintes;
 	}
 

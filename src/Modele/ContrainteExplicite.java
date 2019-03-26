@@ -56,8 +56,8 @@ public class ContrainteExplicite implements Serializable{
 	 */
 	public void passageDico1() {
 		for (Iterator<String> i = monomes.keySet().iterator(); i.hasNext(); ) {
-			String clé = (String) i.next();
-			((Monome)monomes.get(clé)).setCoefficient((((Monome)monomes.get(clé)).getCoefficient().FMultiplication(new Fraction(-1,1))));
+			String clé = i.next();
+			monomes.get(clé).setCoefficient((monomes.get(clé).getCoefficient().FMultiplication(new Fraction(-1,1))));
 		}
 		Monome m = new Monome(inferieurA, " ");
 		this.ajouterMonome(m);
@@ -75,16 +75,16 @@ public class ContrainteExplicite implements Serializable{
 		String chaineFinale = new String();
 		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String clé = (String) i.next();
-			chaineFinale+=((Monome) monomes.get(clé)).toString();
+			String clé = i.next();
+			chaineFinale+=monomes.get(clé).toString();
 		}
 		
 		while(i.hasNext()) {
-			String clé = (String) i.next();
-			if(((Monome)monomes.get(clé)).getCoefficient().getNumerateur()>0) {
+			String clé = i.next();
+			if(monomes.get(clé).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" + ";
 			}
-			chaineFinale += ((Monome) monomes.get(clé)).toString();
+			chaineFinale += monomes.get(clé).toString();
 		}
 		chaineFinale+= " <= "+ this.inferieurA;
 		return chaineFinale;
@@ -99,18 +99,18 @@ public class ContrainteExplicite implements Serializable{
 	public String toString() {
 		String chaineFinale = new String();
 		chaineFinale +=  this.nom + " = ";
-		Iterator i = monomes.keySet().iterator(); 
+		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String clé = (String) i.next();
-			chaineFinale+=((Monome) monomes.get(clé)).toString();
+			String clé = i.next();
+			chaineFinale+=monomes.get(clé).toString();
 		}
 		
 		while(i.hasNext()) {
-			String clé = (String) i.next();
-			if(((Monome)monomes.get(clé)).getCoefficient().getNumerateur()>0) {
+			String clé = i.next();
+			if(monomes.get(clé).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" +";
 			}
-			chaineFinale += " " + ((Monome) monomes.get(clé)).toString();
+			chaineFinale += " " + monomes.get(clé).toString();
 		}
 		return chaineFinale;
 
@@ -129,8 +129,8 @@ public class ContrainteExplicite implements Serializable{
 	public void additionnerLigne(ContrainteExplicite ce) {
 		Iterator<String> i = monomes.keySet().iterator(); 
 		while(i.hasNext()) {
-			String clé = (String) i.next();
-			((Monome) monomes.get(clé)).additionner(((Monome)ce.getMonomes().get(clé)));
+			String clé = i.next();
+			monomes.get(clé).additionner(ce.getMonomes().get(clé));
 		}
 	}
 	
@@ -143,12 +143,12 @@ public class ContrainteExplicite implements Serializable{
 	public void rentrerBase(String inconnue) {
 		Iterator<String> i = monomes.keySet().iterator();
 		while(i.hasNext()) { // On parcours notre contrainte
-			String clé = (String) i.next();
+			String clé = i.next();
 			if (clé.equals(inconnue)) { // on tombe sur le bon Xi
-				Fraction coeff = ((Monome)monomes.get(clé)).getCoefficient(); // on récupère le coefficient du monome à switch
+				Fraction coeff = monomes.get(clé).getCoefficient(); // on récupère le coefficient du monome à switch
 				//String tmp = this.nom;
 				Monome switched = new Monome(new Fraction(-1,1),this.nom); // on met -1 car on le switch donc son coeff devient négatif. Il va ensuite être divisé par le coeff de m
-				this.nom = ((Monome)monomes.get(clé)).getInconnue(); // On remplace le nom de la contrainte par l'inconnue de m
+				this.nom = monomes.get(clé).getInconnue(); // On remplace le nom de la contrainte par l'inconnue de m
 				monomes.remove(clé);
 				monomes.put(switched.getInconnue(),switched);
 				division(coeff); //ADD FRACTION
@@ -163,18 +163,18 @@ public class ContrainteExplicite implements Serializable{
 	 * @param inconnue l'inconnue à échanger avec ce
 	 */
 	public void echanger(ContrainteExplicite ce, String inconnue) {
-		Monome aEchanger = ((Monome)monomes.get(inconnue));
+		Monome aEchanger = monomes.get(inconnue);
 		Fraction coeff = aEchanger.getCoefficient(); //FRACTION
 		monomes.remove(inconnue);
 		
-		for (Iterator i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
-			String clé = (String) i.next();
-			Monome temp = new Monome(((Monome) ce.getMonomes().get(clé)).getCoefficient().FMultiplication(coeff), ((Monome) ce.getMonomes().get(clé)).getInconnue());
+		for (Iterator<String> i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
+			String clé = i.next();
+			Monome temp = new Monome(ce.getMonomes().get(clé).getCoefficient().FMultiplication(coeff), ce.getMonomes().get(clé).getInconnue());
 			if(monomes.get(clé)!=null) {
-				((Monome)monomes.get(clé)).additionner(temp);
+				monomes.get(clé).additionner(temp);
 			}
 			else {
-				Monome ajout = new Monome(coeff.FMultiplication(((Monome)ce.getMonomes().get(clé)).getCoefficient()), clé);
+				Monome ajout = new Monome(coeff.FMultiplication(ce.getMonomes().get(clé).getCoefficient()), clé);
 				monomes.put(clé, ajout);
 			}
 			
@@ -188,8 +188,8 @@ public class ContrainteExplicite implements Serializable{
 	 * @return renvoie la valeur absolue de la constante divisée par le coefficient
 	 */
 	public double majorant(String inconnue) {
-		double constante = ((Monome)monomes.get(" ")).getCoefficient().FMath();
-		double coeffInconnue = ((Monome)monomes.get(inconnue)).getCoefficient().FMath();
+		double constante = monomes.get(" ").getCoefficient().FMath();
+		double coeffInconnue = monomes.get(inconnue).getCoefficient().FMath();
 		return Math.abs(constante/coeffInconnue);
 		
 		
@@ -199,11 +199,11 @@ public class ContrainteExplicite implements Serializable{
 	 * @param Fraction coeff
 	 */
 	public void division(Fraction coeff) { //ADD FRACTION
-		Iterator i = monomes.keySet().iterator();
+		Iterator<String> i = monomes.keySet().iterator();
 		coeff.setNumerateur(-coeff.getNumerateur());
 		while(i.hasNext()) {
-			String clé = (String) i.next();
-			((Monome) monomes.get(clé)).setCoefficient(((Monome) monomes.get(clé)).getCoefficient().FDivision(coeff)); 
+			String clé = i.next();
+			monomes.get(clé).setCoefficient(monomes.get(clé).getCoefficient().FDivision(coeff)); 
 		}
 	}
 	
@@ -227,7 +227,7 @@ public class ContrainteExplicite implements Serializable{
 	 * @return Monome monomes
 	 */
 
-	public Map getMonomes() {
+	public Map<String, Monome> getMonomes() {
 		return monomes;
 	}
 
@@ -235,7 +235,7 @@ public class ContrainteExplicite implements Serializable{
 	 * Définie le champs monomes de this avec la Map fournit en paramètre
 	 * @param Map monomes
 	 */
-	public void setMonomes(Map monomes) {
+	public void setMonomes(Map<String, Monome> monomes) {
 		this.monomes = monomes;
 	}
 	

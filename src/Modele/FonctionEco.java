@@ -6,13 +6,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class FonctionEco implements Serializable{
-	Map monomes;
+	Map<String, Monome> monomes;
 	
 	/**
 	 * Construit un objet FonctionEco contenant une HashMap
 	 */
 	public FonctionEco() {
-		monomes = new HashMap(); //changer en map
+		monomes = new HashMap<String, Monome>(); //changer en map
 	}
 	
 	/**
@@ -21,9 +21,9 @@ public class FonctionEco implements Serializable{
 	 * @param FonctionEco fonctionEco
 	 */
 	public FonctionEco(FonctionEco fonctionEco) {
-		monomes = new HashMap();
-		for (Iterator i = fonctionEco.monomes.keySet().iterator(); i.hasNext(); ) {
-			String clé = (String) i.next();
+		monomes = new HashMap<String, Monome>();
+		for (Iterator<String> i = fonctionEco.monomes.keySet().iterator(); i.hasNext(); ) {
+			String clé = i.next();
 			this.ajouterMonome(new Monome((Monome)fonctionEco.monomes.get(clé)));;
 		}
 	}
@@ -42,18 +42,18 @@ public class FonctionEco implements Serializable{
 	public String toString() {
 		String chaineFinale = new String();
 		chaineFinale +=  "z = ";
-		Iterator i = monomes.keySet().iterator(); 
+		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String clé = (String) i.next();
-			chaineFinale+=((Monome) monomes.get(clé)).toString();
+			String clé = i.next();
+			chaineFinale+=monomes.get(clé).toString();
 		}
 		
 		while(i.hasNext()) {
-			String clé = (String) i.next();
-			if(((Monome)monomes.get(clé)).getCoefficient().getNumerateur()>0) {
+			String clé = i.next();
+			if(monomes.get(clé).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" +";
 			}
-			chaineFinale += " " + ((Monome) monomes.get(clé)).toString();
+			chaineFinale += " " + monomes.get(clé).toString();
 		}
 		return chaineFinale;
 
@@ -65,15 +65,15 @@ public class FonctionEco implements Serializable{
 	 * @param String inconnue
 	 */
 	public void echanger(ContrainteExplicite ce, String inconnue) {
-		Monome aEchanger = ((Monome)monomes.get(inconnue));
+		Monome aEchanger = monomes.get(inconnue);
 		Fraction coeff = aEchanger.getCoefficient(); //FRACTION
 		monomes.remove(inconnue);
 		
-		for (Iterator i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
+		for (Iterator<?> i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
 			String clé = (String) i.next();
 			Monome temp = new Monome(((Monome) ce.getMonomes().get(clé)).getCoefficient().FMultiplication(coeff), ((Monome) ce.getMonomes().get(clé)).getInconnue());
 			if(monomes.get(clé)!=null) {
-				((Monome)monomes.get(clé)).additionner(temp);
+				monomes.get(clé).additionner(temp);
 			}
 			else {
 				Monome ajout = new Monome(coeff.FMultiplication(((Monome)ce.getMonomes().get(clé)).getCoefficient()), clé);
@@ -91,11 +91,11 @@ public class FonctionEco implements Serializable{
 		Fraction max = new Fraction(0);
 		String res=new String();
 		
-		for (Iterator i = monomes.keySet().iterator(); i.hasNext();) {
-			String clé = (String) i.next();
-			if(((Monome)monomes.get(clé)).getCoefficient().FSup(max) && !((Monome)monomes.get(clé)).getInconnue().equals(" ")) {
-				max=new Fraction(((Monome)monomes.get(clé)).getCoefficient());
-				res=((Monome)monomes.get(clé)).getInconnue();
+		for (Iterator<String> i = monomes.keySet().iterator(); i.hasNext();) {
+			String clé = i.next();
+			if(monomes.get(clé).getCoefficient().FSup(max) && !monomes.get(clé).getInconnue().equals(" ")) {
+				max=new Fraction(monomes.get(clé).getCoefficient());
+				res=monomes.get(clé).getInconnue();
 			}
 			
 		}
@@ -106,7 +106,7 @@ public class FonctionEco implements Serializable{
 	 * Renvoie le champs monomes (Map) de this
 	 * @return Map monomes
 	 */
-	public Map getMonomes() {
+	public Map<String, Monome> getMonomes() {
 		return monomes;
 	}
 }
