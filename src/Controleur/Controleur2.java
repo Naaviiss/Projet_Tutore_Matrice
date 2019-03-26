@@ -39,7 +39,7 @@ import vue.PanelGauss;
 import vue.PanelMatrice;
 import vue.PanelTaille;
 
-public class Controleur implements ActionListener,MouseListener{
+public class Controleur2 implements ActionListener,MouseListener{
 	
 	private PanelMatrice chPanMatrice;
 	private PanelTaille chPanTaille;
@@ -54,7 +54,7 @@ public class Controleur implements ActionListener,MouseListener{
 								//utilisé pour revenir au tout début du calcul de la matrice inverse
 	private int taillePolice; //correspond à la taille de la police dans la JTable
 	
-	public Controleur(PanelChoix pPanChoix) {
+	public Controleur2(PanelChoix pPanChoix) {
 		
 		//on met une constante par défaut au cas où l'utilisateur n'en renseigne pas
 		constante = new Fraction(1);
@@ -482,30 +482,30 @@ public class Controleur implements ActionListener,MouseListener{
 			}
 		}
 				
-				//Permettre Ã  l'utilisateur de recommencer des calculs depuis le dÃ©but sur sa matrice
+				//Permettre à  l'utilisateur de recommencer des calculs depuis le début sur sa matrice
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
 					//On vÃ©rifie si l'utilisateur est au niveau de la JTable ou avant
 					if (etat != false) {
 						String texte = new String("Devra recommencer le calcul");
 						JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-						//On efface ce qui est prÃ©sent dans la JTable
+						//On efface ce qui est présent dans la JTable
 						PanelAffichageMatrices.clearTable(chPanAffichageMatrices.getTableMatrices());
 						//On vide toutes les listes (qui contiennent la matrice, l'inverse, l'opÃ©ration et le commentaire)
 						chPanAffichageMatrices.viderListe();
 						//s'il est au niveau de la JTable, on remet tout comme avant.
 						try {
-							Matrice M1 = chPanMatrice.getMatriceSaisi();//crÃ©ation de la matrice
-							Matrice M2 = Matrice.identite(M1.getTaille());//crÃ©ation de la matrice identitÃ©
+							Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
+							Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identitÃ©
 							chPanGauss = new PanelGauss(M1);
-							chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au dÃ©part la chaine pour le calcul et celle pour le commentaire sont vides
+							chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au départ la chaine pour le calcul et celle pour le commentaire sont vides
 							chPanGauss.setAffichageMatrices(chPanAffichageMatrices);
 							chPanelChoix.add(chPanGauss, "panel_gauss");
 							chPanGauss.enregistreEcouteur(this);
 							chPanelChoix.getCardLayout().show(chPanelChoix, "panel_gauss");
-							panCom = chPanGauss.getPanelCommandes();//on rÃ©cupÃ¨re le panel commande
+							panCom = chPanGauss.getPanelCommandes();//on récupère le panel commande
 						} 
 						catch (ExceptEntreFraction e) {
-							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractÃ¨res spÃ©ciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Vous ne pouvez pas rentrer de lettres et de caractères spéciaux dans une fraction !","Erreur",JOptionPane.ERROR_MESSAGE);
 						}
 						catch (ExceptNegatifMalPlace e) {
 							JOptionPane.showMessageDialog(null, "Erreur dans le placement du signe \"-\" !","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -556,13 +556,13 @@ public class Controleur implements ActionListener,MouseListener{
 					}
 				
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
-					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les Ã©tapes suivantes. Toutes les Ã©tapes nÃ©cessitent d'appuyer sur un bouton 'valider' Ã  chaque fois.\n\n\nPremiÃ¨rement, choisir la taille de sa matrice. Celle-ci peut Ãªtre comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-lÃ Â , on comprend le principe avec des tailles encore plus grandes.\n\n"
-							+ "DeuxiÃ¨mement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, nÃ©gatifs, nuls) et des fractions (positives,nÃ©gatives). Les fractions seront rÃ©duites automatiquement.\n\n"
-							+ "TroisiÃ¨mement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'Ã©crirent correctement. Les diffÃ©rents formes de calculs possibles sont les suivantes :\n\n"
+					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à  chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là à , on comprend le principe avec des tailles encore plus grandes.\n\n"
+							+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, négatifs, nuls) et des fractions (positives,négatives). Les fractions seront réduites automatiquement.\n\n"
+							+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'écrirent correctement. Les différents formes de calculs possibles sont les suivantes :\n\n"
 							+ "Ligne_i â†” Ligne_j\n"
 							+ "Ligne_i â†� lambda * ligne_i (Si lambda â‰ Â  0)\n"
 							+ "Ligne_i â†� ligne_i + lambda * ligne_j\n\n"
-							+ "Une matrice identitÃ© correspond Ã Â  : \n" + Matrice.identite(3).toString()
+							+ "Une matrice identité correspond à  : \n" + Matrice.identite(3).toString()
 							+ "Bonne chance !");
 
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);

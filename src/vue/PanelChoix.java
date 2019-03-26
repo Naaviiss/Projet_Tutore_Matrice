@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 import modele.*;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 
 public class PanelChoix extends JPanel{
 
@@ -21,7 +21,7 @@ public class PanelChoix extends JPanel{
 	private PanelGauss panGauss;
 	private PanelMatrice panMatrice;
 	private CardLayout cardLayout;
-	private Controleur chControleur;
+	private Controleur2 chControleur;
 	public GridBagConstraints contrainte = new GridBagConstraints() ;
 	private JButton didacticiel = new JButton("Mode didacticiel");
 	private JButton autonome = new JButton("Mode autonome");
@@ -30,7 +30,7 @@ public class PanelChoix extends JPanel{
 	public PanelChoix() {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
-		chControleur = new Controleur(this);
+		chControleur = new Controleur2(this);
 
 		
 		JPanel pan = new JPanel();
@@ -84,11 +84,11 @@ public class PanelChoix extends JPanel{
 		this.panMatrice = panMatrice;
 	}
 
-	public Controleur getChControleur() {
+	public Controleur2 getChControleur() {
 		return chControleur;
 	}
 
-	public void setChControleur(Controleur chControleur) {
+	public void setChControleur(Controleur2 chControleur) {
 		this.chControleur = chControleur;
 	}
 

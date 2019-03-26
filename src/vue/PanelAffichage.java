@@ -8,14 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 //import controleur.Controleur;
 import modele.Data;
 
 public class PanelAffichage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	//On crée nos deux boutons
+	//On crï¿½e nos deux boutons
 	private JButton bouton_simplex = new JButton("Simplex");
 	private JButton bouton_matrice = new JButton("Matrice");
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
@@ -30,7 +30,7 @@ public class PanelAffichage extends JPanel{
 		bouton_matrice.setPreferredSize(new Dimension(350, 200));
 		bouton_matrice.setFont(new Font(Font.SERIF, 20, 60));
 
-		//Le panel sera géré par un BorderLayout
+		//Le panel sera gï¿½rï¿½ par un BorderLayout
 		panelboutons.setLayout(new BorderLayout(20,20));
 		
 		bouton_simplex.setActionCommand(Data.CHOIX[0]);
@@ -46,7 +46,7 @@ public class PanelAffichage extends JPanel{
 	}//PanelAffichage()
 	
 	
-	public void enregistreEcouteur(Controleur parControleur) {
+	public void enregistreEcouteur(Controleur2 parControleur) {
 		bouton_simplex.addActionListener(parControleur);
 		bouton_matrice.addActionListener(parControleur);
 	}

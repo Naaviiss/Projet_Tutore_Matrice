@@ -17,14 +17,14 @@ import modele.ExceptNegatifMalPlace;
 import modele.ExceptZeroDivision;
 import modele.Fraction;
 import modele.Matrice;
-import Controleur.Controleur;
+import Controleur.Controleur2;
 
 public class PanelMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JPanel panelMatrice; //la partie où on entre la matrice
 	private JPanel panelInstructions; // la partie avec les instructions et  le bouton valider
 	private JLabel instruction;//instruction
-	private Controleur chControleur; //le controleur
+	private Controleur2 chControleur; //le controleur
 	private JButton boutonValider = new JButton("Valider");
 	private int pTailleMatrice;	
 	
@@ -79,7 +79,7 @@ public class PanelMatrice extends JPanel{
 		this.add(panelInstructions, BorderLayout.EAST);
 	}
 	
-	public void enregistreEcouteur(Controleur parControleur){
+	public void enregistreEcouteur(Controleur2 parControleur){
 		boutonValider.addActionListener(parControleur);
 	}
 	

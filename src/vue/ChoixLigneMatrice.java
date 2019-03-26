@@ -8,7 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 import modele.Data;
 import modele.Matrice;
 
@@ -38,7 +38,7 @@ public class ChoixLigneMatrice extends JPanel{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 	
-	public void enregistreEcouteur(Controleur pControleur) {
+	public void enregistreEcouteur(Controleur2 pControleur) {
 		//on mets les labels à l'écoute du controleur
 		for (int i = 0; i<chMatrice.getTaille();i++) {
 			lignes[i].addMouseListener(pControleur);

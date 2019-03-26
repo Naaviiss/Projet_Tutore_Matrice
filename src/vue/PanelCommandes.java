@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 import modele.Data;
 import modele.Matrice;
 
@@ -177,7 +177,7 @@ public class PanelCommandes extends JPanel implements Data{
 		this.chMatrice = pMatrice;
 	}
 	
-	public void enregistreEcouteur(Controleur pControleur) {
+	public void enregistreEcouteur(Controleur2 pControleur) {
 		valider.addActionListener(pControleur);//bouton valider
 		constante.addActionListener(pControleur);
 		for (int i = 0; i<Data.OPERATIONS.length;i++) {

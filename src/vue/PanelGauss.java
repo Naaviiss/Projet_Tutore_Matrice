@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 import modele.*;
 
 public class PanelGauss extends JPanel{
@@ -42,7 +42,7 @@ public class PanelGauss extends JPanel{
 		return affichageMatrices;
 	}
 	
-	public void enregistreEcouteur(Controleur pControleur) {
+	public void enregistreEcouteur(Controleur2 pControleur) {
 		commandesMatrices.enregistreEcouteur(pControleur);
 	}
 	

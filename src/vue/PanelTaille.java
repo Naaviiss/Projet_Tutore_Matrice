@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controleur.Controleur;
+import Controleur.Controleur2;
 import modele.Data;
 
 public class PanelTaille extends JPanel{
@@ -43,7 +43,7 @@ public class PanelTaille extends JPanel{
 			return poids+3;
 		}
 		
-	public void enregistreEcouteur(Controleur parControleur){
+	public void enregistreEcouteur(Controleur2 parControleur){
 		valider.addActionListener(parControleur);
 	}
 
