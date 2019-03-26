@@ -60,19 +60,19 @@ public class API extends JFrame implements ActionListener{
 		
 		this.add(pan);
 		
-		//On s'occupe du menu en haut de l'�cran
+		//On s'occupe du menu en haut de l'écran
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setJMenuBar(menuBar);
 		for(int i=0;i<Data.TITRE_MENU.length;i++){
 			if (i==0){
-				//Si on est sur le bouton Aide, on cr�e un menu d'aide
+				//Si on est sur le bouton Aide, on crée un menu d'aide
 				JMenu menu = new JMenu (Data.TITRE_MENU[i]);
 			    menu.setMnemonic('A');
 				menu.addActionListener(this);
 				menu.setActionCommand(Data.TITRE_MENU[i]);
 				menuBar.add(menu);
-				//Et on ajoute des items � la suite suivant si on veut
+				//Et on ajoute des items &àla suite suivant si on veut
 				//de l'aide pour les simplex ou les matrices
 				for(int j=0;j<Data.TITRE_MENU_LISTE.length;j++){
 					JMenuItem menuitem = new JMenuItem (Data.TITRE_MENU_LISTE[j]);
