@@ -7,15 +7,14 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.Font.FontStyle;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class GenerePDF {
+public class GenerePdf {
 	
 	private Document document;
 	
-	public GenerePDF() {
+	public GenerePdf() {
 		
 		document = new Document();
 		
@@ -38,7 +37,7 @@ public class GenerePDF {
 	 * @param String nomFichier
 	 */
 	
-	public GenerePDF(Historique histo, String nomFichier) {
+	public GenerePdf(Historique histo, String nomFichier) {
 		
 		document = new Document();
 		

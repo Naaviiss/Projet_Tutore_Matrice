@@ -30,7 +30,9 @@ public class API extends JFrame implements ActionListener{
 	JButton mat = new JButton("Matrice");
 	
 	public GridBagConstraints contrainte = new GridBagConstraints() ;
-	
+	/**
+	 * Construit un objet API correspondant à un GridBagLayout qui est l'accueil de l'application
+	 */
 	public API() {
 		super("Accueil de l'API");
 		JPanel pan = new JPanel();
@@ -99,9 +101,12 @@ public class API extends JFrame implements ActionListener{
 
 	public static void main(String[] args) {
 		new API();
-
 	}
 	@Override
+	/**
+	 * L'utilisateur peut, grâce à cette méthode, faire le choix d'utiliser l'application dédiée aux Matrices ou au Simplexe
+	 *@param ActionEvent ev
+	 */
 	public void actionPerformed(ActionEvent ev) {
 		if (ev.getActionCommand().equals(Data.TITRE_MENU[2])){
 			System.exit(0);
@@ -111,6 +116,9 @@ public class API extends JFrame implements ActionListener{
 		if (ev.getActionCommand().equals(Data.TITRE_MENU_LISTE[0])){
 			String texte = new String("Pour travailler sur les simplexes, veuillez cliquer sur le bouton 'Simplexe'");
 			JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
+		}
+		if(ev.getActionCommand().equals("simplexe")) {
+			new FenetreMereSimplex();
 		}
 		
 		//L'action concernant l'aide pour les matrices

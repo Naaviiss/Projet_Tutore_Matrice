@@ -3,13 +3,15 @@ package modele;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class ContrainteExplicite implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String nom;
-	Map monomes;
+	Map<String, Monome> monomes;
 	Fraction inferieurA;
 	int nombreInconnues;
 	
@@ -20,7 +22,7 @@ public class ContrainteExplicite implements Serializable{
 	 * @param String nom
 	 */
 	public ContrainteExplicite(Fraction limite, String nom){
-		this.monomes = new HashMap();
+		this.monomes = new HashMap<String, Monome>();
 		inferieurA=limite;
 		nombreInconnues=0;
 		this.nom=nom;
@@ -32,12 +34,11 @@ public class ContrainteExplicite implements Serializable{
 	 * @param ContrainteExplicite ce
 	 */
 	public ContrainteExplicite(ContrainteExplicite ce) {
-		// TODO Auto-generated constructor stub
 		this.nom = ce.nom;
 		this.inferieurA = new Fraction(ce.inferieurA);
 		this.nombreInconnues = ce.nombreInconnues;
-		monomes = new HashMap();
-		for (Iterator i = ce.monomes.keySet().iterator(); i.hasNext(); ) {
+		monomes = new HashMap<String, Monome>();
+		for (Iterator<?> i = ce.monomes.keySet().iterator(); i.hasNext(); ) {
 			String clé = (String) i.next();
 			this.ajouterMonome(new Monome((Monome)ce.monomes.get(clé)));;
 		}
@@ -55,7 +56,7 @@ public class ContrainteExplicite implements Serializable{
 	 * Permet de former le dictionnaire n°1 : on rentre les limites dans chaque contrainte.
 	 */
 	public void passageDico1() {
-		for (Iterator i = monomes.keySet().iterator(); i.hasNext(); ) {
+		for (Iterator<String> i = monomes.keySet().iterator(); i.hasNext(); ) {
 			String clé = (String) i.next();
 			((Monome)monomes.get(clé)).setCoefficient((((Monome)monomes.get(clé)).getCoefficient().FMultiplication(new Fraction(-1,1))));
 		}
@@ -73,7 +74,7 @@ public class ContrainteExplicite implements Serializable{
 	
 	public String toStringDico1() {
 		String chaineFinale = new String();
-		Iterator i = monomes.keySet().iterator(); 
+		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
 			String clé = (String) i.next();
 			chaineFinale+=((Monome) monomes.get(clé)).toString();
@@ -127,7 +128,7 @@ public class ContrainteExplicite implements Serializable{
 	 * de ContrainteExplicite donnée en paramètre
 	 */
 	public void additionnerLigne(ContrainteExplicite ce) {
-		Iterator i = monomes.keySet().iterator(); 
+		Iterator<String> i = monomes.keySet().iterator(); 
 		while(i.hasNext()) {
 			String clé = (String) i.next();
 			((Monome) monomes.get(clé)).additionner(((Monome)ce.getMonomes().get(clé)));
@@ -141,7 +142,7 @@ public class ContrainteExplicite implements Serializable{
 	 * 
 	 */
 	public void rentrerBase(String inconnue) {
-		Iterator i = monomes.keySet().iterator();
+		Iterator<String> i = monomes.keySet().iterator();
 		while(i.hasNext()) { // On parcours notre contrainte
 			String clé = (String) i.next();
 			if (clé.equals(inconnue)) { // on tombe sur le bon Xi
