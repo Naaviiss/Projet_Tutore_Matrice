@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import Controleur.Controleur;
-import modele.ContrainteExplicite;
-import modele.Monome;
-import modele.Simplexe;
+import Modele.ContrainteExplicite;
+import Modele.Monome;
+import Modele.Simplexe;
 
 public class PanelSimplex extends JPanel {
 	

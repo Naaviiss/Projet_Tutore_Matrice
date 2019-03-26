@@ -6,7 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import modele.Data;
+import Modele.Data;
 
 import java.awt.FlowLayout;
 import java.awt.Frame;

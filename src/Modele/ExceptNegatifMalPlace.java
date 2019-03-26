@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public class ExceptNegatifMalPlace extends Exception{
 	/**

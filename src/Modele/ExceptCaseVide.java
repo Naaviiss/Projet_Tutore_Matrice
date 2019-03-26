@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public class ExceptCaseVide extends Exception{
 	/**

@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public class ExceptEntreFraction extends Exception{
 	/**

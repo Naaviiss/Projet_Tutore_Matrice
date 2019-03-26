@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -9,7 +9,6 @@ public class ContrainteExplicite implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	String nom;
 	Map<String, Monome> monomes;
 	Fraction inferieurA;

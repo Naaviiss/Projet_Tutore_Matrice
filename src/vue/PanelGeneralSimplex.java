@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import Controleur.Controleur;
-import modele.Historique;
+import Modele.Historique;
 
 public class PanelGeneralSimplex extends JPanel{
 	

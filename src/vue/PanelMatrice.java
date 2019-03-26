@@ -10,14 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modele.Data;
-import modele.ExceptCaseVide;
-import modele.ExceptEntreFraction;
-import modele.ExceptNegatifMalPlace;
-import modele.ExceptZeroDivision;
-import modele.Fraction;
-import modele.Matrice;
 import Controleur.Controleur2;
+import Modele.Data;
+import Modele.ExceptCaseVide;
+import Modele.ExceptEntreFraction;
+import Modele.ExceptNegatifMalPlace;
+import Modele.ExceptZeroDivision;
+import Modele.Fraction;
+import Modele.Matrice;
 
 public class PanelMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;

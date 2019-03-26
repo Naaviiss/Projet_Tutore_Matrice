@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import Controleur.Controleur2;
-import modele.Data;
-import modele.Matrice;
+import Modele.Data;
+import Modele.Matrice;
 
 public class PanelCommandes extends JPanel implements Data{
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public class ExceptZeroDivision extends Exception{
 	/**

@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controleur.Controleur2;
-import modele.Data;
-import modele.Matrice;
+import Modele.Data;
+import Modele.Matrice;
 
 public class ChoixLigneMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;

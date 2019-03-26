@@ -9,8 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controleur.Controleur2;
-//import controleur.Controleur;
-import modele.Data;
+import Modele.Data;
 
 public class PanelAffichage extends JPanel{
 

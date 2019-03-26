@@ -12,12 +12,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.EmptyBorder;
 
-import modele.Historique;
-import modele.Simplexe;
+import Modele.Historique;
 
 public class PanelHistorique extends JPanel {
 	

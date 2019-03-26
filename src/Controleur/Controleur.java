@@ -11,13 +11,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import javax.swing.JTextField;
-import modele.ContrainteExplicite;
-import modele.FonctionEco;
-import modele.Fraction;
-import modele.Historique;
-import modele.LectureEcriture;
-import modele.Monome;
-import modele.Simplexe;
+
+import Modele.ContrainteExplicite;
+import Modele.FonctionEco;
+import Modele.Fraction;
+import Modele.Historique;
+import Modele.LectureEcriture;
+import Modele.Monome;
+import Modele.Simplexe;
 import vue.PanelContraintes;
 import vue.PanelFichier;
 import vue.PanelGeneral;

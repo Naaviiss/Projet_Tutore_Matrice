@@ -14,8 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import modele.Historique;
-import modele.Simplexe;
+import Modele.Historique;
+import Modele.Simplexe;
 
 public class PanelDemo extends JPanel implements ActionListener{
 	

@@ -10,9 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import modele.*;
-
 import Controleur.Controleur2;
+import Modele.*;
 
 public class PanelChoix extends JPanel{
 

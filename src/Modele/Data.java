@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public interface Data {
 	public final String [] TITRE_MENU={"Aide","Retour au menu principal","Quitter"};

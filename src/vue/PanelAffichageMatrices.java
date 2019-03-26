@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-import modele.*;
+import Modele.*;
 
 public class PanelAffichageMatrices extends JPanel{
 

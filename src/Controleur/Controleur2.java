@@ -21,16 +21,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
 import com.itextpdf.text.DocumentException;
+
+import Modele.Data;
+import Modele.ExceptCaseVide;
+import Modele.ExceptEntreFraction;
+import Modele.ExceptNegatifMalPlace;
+import Modele.ExceptZeroDivision;
+import Modele.Fraction;
+import Modele.Matrice;
+import Modele.TablePDF;
+
 import java.awt.Font;
 
-import modele.Data;
-import modele.ExceptCaseVide;
-import modele.ExceptEntreFraction;
-import modele.ExceptNegatifMalPlace;
-import modele.ExceptZeroDivision;
-import modele.Fraction;
-import modele.Matrice;
-import modele.TablePDF;
 import vue.MultiLigneRenderer;
 import vue.PanelAffichageMatrices;
 import vue.PanelChoix;

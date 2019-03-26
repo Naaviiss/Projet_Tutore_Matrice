@@ -1,9 +1,9 @@
-package modele;
+package Modele;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import modele.Simplexe;
+import Modele.Simplexe;
 
 public class Historique implements Serializable{
 	

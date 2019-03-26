@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controleur.Controleur;
-import modele.GenerePdf;
-import modele.Historique;
-import modele.LectureEcriture;
+import Modele.GenerePdf;
+import Modele.Historique;
+import Modele.LectureEcriture;
 
 @SuppressWarnings("serial")
 public class PanelGeneral extends JPanel implements ActionListener {

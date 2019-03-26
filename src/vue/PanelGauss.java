@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controleur.Controleur2;
-import modele.*;
+import Modele.*;
 
 public class PanelGauss extends JPanel{
 	private static final long serialVersionUID = 1L;
