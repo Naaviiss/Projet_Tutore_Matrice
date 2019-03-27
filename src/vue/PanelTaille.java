@@ -14,12 +14,27 @@ import Modele.Data;
 
 public class PanelTaille extends JPanel{
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Création d'un bouton ayant pour nom Valider
+	 */
 	private JButton valider = new JButton("valider");
+	/**
+	 * Création d'un panneau déroulant pour le choix des tailles 
+	 */
     private JComboBox<String> comboTaille;
 
+    /**
+     * Création d'un tableau de String ayant pour valeur 3, 4 et 5
+     */
     private String taille[]= {"3","4","5"};
+    /**
+     * Création d'une étiquette
+     */
     private JLabel monlabel;
 	
+    /**
+     * Création d'un PanelTaille permettant de choisir la taille d'une matrice
+     */
     public PanelTaille() {
 		monlabel = new JLabel("Choisir une taille de matrice entre 3 et 5");
 		Font font = new Font(Font.SERIF, 20, 25);
