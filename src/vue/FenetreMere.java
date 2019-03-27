@@ -47,7 +47,7 @@ public class FenetreMere extends JFrame{
 							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,java.awt.Event.CTRL_MASK));
 							break;
 						case 1:
-							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS,java.awt.Event.CTRL_MASK));
+							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,java.awt.Event.CTRL_MASK));
 							break;
 						case 2:
 							menuitem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS,java.awt.Event.CTRL_MASK));	

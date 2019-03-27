@@ -3,16 +3,19 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import Modele.*;
 
-public class PanelAffichageMatrices extends JPanel{
+public class PanelAffichageMatrices extends JPanel implements AdjustmentListener{
 
 	private static final long serialVersionUID = 1L;
 	private JTable tableMatrices; //String pour l'instant
@@ -55,10 +58,14 @@ public class PanelAffichageMatrices extends JPanel{
 		tableMatrices.setModel(modele);
 		
 		//scrollbar
-		panDefil = new JScrollPane(tableMatrices,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panDefil = new JScrollPane(tableMatrices, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		panDefil.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);		
-		panDefil.setPreferredSize(new Dimension(900, 850));
-		
+		panDefil.setPreferredSize(new Dimension(850, 800));
+				
+		final JScrollBar scrollBar = panDefil.getHorizontalScrollBar();
+		scrollBar.setValue(scrollBar.getValue());
+		scrollBar.addAdjustmentListener(this);
+				
 		//ajout panneau defilant avec la table
 		this.add(panDefil);
 		tableMatrices.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -70,11 +77,11 @@ public class PanelAffichageMatrices extends JPanel{
 	
 	//cette méthode est utiliée lors d'un ajout d'un calcul à la table
 	public void ajoutMatrice(Matrice M1, Matrice M2,String operationChaine,String commentaire) {
-		chMatrices.add(M1);//on ajoute la matrice � la liste
-		chMatricesIdentites.add(M2);//on ajoute la matrice identit� � la liste
+		chMatrices.add(M1);//on ajoute la matrice à la liste
+		chMatricesIdentites.add(M2);//on ajoute la matrice identité à la liste
 	
 		//la chaine correspondant au calcul et le commentaire doivet s'afficher une ligne avant
-		if (chLigneModif.size() == 0) {//si aucun calcul n'a �t� effectu�
+		if (chLigneModif.size() == 0) {//si aucun calcul n'a été effectué
 			chLigneModif.add(chLigneModif.size(),operationChaine);//on ajoute la chaine correspondant au calcul sur la premi�re ligne de la table
 			chCommentaire.add(chCommentaire.size(),commentaire);//on ajoute le commentaire sur la premi�re ligne de la table
 		}
@@ -185,5 +192,11 @@ public class PanelAffichageMatrices extends JPanel{
 	} 
 	public MultiLigneRenderer getRenderer() {
 		return renderer;
+	}
+
+	@Override
+	public void adjustmentValueChanged(AdjustmentEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

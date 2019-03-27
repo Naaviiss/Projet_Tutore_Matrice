@@ -37,12 +37,12 @@ public class GenerePdf {
 	 * @param String nomFichier
 	 */
 	
-	public GenerePdf(Historique histo, String nomFichier) {
+	public GenerePdf(Historique histo, File file) {
 		
 		document = new Document();
 		
 		try {
-			PdfWriter.getInstance(document, new FileOutputStream("PDF"+File.separator+nomFichier+".pdf"));
+			PdfWriter.getInstance(document, new FileOutputStream(file));
 			document.open();
 			populate(document, histo);
 		}
