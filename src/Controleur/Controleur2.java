@@ -42,20 +42,53 @@ import vue.PanelMatrice;
 import vue.PanelTaille;
 
 public class Controleur2 implements ActionListener,MouseListener{
-	
+	/**
+	 * Création d'un panel pour afficher la matrice 
+	 */
 	private PanelMatrice chPanMatrice;
+	/**
+	 * Création d'un panel permettant de choisir la taille de la matrice
+	 */
 	private PanelTaille chPanTaille;
-
+	/**
+	 * Création d'un panel permettant de choisir le mode didacticiel ou le mode autonome
+	 */
 	private PanelChoix chPanelChoix;
+	/**
+	 * Création d'un panel affichant les étapes de la méthode de Gauss et les commandes pouvant être réalisées
+	 */
 	private PanelGauss chPanGauss;
-	private PanelAffichageMatrices chPanAffichageMatrices;
+	/**
+	 * Création d'un panel affichant seulement les étapes
+	 */
+	private PanelAffichageMatrices chPanAffichageMatrices; 
+	/**
+	 * Création d'un tableau de String contenant le calcul de l'utilisateur
+	 */
 	private String[] operation = new String[6]; //tableau correspondant au calcul de l'utilisateur
+	/**
+	 * Création d'une fraction qui permettra de multiplier une ligne
+	 */
 	Fraction constante; //constante de l'utilisateur récupérée, par défaut, elle vaut 1
+	/**
+	 * Création d'un panel regroupant les commandes pouvant être réalisées
+	 */
 	private PanelCommandes panCom; //panel commande
+	/**
+	 * Création d'un booléen pour savoir où l'utilisateur se trouve dans l'application
+	 * Il est aussi utilisé pour revenir au tout début du calcul de la matrice inverse
+	 */
 	private Boolean etat=false; //etat pour savoir où l'utilisateur se trouve dans l'application
 								//utilisé pour revenir au tout début du calcul de la matrice inverse
+	/**
+	 * Création d'un entier correspondant à la taille de la police
+	 */
 	private int taillePolice; //correspond à la taille de la police dans la JTable
 	
+	/**
+	 * Créer un controleur
+	 * @param pPanChoix
+	 */
 	public Controleur2(PanelChoix pPanChoix) {
 		
 		//on met une constante par défaut au cas où l'utilisateur n'en renseigne pas
@@ -75,6 +108,10 @@ public class Controleur2 implements ActionListener,MouseListener{
 		chPanAffichageMatrices = new PanelAffichageMatrices(chMatrices, chMatricesID,chLigneModif,chCommentaires);//on créé le panel affichage
 	}
 	
+	/**
+	 * @param ActionEvent pEvt : un évenement correspondant au choix de l'utilisateur
+	 * Permet de gérer les choix de l'utilisateur lors de l'utilisation du programme au démarrage.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent pEvt){
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
@@ -118,7 +155,7 @@ public class Controleur2 implements ActionListener,MouseListener{
 			
 			chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");
 
-			//CrÃ©ation de toutes les opérations suivantes
+			//Création de toutes les opérations suivantes
 			//que ce soit pour les lignes, le signe, la multiplication, l'opération
 			//ou le commentaire
 			int []chLigneA = {0,1,2,2,2,1,0};
@@ -126,10 +163,10 @@ public class Controleur2 implements ActionListener,MouseListener{
 			String []chSigne = {"-","-","-","-","","-","+"};
 			Fraction [] chFraction = {new Fraction(1),new Fraction(1),new Fraction(2),new Fraction(2),new Fraction(-1,5),new Fraction(4),new Fraction(1)};
 			String [] chOperations = {"L1<-L1-L2","L2<-L2-L1","L3<-L3-2L1","L3<-L3-2L2","L3<-1/5L3","L2<-L2-4L3","L1<-L1+L3"};
-			String [] chCommentaires = {"On va cherche à  ce que le premier 2 devienne un 1 et que tout ce qui tourne autour de lui soit un 0",
-					"On cherche maintenant à  ce que le 1 en dessous du 1 en haut Ã  gauche devienne un 0 aussi. Comme ça, le coin en haut à  gauche sera déjà  parfait.",
-					"On va chercher à  ce que le 2 en bas à  gauche devienne un 0",
-					"On continue en voulant que le 2 devienne un 0 pour ressembler de plus en plus à  une matrice inverse",
+			String [] chCommentaires = {"On va chercher à  ce que le premier 2 devienne un 1 et que tout ce qui tourne autour de lui soit un 0",
+					"On cherche maintenant à  ce que le 1 en dessous du 1 en haut à gauche devienne un 0 aussi. Comme ça, le coin en haut à gauche sera déjà parfait.",
+					"On va chercher à  ce que le 2 en bas à gauche devienne un 0",
+					"On continue en voulant que le 2 devienne un 0 pour ressembler de plus en plus à une matrice inverse",
 					"Toute la partie de gauche correspond à une matrice inverse. On va donc changer le -5 en un 1 pour avoir notre diagonale de 1",
 					"On va enlever le 4 pour obtenir un 0",
 					"On va chercher à enlever ce -1 pour obtenir la matice inverse.\n\nBravo! Vous avez réussi et tout compris!"};
@@ -524,8 +561,8 @@ public class Controleur2 implements ActionListener,MouseListener{
 				
 				//si l'utilisateur veut exporter son travail en PDF
 				if(pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[4])) {
-					JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse lÃ  oÃ¹ il veut crÃ©e son fichier
-					fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par dÃ©faut on se place dans le rÃ©pertoire utilisateur
+					JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse là  où il veut créer son fichier
+					fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par défaut on se place dans le répertoire utilisateur
 					FileNameExtensionFilter filtre = new FileNameExtensionFilter(null, "*pdf");//on veut que le fichier soit uniquement au format pdf
 					fichier.addChoosableFileFilter(filtre);
 					
@@ -561,9 +598,9 @@ public class Controleur2 implements ActionListener,MouseListener{
 					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à  chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là à , on comprend le principe avec des tailles encore plus grandes.\n\n"
 							+ "Deuxièmement, remplir sa matrice. On peut remplir la matrice avec des entiers (positifs, négatifs, nuls) et des fractions (positives,négatives). Les fractions seront réduites automatiquement.\n\n"
 							+ "Troisièmement, effectuer des calculs sur sa matrice pour trouver la matrice inverse. Les calculs doivent s'écrirent correctement. Les différents formes de calculs possibles sont les suivantes :\n\n"
-							+ "Ligne_i â†” Ligne_j\n"
-							+ "Ligne_i â†� lambda * ligne_i (Si lambda â‰ Â  0)\n"
-							+ "Ligne_i â†� ligne_i + lambda * ligne_j\n\n"
+							+ "Ligne_i ↔ Ligne_j\n"
+							+ "Ligne_i ← lambda * ligne_i (Si lambda ≠ 0)\n"
+							+ "Ligne_i ← ligne_i + lambda * ligne_j\n\n"
 							+ "Une matrice identité correspond à  : \n" + Matrice.identite(3).toString()
 							+ "Bonne chance !");
 
@@ -574,7 +611,7 @@ public class Controleur2 implements ActionListener,MouseListener{
 		             SwingUtilities.getWindowAncestor(chPanelChoix).dispose();
 				}
 				
-				//Fermer entiÃ¨rement l'application
+				//Fermer entièrement l'application
 				if( pEvt.getActionCommand().equals(Data.TITRE_MATRICE[4]) ) {
 					System.exit(0);
 				}
@@ -588,49 +625,64 @@ public class Controleur2 implements ActionListener,MouseListener{
 		if ( labelVide == 0 || operation[1].equals(Data.FLECHES[0]) ){ //si on choisit la ligne à  modifier ou si on a utilisé la flèche <-
 			if (labelVide == 0) {
 				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
-				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne ÃƒÂ  l'opÃ©ration
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à  l'opération
 			}
-			if( labelVide == 2 && operation[0].equals( e.getComponent().getName() ) ) {//si la premiÃ¨re ligne aprÃ¨s la flÃ¨che est la mÃƒÂªme que celle ÃƒÂ  modifier
-				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquÃ©e
-				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne ÃƒÂ  l'opÃ©ration
+			if( labelVide == 2 && operation[0].equals( e.getComponent().getName() ) ) {//si la première ligne après la flèche est la même que celle à modifier
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à  l'opération
 			}
-			if (labelVide == 5 && !( operation[0].equals( e.getComponent().getName() ) ) && !Arrays.asList(Data.LIGNES).contains(operation[3]) ) { //si la troisiÃ¨me ligne du calcul est diffÃ©rente de la ligne ÃƒÂ  modifier et que la deuxime ligne choisie ne prend pas de calcul
-				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquÃ©e
-				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne ÃƒÂ  l'opÃ©ration
+			if (labelVide == 5 && !( operation[0].equals( e.getComponent().getName() ) ) && !Arrays.asList(Data.LIGNES).contains(operation[3]) ) { //si la troisième ligne du calcul est différente de la ligne à  modifier et que la deuxième ligne choisie ne prend pas de calcul
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
 			}
 			
 			
 		}
-		else if (labelVide == 2 && operation[1].equals(Data.FLECHES[1])) {//s'il s'agit de la flÃ¨che <-> et qu'on choisit la ligne avec laquelle on va intervertir la premiÃ¨re
-			if (!(e.getComponent().getName().equals(operation[0]))) { //si la ligne ÃƒÂ  Ã©changÃ©e est diffÃ©rente de la premiÃ¨re ligne choisie
-				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquÃ©e
-				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne ÃƒÂ  l'opÃ©ration
+		else if (labelVide == 2 && operation[1].equals(Data.FLECHES[1])) {//s'il s'agit de la flèche <-> et qu'on choisit la ligne avec laquelle on va intervertir la première
+			if (!(e.getComponent().getName().equals(operation[0]))) { //si la ligne à échanger est différente de la première ligne choisie
+				panCom.getLabel(labelVide).setText(e.getComponent().getName()); //on peut afficher la ligne cliquée
+				operation[labelVide] = e.getComponent().getName();//on peut ajouter la ligne à l'opération
 			}
 		}
-		//ces if permettent d'Ã©viter le calculs comme L2<-> L2 L3 ou L1 <- L2 L3 L2, etc.
+		//ces if permettent d'éviter le calculs comme L2<-> L2 L3 ou L1 <- L2 L3 L2, etc.
 		
 		
 		
 	}
 
+	/**
+	 * Met le composant survolé en rouge lorsque le survole avec la souris
+	 * @param MouseEvent e
+	 */
 	//pour le over sur une ligne
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		e.getComponent().setForeground(Color.RED);
 	}
 
+	/**
+	 * Met le composant en noir lorsque l'on ne le survole plus
+	 * @param MouseEvent e
+	 */
 	//quand on quitte le over
 	@Override
 	public void mouseExited(MouseEvent e) {
 		e.getComponent().setForeground(Color.BLACK);
 	}
 
+	/**
+	 * Récupère un evènement lorsque l'on clique avec la souris
+	 * @param MouseEvent e
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
 
-
+	/**
+	 * Récupère un évènement lorsque l'on lâche le clique de la souris
+	 * @param MouseEvent e
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
