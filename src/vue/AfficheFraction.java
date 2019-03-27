@@ -14,7 +14,7 @@ public class AfficheFraction extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Construit un objet AfficheFraction correspondant à un BorderLayout dans lequel sera afficher une fraction
+	 * Construit un objet AfficheFraction correspondant à un BorderLayout dans lequel sera affichée une fraction
 	 * @param int num
 	 * @param int denom
 	 */

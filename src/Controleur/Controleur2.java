@@ -547,7 +547,7 @@ public class Controleur2 implements ActionListener,MouseListener{
 						}
 					}
 					else if(resultat == JFileChooser.CANCEL_OPTION) {
-						JOptionPane.showMessageDialog(null, "Erreur, mauvais fichier sÃ©lectionnÃ©","Erreur",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Erreur, mauvais fichier sélectionné","Erreur",JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				
@@ -569,7 +569,7 @@ public class Controleur2 implements ActionListener,MouseListener{
 
 					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 				}
-				//Fermer seulement la fenÃªtre actuelle
+				//Fermer seulement la fenêtre actuelle
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[3])){
 		             SwingUtilities.getWindowAncestor(chPanelChoix).dispose();
 				}
