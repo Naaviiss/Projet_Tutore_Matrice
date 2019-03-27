@@ -12,13 +12,24 @@ import Controleur.Controleur2;
 import Modele.Data;
 
 public class PanelAffichage extends JPanel{
-
 	private static final long serialVersionUID = 1L;
-	//On cr�e nos deux boutons
+	//On crée nos deux boutons
+	/**
+	 * Création d'un bouton ayant pour nom Simplex
+	 */
 	private JButton bouton_simplex = new JButton("Simplex");
+	/**
+	 * Création d'un bouton ayant pour nom Matrice
+	 */
 	private JButton bouton_matrice = new JButton("Matrice");
+	/**
+	 * Création d'un panel pour la gestion des boutons
+	 */
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
 
+	/**
+	 * Construit un objet PanelAffichage 
+	 */
 	public PanelAffichage(/*Controleur pControleur*/){
 		panelboutons = new JPanel();	
 		this.setBorder(new EmptyBorder(300,300,300,300));
@@ -29,7 +40,7 @@ public class PanelAffichage extends JPanel{
 		bouton_matrice.setPreferredSize(new Dimension(350, 200));
 		bouton_matrice.setFont(new Font(Font.SERIF, 20, 60));
 
-		//Le panel sera g�r� par un BorderLayout
+		//Le panel sera géré par un BorderLayout
 		panelboutons.setLayout(new BorderLayout(20,20));
 		
 		bouton_simplex.setActionCommand(Data.CHOIX[0]);
@@ -44,7 +55,10 @@ public class PanelAffichage extends JPanel{
 		
 	}//PanelAffichage()
 	
-	
+	/**
+	 * Met les boutons simplex et matrice à l'écoute du Controleur
+	 * @param parControleur
+	 */
 	public void enregistreEcouteur(Controleur2 parControleur) {
 		bouton_simplex.addActionListener(parControleur);
 		bouton_matrice.addActionListener(parControleur);
