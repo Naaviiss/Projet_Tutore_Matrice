@@ -689,6 +689,10 @@ public class Controleur2 implements ActionListener,MouseListener{
 		
 	}
 	
+	/**
+	 * Méthode permettant de retourner l'index correspondant à la ligne
+	 * @param String ligne
+	 */
 	//retourne l'index correspondant à la ligne
 	public int getNumLigne(String ligne) {
 		if (ligne.equals(Data.LIGNES[0]))
