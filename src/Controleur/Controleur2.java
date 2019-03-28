@@ -342,6 +342,12 @@ public class Controleur2 implements ActionListener,MouseListener{
 					//on lance un popup pour le féliciter
 					JOptionPane.showMessageDialog(null, "Félicitations !\nVous avez réussi à retrouver la matrice identité !\n Pensez à  exporter votre travail en PDF (Ctrl + P) pour ne pas en perdre une miette ;)\n\nVoici votre matrice inversée:\n"+matriceIdentite.toString(),"Bravo !",JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				//si le calcul prend du temps, il doit y avoir un problème
+				if(chPanAffichageMatrices.getChMatrices().size() == 20) {
+					//on lance un popup pour le féliciter
+					JOptionPane.showMessageDialog(null, "Tu as fait beaucoup de calculs dis moi... Tu ne voudrais pas remettre en question ton travail ? Parce que ça devient long là :o \n Peut-être que l'équipe de développement n'a pas eu le temps de vérifier que ta matrice était inversible :p","Attention !", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		}
 		
