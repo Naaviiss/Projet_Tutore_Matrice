@@ -595,6 +595,10 @@ public class Controleur2 implements ActionListener,MouseListener{
 				
 				//si l'utilisateur souhaite revenir au menu principal
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
+					//On efface ce qui est présent dans la JTable
+					PanelAffichageMatrices.clearTable(chPanAffichageMatrices.getTableMatrices());
+					//On vide toutes les listes (qui contiennent la matrice, l'inverse, l'opération et le commentaire)
+					chPanAffichageMatrices.viderListe();
 					chPanelChoix.getCardLayout().first(chPanelChoix);
 				}
 				
