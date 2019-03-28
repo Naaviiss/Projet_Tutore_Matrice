@@ -523,18 +523,16 @@ public class Controleur2 implements ActionListener,MouseListener{
 				
 				//Permettre à  l'utilisateur de recommencer des calculs depuis le début sur sa matrice
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE_LISTE[3])){
-					//On vÃ©rifie si l'utilisateur est au niveau de la JTable ou avant
+					//On vérifie si l'utilisateur est au niveau de la JTable ou avant
 					if (etat != false) {
-						String texte = new String("Devra recommencer le calcul");
-						JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
 						//On efface ce qui est présent dans la JTable
 						PanelAffichageMatrices.clearTable(chPanAffichageMatrices.getTableMatrices());
-						//On vide toutes les listes (qui contiennent la matrice, l'inverse, l'opÃ©ration et le commentaire)
+						//On vide toutes les listes (qui contiennent la matrice, l'inverse, l'opération et le commentaire)
 						chPanAffichageMatrices.viderListe();
 						//s'il est au niveau de la JTable, on remet tout comme avant.
 						try {
 							Matrice M1 = chPanMatrice.getMatriceSaisi();//création de la matrice
-							Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identitÃ©
+							Matrice M2 = Matrice.identite(M1.getTaille());//création de la matrice identité
 							chPanGauss = new PanelGauss(M1);
 							chPanAffichageMatrices.ajoutMatrice(M1, M2,"","");//au départ la chaine pour le calcul et celle pour le commentaire sont vides
 							chPanGauss.setAffichageMatrices(chPanAffichageMatrices);

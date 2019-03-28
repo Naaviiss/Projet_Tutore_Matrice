@@ -111,7 +111,7 @@ public class API extends JFrame implements ActionListener{
 	 *@param ActionEvent ev
 	 */
 	public void actionPerformed(ActionEvent ev) {
-		if (ev.getActionCommand().equals(Data.TITRE_MENU[2])){
+		if (ev.getActionCommand().equals(Data.TITRE_MENU[1])){
 			System.exit(0);
 		}//L'action concernant le bouton Retour Menu Principal
 		

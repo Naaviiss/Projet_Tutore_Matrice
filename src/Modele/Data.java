@@ -1,7 +1,7 @@
 package Modele;
 
 public interface Data {
-	public final String [] TITRE_MENU={"Aide","Retour au menu principal","Quitter"};
+	public final String [] TITRE_MENU={"Aide","Quitter"};
 	public final String [] TITRE_MENU_LISTE={"Simplex","Matrice"};
 	public final String [] CHOIX={"Simplex","Matrice"};
 	public final String [] TITRE_MATRICE={"Retour au menu principal","Outils", "Aide","Sortir de l'application actuelle","Quitter"};
