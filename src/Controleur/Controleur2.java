@@ -115,7 +115,8 @@ public class Controleur2 implements ActionListener,MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent pEvt){
 		if(pEvt.getActionCommand().equals(Data.CHOIX[1])) {//choix du programme matrice
-			chPanelChoix.getCardLayout().show(chPanelChoix, "panel_taille");
+			chPanelChoix.add(chPanelChoix,"panel_choix");
+			chPanelChoix.getCardLayout().show(chPanelChoix,"panel_choix");
 		}
 		
 		if(pEvt.getActionCommand().equals(Data.VALIDER_PANEL_TAILLE)) {//choix de la taille de la matrice
@@ -588,9 +589,8 @@ public class Controleur2 implements ActionListener,MouseListener{
 				
 				//si l'utilisateur souhaite revenir au menu principal
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[0])){
-					String texte = new String("RETOUR AU MENU PRINCIPAL");
-					JOptionPane.showMessageDialog(null, texte, "Aide d'utilisation", JOptionPane.INFORMATION_MESSAGE);
-					}
+					chPanelChoix.getCardLayout().first(chPanelChoix);
+				}
 				
 				if (pEvt.getActionCommand().equals(Data.TITRE_MATRICE[2])){
 					String texte = new String("Pour bien utiliser ce logiciel, il faut suivre les étapes suivantes. Toutes les étapes nécessitent d'appuyer sur un bouton 'valider' à  chaque fois.\n\n\nPremièrement, choisir la taille de sa matrice. Celle-ci peut être comprise entre 3 et 5 (Si on comprends le principe avec ces tailles-là à , on comprend le principe avec des tailles encore plus grandes.\n\n"
