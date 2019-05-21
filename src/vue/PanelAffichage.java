@@ -17,14 +17,17 @@ public class PanelAffichage extends JPanel{
 	 * Clé de hachage SHA qui identifie de manière unique PanelAffichage
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Création d'un bouton ayant pour nom Simplex
 	 */
 	private JButton bouton_simplex = new JButton("Simplex");
+	
 	/**
 	 * Création d'un bouton ayant pour nom Matrice
 	 */
 	private JButton bouton_matrice = new JButton("Matrice");
+	
 	/**
 	 * Création d'un panel pour la gestion des boutons
 	 */
