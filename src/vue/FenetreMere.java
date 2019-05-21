@@ -21,7 +21,7 @@ import java.awt.event.KeyEvent;
 public class FenetreMere extends JFrame {
 
 	/**
-	 * Clé de hachage SHA qui identifie de manière unique API
+	 * Clé de hachage SHA qui identifie de manière unique FenetreMere
 	 */
 	private static final long serialVersionUID = 1L;
 
