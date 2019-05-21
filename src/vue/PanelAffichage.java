@@ -8,19 +8,35 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controleur.Controleur;
-//import controleur.Controleur;
-import modele.Data;
+import Controleur.Controleur2;
+import Modele.Data;
 
 public class PanelAffichage extends JPanel{
-
+	
+	/**
+	 * Clé de hachage SHA qui identifie de manière unique PanelAffichage
+	 */
 	private static final long serialVersionUID = 1L;
-	//On crée nos deux boutons
+	
+	/**
+	 * Création d'un bouton ayant pour nom Simplex
+	 */
 	private JButton bouton_simplex = new JButton("Simplex");
+	
+	/**
+	 * Création d'un bouton ayant pour nom Matrice
+	 */
 	private JButton bouton_matrice = new JButton("Matrice");
+	
+	/**
+	 * Création d'un panel pour la gestion des boutons
+	 */
 	private JPanel panelboutons; // la partie qui concerne la gestion des boutons
 
-	public PanelAffichage(/*Controleur pControleur*/){
+	/**
+	 * Construit un objet PanelAffichage 
+	 */
+	public PanelAffichage(){
 		panelboutons = new JPanel();	
 		this.setBorder(new EmptyBorder(300,300,300,300));
 
@@ -45,8 +61,11 @@ public class PanelAffichage extends JPanel{
 		
 	}//PanelAffichage()
 	
-	
-	public void enregistreEcouteur(Controleur parControleur) {
+	/**
+	 * Met les boutons simplex et matrice à l'écoute du Controleur
+	 * @param parControleur
+	 */
+	public void enregistreEcouteur(Controleur2 parControleur) {
 		bouton_simplex.addActionListener(parControleur);
 		bouton_matrice.addActionListener(parControleur);
 	}

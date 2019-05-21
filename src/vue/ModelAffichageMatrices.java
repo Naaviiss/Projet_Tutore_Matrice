@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import modele.Data;
-import modele.Matrice;
+import Modele.Data;
+import Modele.Matrice;
 
 public class ModelAffichageMatrices extends DefaultTableModel implements Data{
 	private static final long serialVersionUID = 1L;

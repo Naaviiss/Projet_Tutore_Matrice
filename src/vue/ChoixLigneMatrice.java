@@ -8,13 +8,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controleur.Controleur;
-import modele.Data;
-import modele.Matrice;
+import Controleur.Controleur2;
+import Modele.Data;
+import Modele.Matrice;
 
 public class ChoixLigneMatrice extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private Matrice chMatrice;//la matrice � afficher
+	private Matrice chMatrice;//la matrice à afficher
 	private JLabel []lignes;//un tableau de jlabel, chaque case va contenir une ligne du tableau
 	private JPanel panelGlobal;//va contenir les lignes
 	
@@ -38,7 +38,11 @@ public class ChoixLigneMatrice extends JPanel{
 		this.add(panelGlobal,BorderLayout.CENTER);
 	}
 	
-	public void enregistreEcouteur(Controleur pControleur) {
+	/**
+	 * Se met à l'écoute du controleur
+	 * @param pControleur
+	 */
+	public void enregistreEcouteur(Controleur2 pControleur) {
 		//on mets les labels à l'écoute du controleur
 		for (int i = 0; i<chMatrice.getTaille();i++) {
 			lignes[i].addMouseListener(pControleur);

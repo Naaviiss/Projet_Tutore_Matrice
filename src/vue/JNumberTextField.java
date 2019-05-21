@@ -7,6 +7,9 @@ import javax.swing.JTextField;
 public class JNumberTextField extends JTextField {
     private static final long serialVersionUID = 1L;
 
+	/**
+	 * @param KeyEvent ev
+	 */
     @Override
     public void processKeyEvent(KeyEvent ev) {
         if (Character.isDigit(ev.getKeyChar())) {
