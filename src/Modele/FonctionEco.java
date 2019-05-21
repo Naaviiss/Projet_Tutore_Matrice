@@ -23,8 +23,8 @@ public class FonctionEco implements Serializable{
 	public FonctionEco(FonctionEco fonctionEco) {
 		monomes = new HashMap<String, Monome>();
 		for (Iterator<String> i = fonctionEco.monomes.keySet().iterator(); i.hasNext(); ) {
-			String clé = i.next();
-			this.ajouterMonome(new Monome((Monome)fonctionEco.monomes.get(clé)));;
+			String cle = i.next();
+			this.ajouterMonome(new Monome((Monome)fonctionEco.monomes.get(cle)));;
 		}
 	}
 	/**
@@ -44,16 +44,16 @@ public class FonctionEco implements Serializable{
 		chaineFinale +=  "z = ";
 		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String clé = i.next();
-			chaineFinale+=monomes.get(clé).toString();
+			String cle = i.next();
+			chaineFinale+=monomes.get(cle).toString();
 		}
 		
 		while(i.hasNext()) {
-			String clé = i.next();
-			if(monomes.get(clé).getCoefficient().getNumerateur()>0) {
+			String cle = i.next();
+			if(monomes.get(cle).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" +";
 			}
-			chaineFinale += " " + monomes.get(clé).toString();
+			chaineFinale += " " + monomes.get(cle).toString();
 		}
 		return chaineFinale;
 
@@ -70,14 +70,14 @@ public class FonctionEco implements Serializable{
 		monomes.remove(inconnue);
 		
 		for (Iterator<?> i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
-			String clé = (String) i.next();
-			Monome temp = new Monome(((Monome) ce.getMonomes().get(clé)).getCoefficient().FMultiplication(coeff), ((Monome) ce.getMonomes().get(clé)).getInconnue());
-			if(monomes.get(clé)!=null) {
-				monomes.get(clé).additionner(temp);
+			String cle = (String) i.next();
+			Monome temp = new Monome(((Monome) ce.getMonomes().get(cle)).getCoefficient().FMultiplication(coeff), ((Monome) ce.getMonomes().get(cle)).getInconnue());
+			if(monomes.get(cle)!=null) {
+				monomes.get(cle).additionner(temp);
 			}
 			else {
-				Monome ajout = new Monome(coeff.FMultiplication(((Monome)ce.getMonomes().get(clé)).getCoefficient()), clé);
-				monomes.put(clé, ajout);
+				Monome ajout = new Monome(coeff.FMultiplication(((Monome)ce.getMonomes().get(cle)).getCoefficient()), cle);
+				monomes.put(cle, ajout);
 			}
 			
 		}
@@ -92,10 +92,10 @@ public class FonctionEco implements Serializable{
 		String res=new String();
 		
 		for (Iterator<String> i = monomes.keySet().iterator(); i.hasNext();) {
-			String clé = i.next();
-			if(monomes.get(clé).getCoefficient().FSup(max) && !monomes.get(clé).getInconnue().equals(" ")) {
-				max=new Fraction(monomes.get(clé).getCoefficient());
-				res=monomes.get(clé).getInconnue();
+			String cle = i.next();
+			if(monomes.get(cle).getCoefficient().FSup(max) && !monomes.get(cle).getInconnue().equals(" ")) {
+				max=new Fraction(monomes.get(cle).getCoefficient());
+				res=monomes.get(cle).getInconnue();
 			}
 			
 		}

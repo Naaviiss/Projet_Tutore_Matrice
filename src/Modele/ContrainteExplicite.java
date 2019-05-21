@@ -38,8 +38,8 @@ public class ContrainteExplicite implements Serializable{
 		this.nombreInconnues = ce.nombreInconnues;
 		monomes = new HashMap<String, Monome>();
 		for (Iterator<?> i = ce.monomes.keySet().iterator(); i.hasNext(); ) {
-			String cl√© = (String) i.next();
-			this.ajouterMonome(new Monome((Monome)ce.monomes.get(cl√©)));;
+			String clÈ = (String) i.next();
+			this.ajouterMonome(new Monome((Monome)ce.monomes.get(clÈ)));;
 		}
 	}
 	/**
@@ -56,8 +56,8 @@ public class ContrainteExplicite implements Serializable{
 	 */
 	public void passageDico1() {
 		for (Iterator<String> i = monomes.keySet().iterator(); i.hasNext(); ) {
-			String cl√© = i.next();
-			monomes.get(cl√©).setCoefficient((monomes.get(cl√©).getCoefficient().FMultiplication(new Fraction(-1,1))));
+			String clÈ = i.next();
+			monomes.get(clÈ).setCoefficient((monomes.get(clÈ).getCoefficient().FMultiplication(new Fraction(-1,1))));
 		}
 		Monome m = new Monome(inferieurA, " ");
 		this.ajouterMonome(m);
@@ -75,16 +75,16 @@ public class ContrainteExplicite implements Serializable{
 		String chaineFinale = new String();
 		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String cl√© = i.next();
-			chaineFinale+=monomes.get(cl√©).toString();
+			String clÈ = i.next();
+			chaineFinale+=monomes.get(clÈ).toString();
 		}
 		
 		while(i.hasNext()) {
-			String cl√© = i.next();
-			if(monomes.get(cl√©).getCoefficient().getNumerateur()>0) {
+			String clÈ = i.next();
+			if(monomes.get(clÈ).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" + ";
 			}
-			chaineFinale += monomes.get(cl√©).toString();
+			chaineFinale += monomes.get(clÈ).toString();
 		}
 		chaineFinale+= " <= "+ this.inferieurA;
 		return chaineFinale;
@@ -101,36 +101,36 @@ public class ContrainteExplicite implements Serializable{
 		chaineFinale +=  this.nom + " = ";
 		Iterator<String> i = monomes.keySet().iterator(); 
 		if(i.hasNext()) {
-			String cl√© = i.next();
-			chaineFinale+=monomes.get(cl√©).toString();
+			String clÈ = i.next();
+			chaineFinale+=monomes.get(clÈ).toString();
 		}
 		
 		while(i.hasNext()) {
-			String cl√© = i.next();
-			if(monomes.get(cl√©).getCoefficient().getNumerateur()>0) {
+			String clÈ = i.next();
+			if(monomes.get(clÈ).getCoefficient().getNumerateur()>0) {
 				chaineFinale+=" +";
 			}
-			chaineFinale += " " + monomes.get(cl√©).toString();
+			chaineFinale += " " + monomes.get(clÈ).toString();
 		}
 		return chaineFinale;
 
 	}
 	
-	/*Parcourt la HashMap <nom de l'inconnue, Monome> de this. Additionne chaque Monome √† celui ayant la m√™me cl√© dans la HashMap de la 
+	/*Parcourt la HashMap <nom de l'inconnue, Monome> de this. Additionne chaque Monome √† celui ayant la m√™me clÈ dans la HashMap de la 
 	 * Contrainte explicite en param√®tre
 	 */
 	
 	/**
 	 * 
 	 * @param ContrainteExplicite ce: renvoie une contrainte explicite
-	 * Parcourt la HashMap<nom de l'inconnue,Monome> de this et additionne chaque Monome √† celui ayant la m√™me cl√© dans la HashMap
+	 * Parcourt la HashMap<nom de l'inconnue,Monome> de this et additionne chaque Monome √† celui ayant la m√™me clÈ dans la HashMap
 	 * de ContrainteExplicite donn√©e en param√®tre
 	 */
 	public void additionnerLigne(ContrainteExplicite ce) {
 		Iterator<String> i = monomes.keySet().iterator(); 
 		while(i.hasNext()) {
-			String cl√© = i.next();
-			monomes.get(cl√©).additionner(ce.getMonomes().get(cl√©));
+			String clÈ = i.next();
+			monomes.get(clÈ).additionner(ce.getMonomes().get(clÈ));
 		}
 	}
 	
@@ -143,13 +143,13 @@ public class ContrainteExplicite implements Serializable{
 	public void rentrerBase(String inconnue) {
 		Iterator<String> i = monomes.keySet().iterator();
 		while(i.hasNext()) { // On parcours notre contrainte
-			String cl√© = i.next();
-			if (cl√©.equals(inconnue)) { // on tombe sur le bon Xi
-				Fraction coeff = monomes.get(cl√©).getCoefficient(); // on r√©cup√®re le coefficient du monome √† switch
+			String clÈ = i.next();
+			if (clÈ.equals(inconnue)) { // on tombe sur le bon Xi
+				Fraction coeff = monomes.get(clÈ).getCoefficient(); // on r√©cup√®re le coefficient du monome √† switch
 				//String tmp = this.nom;
 				Monome switched = new Monome(new Fraction(-1,1),this.nom); // on met -1 car on le switch donc son coeff devient n√©gatif. Il va ensuite √™tre divis√© par le coeff de m
-				this.nom = monomes.get(cl√©).getInconnue(); // On remplace le nom de la contrainte par l'inconnue de m
-				monomes.remove(cl√©);
+				this.nom = monomes.get(clÈ).getInconnue(); // On remplace le nom de la contrainte par l'inconnue de m
+				monomes.remove(clÈ);
 				monomes.put(switched.getInconnue(),switched);
 				division(coeff); //ADD FRACTION
 				break;
@@ -168,14 +168,14 @@ public class ContrainteExplicite implements Serializable{
 		monomes.remove(inconnue);
 		
 		for (Iterator<String> i = ce.getMonomes().keySet().iterator(); i.hasNext();) {
-			String cl√© = i.next();
-			Monome temp = new Monome(ce.getMonomes().get(cl√©).getCoefficient().FMultiplication(coeff), ce.getMonomes().get(cl√©).getInconnue());
-			if(monomes.get(cl√©)!=null) {
-				monomes.get(cl√©).additionner(temp);
+			String clÈ = i.next();
+			Monome temp = new Monome(ce.getMonomes().get(clÈ).getCoefficient().FMultiplication(coeff), ce.getMonomes().get(clÈ).getInconnue());
+			if(monomes.get(clÈ)!=null) {
+				monomes.get(clÈ).additionner(temp);
 			}
 			else {
-				Monome ajout = new Monome(coeff.FMultiplication(ce.getMonomes().get(cl√©).getCoefficient()), cl√©);
-				monomes.put(cl√©, ajout);
+				Monome ajout = new Monome(coeff.FMultiplication(ce.getMonomes().get(clÈ).getCoefficient()), clÈ);
+				monomes.put(clÈ, ajout);
 			}
 			
 		}
@@ -202,8 +202,8 @@ public class ContrainteExplicite implements Serializable{
 		Iterator<String> i = monomes.keySet().iterator();
 		coeff.setNumerateur(-coeff.getNumerateur());
 		while(i.hasNext()) {
-			String cl√© = i.next();
-			monomes.get(cl√©).setCoefficient(monomes.get(cl√©).getCoefficient().FDivision(coeff)); 
+			String clÈ = i.next();
+			monomes.get(clÈ).setCoefficient(monomes.get(clÈ).getCoefficient().FDivision(coeff)); 
 		}
 	}
 	
