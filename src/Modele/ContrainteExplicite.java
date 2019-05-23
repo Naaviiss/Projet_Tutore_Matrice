@@ -16,7 +16,7 @@ public class ContrainteExplicite implements Serializable{
 	
 	/**
 	 * Construit un objet ContrainteExplicite et remplit les champs Fraction inferieurA et String nom avec les variables
-	 * donnÃ©es en paramÃ¨tre ( les autres champs sont une HashMap vide et un nombre d'inconnues initialisÃ© Ã  0)
+	 * données en paramètre ( les autres champs sont une HashMap vide et un nombre d'inconnues initialisé à 0)
 	 * @param Fraction limite
 	 * @param String nom
 	 */
@@ -28,8 +28,8 @@ public class ContrainteExplicite implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet ContrainteExplicite Ã  partir d'un autre objet ContrainteExplicite donnÃ© en paramÃ¨tre et copie 
-	 * tous les champs de la ContrainteExplicite en paramÃ¨tre dans le nouvel objet qui sera construit
+	 * Construit un objet ContrainteExplicite à partir d'un autre objet ContrainteExplicite donné en paramètre et copie 
+	 * tous les champs de la ContrainteExplicite en paramètre dans le nouvel objet qui sera construit
 	 * @param ContrainteExplicite ce
 	 */
 	public ContrainteExplicite(ContrainteExplicite ce) {
@@ -66,7 +66,7 @@ public class ContrainteExplicite implements Serializable{
 	/* toString pour le dictionnaire 0 (sans les "=", seulement les contraintes avec les "<=")*/
 	
 	/**
-	 * Affiche le premier dictionnaire qui correspond au dictionnaire ou chaque contrainte doit Ãªtre infÃ©rieure Ã  une limite
+	 * Affiche le premier dictionnaire qui correspond au dictionnaire ou chaque contrainte doit être inferieure à une limite
 	 * @return String chaineFinale 
 	 * 
 	 */
@@ -93,8 +93,8 @@ public class ContrainteExplicite implements Serializable{
 	/* toString pour les autres dictionnaires (avec les "=")*/
 	
 	/**
-	 * @return String chaineFinale: renvoie une chaine de caractÃ¨res correspondant Ã  un dictionnaire ( autre que le dictionnaire nÂ°1)
-	 * Permet l'affichage des autres dictionnaires(autre que le dictionnaire nÂ°1)
+	 * @return String chaineFinale: renvoie une chaine de caractères correspondant à un dictionnaire ( autre que le dictionnaire n°1)
+	 * Permet l'affichage des autres dictionnaires(autre que le dictionnaire n°1)
 	 */
 	public String toString() {
 		String chaineFinale = new String();
@@ -116,15 +116,15 @@ public class ContrainteExplicite implements Serializable{
 
 	}
 	
-	/*Parcourt la HashMap <nom de l'inconnue, Monome> de this. Additionne chaque Monome Ã  celui ayant la mÃªme clé dans la HashMap de la 
-	 * Contrainte explicite en paramÃ¨tre
+	/*Parcourt la HashMap <nom de l'inconnue, Monome> de this. Additionne chaque Monome à celui ayant la même clé dans la HashMap de la 
+	 * Contrainte explicite en paramètre
 	 */
 	
 	/**
 	 * 
 	 * @param ContrainteExplicite ce: renvoie une contrainte explicite
-	 * Parcourt la HashMap<nom de l'inconnue,Monome> de this et additionne chaque Monome Ã  celui ayant la mÃªme clé dans la HashMap
-	 * de ContrainteExplicite donnÃ©e en paramÃ¨tre
+	 * Parcourt la HashMap<nom de l'inconnue,Monome> de this et additionne chaque Monome à celui ayant la même clé dans la HashMap
+	 * de ContrainteExplicite donnée en paramètre
 	 */
 	public void additionnerLigne(ContrainteExplicite ce) {
 		Iterator<String> i = monomes.keySet().iterator(); 
@@ -135,9 +135,9 @@ public class ContrainteExplicite implements Serializable{
 	}
 	
 	/**
-	 * Permet de trouver la variable inconnue Ã  sortir de la contrainte. Puis sort cette variable de la contrainte. Puis 
+	 * Permet de trouver la variable inconnue à sortir de la contrainte. Puis sort cette variable de la contrainte. Puis 
 	 * ajoute la variable de la contrainte dans la contrainte. (x1 = 4-2x3-8x2 ->rentrerBase(x3) -> x3=2-4x2-(1/2)x1 )
-	 * @param String inconnue l'inconnue ("x1" par exemple) Ã  sortir de la base
+	 * @param String inconnue l'inconnue ("x1" par exemple) à sortir de la base
 	 * 
 	 */
 	public void rentrerBase(String inconnue) {
@@ -145,9 +145,9 @@ public class ContrainteExplicite implements Serializable{
 		while(i.hasNext()) { // On parcours notre contrainte
 			String clé = i.next();
 			if (clé.equals(inconnue)) { // on tombe sur le bon Xi
-				Fraction coeff = monomes.get(clé).getCoefficient(); // on rÃ©cupÃ¨re le coefficient du monome Ã  switch
+				Fraction coeff = monomes.get(clé).getCoefficient(); // on récupère le coefficient du monome à switch
 				//String tmp = this.nom;
-				Monome switched = new Monome(new Fraction(-1,1),this.nom); // on met -1 car on le switch donc son coeff devient nÃ©gatif. Il va ensuite Ãªtre divisÃ© par le coeff de m
+				Monome switched = new Monome(new Fraction(-1,1),this.nom); // on met -1 car on le switch donc son coeff devient négatif. Il va ensuite être divisé par le coeff de m
 				this.nom = monomes.get(clé).getInconnue(); // On remplace le nom de la contrainte par l'inconnue de m
 				monomes.remove(clé);
 				monomes.put(switched.getInconnue(),switched);
@@ -158,9 +158,9 @@ public class ContrainteExplicite implements Serializable{
 	}
 	
 	/**
-	 * Permet de remplacer une inconnue par une contrainte explicite, puis d'additionner les monomes de mÃªme inconnue.
+	 * Permet de remplacer une inconnue par une contrainte explicite, puis d'additionner les monomes de même inconnue.
 	 * @param ce Une autre contrainte explicite
-	 * @param inconnue l'inconnue Ã  Ã©changer avec ce
+	 * @param inconnue l'inconnue à échanger avec ce
 	 */
 	public void echanger(ContrainteExplicite ce, String inconnue) {
 		Monome aEchanger = monomes.get(inconnue);
@@ -183,9 +183,9 @@ public class ContrainteExplicite implements Serializable{
 	}
 	
 	/**
-	 * Calcul le majorant Ã  partir de la constante et du coefficient de l'inconnue fourni en paramÃ¨tre
+	 * Calcul le majorant à partir de la constante et du coefficient de l'inconnue fourni en paramètre
 	 * @param String inconnue
-	 * @return renvoie la valeur absolue de la constante divisÃ©e par le coefficient
+	 * @return renvoie la valeur absolue de la constante divisée par le coefficient
 	 */
 	public double majorant(String inconnue) {
 		double constante = monomes.get(" ").getCoefficient().FMath();
@@ -215,7 +215,7 @@ public class ContrainteExplicite implements Serializable{
 		return nom;
 	}
 	/**
-	 * DÃ©finie le champs nom de this avec la String fournit en paramÃ¨tre
+	 * Définie le champs nom de this avec la String fournit en paramètre
 	 * @param String nom
 	 */
 	public void setNom(String nom) {
@@ -232,7 +232,7 @@ public class ContrainteExplicite implements Serializable{
 	}
 
 	/**
-	 * DÃ©finie le champs monomes de this avec la Map fournit en paramÃ¨tre
+	 * Définie le champs monomes de this avec la Map fournit en paramètre
 	 * @param Map monomes
 	 */
 	public void setMonomes(Map<String, Monome> monomes) {
@@ -248,7 +248,7 @@ public class ContrainteExplicite implements Serializable{
 	}
 
 	/**
-	 * DÃ©finie le champs inferieurA de this avec la Fraction fournit en paramÃ¨tre
+	 * Définie le champs inferieurA de this avec la Fraction fournit en paramètre
 	 * @param Fraction inferieurA
 	 */
 	public void setInferieurA(Fraction inferieurA) {
@@ -262,7 +262,7 @@ public class ContrainteExplicite implements Serializable{
 		return nombreInconnues;
 	}
 	/**
-	 * DÃ©finie le champs nombreInconnues de this avec l'int fournit en paramÃ¨tre
+	 * Définie le champs nombreInconnues de this avec l'int fournit en paramètre
 	 * @param int nombreInconnues
 	 */
 	public void setNombreInconnues(int nombreInconnues) {

@@ -33,7 +33,7 @@ public class PanelSimplex extends JPanel {
 	}
 
 	/**
-	 * Construit un objet PanelSimplexe Ã  partir d'un objet Simplexe permettant l'affichage d'un Simplexe
+	 * Construit un objet PanelSimplexe à partir d'un objet Simplexe permettant l'affichage d'un Simplexe
 	 * @param Simplexe simp
 	 */
 	public PanelSimplex(Simplexe simp) {
@@ -83,7 +83,7 @@ public class PanelSimplex extends JPanel {
 				
 				if(!m.getInconnue().equals(" ") && m.getCoefficient().getNumerateur()!=0) {
 					tabBoutonsInconnues[nbContraintes][nbBoutons] = new JButton(m.getInconnue());
-					tabBoutonsInconnues[nbContraintes][nbBoutons].setToolTipText("Une variable hors base Ã  Ã©changer");
+					tabBoutonsInconnues[nbContraintes][nbBoutons].setToolTipText("Une variable hors base à échanger");
 					tabBoutonsInconnues[nbContraintes][nbBoutons].setFont(police);
 					this.add(tabBoutonsInconnues[nbContraintes][nbBoutons],gridLim);
 					nbBoutons++;
@@ -116,7 +116,7 @@ public class PanelSimplex extends JPanel {
 	}
 
 	/**
-	 * DÃ©finit le champ simplexe de this Ã  partir du Simplexe donnÃ© en paramÃ¨tre
+	 * Définit le champ simplexe de this à partir du Simplexe donné en paramètre
 	 * @param simplexe
 	 */
 	public void setSimplexe(Simplexe simplexe) {
@@ -132,7 +132,7 @@ public class PanelSimplex extends JPanel {
 	}
 
 	/**
-	 * DÃ©finit le champ tabBoutonsInconnues de this avec le JButton[][] donnÃ© en paramÃ¨tre
+	 * Définit le champ tabBoutonsInconnues de this avec le JButton[][] donné en paramètre
 	 * @param JButton[][] tabBoutonsInconnues
 	 */
 	public void setTabBoutonsInconnues(JButton[][] tabBoutonsInconnues) {
@@ -140,7 +140,7 @@ public class PanelSimplex extends JPanel {
 	}
 	
 	/**
-	 * Met le controleur donnÃ© en paramÃ¨tre Ã  l'Ã©coute de chaque monome pour pouvoir les Ã©changer
+	 * Met le controleur donné en paramètre à l'écoute de chaque monome pour pouvoir les échanger
 	 * @param Controleur controleur
 	 */
 	public void enregistreEcouteur(Controleur controleur) {

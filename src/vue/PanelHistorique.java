@@ -40,7 +40,7 @@ public class PanelHistorique extends JPanel {
 		contrainte.insets = new Insets(5,25,5,25);
 		
 		for(int i =0 ; i<histo.getListeSimplexe().size() ; i++) {
-			JLabel simp = new JLabel("<html><head></head><body><p> Dictionnaire nÂ°"+Integer.toString(i)+":</p>"
+			JLabel simp = new JLabel("<html><head></head><body><p> Dictionnaire n°"+Integer.toString(i)+":</p>"
 			+histo.getListeSimplexe().get(i).toString()+"</body></html>");
 			
 			simp.setFont(police);

@@ -32,7 +32,7 @@ public class GenerePdf {
 	}
 	
 	/**
-	 * Construit un objet GenerePdf Ã  partir d'un Historique et d'une String donnÃ©s en paramÃ¨tre, la String correspondant au nom du fichier
+	 * Construit un objet GenerePdf à partir d'un Historique et d'une String donnés en paramètre, la String correspondant au nom du fichier
 	 * @param Historique histo
 	 * @param String nomFichier
 	 */
@@ -65,7 +65,7 @@ public class GenerePdf {
 	}
 	
 	/**
-	 * Ajoute des paragraphes correspondant Ã  chaque Simplexe composant l'Historique donnÃ© en paramÃ¨tre dans le document pdf
+	 * Ajoute des paragraphes correspondant à chaque Simplexe composant l'Historique donné en paramètre dans le document pdf
 	 * @param Document doc
 	 * @param Historique histo
 	 * @throws DocumentException
@@ -80,8 +80,8 @@ public class GenerePdf {
 			i++;
 		}
 		
-		if(histo.getListeSimplexe().getLast().echangeJudicieux().contains("bÃ©nÃ©fice")) {
-			doc.add(new Paragraph("\nBÃ©nÃ©fice maximum : "+histo.getListeSimplexe().getLast().getFonctionEco().getMonomes().get(" "),f));
+		if(histo.getListeSimplexe().getLast().echangeJudicieux().contains("bénéfice")) {
+			doc.add(new Paragraph("\nBénéfice maximum : "+histo.getListeSimplexe().getLast().getFonctionEco().getMonomes().get(" "),f));
 		}
 	}
 

@@ -18,7 +18,7 @@ public class PanelDemo extends JPanel implements ActionListener{
 	CardLayout gestionnaireDeCartes;
 	int indice=0;
 	
-	String[] titres= {"Affichage", "Charger un Simplexe (Fichier > Charger Simplexe","CrÃ©ation d'un Simplexe (Fichier > Nouveau Simplexe)","CrÃ©ation d'un Simplexe (partie 2) (Fichier > Nouveau Simplexe)"};
+	String[] titres= {"Affichage", "Charger un Simplexe (Fichier > Charger Simplexe","Création d'un Simplexe (Fichier > Nouveau Simplexe)","Création d'un Simplexe (partie 2) (Fichier > Nouveau Simplexe)"};
 	
 	JLabel titre;
 
@@ -27,7 +27,7 @@ public class PanelDemo extends JPanel implements ActionListener{
 
 	
 	/**
-	 * GÃ©nÃ¨re un panel contenant un diaporama d'images du dossier "images"
+	 * Génère un panel contenant un diaporama d'images du dossier "images"
 	 */
 	public PanelDemo() {
 
@@ -41,7 +41,7 @@ public class PanelDemo extends JPanel implements ActionListener{
 		suivant.addActionListener(this);
 		suivant.setActionCommand("suivant");
 		
-		instructions = new JLabel("Cliquez sur les flÃ¨ches de dÃ©filement pour parcourir le mode d'emploi");
+		instructions = new JLabel("Cliquez sur les flèches de défilement pour parcourir le mode d'emploi");
 		JPanel container =new JPanel();
 		container.setLayout(new BorderLayout());
 		
@@ -56,11 +56,11 @@ public class PanelDemo extends JPanel implements ActionListener{
 
 		ImageIcon image2 = new ImageIcon("images"+File.separator+"creerSimplexe.png");
 		JLabel affichage2=new JLabel(image2);
-		diapositives.add(affichage2, "CrÃ©ation d'un Simplexe (Fichier > Nouveau Simplexe)");
+		diapositives.add(affichage2, "Création d'un Simplexe (Fichier > Nouveau Simplexe)");
 		
 		ImageIcon image4 = new ImageIcon("images"+File.separator+"creerSimplexe2.png");
 		JLabel affichage4=new JLabel(image4);
-		diapositives.add(affichage4, "CrÃ©ation d'un Simplexe (partie 2) (Fichier > Nouveau Simplexe)");
+		diapositives.add(affichage4, "Création d'un Simplexe (partie 2) (Fichier > Nouveau Simplexe)");
 		
 		
 		
@@ -79,7 +79,7 @@ public class PanelDemo extends JPanel implements ActionListener{
 	}
 
 	/**
-	 * Permet le dÃ©filement du diaporama
+	 * Permet le défilement du diaporama
 	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {

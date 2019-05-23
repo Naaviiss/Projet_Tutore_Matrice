@@ -7,7 +7,7 @@ public class Monome implements Serializable{
 	String inconnue;
 	
 	/**
-	 * Construit un objet Monome Ã  partir d'une Fraction correspondant au coefficient du monome et d'une String correspondant
+	 * Construit un objet Monome à partir d'une Fraction correspondant au coefficient du monome et d'une String correspondant
 	 * au nom de l'inconnue
 	 * @param Fraction coeff
 	 * @param String inconnue
@@ -18,7 +18,7 @@ public class Monome implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet Monome Ã  partir d'un autre objet Monome et copie tous ses champs dans les champs du nouvel objet Ã  construire
+	 * Construit un objet Monome à partir d'un autre objet Monome et copie tous ses champs dans les champs du nouvel objet à construire
 	 * @param Monome monome
 	 */
 	public Monome(Monome monome) {
@@ -27,7 +27,7 @@ public class Monome implements Serializable{
 	}
 
 	/**
-	 * Affiche le Monome et gÃ¨re l'affichage des cas particuliers
+	 * Affiche le Monome et gère l'affichage des cas particuliers
 	 *@return String 
 	 */
 	public String toString() {
@@ -75,7 +75,7 @@ public class Monome implements Serializable{
 	}
 
 	/**
-	 * Definie le champ coefficient de this avec la Fraction fournie en paramÃ¨tre
+	 * Definie le champ coefficient de this avec la Fraction fournie en paramètre
 	 * @param Fraction coefficient
 	 */
 	public void setCoefficient(Fraction coefficient) {
@@ -90,7 +90,7 @@ public class Monome implements Serializable{
 		return inconnue;
 	}
 	/**
-	 * DÃ©finie le champ inconnue de this avec la String fournie en paramÃ¨tre
+	 * DÃ©finie le champ inconnue de this avec la String fournie en paramètre
 	 * @param String inconnue
 	 */
 	public void setInconnue(String inconnue) {

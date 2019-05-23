@@ -14,7 +14,7 @@ public class PanelGeneralSimplex extends JPanel{
 	Historique historique;
 	
 	/**
-	 * Construit un objet PanelGeneralSimplex Ã  partir d'un Historique fourni en paramÃ¨tre
+	 * Construit un objet PanelGeneralSimplex à partir d'un Historique fourni en paramètre
 	 * @param Historique historique
 	 */
 	public PanelGeneralSimplex(Historique historique) {
@@ -60,7 +60,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 
 	/**
-	 * DÃ©finit le champ panelIndi avec le PanelIndications fourni en paramÃ¨tre
+	 * Définit le champ panelIndi avec le PanelIndications fourni en paramètre
 	 * @param PanelIndication panelIndi
 	 */
 	public void setPanelIndi(PanelIndications panelIndi) {
@@ -68,7 +68,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 	
 	/**
-	 * CrÃ©e un nouveau panelIndi,le remplit d'un enonce(String) donnÃ© en paramÃ¨tre et l'ajoute au panelGeneralSimplex
+	 * Crée un nouveau panelIndi,le remplit d'un enonce(String) donné en paramètre et l'ajoute au panelGeneralSimplex
 	 * @param enonce
 	 */
 	public void setPanelIndi(String enonce) {
@@ -79,7 +79,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 	
 	/**
-	 * DÃ©finit le champ panelSimp de this avec le PanelSimplex donnÃ© en paramÃ¨tre
+	 * Définit le champ panelSimp de this avec le PanelSimplex donné en paramètre
 	 * @param PanelSimplex panelSimp
 	 */
 	public void setPanelSimp(PanelSimplex panelSimp) {
@@ -96,7 +96,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 
 	/**
-	 * DÃ©finit le champ panelH de this avec le PanelHistorique donnÃ© en paramÃ¨tre
+	 * Définit le champ panelH de this avec le PanelHistorique donné en paramètre
 	 * @param panelH
 	 */
 	public void setPanelH(PanelHistorique panelH) {
@@ -112,7 +112,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 
 	/**
-	 * DÃ©finit le champ historique de this avec l'Historique donnÃ© en paramÃ¨tre
+	 * Définit le champ historique de this avec l'Historique donné en paramètre
 	 * @param Historique historique
 	 */
 	public void setHistorique(Historique historique) {
@@ -120,7 +120,7 @@ public class PanelGeneralSimplex extends JPanel{
 	}
 
 	/**
-	 * Met le controleur donnÃ© en paramÃ¨tre Ã  l'Ã©coute des champs panelSimp et panelIndi
+	 * Met le controleur donné en paramètre à l'écoute des champs panelSimp et panelIndi
 	 * @param Controleur controleur
 	 */
 	public void enregistreEcouteur(Controleur controleur) {

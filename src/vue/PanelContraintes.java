@@ -22,8 +22,8 @@ public class PanelContraintes extends JPanel {
 	int nombreMonome;
 	
 	/**
-	 * Construit un objet PanelContraintes Ã  partir des paramÃ¨tres nombreMonome(Integer) et nombreContraintes(Integer).
-	 * Ce panel permet Ã  l'utilisateur de choisir les valeurs des coefficients de chaque monome et de la fonction Ã©conomique.
+	 * Construit un objet PanelContraintes à partir des paramètres nombreMonome(Integer) et nombreContraintes(Integer).
+	 * Ce panel permet à l'utilisateur de choisir les valeurs des coefficients de chaque monome et de la fonction économique.
 	 * @param Integer nombreMonome
 	 * @param Integer nombreContraintes
 	 */
@@ -99,7 +99,7 @@ public class PanelContraintes extends JPanel {
 	}
 	
 	/**
-	 * Permet de remettre les valeurs des champs du formulaire Ã  0
+	 * Permet de remettre les valeurs des champs du formulaire à 0
 	 */
 	public void viderFormulaire() {
 		
@@ -126,7 +126,7 @@ public class PanelContraintes extends JPanel {
 	}
 
 	/**
-	 * DÃ©finit le champ nombreMonome avec la valeur fournit en paramÃ¨tre
+	 * DÃ©finit le champ nombreMonome avec la valeur fournit en paramètre
 	 * @param int nombreMonome
 	 */
 	public void setNombreMonome(int nombreMonome) {
@@ -134,7 +134,7 @@ public class PanelContraintes extends JPanel {
 	}
 
 	/**
-	 * Met le Controleur en paramÃ¨tre Ã  l'Ã©coute du bouton boutonCreer
+	 * Met le Controleur en paramètre à l'écoute du bouton boutonCreer
 	 * @param Controleur parControleur
 	 */
 	public void enregistreEcouteur(Controleur parControleur) {
@@ -143,7 +143,7 @@ public class PanelContraintes extends JPanel {
 	}
 	
 	/**
-	 * Lorsque cette mÃ©thode est appelÃ©e,le Controleur fourni en paramÃ¨tre n'est plus Ã  l'Ã©coute du bouton boutonCreer
+	 * Lorsque cette méthode est appelée,le Controleur fourni en paramètre n'est plus à l'écoute du bouton boutonCreer
 	 * @param Controleur parControleur
 	 */
 	public void desenregistreEcouteur(Controleur parControleur) {

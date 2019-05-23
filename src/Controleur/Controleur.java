@@ -39,8 +39,8 @@ public class Controleur implements ActionListener {
 	}
 
 	/**
-	 * @param ActionEvent evt : un Ã©venement correspondant au choix de l'utilisateur
-	 * Permet de gÃ©rer les choix de l'utilisateur lors de son utilisation du programme Simplexe Ã  partir du dÃ©marrage du programme.
+	 * @param ActionEvent evt : un évènement correspondant au choix de l'utilisateur
+	 * Permet de gérer les choix de l'utilisateur lors de son utilisation du programme Simplexe à partir du démarrage du programme.
 	 */
 	public void actionPerformed(ActionEvent evt) {
 		
@@ -117,8 +117,8 @@ public class Controleur implements ActionListener {
 		
 		if(evt.getActionCommand().equals("Charger")) {
 			
-			JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse lÃƒ  oÃƒÂ¹ il veut crÃƒÂ©e son fichier
-			fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par dÃƒÂ©faut on se place dans le rÃƒÂ©pertoire utilisateur
+			JFileChooser fichier = new JFileChooser(); //pour que l'utilisateur choisisse là où il veut crée son fichier
+			fichier.setCurrentDirectory(new File(System.getProperty("user.home"))); //par défaut on se place dans le répertoire utilisateur
 			FileNameExtensionFilter filtre = new FileNameExtensionFilter(null, "*ser");//on veut que le fichier soit uniquement au format pdf
 			fichier.addChoosableFileFilter(filtre);
 			

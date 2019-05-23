@@ -16,8 +16,8 @@ public class FonctionEco implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet FonctionEco Ã  partir d'un autre objet FonctionEco donnÃ© en paramÃ¨tre et copie son champs Map monomes
-	 * dans le champs Map monomes du nouvel objet Ã  construire
+	 * Construit un objet FonctionEco à partir d'un autre objet FonctionEco donné en paramètre et copie son champs Map monomes
+	 * dans le champs Map monomes du nouvel objet à construire
 	 * @param FonctionEco fonctionEco
 	 */
 	public FonctionEco(FonctionEco fonctionEco) {
@@ -28,15 +28,15 @@ public class FonctionEco implements Serializable{
 		}
 	}
 	/**
-	 * Ajoute un Monome Ã  la Map de monome de this
+	 * Ajoute un Monome à la Map de monome de this
 	 * @param Monome m
 	 */
 	public void ajouterMonome(Monome m) {
-		monomes.put(m.getInconnue(), m); // transformer pour que Ã§a s'adapte Ã  la map
+		monomes.put(m.getInconnue(), m); // transformer pour que ça s'adapte à la map
 	}
 	
 	/**
-	 * Renvoie une chaine de caractÃ¨re correspondant Ã  la fonction Ã©conomique
+	 * Renvoie une chaine de caractère correspondant à la fonction économique
 	 *@return String chaineFinale
 	 */
 	public String toString() {
@@ -59,8 +59,8 @@ public class FonctionEco implements Serializable{
 
 	}
 	/**
-	 * Echange la variable "inconnue" de la fonction Ã©conomique avec une contrainte explicite, puis simplifie l'expression en additionnant
-	 * les monomes de mÃªme inconnue.
+	 * Echange la variable "inconnue" de la fonction économique avec une contrainte explicite, puis simplifie l'expression en additionnant
+	 * les monomes de même inconnue.
 	 * @param ContrainteExplicite ce
 	 * @param String inconnue
 	 */
@@ -84,7 +84,7 @@ public class FonctionEco implements Serializable{
 		
 	}
 	/**
-	 * Renvoie le Monome de la fonction Ã©conomique ayant la valeur de coefficient maximale 
+	 * Renvoie le Monome de la fonction économique ayant la valeur de coefficient maximale 
 	 * @return String res
 	 */
 	public String monomeCoeffMax() {

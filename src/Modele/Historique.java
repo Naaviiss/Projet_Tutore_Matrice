@@ -17,7 +17,7 @@ public class Historique implements Serializable{
 		return listeSimplexe;
 	}
 	/**
-	 * Ajoute un Simplexe Ã  la LinkedList<Simplexe> de this
+	 * Ajoute un Simplexe à la LinkedList<Simplexe> de this
 	 * @param Simplexe simplexe
 	 */
 	public void add(Simplexe simplexe) {
@@ -25,7 +25,7 @@ public class Historique implements Serializable{
 	}
 	
 	/**
-	 * Parcourt la liste de Simplexe et les ajoute Ã  la String chaineFinale
+	 * Parcourt la liste de Simplexe et les ajoute à la String chaineFinale
 	 *@return String chaineFinale
 	 */
 	public String toString() {
@@ -37,7 +37,7 @@ public class Historique implements Serializable{
 	}
 
 	/**
-	 * DÃ©fini le champ listeSimplexe de this avec la LinkedList<Simplexe> fournie en paramÃ¨tre
+	 * Défini le champ listeSimplexe de this avec la LinkedList<Simplexe> fournie en paramètre
 	 * @param LinkedList<Simplexe>listeSimplexe
 	 */
 	public void setListeSimplexe(LinkedList<Simplexe> listeSimplexe) {
@@ -55,7 +55,7 @@ public class Historique implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet Historique Ã  partir d'une liste de Simplexe LinkedList<Simplexe>
+	 * Construit un objet Historique à partir d'une liste de Simplexe LinkedList<Simplexe>
 	 * @param LinkedList<Simplexe>liste
 	 */
 	public Historique(LinkedList<Simplexe> liste) {
@@ -63,7 +63,7 @@ public class Historique implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet Historique Ã  partir d'un autre objet Historique donnÃ© en paramÃ¨tre
+	 * Construit un objet Historique à partir d'un autre objet Historique donné en paramètre
 	 * @param Historique histo
 	 */
 	public Historique(Historique histo) {

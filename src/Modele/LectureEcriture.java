@@ -37,7 +37,7 @@ public class LectureEcriture {
 	}
 	
 	/**
-	 * Permet l'Ã©criture dans un fichier
+	 * Permet l'écriture dans un fichier
 	 * @param File parFichier
 	 * @param Object parObjet
 	 */

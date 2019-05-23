@@ -12,7 +12,7 @@ public class PanelFichier extends JPanel{
 	private CardLayout gestionnaireDeCartes;
 
 	/**
-	 * Construit un objet PanelFichier permettant Ã  l'utilisateur de rentrer un fichier Ã  charger en tant que Simplexe
+	 * Construit un objet PanelFichier permettant à l'utilisateur de rentrer un fichier à charger en tant que Simplexe
 	 */
 	public PanelFichier(){
 		
@@ -44,7 +44,7 @@ public class PanelFichier extends JPanel{
 	
 	//EnregistreEcouteur qui appelle les enregistreEcouteurs des panelFils
 	/**
-	 * permet de mettre le controleur en paramÃ¨tre Ã  l'Ã©coute de tous les panels fils
+	 * permet de mettre le controleur en paramètre à l'écoute de tous les panels fils
 	 * @param parControleur:Controleur
 	 */
 	public void enregistreEcouteur(Controleur parControleur){
@@ -73,7 +73,7 @@ public class PanelFichier extends JPanel{
 
 
 	/**
-	 * DÃ©finit le champ panelCharger de this avec le PanelChargerSimplexe fourni en paramÃ¨tre
+	 * Définit le champ panelCharger de this avec le PanelChargerSimplexe fourni en paramètre
 	 * @param PanelChargerSimplexe panelCharger
 	 */
 	public void setPanelCharger(PanelChargerSimplexe panelCharger) {
@@ -82,7 +82,7 @@ public class PanelFichier extends JPanel{
 
 
 	/**
-	 * DÃ©fini le champs panelFormulaire de this avec le PanelFormulaire fourni en paramÃ¨tre
+	 * Défini le champs panelFormulaire de this avec le PanelFormulaire fourni en paramètre
 	 * @param panelFormulaire
 	 */
 	public void setPanelFormulaire(PanelFormulaire panelFormulaire) {

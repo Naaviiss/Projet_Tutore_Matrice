@@ -15,7 +15,7 @@ public class PanelIndications extends JPanel{
 	GridBagConstraints contrainte = new GridBagConstraints();
 	
 	/**
-	 * Construit un objet PanelIndication utilisÃ© pour donner les indices Ã  l'utilisateur
+	 * Construit un objet PanelIndication utilisé pour donner les indices à l'utilisateur
 	 */
 	public PanelIndications() {
 		this.setLayout(new GridBagLayout());
@@ -30,7 +30,7 @@ public class PanelIndications extends JPanel{
 	}
 	
 	/**
-	 * Construit un objet PanelIndication Ã  partir d'une String enonce,utilisÃ©e pour donner les indices Ã  l'utilisateur
+	 * Construit un objet PanelIndication à partir d'une String enonce,utilisée pour donner les indices à l'utilisateur
 	 * @param String enonce
 	 */
 	public PanelIndications(String enonce) {
@@ -47,7 +47,7 @@ public class PanelIndications extends JPanel{
 	}
 	
 	/**
-	 * Met le controleur donnÃ© en paramÃ¨tre Ã  l'Ã©coute du bouton indice
+	 * Met le controleur donné en paramètre à l'écoute du bouton indice
 	 * @param Controleur parControleur
 	 */
 	public void enregistreEcouteur(Controleur parControleur) {

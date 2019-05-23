@@ -9,7 +9,7 @@ public class Simplexe implements Serializable{
 	FonctionEco fonctionEco;
 	
 	/**
-	 * Construit un objet Simplexe Ã  partir d'une List et d'une FonctionEco fournie en paramÃ¨tre
+	 * Construit un objet Simplexe à partir d'une List et d'une FonctionEco fournie en paramètre
 	 * @param List contraintes
 	 * @param FonctionEco fonctionEco
 	 */
@@ -26,7 +26,7 @@ public class Simplexe implements Serializable{
 	}
 	
 	/**
-	 * Construit un objet Simplexe Ã  partir d'un autre Simplexe et copie tous ses champs dans les champs du nouvel objet Ã  construire
+	 * Construit un objet Simplexe à partir d'un autre Simplexe et copie tous ses champs dans les champs du nouvel objet à construire
 	 * @param Simplexe simp
 	 */
 	public Simplexe(Simplexe simp) {
@@ -41,7 +41,7 @@ public class Simplexe implements Serializable{
 	}
 
 	/**
-	 * Permet le passage au dictionnaire nÂ°1 du Simplexe
+	 * Permet le passage au dictionnaire n°1 du Simplexe
 	 */
 	public void passageDico1() {
 		for(int i = 0; i<contraintes.size();i++) {
@@ -51,7 +51,7 @@ public class Simplexe implements Serializable{
 	
 	
 	/**
-	 * Remplie la String chaineFinale avec les diffÃ©rentes ContraintesExplicite et renvoie la chaineFinale.Cette fonction permet
+	 * Remplie la String chaineFinale avec les différentes ContraintesExplicite et renvoie la chaineFinale.Cette fonction permet
 	 * un affichage en HTML
 	 *@return String chaineFinale
 	 */
@@ -65,7 +65,7 @@ public class Simplexe implements Serializable{
 	}
 	
 	/**
-	 * Remplie la String chaineFinale avec les diffÃ©rentes ContraintesExplicite et renvoie la chaineFinale
+	 * Remplie la String chaineFinale avec les différentes ContraintesExplicite et renvoie la chaineFinale
 	 * @return String chaineFinale
 	 */
 	public String toString2() {
@@ -79,8 +79,8 @@ public class Simplexe implements Serializable{
 	}
 	
 	/**
-	 * UtilisÃ©e lors des indices qui sont demandÃ©s par l'utilisateur ,cette fonction affiche quel est l'Ã©change de variable dans la base
-	 * et hors base qu'il est prÃ©fÃ©rable d'effectuer afin de se rapprocher au plus prÃ¨s du bÃ©nÃ©fice maximal.
+	 * Utilisée lors des indices qui sont demandés par l'utilisateur ,cette fonction affiche quel est l'échange de variable dans la base
+	 * et hors base qu'il est préférable d'effectuer afin de se rapprocher au plus près du bénéfice maximal.
 	 * @return String
 	 */
 	public String echangeJudicieux() {
@@ -101,13 +101,13 @@ public class Simplexe implements Serializable{
 			
 		}
 		if(inconnueHorsBase == "") {
-			return "Vous avez atteint le bÃ©nÃ©fice maximum";
+			return "Vous avez atteint le bénéfice maximum";
 		}
-		return "Echange Ã  effectuer : " + inconnueBase + " & " + inconnueHorsBase;
+		return "Echange à effectuer : " + inconnueBase + " & " + inconnueHorsBase;
 	}
 	
 	/**
-	 * Permet l'Ã©change d'une variable hors base et d'une variable dans la base dans le Simplexe
+	 * Permet l'échange d'une variable hors base et d'une variable dans la base dans le Simplexe
 	 * @param String inconnueHorsBase
 	 * @param String inconnueBase
 	 */
@@ -139,7 +139,7 @@ public class Simplexe implements Serializable{
 	}
 	
 	/**
-	 * DÃ©fini le champ contraintes de this avec le paramÃ¨tre fourni
+	 * Défini le champ contraintes de this avec le paramètre fourni
 	 * @param List contraintes
 	 */
 	public void setContraintes(List<ContrainteExplicite> contraintes) {
@@ -155,7 +155,7 @@ public class Simplexe implements Serializable{
 	}
 
 	/**
-	 * DÃ©fini le champ fonctionEco de this avec le paramÃ¨tre fourni
+	 * Défini le champ fonctionEco de this avec le paramètre fourni
 	 * @param FonctionEco fonctionEco
 	 */
 	public void setFonctionEco(FonctionEco fonctionEco) {
