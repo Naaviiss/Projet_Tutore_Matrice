@@ -10,57 +10,51 @@ import javax.swing.JPanel;
 
 import Controleur.Controleur;
 
-public class PanelChargerSimplexe extends JPanel{
-	private JButton parcourir;
-	
+/**
+ * PanelChargerSimplexe est une classe qui permet de charger un simplexe déjà
+ * existant au sein de l'application simplexe.
+ */
+public class PanelChargerSimplexe extends JPanel {
 	/**
-	 * Construit un objet PanelChargerSimplexe permettant Ã  l'utilisateur de charger un Simplexe dÃ©jÃ  existant
+	 * Bouton permettant de parcourir pour chercher un simplexe déjà existant
+	 */
+	private JButton parcourir;
+
+	/**
+	 * Construit un objet PanelChargerSimplexe permettant à l'utilisateur de charger
+	 * un Simplexe déjà existant
 	 */
 	public PanelChargerSimplexe() {
-		
-		//GridBagLayout
-		
+		// GridBagLayout
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints contrainteEvenement = new GridBagConstraints();
-		contrainteEvenement.insets = new Insets(3,3,3,3);
-		
-		//CrÃ©ation d'une etiquette
-	
-		JLabel nomDuFichier=new JLabel("Choisissez un fichier :");
-		
-		
+		contrainteEvenement.insets = new Insets(3, 3, 3, 3);
 
-		
-		//Bouton et ActionCommand
-		parcourir=new JButton("Parcourir");	
+		// Création d'une etiquette
+		JLabel nomDuFichier = new JLabel("Choisissez un fichier :");
+
+		// Bouton et ActionCommand
+		parcourir = new JButton("Parcourir");
 		parcourir.setActionCommand("Charger");
-		
 
-		
-		
-		//Ajout des Ã©lÃ©ments dans le GridBagLayout
-		contrainteEvenement.gridx=0;
-		contrainteEvenement.gridy=0;
-		this.add(nomDuFichier,contrainteEvenement);
-		
+		// Ajout des éléments dans le GridBagLayout
+		contrainteEvenement.gridx = 0;
+		contrainteEvenement.gridy = 0;
+		this.add(nomDuFichier, contrainteEvenement);
 
-		
-		contrainteEvenement.gridx=0;
-		contrainteEvenement.gridy=1;
-		contrainteEvenement.insets = new Insets(20,3,3,3);
-		this.add(parcourir,contrainteEvenement);
-		
+		contrainteEvenement.gridx = 0;
+		contrainteEvenement.gridy = 1;
+		contrainteEvenement.insets = new Insets(20, 3, 3, 3);
+		this.add(parcourir, contrainteEvenement);
 	}
-	
-	
-	
-	
-	//ActionListener sur le bouton ajouter
+
 	/**
-	 * Met le controleur en paramÃ¨tre Ã  l'Ã©coute du bouton Charger 
+	 * Met le controleur en paramétre à l'écoute du bouton Charger
+	 * 
 	 * @param parControleur
+	 *            le controleur
 	 */
-	public void enregistreEcouteur(Controleur parControleur){
+	public void enregistreEcouteur(Controleur parControleur) {
 		parcourir.addActionListener(parControleur);
 	}
 }

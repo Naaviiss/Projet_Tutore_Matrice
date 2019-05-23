@@ -11,10 +11,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+/**
+ * FenetreMereSimplex est une classe quie permet
+ * l'affichage principale de l'application Simplexe.
+ */
 public class FenetreMereSimplex extends JFrame {
 
+	/**
+	 * Panel correspondant à l'affichage principale de la fenêtre
+	 */
 	PanelGeneral contentPane;
 	
+	/**
+	 * Constructeur par défaut de la classe. Permet la création de l'affichage
+	 * d'accueil de l'application Simplexe.
+	 */
 	public FenetreMereSimplex() {
 		super("API Simplexe");
 		
@@ -31,16 +42,16 @@ public class FenetreMereSimplex extends JFrame {
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menuBar.setBackground(Color.WHITE);
 		
-		//JMenu CrÃ©ation
+		//JMenu Création
 		JMenu menuCreation=new JMenu("Fichier");
 		menuCreation.setBackground(Color.LIGHT_GRAY);
 		menuCreation.setMnemonic('F');
 		menuBar.add(menuCreation);
 		
-		String[] itemsCreation = {"Nouveau Simplexe", "Charger Simplexe", "Enregistrer", "Enregistrer sous", "Mode DÃ©mo"};
+		String[] itemsCreation = {"Nouveau Simplexe", "Charger Simplexe", "Enregistrer", "Enregistrer sous", "Mode Démo"};
 		JMenuItem[] menuItemsCreation = new JMenuItem[itemsCreation.length];
 		
-		// Les items de la JMenuBar sont ajoutÃ©s et mis Ã©coutÃ© par le contrÃ´leur
+		// Les items de la JMenuBar sont ajoutés et mis à l'écoute par le contrôleur
 		for(int i=0; i<itemsCreation.length;i++) {
 			menuItemsCreation[i]=new JMenuItem(itemsCreation[i]);
 			menuCreation.add(menuItemsCreation[i]);
@@ -73,5 +84,4 @@ public class FenetreMereSimplex extends JFrame {
 			menuItem[i].setBackground(Color.WHITE);
 		}
 	}
-	
 }
