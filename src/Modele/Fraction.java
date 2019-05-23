@@ -357,5 +357,4 @@ public class Fraction implements Serializable {
 		else
 			return Integer.toString(numerateur);
 	}
-
 }

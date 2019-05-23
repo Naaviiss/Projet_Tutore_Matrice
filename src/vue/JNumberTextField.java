@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
 public class JNumberTextField extends JTextField {
+	/**
+	 * Clé de hachage SHA qui identifie de manière unique JNumberTextField
+	 */
     private static final long serialVersionUID = 1L;
 
 	/**

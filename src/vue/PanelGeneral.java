@@ -15,7 +15,6 @@ import Modele.GenerePdf;
 import Modele.Historique;
 import Modele.LectureEcriture;
 
-@SuppressWarnings("serial")
 public class PanelGeneral extends JPanel implements ActionListener {
 	
 	String[] intitulesPanneaux = {"Fichier","Affichage", "Annuler", "Quitter", "?"};

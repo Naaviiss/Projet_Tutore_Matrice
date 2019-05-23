@@ -1,10 +1,20 @@
 package Modele;
 
-public class ExceptEntreFraction extends Exception{
+/**
+ * ExceptEntreFraction est une classe qui va permettre de gérer le cas où la
+ * matrice contient des caractères non admis.
+ */
+public class ExceptEntreFraction extends Exception {
+
 	/**
-	 * Exception qui va Ãªtre levÃ©e quand la matrice est remplie avec des lettres ou des caractÃ¨res spÃ©ciaux
+	 * Clé de hachage SHA qui identifie de manière unique ExceptEntreFraction
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ExceptEntreFraction() {}
+	/**
+	 * Exception qui va être levée quand la matrice est remplie avec des lettres ou
+	 * des caractères spéciaux
+	 */
+	public ExceptEntreFraction() {
+	}
 }

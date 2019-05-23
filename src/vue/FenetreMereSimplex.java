@@ -11,8 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-
-@SuppressWarnings("serial")
 public class FenetreMereSimplex extends JFrame {
 
 	PanelGeneral contentPane;

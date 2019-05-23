@@ -21,5 +21,4 @@ public interface Data {
 	public final String EFFACER = "Effacer";
 	
 	public final String CONSTANTE = "Constante";
-
 }

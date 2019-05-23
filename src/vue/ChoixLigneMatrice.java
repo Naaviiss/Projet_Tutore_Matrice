@@ -12,42 +12,62 @@ import Controleur.Controleur2;
 import Modele.Data;
 import Modele.Matrice;
 
-public class ChoixLigneMatrice extends JPanel{
+public class ChoixLigneMatrice extends JPanel {
+
+	/**
+	 * Clé de hachage SHA qui identifie de manière unique ChoixLigneMatrice
+	 */
 	private static final long serialVersionUID = 1L;
-	private Matrice chMatrice;//la matrice Ã  afficher
-	private JLabel []lignes;//un tableau de jlabel, chaque case va contenir une ligne du tableau
-	private JPanel panelGlobal;//va contenir les lignes
-	
+
+	/**
+	 * La matrice à afficher
+	 */
+	private Matrice chMatrice;
+
+	/**
+	 * Un tableau de label où chaque case va contenir une ligne du tableau
+	 */
+	private JLabel[] lignes;
+
+	/**
+	 * Panel contenant les lignes
+	 */
+	private JPanel panelGlobal;
+
+	/**
+	 * Constructeur par défaut de la classe ChoixLigneMatrice
+	 * 
+	 * @param pMatrice
+	 *            la matrice à afficher
+	 */
 	public ChoixLigneMatrice(Matrice pMatrice) {
 		this.setLayout(new BorderLayout());
-		
+
 		chMatrice = pMatrice;
 		lignes = new JLabel[chMatrice.getTaille()];
 		panelGlobal = new JPanel();
-		
-		panelGlobal.setLayout(new BoxLayout(panelGlobal, BoxLayout.PAGE_AXIS));//gestionnaire pour positionner les labels
-		
-		//instance des labels
-		for (int i = 0; i<chMatrice.getTaille();i++) {
+
+		panelGlobal.setLayout(new BoxLayout(panelGlobal, BoxLayout.PAGE_AXIS));// gestionnaire pour positionner les
+																				// labels
+		// instance des labels
+		for (int i = 0; i < chMatrice.getTaille(); i++) {
 			lignes[i] = new JLabel(chMatrice.toStringLigne(i));
 			lignes[i].setFont(new Font(Font.SERIF, 0, 30));
 			lignes[i].setName(Data.LIGNES[i]);
 			panelGlobal.add(lignes[i]);
 		}
-		
-		this.add(panelGlobal,BorderLayout.CENTER);
+		this.add(panelGlobal, BorderLayout.CENTER);
 	}
-	
+
 	/**
-	 * Se met Ã  l'Ã©coute du controleur
+	 * Se met à l'écoute du controleur
+	 * 
 	 * @param pControleur
 	 */
 	public void enregistreEcouteur(Controleur2 pControleur) {
-		//on mets les labels Ã  l'Ã©coute du controleur
-		for (int i = 0; i<chMatrice.getTaille();i++) {
+		// on mets les labels à l'écoute du controleur
+		for (int i = 0; i < chMatrice.getTaille(); i++) {
 			lignes[i].addMouseListener(pControleur);
 		}
 	}
-
 }
-
