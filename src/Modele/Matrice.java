@@ -1,14 +1,30 @@
 package Modele;
 
+/**
+ * MAtrice est une classe qui permet la gestion
+ * de tout ce qui concerne les matrices
+ */
 public class Matrice {
 	
+	/**
+	 * Le nombre de lignes de la matrice
+	 */
 	private int chLigne;
+	
+	/**
+	 * Le nombre de colonnes de la matrice
+	 */
 	private int chCol;
+	
+	/**
+	 * Le tableau correspondant à toutes les cases de la matrice
+	 */
 	private Fraction[][] chCase;
-	
-	/////MATRICE/////
-	
-	//creer une matrice carre vide de taille parTaille
+
+	/**
+	 * Constructeur par défaut de la classe Matrice
+	 * @param parTaille la taille de la matrice
+	 */
 	public Matrice (int parTaille) {
 		chLigne = parTaille;
 		chCol = parTaille;
@@ -16,7 +32,11 @@ public class Matrice {
 		this.remplir(0);
 	}
 	
-	//creer une matrice vide de taille parLig et parCol
+	/**
+	 * Autre constructeur par défaut de la classe Matrice 
+	 * @param parLig le nombre de lignes de la matrice
+	 * @param parCol le nombre de colonnes de la matrice
+	 */
 	public Matrice (int parLig, int parCol) {
 		chLigne = parLig;
 		chCol = parCol;
@@ -24,7 +44,10 @@ public class Matrice {
 		this.remplir(0);
 	}
 	
-	//creer une matrice avec un tableau donne en parametre
+	/**
+	 * Autre constructeur par défaut de la classe Matrice
+	 * @param parMat les valeurs de chaque case
+	 */
 	public Matrice (Fraction[][] parMat) {
 		chLigne = parMat.length;
 		chCol = parMat.length;
@@ -36,7 +59,10 @@ public class Matrice {
 		}
 	}
 	
-	//creer une copie d'une matrice
+	/**
+	 * Créer une copie d'une matrice
+	 * @param A une matrice
+	 */
 	public void copie(Matrice A) {
 		for(int i =0;i<chLigne;i++) {
 			for(int j=0;j<chCol;j++) {
@@ -45,8 +71,10 @@ public class Matrice {
 		}
 	}
 	
-	//REMPLIR
-	//remplie une matrice de x ( remplie de 0 a sa creation pour pas que la matrice soit remplit de null et donne erreur )
+	/**
+	 * Remplie une matrice d'un certain élément.
+	 * @param x un élément en question
+	 */
 	public void remplir(int x) {
 		for(int i=0; i<this.getLig() ; i++) {
 			for(int j=0; j<this.getCol() ;j++) {
@@ -55,58 +83,85 @@ public class Matrice {
 		}
 	}
 	
-															/////GETTER/////
-	//get une case
+	/**
+	 * Rend la valeur d'une case de la matrice voulue
+	 * @param i la ligne de la case
+	 * @param j la colonne de la case
+	 * @return la valeur de la case de la matrice voulue
+	 */
 	public Fraction getCase(int i, int j) {
-		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
+		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) 
 			throw new RuntimeException("Case non existante");
-		}
-		else {
+		else 
 			return this.chCase[i][j];
-		}
 	}
-	//get une ligne sous forme de tableau de fraction
+
+	/**
+	 * Renvoie une ligne de la matrice sous forme de tableau de fraction
+	 * @param x l'indice de la ligne
+	 * @return une lignde ed la matrice sous forme de tableau de fraction
+	 */
 	public Fraction[] getLigne(int x) {
-		if((x > this.getCol()-1) || (x < 0)) {
+		if((x > this.getCol()-1) || (x < 0))
 			throw new RuntimeException("Ligne non existante");
-		}
-		else {
+		else 
 			return chCase[x];
-		}
 	}
-	//get toute la matrice sous forme de tableau de fraction ( ex : {{1,2,3} , {4,5,6} , {7,8,9}} )
+
+	/**
+	 * Renvoie la matrice sous forme de tableau de fraction
+	 * @return la matrice sous forme de tableau de fraction
+	 */
 	public Fraction[][] getAll() {
 		return chCase;
 	}
-	//get taille matrice carre
+
+	/**
+	 * Renvoie la taille de la matrice
+	 * @return la taille de la matrice
+	 */
 	public int getTaille() {
-		if(this.getLig() != this.getCol()) {
+		if(this.getLig() != this.getCol()) 
 			throw new RuntimeException("Pas matrice carre");
-		}
-		else {
+		else 
 			return this.getLig();
-		}
 	}
-	//get nombre ligne d'une matrice
+
+	/**
+	 * Renvoie le nombre de lignes d'une matrice
+	 * @return le nombre de lignes d'une matrice
+	 */
 	public int getLig() {
 		return chLigne;
 	}
-	//get nombre de colonne d'une matrice
+
+	/**
+	 * Renvoie le nombre de colonnes d'une matrice
+	 * @return le nombre de colonnes d'une matrice
+	 */
 	public int getCol() {
 		return chCol;
 	}
 	
-															/////SETTER/////
-	//set une case
-	public void setCase(int i, int j, Fraction var) { //var int a changer en fraction
-		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) {
+
+	/**
+	 * Change la valeur d'une case de la matrice
+	 * @param i la ligne de la case
+	 * @param j la colonne de la case
+	 * @param var la nouvelle valeur de la case
+	 */
+	public void setCase(int i, int j, Fraction var) {
+		if((i > this.getLig() ) || (i < 0 ) || (j > this.getCol() ) || (j < 0 )) 
 			throw new RuntimeException("Case non existante");
-		}
-		else {
+		else
 			this.chCase[i][j] = var;
-		}
 	}
-	//set une ligne de la matrice appelante avec un tableau donne en parametre
+
+	/**
+	 * Change la valeur d'une ligne entière de la fraction
+	 * @param x l'indice de la ligne
+	 * @param tab les nouvelles valeurs de la ligne
+	 */
 	public void setLigne(int x, Fraction tab[]) {
 		if((x > this.getCol()-1) || (x < 0)) {
 			throw new RuntimeException("Ligne non existante");
@@ -116,9 +171,11 @@ public class Matrice {
 		}
 	}
 	
-	/////METHODES/////
-	
-	//renvoie une matrice identite de taille "Taille"
+	/**
+	 * Renvoie une matrice identitée de la matrice
+	 * @param Taille une taille
+	 * @return une matrice identitée
+	 */
 	public static Matrice identite(int Taille) {
         Matrice Ident = new Matrice(Taille);
         for (int i=0; i < Taille; i++) {
@@ -127,57 +184,65 @@ public class Matrice {
         return Ident;
     }
 	
-	//echange deux lignes entre elles ( M[Li] <- M[Lj]   && M[Lj] <- M[Li])
+	/**
+	 * Echange deux lignes entre elles
+	 * ( M[Li] <- M[Lj]   && M[Lj] <- M[Li])
+	 * @param i l'indice de la ligne
+	 * @param j l'indice de la colonne
+	 */
 	public void echange(int i, int j) {
 		Fraction[] tampon = getLigne(i);
         chCase[i] = getLigne(j);
         chCase[j] = tampon;
     }
 	
-	//COMPARE
-	//compare deux matrices entre elles et renvoie true si elles sont identique, sinon false
+
+	/**
+	 * Compare deux matrices entre elles
+	 * @param parMat une matrice
+	 * @return vrai si elles sont identiques, sinon faux. 
+	 */
 	public boolean mCompare(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol())
 			throw new RuntimeException("Erreur dimensions des deux matrices");
-		}
 		for (int i=0; i < this.getLig() ;i++) {
 			for(int j=0; j < this.getCol() ;j++) {
-				if(!(Mat.chCase[i][j].FCompare(parMat.chCase[i][j]))) {
+				if(!(Mat.chCase[i][j].FCompare(parMat.chCase[i][j])))
 					return false;
-				}
 			}
 		}
 		return true;
 	}
 	
-	//ISIDENTITY
-	//return true si la matrice est une matrice identite, sinon false
+	/**
+	 * Compare deux matrices entre elles et vérifie si elles sont identitées ou non
+	 * @return vrai si l'une est l'identiée de l'autre, sinon faux. 
+	 */
 	public boolean isIdentite() {
 		int zero = 0;
 		for(int i=0; i < this.getLig(); i++) {
 			for(int j=0; j < this.getCol(); j++) {
-				if(j==zero && !(chCase[i][j].FCompare(new Fraction(1)))) {
+				if(j==zero && !(chCase[i][j].FCompare(new Fraction(1))))
 					return false;
-				}
-				else if(j!=zero && !(chCase[i][j].FCompare(new Fraction(0)))) {
+
+				else if(j!=zero && !(chCase[i][j].FCompare(new Fraction(0))))
 					return false;
-				}
 			}
 			zero +=1;
 		}
 		return true;
 	}
 	
-	/////OPERATIONS/////
-	
-	//ADDITION
-	//additionne deux matrices entre elles ( res <- M1 + M2 )
+	/**
+	 * Additionne deux matrices entre elles ( res <- M1 + M2 )
+	 * @param parMat une matrice
+	 * @return l'addition des deux matrices
+	 */
 	public Matrice MAddition(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol())
 			throw new RuntimeException("Erreur dimensions des deux matrices");
-		}
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ;j++) {
@@ -186,7 +251,12 @@ public class Matrice {
 		}
 		return res;
 	}
-	//additionne une matrice avec une fraction ( res <- M + frac )
+
+	/**
+	 * Additionne une matrice avec une fraction ( res <- M + frac )
+	 * @param parFrac une fraction
+	 * @return l'addition d'une matrice avec une fraction
+	 */
 	public Matrice IAddition(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
@@ -197,7 +267,14 @@ public class Matrice {
 		}
 		return res;
 	}
-	//additionne deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] + M[Lj])
+
+	/**
+	 * Additionne deux ligne d'une même matrice (M[Li] <- M[Li] + M[Lj])
+	 * Le résultat va dans la première ligne donnée
+	 * @param i l'indice de la première ligne
+	 * @param j l'indice de la première ligne
+	 * @return l'addition des deux lignes
+	 */
 	public Matrice LAddition(int i, int j) {
 		Matrice Mat = this;
 		Fraction tabi[] = Mat.getLigne(i);
@@ -208,14 +285,16 @@ public class Matrice {
 		Mat.setLigne(i,tabi);
 		return Mat;
 	}
-	
-	//SOUSTRACTION
-	//soustrait deux matrices entre elles ( res <- M1 - M2 )
+	 
+	/**
+	 * Soustrait deux matrices entre elles ( res <- M1 - M2 )
+	 * @param parMat une matrice
+	 * @return la soustraction des deux matrices
+	 */
 	public Matrice MSoustraction(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol()) {
+		if(Mat.getLig() != parMat.getLig() || Mat.getCol() != parMat.getCol())
 			throw new RuntimeException("Erreur dimensions des deux matrices");
-		}
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol();j++) {
@@ -224,7 +303,12 @@ public class Matrice {
 		}
 		return res;
 	}
-	//soustrait une matrice avec une fraction ( res <- M - frac )
+
+	/**
+	 * Soustrait une matrice avec une fraction ( res <- M - frac )
+	 * @param parFrac une fraction
+	 * @return la soustraction d'une matrice avec un fraction
+	 */
 	public Matrice ISoustraction(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
@@ -235,7 +319,14 @@ public class Matrice {
 		}
 		return res;
 	}
-	//soustrait deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] - M[Lj])
+
+	/**
+	 * Soustrait deux lignes d'une même matrice
+	 * Le résultat va dans la première ligne donnée (M[Li] <- M[Li] - M[Lj])
+	 * @param i la première ligne donnée
+	 * @param j la deuxième lignée donnée
+	 * @return la soustraction de deux lignes d'une même matrice
+	 */
 		public Matrice LSoustraction(int i, int j) {
 			Matrice Mat = this;
 			Fraction tabi[] = Mat.getLigne(i);
@@ -247,13 +338,15 @@ public class Matrice {
 			return Mat;
 		}
 	
-	//MULTIPLICATION
-	//multiplie deux matrices entre elles ( res <- M1 * M2 )
+		/**
+		 * Multiplie deux matrices entre elles ( res <- M1 * M2 )
+		 * @param parMat une matrice
+		 * @return la multiplication de deux matrices entre elles
+		 */
 	public Matrice MMultiplication(Matrice parMat) {
 		Matrice Mat = this;
-		if(Mat.getCol() != parMat.getLig()) {
+		if(Mat.getCol() != parMat.getLig())
 			throw new RuntimeException("Erreur dimensions des deux matrices");
-		}
 		Matrice res = new Matrice(Mat.getLig(),parMat.getCol());
 		for (int i=0; i < res.getLig(); i++) {
 			for(int j=0; j < res.getCol() ; j++) {
@@ -264,7 +357,11 @@ public class Matrice {
 		}
 		return res;
 	}
-	//multiplie une matrice avec une fraction ( res <- M * frac )
+	/**
+	 * Multiplie une matrice avec une fraction ( res <- M * frac )
+	 * @param parFrac une fraction
+	 * @return la multiplication d'une matrice avec une fraction
+	 */
 	public Matrice iMultiplication(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(this.getLig(),this.getCol());
@@ -275,7 +372,14 @@ public class Matrice {
 		}
 		return res;
 	}
-	//multiplie deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] * M[Lj])
+
+	/**
+	 * Multiplie deux lignes d'une même matrice (M[Li] <- M[Li] * M[Lj])
+	 * Le résultat va dans la première ligne donnée
+	 * @param i la première ligne donnée
+	 * @param j la deuxième ligne donnée
+	 * @return la multiplciation de deux lignes d'une même matrice
+	 */
 		public Matrice LMultiplication(int i, int j) {
 			Matrice Mat = this;
 			Fraction tabi[] = Mat.getLigne(i);
@@ -293,7 +397,11 @@ public class Matrice {
 	//Impossible de faire ces quatres prerequis car il faut le faire le modulo d'une fraction
 	//Donc pas de "public Matrice MDivision(Matrice parMat) ( res <- M1 / M2 ) "
 	
-	//divise une matrice avec une fraction ( res <- M / frac )
+		/**
+		 * Divise une matrice avec une fraction ( res <- M / frac )
+		 * @param parFrac une fraction
+		 * @return la division d'une matrice avec une fraction
+		 */
 	public Matrice iDivision(Fraction parFrac) {
 		Matrice Mat = this;
 		Matrice res = new Matrice(Mat.getLig(),Mat.getCol());
@@ -304,7 +412,14 @@ public class Matrice {
 		}
 		return res;
 	}
-	//additionne deux lignes d'une meme matrice, le resultat vas dans la premiere ligne donnee (M[Li] <- M[Li] / M[Lj])
+	
+	/**
+	 * Additionne deux lignes d'une même matrice (M[Li] <- M[Li] / M[Lj])
+	 * Le résultat va dans la première ligne donnée
+	 * @param i la première ligne donnée
+	 * @param j la deuxième ligne donnée
+	 * @return l'addition de deux lignes d'une même matrice
+	 */
 	public Matrice lDivision(int i, int j) {
 		Matrice Mat = this;
 		Fraction tabi[] = Mat.getLigne(i);
@@ -316,12 +431,11 @@ public class Matrice {
 		return Mat;
 	}
 	
-	/////MODIFYLINE/////
-	
-	// MODIFYLINE -> ( L3 -> 2L3 )
-	// Multiplication d'une ligne par un nombre non nul.
-	// Prend en paramètre : 
-	// int ligne(0 ou 1 ou 2),Fraction pFraction
+	/**
+	 * Muttiplication d'une ligne par un nombre non nul. ( L3 -> 2L3 )
+	 * @param ligne la ligne voulue
+	 * @param pFraction une fraction correspondant à un nombre non nul
+	 */
 	public void modifyLine(int ligne, Fraction pFraction) {
 		for(int i=0; i<getTaille(); i++) {
 			for(int j=0; j<getTaille(); j++) {
@@ -332,13 +446,16 @@ public class Matrice {
 		}
 	}
 	
-	// MODIFYLINE 2 -> ( L3 -> L3 - 2L1 )
-	// Transformation d'une ligne à l'aide d'une autre ligne
-	/*	
+	/**
+	 * Transforme une ligne à l'aide d'une autre ligne ( L3 -> L3 - 2L1 )
 	 * EXEMPLE pour : L3 -> L3 - 2L1
 	 * 				  Ligne3 = Ligne3 - 2*Ligne1
 	 * matrice.modifyLine2(2, "-", 0, new Fraction(2));
-	*/										
+	 * @param ligneA la première ligne à modifier
+	 * @param operand le signe opérateur
+	 * @param ligneB la deuxième ligne
+	 * @param multiplicateur le multiplicateur de la deuxième ligne
+	 */
 	public void modifyLine2(int ligneA, String operand, int ligneB, Fraction multiplicateur) {
 		Fraction frac;
 		for(int i=0; i<getTaille(); i++) {
@@ -365,9 +482,11 @@ public class Matrice {
 		}
 	}
 	
-	////AFFICHE/////
-	//affiche une matrice
+
 		@Override
+		/**
+		 * Affichage d'une matrice
+		 */
 		public String toString() {
 			int tailleMatrice = this.getTaille();  //taille de la matrice carré
 			int[][] TabFractionNumerateur = new int[tailleMatrice][tailleMatrice];  //tableau contenant les numerateur des fraction

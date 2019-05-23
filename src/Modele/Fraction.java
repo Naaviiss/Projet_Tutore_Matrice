@@ -2,34 +2,67 @@ package Modele;
 
 import java.io.Serializable;
 
+/**
+ * Fraction est une classe qui permet la gestion
+ * de tout ce qui concerne les fractions
+ */
 public class Fraction implements Serializable {
+	/**
+	 * Le numérateur de la fraction
+	 */
 	private int numerateur;
+	
+	/**
+	 * Le dénominateur de la fraction
+	 */
 	private int denominateur;
 	
-	//FRACTION
-	//une fraction composee d'une numerateur et d'un denominateur
+	/**
+	 * Constructeur par défaut de la classe Fraction
+	 * Besoin d'un numérateur et d'un dénominateur
+	 * @param parNum un numérateur
+	 * @param parDen un dénominateur
+	 */
 	public Fraction(int parNum, int parDen){
 		numerateur = parNum;
 		denominateur = parDen;
 		reduire();  
 	}
-	//si la fraction est un nombre entier
+
+	/**
+	 * Autre constructeur par défaut de la classe Fraction
+	 * Besoin d'une seule valeur car c'est un entier.
+	 * @param parVal un nombre
+	 */
 	public Fraction(int parVal) {
 		numerateur = parVal;
 		denominateur = 1;
 		reduire();
 	}
-	//copie d'une fraction
+
+	/**
+	 * Autre constructeur par défaut de la classe Fraction
+	 * Besoin d'une fraction car elle effectue une copie de fraction
+	 * @param parFrac une fraction
+	 */
 	public Fraction(Fraction parFrac) {
 		numerateur = parFrac.getNumerateur();
 		denominateur = parFrac.getDenominateur();
 		reduire();
 	}
 
-	//change un string en fraction : 3/5 devient Fraction(3,5)
+	/**
+	 * Autre constructeur par défaut de la classe Fraction
+	 * Change un string en fraction (3/5 devient Fraction(3,5))
+	 * @param parFrac une fraction 
+	 * @throws ExceptEntreFraction
+	 * @throws ExceptZeroDivision
+	 * @throws ExceptNegatifMalPlace
+	 * @throws ExceptCaseVide
+	 */
 	public Fraction(String parFrac) throws ExceptEntreFraction,ExceptZeroDivision,ExceptNegatifMalPlace,ExceptCaseVide{
 		int slash = 0;  //si il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a passÃ© le slash
+		int rencontre = 0;	//savoir quand on a passé le slash
 		String numerateurString = "";
 		String denominateurString = "";
 		for(char ch : parFrac.toCharArray()) { //Test s'il y a un slash dans le String
@@ -40,43 +73,34 @@ public class Fraction implements Serializable {
 		
 		if(slash == 1) { //si c'est une fraction
 			for(char ch : parFrac.toCharArray()) {
-				if(ch == '/') {
+				if(ch == '/')
 					rencontre = 1;
-				}
 				else if(ch != '/' && rencontre == 0) {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
-						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spÃ©cial dans la fraction
+						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la fraction
 					}
-					else {
+					else
 						numerateurString += ch;
-					}
-					
 				}
 				else {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 						System.out.println("la");
-						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spÃ©cial dans la fraction
+						throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la fraction
 					}
-					else {
+					else
 						denominateurString += ch;
-					}
 				}
 			}
-			if(numerateurString == "") {
+			if(numerateurString == "") 
 				throw new ExceptCaseVide();
-			}
-			if(denominateurString == "") {
+			if(denominateurString == "") 
 				throw new ExceptCaseVide();
-			}
-			if(numerateurString.equals("-")) {
+			if(numerateurString.equals("-"))
 				throw new ExceptCaseVide();
-			}
-			if(denominateurString.equals("-")) {
+			if(denominateurString.equals("-"))
 				throw new ExceptCaseVide();
-			}
-			if(Integer.parseInt(denominateurString) == 0) {
+			if(Integer.parseInt(denominateurString) == 0)
 				throw new ExceptZeroDivision();
-			}
 			for(int i=1 ; i < numerateurString.length() ; i++) {
 				if(numerateurString.charAt(i) == '-') {
 					throw new ExceptNegatifMalPlace();
@@ -94,18 +118,15 @@ public class Fraction implements Serializable {
 			for(char ch : parFrac.toCharArray()) {
 				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '-') {
 					System.out.println("ici");
-					throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spÃ©cial dans la case
+					throw new ExceptEntreFraction(); //s'il y a une lettre ou un caractere spécial dans la case
 				}
-				else {
+				else 
 					numerateurString += ch;
-				}
 			}
-			if(numerateurString == "") {
+			if(numerateurString == "")
 				throw new ExceptCaseVide();
-			}
-			if(numerateurString.equals("-")) {
+			if(numerateurString.equals("-"))
 				throw new ExceptCaseVide();
-			}
 			for(int i=1 ; i < numerateurString.length() ; i++) {
 				if(numerateurString.charAt(i) == '-') {
 					throw new ExceptNegatifMalPlace();
@@ -117,11 +138,14 @@ public class Fraction implements Serializable {
 		reduire();
 	}
 	
-	//ISFRACTION
-	// String.isFraction() dit si la string est une fraction
+	/**
+	 * Renvoie vrai si la string est une fraction
+	 * @param parFrac une fraction
+	 * @return vrai si la string est une fraction, sinon faux.
+	 */
 	public static boolean isFraction(String parFrac) {
 		int slash = 0;  //s'il y a un slash dans le String
-		int rencontre = 0;	//savoir quand on a passÃ© le slash
+		int rencontre = 0;	//savoir quand on a passé le slash
 		String numerateurString = "";
 		String denominateurString = "";
 		for(char ch : parFrac.toCharArray()) { //Test si il y a un slash dans le String
@@ -129,7 +153,6 @@ public class Fraction implements Serializable {
 				slash = 1;
 			}
 		}
-		
 		if(slash == 1) {
 			for(char ch : parFrac.toCharArray()) {
 				if(ch == '/') {
@@ -139,64 +162,75 @@ public class Fraction implements Serializable {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
-					else {
+					else
 						numerateurString += ch;
-					}
-					
 				}
 				else {
 					if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9' && ch != '/') {
 						return false;
 					}
-					else {
+					else
 						denominateurString += ch;
-					}
 				}
 			}
-			if(numerateurString == "" || denominateurString == "") {
+			if(numerateurString == "" || denominateurString == "")
 				return false;
-			}
-			if(Integer.parseInt(denominateurString) == 0) {
+			if(Integer.parseInt(denominateurString) == 0)
 				return false;
-			}
 		}
 		else {
 			for(char ch : parFrac.toCharArray()) {
 				if(ch != '0' && ch != '1' && ch != '2' && ch != '3' && ch != '4' && ch != '5' && ch != '6' && ch != '7' && ch != '8' && ch != '9') {
 					return false;
 				}
-				else {
+				else
 					numerateurString += ch;
-				}
 			}
-			if(numerateurString == "") {
+			if(numerateurString == "")
 				return false;
-			}
 		}
 		return true;
 	}
 
-	
-	//GETTER
+	/**
+	 * Rend le numérateur de la fraction 
+	 * @return le numérateur de la fraction
+	 */
 	public int getNumerateur() {
 		return numerateur;
 	}
 	
+	/**
+	 * Rend le dénominateur de la fraction
+	 * @return le dénominateur de la fraction
+	 */
 	public int getDenominateur() {
 		return denominateur;
 	}
 	
-	//SETTER (ne pas oublier de recreer la fraction apres pour qu'elle soit rï¿½duite)
+	//SETTER (ne pas oublier de recreer la fraction apres pour qu'elle soit réduite)
+	/**
+	 * Change le numérateur de la fraction
+	 * @param parNum le nouveau numérateur de la fraction
+	 */
 	public void setNumerateur(int parNum) {
 		this.numerateur = parNum;
 	}
 	
+	/**
+	 * Change le dénominateur de la fraction
+	 * @param parDen le nouveau dénominateur de la fraction
+	 */
 	public void setDenominateur(int parDen) {
 		this.denominateur = parDen;
 	}
 	
-	//CALCUL PGCD
-	//calcul le pgcd entre deux nombres ; utilise pour reduire une fraction
+	/**
+	 * Calcule le PGCD entre deux nombres
+	 * @param Num le numérateur de la fraction
+	 * @param Den lé dénominateur de la fraction
+	 * @return une fraction irreductible 
+	 */
 	public int CalculPGCD(int Num, int Den) {
 		if(Num % Den == 0) {
 			return Den;
@@ -204,8 +238,9 @@ public class Fraction implements Serializable {
 		return CalculPGCD(Den, Num % Den);
 	}
 	
-	//REDUIRE reduit de facon definitive
-	//reduit la fraction jusqu'a ce qu'elle soit irreductible
+	/**
+	 * Reduit une fraction de façon irréductible
+	 */
 	public void reduire() {
 		if(denominateur < 0) { //pour mettre le - devant
 			numerateur *= -1;
@@ -216,17 +251,23 @@ public class Fraction implements Serializable {
 		this.setDenominateur(denominateur/pgcd);
 	}
 	
-	//REDUIREV2 reduit juste pour l'affichage
-	//reduit la fraction jusqu'a ce qu'elle soit irreductible -- ne sert a rien si "reduire()" est activï¿½ dans les constructeur "Fraction"
+	/**
+	 * Reduit une fration de façon irréductible mais pour l'affichage
+	 * @param frac une fraction
+	 * @return une fraction irréductible pour l'affichage
+	 */
 	public Fraction reduireV2(Fraction frac) {
+		//reduit la fraction jusqu'a ce qu'elle soit irreductible -- ne sert a rien si "reduire()" est activé dans les constructeur "Fraction"
 		int pgcd = CalculPGCD(frac.getNumerateur(),frac.getDenominateur());
 		frac.setNumerateur(frac.getNumerateur()/pgcd);
 		frac.setDenominateur(frac.getDenominateur()/pgcd);
 		return new Fraction(frac.getNumerateur(), frac.getDenominateur());
 	}
 	
-	//ECRITURE NON FRACTIONNELLE (voir si utilise float ou double)
-	//ecrit une fraction sous le format a virgule (float : 7 chiffres apres la virgule || double = 15 chiffres apres la virgule)
+	/**
+	 * Ecrit une fraction sous format décimal. 
+	 * @return une fraction sous le format décimal
+	 */
 	public double FMath() {
 		double nume = this.getNumerateur();
 		double deno = this.getDenominateur();
@@ -234,61 +275,78 @@ public class Fraction implements Serializable {
 		return resultat;
 	}
 	
-	//COMPARE
-	//compare deux fractions entre elles
+	/**
+	 * Compare deux fractions entre elles
+	 * @param f une fraction
+	 * @return vrai si elles sont identiques, faux sinon.
+	 */
 	public boolean FCompare(Fraction f) {
-		if((this.getNumerateur() == f.getNumerateur()) && (this.getDenominateur() == f.getDenominateur())) {
+		if((this.getNumerateur() == f.getNumerateur()) && (this.getDenominateur() == f.getDenominateur()))
 			return true;
-		}
-		else {
+		else
 			return false;
-		}
 	}
 	
-	//donne l'ordre de deux fractions ( < ou > )  true si sup
+	/**
+	 * Renvoie si la fraction est plus grande qu'une autre.
+	 * @param f une fraction
+	 * @return vrai si la fraction est plus grande, sinon faux. 
+	 */
 	public boolean FSup(Fraction f) {
-		if(this.FMath() > f.FMath()) {
+		if(this.FMath() > f.FMath()) 
 			return true;
-		}
-		else {
+		else
 			return false;
-		}
 	}
 	
-	//ADDITION
-	//addition deux fractions entre elles
+	/**
+	 * Additionne deux fractions entre elles
+	 * @param frac une fraction
+	 * @return l'addition des deux fractions
+	 */
 	public Fraction FAddition(Fraction frac) {
 		int num = ( (numerateur * frac.getDenominateur()) + (frac.getNumerateur() * denominateur) );
 		int den = denominateur * frac.getDenominateur();
 		return new Fraction(num, den);
 	}
 	
-	//SOUSTRACTION
-	//soustrait deux fractions entre elles
+	/**
+	 * Soustrait deux fractions entre elles
+	 * @param frac une fraction
+	 * @return la soustraction des deux fractions
+	 */
 	public Fraction FSoustraction(Fraction frac) {
 		int num = ( (numerateur * frac.denominateur) - (frac.numerateur * denominateur) );
 		int den = denominateur * frac.denominateur;
 		return new Fraction(num, den);
 	}
 	
-	//MULTIPLICATION
-	//multiplie deux fractions entre elles
+	/**
+	 * Multiplie deux fractions entre elles
+	 * @param frac une fraction
+	 * @return la multiplication des deux fractions
+	 */
 	public Fraction FMultiplication(Fraction frac) {
 		int num = numerateur * frac.getNumerateur();
 		int den = denominateur * frac.getDenominateur();
 		return new Fraction(num, den);
 	}
 	
-	//DIVISION
-	//divise deux fractions entre elles
+	/**
+	 * Divise deux fractions entre elles
+	 * @param frac une fraction
+	 * @return la division des deux fractions
+	 */
 	public Fraction FDivision(Fraction frac) {
 		int num = numerateur * frac.getDenominateur();
 		int den = denominateur * frac.getNumerateur();
 		return new Fraction(num, den);
 	}
 	
-	//TOSTRING
-	//ecrit une fraction
+	/**
+	 * Affichage d'une fraction
+	 * @return l'affichage d'une fraction sous le format d'un string
+	 */
 	public String toStringHoriz() {
 		if(denominateur == 1) {
 			return Integer.toString(numerateur);
@@ -349,7 +407,10 @@ public class Fraction implements Serializable {
 			}
 		}
 	}
-	
+	/**
+	 * Affiche une fraction
+	 * @return la fraction
+	 */
 	@Override
 	public String toString() {
 		if (denominateur != 1)
