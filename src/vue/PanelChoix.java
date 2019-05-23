@@ -92,7 +92,7 @@ public class PanelChoix extends JPanel {
 		contrainte.gridy = 0;
 		contrainte.gridheight = 2;
 		contrainte.gridwidth = 2;
-		pan.add(new JLabel("Veuillez choisir un mode Ã  suivre", SwingConstants.CENTER), contrainte);
+		pan.add(new JLabel("Veuillez choisir un mode à suivre", SwingConstants.CENTER), contrainte);
 
 		contrainte.gridx = 0;
 		contrainte.gridy = 2;

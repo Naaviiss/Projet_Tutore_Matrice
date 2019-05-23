@@ -13,7 +13,14 @@ import Controleur.Controleur;
 
 public class PanelChoixNombresMonomesContraintes extends JPanel {
 
+	/**
+	 * Choix du nombre de monomes
+	 */
 	JComboBox <Integer> nbMonome = new JComboBox <Integer>();
+	
+	/**
+	 * Choix du nombre de contraintes
+	 */
 	JComboBox <Integer> nbContraintes = new JComboBox <Integer>();
 	Integer [] box = new Integer[10];
 	
@@ -24,8 +31,8 @@ public class PanelChoixNombresMonomesContraintes extends JPanel {
 	JButton ok;
 	
 	/**
-	 * Construit un objet PanelChoixNombresMonomesContraintes permettant Ã  l'utilisateur de choisir le nombre de contraintes et de 
-	 * monomes souhaitÃ© dans le Simplexe
+	 * Construit un objet PanelChoixNombresMonomesContraintes permettant à l'utilisateur de choisir le nombre de contraintes et de 
+	 * monomes souhaité dans le Simplexe
 	 */
 	public PanelChoixNombresMonomesContraintes() {
 		//On ajoute nbMonome, nbContrainte et leur label dans la partie Nord
@@ -63,12 +70,11 @@ public class PanelChoixNombresMonomesContraintes extends JPanel {
 		contrainte.gridy = 3;
 		contrainte.anchor = GridBagConstraints.CENTER;
 		this.add(ok,contrainte);
-		
 	}
 	
 	/**
-	 * Met le contrÃ´leur en paramÃ¨tre Ã  l'Ã©coute du bouton ok
-	 * @param parControleur
+	 * Met le contrôleur en paramétre à l'écoute du bouton ok
+	 * @param parControleur le contrôleur
 	 */
 	public void enregistreEcouteur(Controleur parControleur) {
 		ok.setActionCommand("ok");
@@ -77,14 +83,14 @@ public class PanelChoixNombresMonomesContraintes extends JPanel {
 	
 	/**
 	 * Renvoie le champ ok de this
-	 * @return JButton ok
+	 * @return le bouton ok
 	 */
 	public JButton getBouton() {
 		return ok;
 	}
 	
 	/**
-	 * remet le nombre de monomes et de contraintes souhaitÃ© Ã  0
+	 * Remet le nombre de monomes et de contraintes souhaité à 0
 	 */
 	public void viderFormulaire() {
 		nbMonome.setSelectedIndex(0);
